@@ -2,6 +2,7 @@ package util;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.DirectoryStream;
 import java.nio.file.FileVisitOption;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
@@ -102,6 +103,30 @@ public class FileUtil {
 			}
 			return FileVisitResult.CONTINUE;
 		}
+	}
+	
+	/**
+	 * Returns if specified path denotes a leaf directory (a directory which contains no directories).
+	 * @param directory Path of directory to test for leaf status.
+	 * @return if specified path denotes a leaf directory.
+	 * @throws FileNotFoundException If the specified directory does not exist.
+	 * @throws IOException If an IOException occurs when investigating the directory and its children.
+	 */
+	public static boolean isLeafDirectory(Path directory) throws FileNotFoundException, IOException {
+		if(!Files.exists(directory)) {
+			throw new FileNotFoundException("Specified directory does not exist.");
+		}
+		if(!Files.isDirectory(directory)) {
+			throw new IllegalArgumentException("Specified path is not a directory.");
+		}
+		DirectoryStream<Path> ds = Files.newDirectoryStream(directory);
+		
+		for(Path p : ds) {
+			if(Files.isDirectory(p)) {
+				return false;
+			}
+		}
+		return true;
 	}
 	
 }

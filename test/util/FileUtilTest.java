@@ -68,7 +68,7 @@ public class FileUtilTest {
 		//check exceptions
 		boolean exception_thrown = false;
 		try {
-			FileUtil.fileInventory(Paths.get("testdata/testInventory/dir1/file"));
+			FileUtil.directoryInventory(Paths.get("testdata/testInventory/dir1/file"));
 		} catch (IllegalArgumentException e) {
 			exception_thrown = true;
 		}
@@ -76,11 +76,35 @@ public class FileUtilTest {
 		
 		exception_thrown = false;
 		try {
-			FileUtil.fileInventory(Paths.get("testdata/nosuchdirectory"));
+			FileUtil.directoryInventory(Paths.get("testdata/nosuchdirectory"));
 		} catch (FileNotFoundException e) {
 			exception_thrown = true;
 		}
 		assertTrue(exception_thrown);
 	}
 
+	@Test
+	public void testIsLeafDirectory() throws FileNotFoundException, IOException {
+		assertTrue(FileUtil.isLeafDirectory(Paths.get("testdata/testInventory/dir1")));
+		assertFalse(FileUtil.isLeafDirectory(Paths.get("testdata/testInventory/dir2")));
+		assertTrue(FileUtil.isLeafDirectory(Paths.get("testdata/testInventory/dir2/dira")));
+		assertTrue(FileUtil.isLeafDirectory(Paths.get("testdata/testInventory/dir2/dirb")));
+		
+		//check exceptions
+		boolean exception_thrown = false;
+		try {
+			FileUtil.isLeafDirectory(Paths.get("testdata/testInventory/dir1/file"));
+		} catch (IllegalArgumentException e) {
+			exception_thrown = true;
+		}
+		assertTrue(exception_thrown);
+		
+		exception_thrown = false;
+		try {
+			FileUtil.isLeafDirectory(Paths.get("testdata/nosuchdirectory"));
+		} catch (FileNotFoundException e) {
+			exception_thrown = true;
+		}
+		assertTrue(exception_thrown);
+	}
 }
