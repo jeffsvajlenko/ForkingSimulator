@@ -9,8 +9,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
+import java.util.ArrayList;
 import java.util.EnumSet;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -44,7 +44,7 @@ public class FileUtil {
 		List<Path> inventory;
 		
 		InventoryFiles() {
-			inventory = new LinkedList<Path>();
+			inventory = new ArrayList<Path>();
 		}
 		
 		public List<Path> getInventory() {
@@ -86,7 +86,7 @@ public class FileUtil {
 		Path root;
 		
 		InventoryDirectories(Path root) {
-			inventory = new LinkedList<Path>();
+			inventory = new ArrayList<Path>();
 			this.root = root.toAbsolutePath();
 		}
 		
