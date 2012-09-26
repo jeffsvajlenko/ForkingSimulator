@@ -9,12 +9,12 @@ import java.util.Random;
 import util.FileUtil;
 
 
-public class Repository {
+public class InventoriedSystem {
 	
-	//Location of repository
+	//Location of system
 	Path location;
 	
-	//Repository Inventory
+	//System Inventory
 	List<Path> files;
 	List<Path> directories;
 	List<Path> leafDirectories;
@@ -27,26 +27,32 @@ public class Repository {
 	//Random Number Generator
 	Random random;
 	
+	//Language
+	String language;
+	
 	/**
-	 * Creates a variant repository from the specified directory.
-	 * @param repository The directory containing the repository.
+	 * Creates an inventoried system from the specified directory.
+	 * @param systemdir The directory containing the system.
 	 * @throws IOException
 	 */
-	public Repository(Path repository) throws IOException {
+	public InventoriedSystem(Path systemdir, String language) throws IOException {
 		// Check input
-		if(!Files.exists(repository)) {
-			throw new IllegalArgumentException("Repository does not exist.");
+		if(!Files.exists(systemdir)) {
+			throw new IllegalArgumentException("System does not exist.");
 		}
-		if(!Files.isDirectory(repository)) {
-			throw new IllegalArgumentException("Repository is not a directory.");
+		if(!Files.isDirectory(systemdir)) {
+			throw new IllegalArgumentException("System is not a directory.");
 		}
 		
+		//Language
+		this.language = language;
+		
 		//Files
-		files = FileUtil.fileInventory(repository);
+		files = FileUtil.fileInventory(systemdir);
 		selectFiles = new ArrayList<Path>(files);
 		
 		//Directories
-		directories = FileUtil.directoryInventory(repository);
+		directories = FileUtil.directoryInventory(systemdir);
 		selectDirectories = new ArrayList<Path>(directories);
 		
 		//LeafDirectories
@@ -67,48 +73,48 @@ public class Repository {
 //--- Query Features
 	
 	/**
-	 * Returns the number of files in the repository.
-	 * @return the number of files in the repository.
+	 * Returns the number of files in the system.
+	 * @return the number of files in the system.
 	 */
 	public int numFiles() {
 		return this.files.size();
 	}
 	
 	/**
-	 * Returns the number of directories in the repository.
-	 * @return the number of directories in the repository.
+	 * Returns the number of directories in the system.
+	 * @return the number of directories in the system.
 	 */
 	public int numDirectories() {
 		return this.directories.size();
 	}
 	
 	/**
-	 * Returns the number of leaf directories in the repository.
-	 * @return the number of leaf directories in the repository.
+	 * Returns the number of leaf directories in the system.
+	 * @return the number of leaf directories in the system.
 	 */
 	public int numLeafDirectories() {
 		return this.leafDirectories.size();
 	}
 	
 	/**
-	 * Returns an unmodifiable list of all files in the repository.
-	 * @return an unmodifiable list of all files in the repository.
+	 * Returns an unmodifiable list of all files in the system.
+	 * @return an unmodifiable list of all files in the system.
 	 */
 	public List<Path> getFiles() {
 		return Collections.unmodifiableList(this.files);
 	}
 	
 	/**
-	 * Returns an unmodifiable list of all directories in the repository.
-	 * @return an unmodifiable list of all directories in the repository.
+	 * Returns an unmodifiable list of all directories in the system.
+	 * @return an unmodifiable list of all directories in the system.
 	 */
 	public List<Path> getDirectories() {
 		return Collections.unmodifiableList(this.directories);
 	}
 	
 	/**
-	 * Returns an unmodifiable list of all the leaf directories in the repository.
-	 * @return an unmodifiable list of all the leaf directories in the repository.
+	 * Returns an unmodifiable list of all the leaf directories in the system.
+	 * @return an unmodifiable list of all the leaf directories in the system.
 	 */
 	public List<Path> getLeafDirectories() {
 		return Collections.unmodifiableList(this.leafDirectories);
@@ -117,8 +123,8 @@ public class Repository {
 //--- Select Random Features, repeats	
 	
 	/**
-	 * Returns a random file (as a Path object) from the repository.  Repeats may occur in subsequent calls.
-	 * @return a random file (as a path object) from the repository, or null if there is no files to choose from.
+	 * Returns a random file (as a Path object) from the system.  Repeats may occur in subsequent calls.
+	 * @return a random file (as a path object) from the system, or null if there is no files to choose from.
 	 */
 	public Path getRandomFile() {
 		if(files.size() == 0) {
@@ -130,8 +136,8 @@ public class Repository {
 	}
 	
 	/**
-	 * Returns a random directory (as a Path object) from the repository.  Repeats may occur in subsequent calls.
-	 * @return a random directory (as a path object) from the repository, or null if there is no directories to choose from.
+	 * Returns a random directory (as a Path object) from the system.  Repeats may occur in subsequent calls.
+	 * @return a random directory (as a path object) from the system, or null if there is no directories to choose from.
 	 */
 	public Path getRandomDirectory() {
 		if(directories.size() == 0) {
@@ -143,8 +149,8 @@ public class Repository {
 	}
 	
 	/**
-	 * Returns a random leaf directory (as a Path object) from the repository.  Repeats may occur in subsequent calls.
-	 * @return a random leaf directory (as a path object) from the repository, or null if there is no directories to choose from.
+	 * Returns a random leaf directory (as a Path object) from the system.  Repeats may occur in subsequent calls.
+	 * @return a random leaf directory (as a path object) from the system, or null if there is no directories to choose from.
 	 */
 	public Path getRandomLeafDirectory() {
 		if(leafDirectories.size() == 0) {
@@ -158,8 +164,8 @@ public class Repository {
 //---- Select random features, no repeats.	
 	
 	/**
-	 * Returns a random file (as a Path object) from the repository.  Repeats do not occur with subsequent calls unless it is reset (see resetRandomFileRepeat).
-	 * @return a random file (as a Path object) from the repository, or null if no files left to chose from (due to no repeats).
+	 * Returns a random file (as a Path object) from the system.  Repeats do not occur with subsequent calls unless it is reset (see resetRandomFileRepeat).
+	 * @return a random file (as a Path object) from the system, or null if no files left to chose from (due to no repeats).
 	 */
 	public Path getRandomFileNoRepeats() {
 		if(selectFiles.size() == 0) {
@@ -172,15 +178,15 @@ public class Repository {
 	}
 	
 	/**
-	 * Resets getRandomFileNoRepeats so that any file in the repository may be chosen (again without repeats).
+	 * Resets getRandomFileNoRepeats so that any file in the system may be chosen (again without repeats).
 	 */
 	public void resetRandomFileRepeat() {
 		this.selectFiles = new ArrayList<Path>(this.files);
 	}
 	
 	/**
-	 * Returns a random directory (as a Path object) from the repository.  Repeats do not occur with subsequent calls unless it is reset (see resetRandomDirectoryRepeat).
-	 * @return a random directory (as a Path object) from the repository, or null if no directory left to chose from (due to no repeats).
+	 * Returns a random directory (as a Path object) from the system.  Repeats do not occur with subsequent calls unless it is reset (see resetRandomDirectoryRepeat).
+	 * @return a random directory (as a Path object) from the system, or null if no directory left to chose from (due to no repeats).
 	 */
 	public Path getRandomDirectoryNoRepeats() {
 		if(selectDirectories.size() == 0) {
@@ -193,15 +199,15 @@ public class Repository {
 	}
 	
 	/**
-	 * Resets getRandomDirectory so that any directory in the repository may be chosen (again without repeats).
+	 * Resets getRandomDirectory so that any directory in the system may be chosen (again without repeats).
 	 */
 	public void resetRandomDirectoryRepeat() {
 		this.selectDirectories = new ArrayList<Path>(this.directories);
 	}
 	
 	/**
-	 * Returns a random leaf directory (as a Path object) from the repository.  Repeats do not occur with subsequent calls unless it is reset (see resetRandomLeafDirectoryRepeat).
-	 * @return a random leaf directory (as a Path object) from the repository, or null if no leaf directory left to chose from (due to no repeats).
+	 * Returns a random leaf directory (as a Path object) from the system.  Repeats do not occur with subsequent calls unless it is reset (see resetRandomLeafDirectoryRepeat).
+	 * @return a random leaf directory (as a Path object) from the system, or null if no leaf directory left to chose from (due to no repeats).
 	 */
 	public Path getRandomLeafDirectoryNoRepeats() {
 		if(selectLeafDirectories.size() == 0) {
@@ -214,7 +220,7 @@ public class Repository {
 	}
 	
 	/**
-	 * Resets getRandomLeafDirectory so that any leaf directory in the repository may be chosen (again without repeats).
+	 * Resets getRandomLeafDirectory so that any leaf directory in the system may be chosen (again without repeats).
 	 */
 	public void resetRandomLeafDirectoryRepeat() {
 		this.selectLeafDirectories = new ArrayList<Path>(this.leafDirectories);
