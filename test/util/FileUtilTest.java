@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -106,5 +107,156 @@ public class FileUtilTest {
 			exception_thrown = true;
 		}
 		assertTrue(exception_thrown);
+	}
+	
+	@Test
+	public void testCopyDirectory() throws IOException {
+		Files.createDirectories(Paths.get("testdata/deleteme"));
+		Files.createFile(Paths.get("testdata/deleteme/file1"));
+		Files.createFile(Paths.get("testdata/deleteme/file2"));
+		Files.createFile(Paths.get("testdata/deleteme/file3"));
+		Files.createFile(Paths.get("testdata/deleteme/file4"));
+		Files.createDirectories(Paths.get("testdata/deleteme/dir1"));
+		Files.createFile(Paths.get("testdata/deleteme/dir1/file1"));
+		Files.createFile(Paths.get("testdata/deleteme/dir1/file2"));
+		Files.createFile(Paths.get("testdata/deleteme/dir1/file3"));
+		Files.createFile(Paths.get("testdata/deleteme/dir1/file4"));
+		Files.createDirectories(Paths.get("testdata/deleteme/dir2"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/file1"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/file2"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/file3"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/file4"));
+		Files.createDirectories(Paths.get("testdata/deleteme/dir2/dir21"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/dir21/file1"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/dir21/file2"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/dir21/file3"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/dir21/file4"));
+		
+		assertTrue(Files.exists(Paths.get("testdata/deleteme")));
+		assertTrue(Files.isDirectory(Paths.get("testdata/deleteme")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/file1")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/file2")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/file3")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/file4")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir1")));
+		assertTrue(Files.isDirectory(Paths.get("testdata/deleteme/dir1")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir1/file1")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir1/file2")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir1/file3")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir1/file4")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2")));
+		assertTrue(Files.isDirectory(Paths.get("testdata/deleteme/dir2")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/file1")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/file2")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/file3")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/file4")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/dir21")));
+		assertTrue(Files.isDirectory(Paths.get("testdata/deleteme/dir2/dir21")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/dir21/file1")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/dir21/file2")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/dir21/file3")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/dir21/file4")));
+		
+		FileUtil.copyDirectory(Paths.get("testdata/deleteme"), Paths.get("testdata/deletemetoo"));
+		
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo")));
+		assertTrue(Files.isDirectory(Paths.get("testdata/deletemetoo")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/file1")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/file2")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/file3")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/file4")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir1")));
+		assertTrue(Files.isDirectory(Paths.get("testdata/deletemetoo/dir1")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir1/file1")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir1/file2")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir1/file3")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir1/file4")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir2")));
+		assertTrue(Files.isDirectory(Paths.get("testdata/deletemetoo/dir2")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir2/file1")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir2/file2")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir2/file3")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir2/file4")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir2/dir21")));
+		assertTrue(Files.isDirectory(Paths.get("testdata/deletemetoo/dir2/dir21")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir2/dir21/file1")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir2/dir21/file2")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir2/dir21/file3")));
+		assertTrue(Files.exists(Paths.get("testdata/deletemetoo/dir2/dir21/file4")));
+		
+		FileUtil.deleteDirectory(Paths.get("testdata/deleteme"));
+		FileUtil.deleteDirectory(Paths.get("testdata/deletemetoo"));
+	}
+	
+	@Test
+	public void testDeleteDirectory() throws IOException {
+		Files.createDirectories(Paths.get("testdata/deleteme"));
+		Files.createFile(Paths.get("testdata/deleteme/file1"));
+		Files.createFile(Paths.get("testdata/deleteme/file2"));
+		Files.createFile(Paths.get("testdata/deleteme/file3"));
+		Files.createFile(Paths.get("testdata/deleteme/file4"));
+		Files.createDirectories(Paths.get("testdata/deleteme/dir1"));
+		Files.createFile(Paths.get("testdata/deleteme/dir1/file1"));
+		Files.createFile(Paths.get("testdata/deleteme/dir1/file2"));
+		Files.createFile(Paths.get("testdata/deleteme/dir1/file3"));
+		Files.createFile(Paths.get("testdata/deleteme/dir1/file4"));
+		Files.createDirectories(Paths.get("testdata/deleteme/dir2"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/file1"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/file2"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/file3"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/file4"));
+		Files.createDirectories(Paths.get("testdata/deleteme/dir2/dir21"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/dir21/file1"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/dir21/file2"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/dir21/file3"));
+		Files.createFile(Paths.get("testdata/deleteme/dir2/dir21/file4"));
+		
+		assertTrue(Files.exists(Paths.get("testdata/deleteme")));
+		assertTrue(Files.isDirectory(Paths.get("testdata/deleteme")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/file1")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/file2")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/file3")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/file4")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir1")));
+		assertTrue(Files.isDirectory(Paths.get("testdata/deleteme/dir1")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir1/file1")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir1/file2")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir1/file3")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir1/file4")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2")));
+		assertTrue(Files.isDirectory(Paths.get("testdata/deleteme/dir2")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/file1")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/file2")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/file3")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/file4")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/dir21")));
+		assertTrue(Files.isDirectory(Paths.get("testdata/deleteme/dir2/dir21")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/dir21/file1")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/dir21/file2")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/dir21/file3")));
+		assertTrue(Files.exists(Paths.get("testdata/deleteme/dir2/dir21/file4")));
+		
+		FileUtil.deleteDirectory(Paths.get("testdata/deleteme"));
+		
+		assertFalse(Files.exists(Paths.get("testdata/deleteme")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/file1")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/file2")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/file3")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/file4")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir1")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir1/file1")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir1/file2")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir1/file3")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir1/file4")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir2")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir2/file1")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir2/file2")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir2/file3")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir2/file4")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir2/dir21")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir2/dir21/file1")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir2/dir21/file2")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir2/dir21/file3")));
+		assertFalse(Files.exists(Paths.get("testdata/deleteme/dir2/dir21/file4")));
 	}
 }

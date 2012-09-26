@@ -7,15 +7,20 @@ import java.nio.file.FileVisitOption;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
+import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 
  * A collection of utility functions for file IO.
+ * 
+ * Directory copy was taken from: https://github.com/bbejeck/Java-7
  *
  */
 public class FileUtil {
@@ -23,7 +28,7 @@ public class FileUtil {
 	/**
 	 * Returns a list of all files under the specified directory.  Symbolic links are neither included in the results, or followed in the search.
 	 * @param directory the directory to inventory.
-	 * @return a list of all files under the specified directory.  Each is specified by its absolute path.
+	 * @return a list of all files under the specified directory.  Each is specified by its absolute path.  (List is ArrayList).
 	 * @throws IOException if an IOException occurs.
 	 * @throws FileNotFoundException If the specified directory does not exist.
 	 * @throws IllegalArgumentException If the specified path points to a file not a directory.
@@ -63,7 +68,7 @@ public class FileUtil {
 	/**
 	 * Returns a list of all directories in the specified directory.  Symbolic links are neither included in the results, or followed in the search.
 	 * @param directory the directory to inventory.
-	 * @return a list of all directories in the specified directory.  Each is specified by its absolute path.
+	 * @return a list of all directories in the specified directory.  Each is specified by its absolute path.  (List is ArrayList).
 	 * @throws IOException if an IOException occurs.
 	 * @throws FileNotFoundException If the specified directory does not exist.
 	 * @throws IllegalArgumentException If the specified path points to a file not a directory.
@@ -129,4 +134,70 @@ public class FileUtil {
 		return true;
 	}
 	
+	/**
+	 * Copies a directory from src to dest.  Destination directory must not exist before call.
+	 * @param src The directory to copy.
+	 * @param dest The destination of the copy, specified as the root of the copied file tree.  Copied root may have different name from source.
+	 * @throws IOException If an IOException occurs during the copy operation.
+	 * @throws IllegalArgumentException if dest specifies an existing file or directory.
+	 */
+	public static void copyDirectory(Path src, Path dest) throws IOException {
+		//Check input
+		Objects.requireNonNull(src);
+		Objects.requireNonNull(dest);
+		FileUtil.requireDirectory(src);
+		
+		if(Files.exists(dest)) {
+			throw new IllegalArgumentException("Destination already exists.");
+		}
+		
+		//Create destination directory
+		Files.createDirectories(dest);
+		
+		//Copy contents
+		DirectoryStream<Path> ds = Files.newDirectoryStream(src);
+		for(Path p : ds) {
+			if(Files.isDirectory(p)) {
+				FileUtil.copyDirectory(p, dest.resolve(p.getFileName()));
+			} else {
+				Files.copy(p, dest.resolve(p.getFileName()));
+			}
+		}
+	}
+	
+	/**
+	 * Deletes the specified directory and its contents.  If function fails it may leave the directory partially deleted.
+	 * @param directory The directory to delete.
+	 * @throws IOException If an IO error occurs, such as a file/directory being impossible to delete (ex: permissions).
+	 */
+	public static void deleteDirectory(Path directory) throws IOException {
+		//Check input
+		Objects.requireNonNull(directory);
+		FileUtil.requireDirectory(directory);
+		
+		//Delete Contents
+		DirectoryStream<Path> ds = Files.newDirectoryStream(directory);
+		for(Path p : ds) {
+			if(Files.isDirectory(p)) {
+				deleteDirectory(p);
+			} else {
+				Files.delete(p);
+			}
+		}
+		
+		//Delete Self
+		Files.delete(directory);
+	}
+	
+	private static void requireDirectory(Path directory) {
+		if(!Files.isDirectory(directory)) {
+			throw new IllegalArgumentException(directory.toString() + " is not a directory.");
+		}
+	}
+	
+	private static void requireRegularFile(Path file) {
+		if(!Files.isRegularFile(file)) {
+			throw new IllegalArgumentException(file.toString() + " is not a directory.");
+		}
+	}
 }
