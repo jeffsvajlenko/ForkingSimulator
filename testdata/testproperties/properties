@@ -1,0 +1,14 @@
+#comment
+system=/path/to/system/
+repository=/path/to/repository
+language=java
+#comment
+numfiles=10
+numdirectories=15
+numfragments=5
+maxinjectnum=2
+#comment
+numforks=11
+#comment
+mutationrate=0.25
+#comment
