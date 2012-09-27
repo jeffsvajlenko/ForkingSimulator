@@ -1,3 +1,4 @@
+package models;
 
 public abstract class Variant {
 	//The variants type
