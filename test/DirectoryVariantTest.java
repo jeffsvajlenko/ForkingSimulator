@@ -2,6 +2,9 @@ import static org.junit.Assert.*;
 
 import java.nio.file.Paths;
 
+import models.DirectoryVariant;
+import models.Variant;
+
 import org.junit.Test;
 
 
