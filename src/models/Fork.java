@@ -56,11 +56,11 @@ public class Fork {
 	/**
 	 * Injects a file into this fork.
 	 * @param file A path to the file to inject.
-	 * @return true if injection is successful, or false if a proper injection location could not be found.
+	 * @return A FileVariant describing the injection, or null if a injection site could not be found.
 	 * @throws IOException If an IO exception occurs during injection.  An IOException occurring may leave the Fork in a bad state!
 	 * @throws IllegalArgumentException If the file path does not point to an existing file.
 	 */
-	public boolean injectFile(Path file) throws IOException {
+	public FileVariant injectFile(Path file) throws IOException {
 		//Check input
 		if(!Files.exists(file)) {
 			throw new IllegalArgumentException("File does not exist.");
@@ -76,7 +76,7 @@ public class Fork {
 		while(true) {
 			attempts++;
 			if(attempts == MAX_ATTEMPTS) {
-				return false;
+				return null;
 			}
 			injectin = fork.getRandomDirectory();
 			if(!Files.exists(Paths.get(injectin.toString(), file.getFileName().toString()))) {
@@ -93,17 +93,17 @@ public class Fork {
 		filevariants.add(v);
 		
 		//Return success
-		return true;
+		return v;
 	}
 	
 	/**
 	 * Injects a directory into this fork.
 	 * @param directory The path to the directory to inject.
-	 * @return true if injection was successful, or false if a proper injection location could not be found.
+	 * @return A DirectoryVariant describing the injection, or null if a injection site could not be found.
 	 * @throws IOException If an IO exception occurs during injection.  An IOException occurring may leave the Fork in a bad state!
 	 * @throws IllegalArgumentException If the directory path does not point to an existing directory.
 	 */
-	public boolean injectDirectory(Path directory) throws IOException {
+	public DirectoryVariant injectDirectory(Path directory) throws IOException {
 		//Check input
 		if(!Files.exists(directory)) {
 			throw new IllegalArgumentException("Directory does not exist.");
@@ -119,7 +119,7 @@ public class Fork {
 		while(true) {
 			attempts++;
 			if(attempts == MAX_ATTEMPTS) {
-				return false;
+				return null;
 			}
 			injectin = fork.getRandomDirectory();
 			if(!Files.exists(Paths.get(injectin.toString(), directory.getFileName().toString()))) {
@@ -137,7 +137,7 @@ public class Fork {
 		
 		
 		//Return success
-		return true;
+		return v;
 	}
 	
 	public boolean injectFragment(Fragment fragment) {
