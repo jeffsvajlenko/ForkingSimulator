@@ -7,9 +7,7 @@ import java.nio.file.FileVisitOption;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
-import java.nio.file.StandardCopyOption;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.EnumSet;
@@ -27,6 +25,7 @@ public class FileUtil {
 	
 	/**
 	 * Returns a list of all files under the specified directory.  Symbolic links are neither included in the results, or followed in the search.
+	 * Paths are absolute and normalised.
 	 * @param directory the directory to inventory.
 	 * @return a list of all files under the specified directory.  Each is specified by its absolute path.  (List is ArrayList).
 	 * @throws IOException if an IOException occurs.
@@ -59,7 +58,7 @@ public class FileUtil {
 		@Override
 		public FileVisitResult visitFile(Path file, BasicFileAttributes attr) {
 			if (!attr.isSymbolicLink() && attr.isRegularFile()) {
-				inventory.add(file.toAbsolutePath());
+				inventory.add(file.toAbsolutePath().normalize());
 			}
 			return FileVisitResult.CONTINUE;
 		}
@@ -67,6 +66,7 @@ public class FileUtil {
 	
 	/**
 	 * Returns a list of all directories in the specified directory.  Symbolic links are neither included in the results, or followed in the search.
+	 * Paths are absolute and normalised.
 	 * @param directory the directory to inventory.
 	 * @return a list of all directories in the specified directory.  Each is specified by its absolute path.  (List is ArrayList).
 	 * @throws IOException if an IOException occurs.
@@ -92,7 +92,7 @@ public class FileUtil {
 		
 		InventoryDirectories(Path root) {
 			inventory = new ArrayList<Path>();
-			this.root = root.toAbsolutePath();
+			this.root = root.toAbsolutePath().normalize();
 		}
 		
 		public List<Path> getInventory() {
@@ -112,6 +112,7 @@ public class FileUtil {
 	
 	/**
 	 * Returns if specified path denotes a leaf directory (a directory which contains no directories).
+	 * Paths are absolute and normalised.
 	 * @param directory Path of directory to test for leaf status.
 	 * @return if specified path denotes a leaf directory.
 	 * @throws FileNotFoundException If the specified directory does not exist.
