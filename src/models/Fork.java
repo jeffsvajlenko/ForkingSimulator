@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 import util.FileUtil;
 
@@ -31,6 +32,9 @@ public class Fork {
 	 */
 	public Fork(Path systemdir, Path forkdir, String language) throws IOException {	
 		//Check input validity
+		Objects.requireNonNull(systemdir);
+		Objects.requireNonNull(forkdir);
+		Objects.requireNonNull(language);
 		if(!Files.exists(systemdir)) {
 			throw new IllegalArgumentException("System directory does not exist.");
 		}
