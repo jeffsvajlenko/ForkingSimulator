@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import util.FileUtil;
@@ -13,23 +14,23 @@ import util.FileUtil;
 public class InventoriedSystem {
 	
 	//Location of system
-	Path location;
+	private Path location;
 	
 	//System Inventory
-	List<Path> files;
-	List<Path> directories;
-	List<Path> leafDirectories;
+	private List<Path> files;
+	private List<Path> directories;
+	private List<Path> leafDirectories;
 	
 	//For random selection without repeats
-	List<Path> selectFiles;
-	List<Path> selectDirectories;
-	List<Path> selectLeafDirectories;
+	private List<Path> selectFiles;
+	private List<Path> selectDirectories;
+	private List<Path> selectLeafDirectories;
 	
 	//Random Number Generator
-	Random random;
+	private Random random;
 	
 	//Language
-	String language;
+	private String language;
 	
 	/**
 	 * Creates an inventoried system from the specified directory.
@@ -38,6 +39,8 @@ public class InventoriedSystem {
 	 */
 	public InventoriedSystem(Path systemdir, String language) throws IOException {
 		// Check input
+		Objects.requireNonNull(systemdir);
+		Objects.requireNonNull(language);
 		if(!Files.exists(systemdir)) {
 			throw new IllegalArgumentException("System does not exist.");
 		}
@@ -45,8 +48,11 @@ public class InventoriedSystem {
 			throw new IllegalArgumentException("System is not a directory.");
 		}
 		
+		//System Location
+		this.location = systemdir.toAbsolutePath().normalize();
+		
 		//Language
-		this.language = language;
+		this.language = language.toLowerCase();
 		
 		//Files
 		files = FileUtil.fileInventory(systemdir);
@@ -119,6 +125,22 @@ public class InventoriedSystem {
 	 */
 	public List<Path> getLeafDirectories() {
 		return Collections.unmodifiableList(this.leafDirectories);
+	}
+	
+	/**
+	 * Returns the location of the system (absolute and normalized).
+	 * @return the location of the system.
+	 */
+	public Path getLocation() {
+		return this.location;
+	}
+	
+	/**
+	 * Returns the system language.
+	 * @return the system language.
+	 */
+	public String getLanguage() {
+		return this.language;
 	}
 	
 //--- Select Random Features, repeats	
@@ -215,7 +237,7 @@ public class InventoriedSystem {
 			return null;
 		} else {
 			int index = random.nextInt(selectLeafDirectories.size());
-			Path p = selectDirectories.remove(index);
+			Path p = selectLeafDirectories.remove(index);
 			return p;
 		}
 	}
