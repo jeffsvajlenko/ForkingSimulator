@@ -225,9 +225,9 @@ public class FileUtil {
 		}
 	}
 	
-	private static void requireRegularFile(Path file) {
-		if(!Files.isRegularFile(file)) {
-			throw new IllegalArgumentException(file.toString() + " is not a directory.");
-		}
-	}
+	//private static void requireRegularFile(Path file) {
+	//	if(!Files.isRegularFile(file)) {
+	//		throw new IllegalArgumentException(file.toString() + " is not a directory.");
+	//	}
+	//}
 }
