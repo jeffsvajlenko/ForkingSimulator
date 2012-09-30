@@ -1,8 +1,8 @@
 # Makefile for new NiCad tools
 # J.R. Cordy March 2010
 
-MACHINESIZE = -m32
-# MACHINESIZE = -m64 -mcmodel=medium
+#MACHINESIZE = -m32
+MACHINESIZE = -m64 -mcmodel=medium
 TURINGSIZE = -mLINUX -DHUGE
 
 all : cloneclasses.x clonepairs.x crossclones.x getsource.x tohtmlpairs.x streamprocess.x
