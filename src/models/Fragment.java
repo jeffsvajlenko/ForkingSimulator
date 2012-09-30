@@ -8,10 +8,10 @@ public class Fragment {
 	int endline;
 	int type;
 	
-	static final int TYPE_FUNCTION = 1;
-	static final int TYPE_BLOCK = 2;
-	static final int TYPE_CLASS = 3;
-	static final int TYPE_ARBITRARY = 4;
+	public static final int TYPE_FUNCTION = 1;
+	public static final int TYPE_BLOCK = 2;
+	public static final int TYPE_CLASS = 3;
+	public static final int TYPE_ARBITRARY = 4;
 	
 	/**
 	 * Constructs a Fragment.
