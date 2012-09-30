@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.util.LinkedList;
@@ -87,14 +88,6 @@ public class FragmentUtilTest {
 		}
 		assertTrue("Failed to throw illegal argument exception for invalid fragment.", thrown);
 		
-		thrown = false;
-		try {
-			FragmentUtil.extractFragment(new FunctionFragment(Paths.get("testdata/FragmentUtilTest/InventoriedSystem.java"), 39, 84), Paths.get("testdata/FragmentUtilTest/cantread"));
-		} catch (IllegalArgumentException e) {
-			thrown = true;
-		}
-		assertTrue("Failed to throw illegal argument exception for an output file that already exists.", thrown);
-		
 		Files.setPosixFilePermissions(Paths.get("testdata/FragmentUtilTest/cantread"), PosixFilePermissions.fromString("r--r-----"));
 		thrown = false;
 		try {
@@ -152,6 +145,57 @@ public class FragmentUtilTest {
 		assertTrue("Failed to catch illegal argument exception - file is not a regulr file.", thrown);
 	}
 
+	@Test
+	public void testInjectFragment() throws IOException {
+		FunctionFragment f = new FunctionFragment(Paths.get("testdata/FragmentUtilTest/InventoriedSystem.java"), 44, 84);
+		Path file = Paths.get("testdata/FragmentUtilTest/InventoriedSystem.java");
+		Path realfile = Paths.get("testdata/FragmentUtilTest/InventoriedSystem_copy.java");
+		
+		Files.deleteIfExists(realfile);
+		Files.copy(file, realfile);
+		FragmentUtil.injectFragment(realfile, 300, f);
+		assertTrue(filesEqual(realfile, Paths.get("testdata/FragmentUtilTest/InventoriedSystem_injectEnd.java")));
+		
+		Files.deleteIfExists(realfile);
+		Files.copy(file, realfile);
+		FragmentUtil.injectFragment(realfile, 95, f);
+		assertTrue(filesEqual(realfile, Paths.get("testdata/FragmentUtilTest/InventoriedSystem_injectMiddle.java")));
+		
+		Files.deleteIfExists(realfile);
+		Files.copy(file, realfile);
+		FragmentUtil.injectFragment(realfile, 1, f);
+		assertTrue(filesEqual(realfile, Paths.get("testdata/FragmentUtilTest/InventoriedSystem_injectStart.java")));
+	}
+	
+	private boolean filesEqual(Path f1, Path f2) throws FileNotFoundException {
+		List<String> file1 = new LinkedList<String>();
+		List<String> file2 = new LinkedList<String>();
+		
+		Scanner s = new Scanner(f1.toFile());
+		while(s.hasNextLine()) {
+			file1.add(s.nextLine());
+		}
+		s.close();
+		
+		s = new Scanner(f2.toFile());
+		while(s.hasNextLine()) {
+			file2.add(s.nextLine());
+		}
+		s.close();
+		
+		if(file1.size() != file2.size()) {
+			return false;
+		}
+		
+		for(int i = 0; i < file1.size(); i++) {
+			if(!file1.get(i).equals(file2.get(i))) {
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
 	@Test
 	public void testIsFunction() throws IOException {
 		//Check success cases
