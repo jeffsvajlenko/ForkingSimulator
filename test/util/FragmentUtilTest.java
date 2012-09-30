@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,7 +20,7 @@ public class FragmentUtilTest {
 	@Test
 	public void testExtractFragment() throws IOException {
 	//Cleanup
-		Files.deleteIfExists(Paths.get("testdata/FragmentUtilTest/ExtractTest"));
+		Files.deleteIfExists(Paths.get("testdata/FragmentUtilTest/ExtractTest"));	
 		
 	//Perform extract
 		FragmentUtil.extractFragment(new FunctionFragment(Paths.get("testdata/FragmentUtilTest/InventoriedSystem.java"), 39, 84), Paths.get("testdata/FragmentUtilTest/ExtractTest"));
@@ -94,6 +95,7 @@ public class FragmentUtilTest {
 		}
 		assertTrue("Failed to throw illegal argument exception for an output file that already exists.", thrown);
 		
+		Files.setPosixFilePermissions(Paths.get("testdata/FragmentUtilTest/cantread"), PosixFilePermissions.fromString("r--r-----"));
 		thrown = false;
 		try {
 			FragmentUtil.extractFragment(new FunctionFragment(Paths.get("testdata/FragmentUtilTest/cantread"), 39, 84), Paths.get("testdata/FragmentUtilTest/ExtractTest"));
@@ -101,6 +103,7 @@ public class FragmentUtilTest {
 			thrown = true;
 		}
 		assertTrue("Failed to throw illegal argument exception for an input file which is not readable.", thrown);
+		Files.setPosixFilePermissions(Paths.get("testdata/FragmentUtilTest/cantread"), PosixFilePermissions.fromString("rw-rw-r--"));
 		
 	}
 
@@ -130,6 +133,7 @@ public class FragmentUtilTest {
 		}
 		assertTrue("Failed to catch file not found exception.", thrown);
 		
+		Files.setPosixFilePermissions(Paths.get("testdata/FragmentUtilTest/cantread"), PosixFilePermissions.fromString("-w--w----"));
 		thrown = false;
 		try {
 			FragmentUtil.countLines(Paths.get("testdata/FragmentUtilTest/cantread"));
@@ -137,6 +141,7 @@ public class FragmentUtilTest {
 			thrown = true;
 		}
 		assertTrue("Failed to catch illegal argument exception - file not readable.", thrown);
+		Files.setPosixFilePermissions(Paths.get("testdata/FragmentUtilTest/cantread"), PosixFilePermissions.fromString("rw-rw-r--"));
 		
 		thrown = false;
 		try {
@@ -179,6 +184,7 @@ public class FragmentUtilTest {
 		}
 		assertTrue("Failed to throw illegal argument exception for non-existant function.", thrown);
 		
+		Files.setPosixFilePermissions(Paths.get("testdata/FragmentUtilTest/cantread"), PosixFilePermissions.fromString("-w--w----"));
 		thrown=false;
 		try {
 			FragmentUtil.isFunction(Paths.get("testdata/FragmentUtilTest/cantread"), "java");
@@ -186,6 +192,7 @@ public class FragmentUtilTest {
 			thrown=true;
 		}
 		assertTrue("Failed to throw illegal argument exception for unreadable function.", thrown);
+		Files.setPosixFilePermissions(Paths.get("testdata/FragmentUtilTest/cantread"), PosixFilePermissions.fromString("rw-rw-r--"));
 		
 		thrown=false;
 		try {
