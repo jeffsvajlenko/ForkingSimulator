@@ -35,6 +35,9 @@ public class Properties {
 	private double mutationrate;
 	private boolean setmutationrate=false;
 	
+	private Path installdir;
+	private boolean setinstalldir=false;
+	
 	/**
 	 * Creates a Properties object with the properties specified by the properties file.
 	 * @param propertiesfile Path to the properties file.
@@ -74,6 +77,16 @@ public class Properties {
 							throw new IllegalArgumentException("Propety 'system' is invalid.");
 						}
 						this.setsystem=true;
+					//Install Directory
+					} else if (line.startsWith("install=")) {
+						line = line.substring(8);
+						try {
+							this.installdir = Paths.get(line).toAbsolutePath().normalize();
+						} catch(Exception e) {
+							s.close();
+							throw new IllegalArgumentException("Property 'install' is invalid.");
+						}
+						this.setinstalldir = true;
 					//Repository Directory
 					} else if (line.startsWith("repository=")) {
 						line = line.substring(11);
@@ -180,44 +193,38 @@ public class Properties {
 					}
 				}
 			}
+			s.close();
 			//Check properties were set
 			if(!this.setlanguage) {
-				s.close();
 				throw new IllegalArgumentException("Property 'language' was not specified.");
 			}
 			if(!this.setmaxinjectnum) {
-				s.close();
 				throw new IllegalArgumentException("Property 'maxinjectnum' was not specified.");
 			}
 			if(!this.setmutationrate) {
-				s.close();
 				throw new IllegalArgumentException("Property 'mutationrate' was not specified.");
 			}
 			if(!this.setnumdirectories) {
-				s.close();
 				throw new IllegalArgumentException("Property 'numdirectories' was not specified.");
 			}
 			if(!this.setnumfiles) {
-				s.close();
 				throw new IllegalArgumentException("Property 'numfiles' was not specified.");
 			}
 			if(!this.setnumforks) {
-				s.close();
 				throw new IllegalArgumentException("Property 'numforks' was not specified.");
 			}
 			if(!this.setnumfragments) {
-				s.close();
 				throw new IllegalArgumentException("Property 'numfragments' was not specified.");
 			}
 			if(!this.setrepository) {
-				s.close();
 				throw new IllegalArgumentException("Property 'repository' was not specified.");
 			}
 			if(!this.setsystem) {
-				s.close();
 				throw new IllegalArgumentException("Property 'system' was not specified.");
 			}
-			s.close();
+			if(!this.setinstalldir) {
+				throw new IllegalArgumentException("Property 'install' was not specified.");
+			}
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("Propertiesfile must refer to an existing file.");
 		}
@@ -284,5 +291,12 @@ public class Properties {
 	 */
 	public double getMutationrate() {
 		return mutationrate;
+	}
+	
+	/**
+	 * @return A path to the installation directory.
+	 */
+	public Path getInstall() {
+		return this.installdir;
 	}
 }
