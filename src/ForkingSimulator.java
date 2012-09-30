@@ -3,11 +3,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
 import models.FileVariant;
+import models.DirectoryVariant;
 import models.Fork;
 import models.InventoriedSystem;
 
@@ -106,28 +108,106 @@ public class ForkingSimulator {
 		Random random = new Random();
 		
 	// Create File Variants
-		for(int i = 0; i < properties.getNumfiles(); i++) {
-			//Get file to inject (from repository) without repeats
+		System.out.println("BEGIN: FileVariants");
+		int numf = 0;
+		while (numf < properties.getNumfiles()) {
+		//Get file to inject (from repository) without repeats
 			Path file = repository.getRandomFileNoRepeats();
 			
-			//Randomly select number of forks to inject into
+		//Out of options before goal?
+			if(file == null) {
+				break;
+			}
+			
+		//Randomly select number of forks to inject into
 			int numinjections = random.nextInt(properties.getMaxinjectnum()) + 1;
 			
-			//Chose the forks to inject into (the numbers in the forks list)
+		//Chose the forks to inject into (the numbers in the forks list)
 			List<Integer> injects = pickRandomNumbers(numinjections,properties.getNumforks());
+			Collections.sort(injects);
 			
-			//Inject the file into the forks
+		//Inject the file into the forks
+			//track the foks effected / variants created
+			List<Integer> t_forks = new LinkedList<Integer>();
+			List<FileVariant> t_variants = new LinkedList<FileVariant>();
+			
+			//perform injections
 			for(int forkn : injects) {
 				try {
 					FileVariant fv = forks.get(forkn).injectFile(file);
+					if(fv != null) {
+						t_forks.add(forkn);
+						t_variants.add(fv);
+					}
 				} catch (IOException e) {
 					System.out.println("Failed to inject file into a fork (IOException).  Could be a permission error, or something else is interacting with the fork's files.");
 					return;
 				}
 			}
+			assert(t_forks.size() == t_variants.size()) : "t_forks and t_variants not same size... debug";
+			
+		//Check success (increment counter) and report effects
+			if(t_variants.size() != 0) {
+				numf++;
+				System.out.println(numf + " : " + file.toAbsolutePath().normalize().toString());
+				for(int i = 0; i < t_forks.size(); i++) {
+					System.out.println("\t" + t_forks.get(i) + " : " + t_variants.get(i).getInjectedFile());
+				}
+			}
 		}
+		System.out.println("END: FileVariants");
 		
 	// Create Leaf Directory Variants
+		System.out.println("BEGIN: DirVariants");
+		int numd = 0;
+		while (numd < properties.getNumdirectories()) {
+		
+		//Get directory to inject (from repository) without repeats
+			Path dir = repository.getRandomLeafDirectoryNoRepeats();
+			
+		//Out of options before goal?
+			if(dir == null) {
+				break;
+			}
+			
+		//Randomly select number of forks to inject into
+			int numinjections = random.nextInt(properties.getMaxinjectnum()) + 1;
+			
+		//Chose the forks to inject into (the numbers in the forks list)
+			List<Integer> injects = pickRandomNumbers(numinjections,properties.getNumforks());
+			Collections.sort(injects);
+			
+		//Inject the file into the forks
+			//track the forks effected / variants created
+			List<Integer> t_forks = new LinkedList<Integer>();
+			List<DirectoryVariant> t_variants = new LinkedList<DirectoryVariant>();
+			
+			//perform injections
+			for(int forkn : injects) {
+				try {
+					DirectoryVariant dv = forks.get(forkn).injectDirectory(dir);
+					if(dv != null) {
+						t_forks.add(forkn);
+						t_variants.add(dv);
+					}
+				} catch (IOException e) {
+					System.out.println("Failed to inject directory into a fork (IOException).  Could be a permission error, or something else is interacting with the fork's files.");
+					return;
+				}
+			}
+			assert(t_forks.size() == t_variants.size()) : "t_forks and t_variants not same size... debug";
+			
+		//Check success (increment counter) and report effects
+			if(t_variants.size() != 0) {
+				numf++;
+				System.out.println(numf + " : " + dir.toAbsolutePath().normalize().toString());
+				for(int i = 0; i < t_forks.size(); i++) {
+					System.out.println("\t" + t_forks.get(i) + " : " + t_variants.get(i).getInjectedDirectory());
+				}
+			}
+		}
+		System.out.println("END: DirectoryVariants");
+	
 		
 	// Create Fragment Variants
 		

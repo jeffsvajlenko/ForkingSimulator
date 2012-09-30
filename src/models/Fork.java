@@ -49,6 +49,14 @@ public class Fork {
 	}
 	
 	/**
+	 * Returns a path to the fork (absolute and normalized).
+	 * @return a path to the fork.
+	 */
+	public Path getLocation() {
+		return this.fork.getLocation().toAbsolutePath().normalize();
+	}
+	
+	/**
 	 * Creates a fork of the system contained in systemdir of the specified source language, and stores it in the specified forkdir.
 	 * @param systemdir Path to the directory containing the system to fork.
 	 * @param forkdir Path to the directory in which to store the fork.  Directory must not currently exist.
