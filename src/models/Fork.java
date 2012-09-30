@@ -1,6 +1,7 @@
 package models;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Collections;
@@ -9,6 +10,7 @@ import java.util.List;
 import java.util.Objects;
 
 import util.FileUtil;
+import util.FragmentUtil;
 
 
 public class Fork {
@@ -23,6 +25,7 @@ public class Fork {
 	private List<Variant> variants;
 	private List<FileVariant> filevariants;
 	private List<DirectoryVariant> directoryvariants;
+	private List<FragmentVariant> fragmentvariants;
 	
 	/**
 	 * Returns the variants in an unmodifiable list.  Variants are in the order they were injected.
@@ -46,6 +49,14 @@ public class Fork {
 	 */
 	public List<DirectoryVariant> getDirectoryVariants() {
 		return Collections.unmodifiableList(directoryvariants);
+	}
+	
+	/**
+	 * Returns the fragment variants in an unmodifiable list.  Variants are in the order they were injected.
+	 * @return the fragment variants in an unmodifiable list.  Variants are in the order they were injected.
+	 */
+	public List<FragmentVariant> getFragmentVariants() {
+		return Collections.unmodifiableList(fragmentvariants);
 	}
 	
 	/**
@@ -177,7 +188,29 @@ public class Fork {
 		return v;
 	}
 	
-	public boolean injectFragment(Fragment fragment) {
-		return false;
+	
+	public FragmentVariant injectFunctionFragment(FunctionFragment fragment) throws NoSuchFileException, IOException {
+		//Check Input
+		//TODO is this complete?
+		Objects.requireNonNull(fragment);
+		if(!Files.exists(fragment.getSrcFile())) {
+			new IllegalArgumentException("Fragment's source file is invalid.");
+		}
+		
+		//Get location to inject at
+		FunctionFragment f = fork.getRandomFunctionFragmentNoFileRepeats();
+		if(f == null) {
+			return null;
+		}
+		
+		//Inject
+		FragmentUtil.injectFragment(f.getSrcFile(), f.getEndLine()+1, fragment);
+		
+		//Make record
+		FragmentVariant fv = new FragmentVariant(fragment, new FunctionFragment(f.getSrcFile(), f.getEndLine()+1, f.getEndLine() + 1 + (fragment.getEndLine()-fragment.getStartLine())));
+		variants.add(fv);
+		fragmentvariants.add(fv);
+		
+		return fv;
 	}
 }
