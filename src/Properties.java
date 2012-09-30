@@ -77,16 +77,6 @@ public class Properties {
 							throw new IllegalArgumentException("Propety 'system' is invalid.");
 						}
 						this.setsystem=true;
-					//Install Directory
-					} else if (line.startsWith("install=")) {
-						line = line.substring(8);
-						try {
-							this.installdir = Paths.get(line).toAbsolutePath().normalize();
-						} catch(Exception e) {
-							s.close();
-							throw new IllegalArgumentException("Property 'install' is invalid.");
-						}
-						this.setinstalldir = true;
 					//Repository Directory
 					} else if (line.startsWith("repository=")) {
 						line = line.substring(11);
@@ -291,12 +281,5 @@ public class Properties {
 	 */
 	public double getMutationrate() {
 		return mutationrate;
-	}
-	
-	/**
-	 * @return A path to the installation directory.
-	 */
-	public Path getInstall() {
-		return this.installdir;
 	}
 }
