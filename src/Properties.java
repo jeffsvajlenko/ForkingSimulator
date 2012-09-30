@@ -35,9 +35,6 @@ public class Properties {
 	private double mutationrate;
 	private boolean setmutationrate=false;
 	
-	private Path installdir;
-	private boolean setinstalldir=false;
-	
 	/**
 	 * Creates a Properties object with the properties specified by the properties file.
 	 * @param propertiesfile Path to the properties file.
@@ -211,9 +208,6 @@ public class Properties {
 			}
 			if(!this.setsystem) {
 				throw new IllegalArgumentException("Property 'system' was not specified.");
-			}
-			if(!this.setinstalldir) {
-				throw new IllegalArgumentException("Property 'install' was not specified.");
 			}
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("Propertiesfile must refer to an existing file.");
