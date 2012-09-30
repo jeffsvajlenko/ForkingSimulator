@@ -2,7 +2,7 @@ package models;
 import java.nio.file.Path;
 
 
-public class Fragment {
+public abstract class Fragment {
 	Path srcfile;
 	int startline;
 	int endline;
@@ -61,5 +61,4 @@ public class Fragment {
 	public int getEndLine() {
 		return this.endline;
 	}
-	
 }
