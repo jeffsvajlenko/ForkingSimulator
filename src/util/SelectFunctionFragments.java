@@ -90,7 +90,7 @@ public class SelectFunctionFragments {
 
 		
 		// Cleanup
-		//new File(srcloc.getAbsolutePath() + "/_functions.xml").delete(); // no longer need this file, so trash it
+		new File(srcloc.getAbsolutePath() + "/_functions.xml").delete(); // no longer need this file, so trash it
 		
 		// Return
 		return functions;

@@ -4,11 +4,13 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
 import util.FileUtil;
+import util.SelectFunctionFragments;
 
 
 public class InventoriedSystem {
@@ -20,11 +22,13 @@ public class InventoriedSystem {
 	private List<Path> files;
 	private List<Path> directories;
 	private List<Path> leafDirectories;
+	private List<FunctionFragment> functionFragments;
 	
 	//For random selection without repeats
 	private List<Path> selectFiles;
 	private List<Path> selectDirectories;
 	private List<Path> selectLeafDirectories;
+	private List<FunctionFragment> selectFunctionFragments;
 	
 	//Random Number Generator
 	private Random random;
@@ -72,6 +76,8 @@ public class InventoriedSystem {
 		selectLeafDirectories = new ArrayList<Path>(leafDirectories);
 		
 		//Function Fragments
+		this.functionFragments = SelectFunctionFragments.getFragments(this.location.toFile(), this.language);
+		this.selectFunctionFragments = new LinkedList<FunctionFragment>(this.functionFragments);
 		
 		//Random Number Generator
 		random = new Random();
@@ -128,6 +134,14 @@ public class InventoriedSystem {
 	}
 	
 	/**
+	 * Returns an unmodifiable list of all the function fragments in the system.
+	 * @return an unmodifiable list of all the function fragments in the system.
+	 */
+	public List<FunctionFragment> getFunctionFragments() {
+		return Collections.unmodifiableList(this.functionFragments);
+	}
+	
+	/**
 	 * Returns the location of the system (absolute and normalized).
 	 * @return the location of the system.
 	 */
@@ -181,6 +195,19 @@ public class InventoriedSystem {
 		} else {
 			int index = random.nextInt(leafDirectories.size());
 			return leafDirectories.get(index);
+		}
+	}
+	
+	/**
+	 * Returns a random function fragment from the system.  Repeats may occur in subsequent calls.
+	 * @return a random function fragment from the system.  Repeats may occur in subsequent calls.
+	 */
+	public Fragment getRandomFunctionFragment() {
+		if(functionFragments.size() == 0) {
+			return null;
+		} else {
+			int index = random.nextInt(functionFragments.size());
+			return functionFragments.get(index);
 		}
 	}
 	
@@ -247,5 +274,26 @@ public class InventoriedSystem {
 	 */
 	public void resetRandomLeafDirectoryRepeat() {
 		this.selectLeafDirectories = new ArrayList<Path>(this.leafDirectories);
+	}
+
+	/**
+	 * Returns a random function fragment from the system.  Repeats do not occur with subsequent calls unless it is reset (see resetRandomFunctionFragmentRepeat).
+	 * @return a random function fragment from the system, or null of no function fragments left to chose from (due to no repeats).
+	 */
+	public FunctionFragment getRandomFunctionFragmentNoRepeats() {
+		if(selectFunctionFragments.size() == 0) {
+			return null;
+		} else {
+			int index = random.nextInt(selectFunctionFragments.size());
+			FunctionFragment f = selectFunctionFragments.remove(index);
+			return f;
+		}
+	}
+	
+	/**
+	 * Resets getRandomFunctionFragmentNoRepeats so that any function fragment in the system may be chosen (again without repeats).
+	 */
+	public void resetRandomFunctionFragmentRepeat() {
+		this.selectFunctionFragments = new ArrayList<FunctionFragment>(this.functionFragments);
 	}
 }

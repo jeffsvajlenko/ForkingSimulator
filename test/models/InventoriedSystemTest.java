@@ -79,6 +79,34 @@ public class InventoriedSystemTest {
 				assertTrue("InventorySystem leafs is missing a directory " + p, leafs.contains(p));
 			}
 		
+		// Check function fragments
+			//Get function fragments
+			List<FunctionFragment> ffragments = is.getFunctionFragments();
+			assertTrue(ffragments.size() == 2886);
+			
+			//get list of know functions
+			List<FunctionFragment> ffragments_c = new LinkedList<FunctionFragment>();
+			s = new Scanner(new File("testdata/inventoriedSystem/functionfragments"));
+			s.useDelimiter(",");
+			while(s.hasNextLine()) {
+				String line = s.nextLine();
+				Scanner lines = new Scanner(line);
+				lines.useDelimiter(",");
+				ffragments_c.add(new FunctionFragment(Paths.get(lines.next()).toAbsolutePath().normalize(),Integer.parseInt(lines.next()), Integer.parseInt(lines.next())));
+				lines.close();
+			}
+			s.close();
+			
+			//Check correct
+			for(FunctionFragment f : ffragments) {
+				//System.out.println(f);
+				assertTrue("InventorySystem functionfragments contains a fragment that is not in check " + f, ffragments_c.contains(f));
+			}
+			for(FunctionFragment f : ffragments_c) {
+				//System.out.println(f);
+				assertTrue("InventorySystem functionfragments is missing a fragment " + f, ffragments.contains(f));
+			}
+
 	//Check random no repeats
 			List<Path> files_rc = new LinkedList<Path>(files);
 			List<Path> dirs_rc = new LinkedList<Path>(dirs);
