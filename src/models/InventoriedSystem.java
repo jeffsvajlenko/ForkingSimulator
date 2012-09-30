@@ -4,6 +4,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -29,6 +30,9 @@ public class InventoriedSystem {
 	private List<Path> selectDirectories;
 	private List<Path> selectLeafDirectories;
 	private List<FunctionFragment> selectFunctionFragments;
+	
+	//For random selection without file repeats (fragments)
+	private List<FunctionFragment> selectFunctionFragmentsFile;
 	
 	//Random Number Generator
 	private Random random;
@@ -77,7 +81,8 @@ public class InventoriedSystem {
 		
 		//Function Fragments
 		this.functionFragments = SelectFunctionFragments.getFragments(this.location.toFile(), this.language);
-		this.selectFunctionFragments = new LinkedList<FunctionFragment>(this.functionFragments);
+		this.selectFunctionFragments = new ArrayList<FunctionFragment>(this.functionFragments);
+		this.selectFunctionFragmentsFile = new LinkedList<FunctionFragment>(this.functionFragments);
 		
 		//Random Number Generator
 		random = new Random();
@@ -107,6 +112,14 @@ public class InventoriedSystem {
 	 */
 	public int numLeafDirectories() {
 		return this.leafDirectories.size();
+	}
+	
+	/**
+	 * Returns the number of function fragments in the system.
+	 * @return the number of function fragments in the system.
+	 */
+	public int numFunctionFragments() {
+		return this.functionFragments.size();
 	}
 	
 	/**
@@ -202,7 +215,7 @@ public class InventoriedSystem {
 	 * Returns a random function fragment from the system.  Repeats may occur in subsequent calls.
 	 * @return a random function fragment from the system.  Repeats may occur in subsequent calls.
 	 */
-	public Fragment getRandomFunctionFragment() {
+	public FunctionFragment getRandomFunctionFragment() {
 		if(functionFragments.size() == 0) {
 			return null;
 		} else {
@@ -296,4 +309,33 @@ public class InventoriedSystem {
 	public void resetRandomFunctionFragmentRepeat() {
 		this.selectFunctionFragments = new ArrayList<FunctionFragment>(this.functionFragments);
 	}
+	
+	/**
+	 * Returns a random function fragment from the system.  Repeats with respect to source files do not occur with subsequent calls unless it is reset (see resetRandomFUnctionFragmentNoFileRepeat).
+	 * @return a random function fragment form the system, or null if no function fragments left to chsoe from (due to no repeats of source files).
+	 */
+	public FunctionFragment getRandomFunctionFragmentNoFileRepeats() {
+		if(selectFunctionFragmentsFile.size() == 0) {
+			return null;
+		} else {
+			int index = random.nextInt(selectFunctionFragmentsFile.size());
+			FunctionFragment f = selectFunctionFragmentsFile.remove(index);
+			Iterator<FunctionFragment> iter = selectFunctionFragmentsFile.iterator();
+			while(iter.hasNext()) {
+				FunctionFragment frag = iter.next();
+				if(frag.getSrcFile().toAbsolutePath().normalize().equals(f.getSrcFile().toAbsolutePath().normalize())) {
+					iter.remove();
+				}
+			}
+			return f;
+		}
+	}
+	
+	/**
+	 * Resets getRandomFUnctionFragmentsNoFileRepeats so that any function fragment in the system may be chosen (again without file repeats).
+	 */
+	public void resetRandomFunctionFragmentNoFileRepeats() {
+		this.selectFunctionFragmentsFile = new LinkedList<FunctionFragment>(this.functionFragments);
+	}
+	
 }

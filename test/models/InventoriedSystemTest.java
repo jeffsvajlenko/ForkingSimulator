@@ -111,8 +111,10 @@ public class InventoriedSystemTest {
 			List<Path> files_rc = new LinkedList<Path>(files);
 			List<Path> dirs_rc = new LinkedList<Path>(dirs);
 			List<Path> leafs_rc = new LinkedList<Path>(leafs);
+			List<FunctionFragment> ffragments_rc = new LinkedList<FunctionFragment>(ffragments);
 			
 			Path p;
+			FunctionFragment ff;
 			
 		//Check random files no repeats
 
@@ -143,17 +145,17 @@ public class InventoriedSystemTest {
 
 		//Check random directories no repeats
 			while((p = is.getRandomDirectoryNoRepeats()) != null) {
-				assertTrue("getRandomDirectory returned a directroy that is not in the list, or is a repeat.", dirs_rc.remove(p));
+				assertTrue("getRandomDirectoryNoRepeats returned a directroy that is not in the list, or is a repeat.", dirs_rc.remove(p));
 			}
-			assertTrue("getRandomDirectory returned null before it ran out of selections.", dirs_rc.size() == 0);
+			assertTrue("getRandomDirectoryNoRepeats returned null before it ran out of selections.", dirs_rc.size() == 0);
 			
 			//check directory random reset
 			is.resetRandomDirectoryRepeat();
 			dirs_rc = new LinkedList<Path>(dirs);
 			while((p = is.getRandomDirectoryNoRepeats()) != null) {
-				assertTrue("getRandomDirectory returned a directroy that is not in the list, or is a repeat [after reset].", dirs_rc.remove(p));
+				assertTrue("getRandomDirectoryNoRepeats returned a directroy that is not in the list, or is a repeat [after reset].", dirs_rc.remove(p));
 			}
-			assertTrue("getRandomDirectory returned null before it ran out of selections [after reset].", dirs_rc.size() == 0);
+			assertTrue("getRandomDirectoryNoRepeats returned null before it ran out of selections [after reset].", dirs_rc.size() == 0);
 			
 			//check directory random reset
 			is.resetRandomDirectoryRepeat();
@@ -161,32 +163,95 @@ public class InventoriedSystemTest {
 
 			is.resetRandomDirectoryRepeat();
 			while((p = is.getRandomDirectoryNoRepeats()) != null) {
-				assertTrue("getRandomDirectory returned a directroy that is not in the list, or is a repeat [after reset].", dirs_rc.remove(p));
+				assertTrue("getRandomDirectoryNoRepeats returned a directroy that is not in the list, or is a repeat [after reset].", dirs_rc.remove(p));
 			}
-			assertTrue("getRandomDirectory returned null before it ran out of selections [after reset].", dirs_rc.size() == 0);
+			assertTrue("getRandomDirectoryNoRepeats returned null before it ran out of selections [after reset].", dirs_rc.size() == 0);
 			
 		//Check random leafs no repeats
 			while((p = is.getRandomLeafDirectoryNoRepeats()) != null) {
-				assertTrue("getRandomLeafDirectory returned a directory not in the list or repeated a directory.",leafs_rc.remove(p));
+				assertTrue("getRandomLeafDirectoryNoRepeats returned a directory not in the list or repeated a directory.",leafs_rc.remove(p));
 			}
-			assertTrue("getRandomLeafDirectory returned null before it ran out of selections.", leafs_rc.size() == 0);
+			assertTrue("getRandomLeafDirectoryNoRepeats returned null before it ran out of selections.", leafs_rc.size() == 0);
 			
 			//check directory random reset
 			is.resetRandomLeafDirectoryRepeat();
 			leafs_rc = new LinkedList<Path>(leafs);
 			while((p = is.getRandomLeafDirectoryNoRepeats()) != null) {
-				assertTrue("getRandomLeafDirectory returned a directory not in the list or repeated a directory [after reset].",leafs_rc.remove(p));
+				assertTrue("getRandomLeafDirectoryNoRepeats returned a directory not in the list or repeated a directory [after reset].",leafs_rc.remove(p));
 			}
-			assertTrue("getRandomLeafDirectory returned null before it ran out of selections.", leafs_rc.size() == 0);
+			assertTrue("getRandomLeafDirectoryNoRepeats returned null before it ran out of selections.", leafs_rc.size() == 0);
 			
 			//check directory random reset
 			is.resetRandomLeafDirectoryRepeat();
 			leafs_rc = new LinkedList<Path>(leafs);
 			is.resetRandomLeafDirectoryRepeat();
 			while((p = is.getRandomLeafDirectoryNoRepeats()) != null) {
-				assertTrue("getRandomLeafDirectory returned a directory not in the list or repeated a directory [after reset].",leafs_rc.remove(p));
+				assertTrue("getRandomLeafDirectoryNoRepeats returned a directory not in the list or repeated a directory [after reset].",leafs_rc.remove(p));
 			}
-			assertTrue("getRandomLeafDirectory returned null before it ran out of selections.", leafs_rc.size() == 0);
+			assertTrue("getRandomLeafDirectoryNoRepeats returned null before it ran out of selections.", leafs_rc.size() == 0);
+		
+		//Check random function fragments no repeats
+			while((ff = is.getRandomFunctionFragmentNoRepeats()) != null) {
+				assertTrue("getRandomFunctionFragmentNoRepeats returend a function fragment not in the list or repeated a function fragment.", ffragments_rc.remove(ff));
+			}
+			assertTrue("getRandomFUnctionFragmentNoRepeats returned null before it ran out of selections.", ffragments_rc.size() == 0);
+			
+			//check function fragment random reset
+			is.resetRandomFunctionFragmentRepeat();
+			ffragments_rc = new LinkedList<FunctionFragment>(ffragments);
+			while((ff = is.getRandomFunctionFragmentNoRepeats()) != null) {
+				assertTrue("getRandomFunctionFragmentNoRepeats returend a function fragment not in the list or repeated a function fragment.", ffragments_rc.remove(ff));
+			}
+			assertTrue("getRandomFUnctionFragmentNoRepeats returned null before it ran out of selections.", ffragments_rc.size() == 0);
+			
+			//check function fragment random reset
+			is.resetRandomFunctionFragmentRepeat();
+			ffragments_rc = new LinkedList<FunctionFragment>(ffragments);
+			while((ff = is.getRandomFunctionFragmentNoRepeats()) != null) {
+				assertTrue("getRandomFunctionFragmentNoRepeats returend a function fragment not in the list or repeated a function fragment.", ffragments_rc.remove(ff));
+			}
+			assertTrue("getRandomFUnctionFragmentNoRepeats returned null before it ran out of selections.", ffragments_rc.size() == 0);
+			
+		//Check random function fragments no file repeats
+			List<FunctionFragment> ff_nofile = new LinkedList<FunctionFragment>();
+			while((ff = is.getRandomFunctionFragmentNoFileRepeats()) != null) {
+				ff_nofile.add(ff);
+			}
+			assert(ff_nofile.size() > 0);
+			while(ff_nofile.size() != 0) {
+				FunctionFragment fff = ff_nofile.remove(0);
+				for(FunctionFragment f : ff_nofile) {
+					assertFalse("Function fragment get without file repeat picked from same file multiple times.", f.getSrcFile().toAbsolutePath().normalize().equals(fff.getSrcFile().toAbsolutePath().normalize()));
+				}
+			}
+			
+			// check random reset
+			is.resetRandomFileRepeat();
+			ff_nofile = new LinkedList<FunctionFragment>();
+			while((ff = is.getRandomFunctionFragmentNoFileRepeats()) != null) {
+				ff_nofile.add(ff);
+			}
+			assert(ff_nofile.size() > 0);
+			while(ff_nofile.size() != 0) {
+				FunctionFragment fff = ff_nofile.remove(0);
+				for(FunctionFragment f : ff_nofile) {
+					assertFalse("Function fragment get without file repeat picked from same file multiple times.", f.getSrcFile().toAbsolutePath().normalize().equals(fff.getSrcFile().toAbsolutePath().normalize()));
+				}
+			}
+			
+			// check random reset
+			is.resetRandomFileRepeat();
+			ff_nofile = new LinkedList<FunctionFragment>();
+			while((ff = is.getRandomFunctionFragmentNoFileRepeats()) != null) {
+				ff_nofile.add(ff);
+			}
+			assert(ff_nofile.size() > 0);
+			while(ff_nofile.size() != 0) {
+				FunctionFragment fff = ff_nofile.remove(0);
+				for(FunctionFragment f : ff_nofile) {
+					assertFalse("Function fragment get without file repeat picked from same file multiple times.", f.getSrcFile().toAbsolutePath().normalize().equals(fff.getSrcFile().toAbsolutePath().normalize()));
+				}
+			}
 			
 		// Check random selection (repeats...)
 			//Files
@@ -210,10 +275,18 @@ public class InventoriedSystemTest {
 				assertTrue("getRandomLeafDirectory failed.", leafs_rc.contains(p));
 			}
 			
+			//function fragments
+			ffragments_rc = new LinkedList<FunctionFragment>(ffragments);
+			for(int i = 0; i < 1000; i++) {
+				assertTrue((ff = is.getRandomFunctionFragment()) != null);
+				assertTrue("getRandomFunctionFragment failed.", ffragments_rc.contains(ff));
+			}
+			
 		// Check num functions
 			assertEquals("numFiles failed", files_c.size(), is.numFiles());
 			assertEquals("numDirectories failed", dirs_c.size(), is.numDirectories());
 			assertEquals("numLeafDirectories failed", leafs_c.size(), is.numLeafDirectories());
+			assertEquals("numFunctionFragments failed", ffragments_c.size(), is.numFunctionFragments());
 			
 		// check location
 			assertEquals("getLocation failed", Paths.get("testdata/inventoriedSystem/").toAbsolutePath().normalize(),is.getLocation());
