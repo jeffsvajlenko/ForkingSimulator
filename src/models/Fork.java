@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -22,6 +23,30 @@ public class Fork {
 	private List<Variant> variants;
 	private List<FileVariant> filevariants;
 	private List<DirectoryVariant> directoryvariants;
+	
+	/**
+	 * Returns the variants in an unmodifiable list.  Variants are in the order they were injected.
+	 * @return the variants in an unmodifiable list.  Variants are in the order they were injected.
+	 */
+	public List<Variant> getVariants() {
+		return Collections.unmodifiableList(variants);
+	}
+	
+	/**
+	 * Returns the file variants in an unmodifiable list.  Variants are in order they were injected.
+	 * @return the file variants in an unmodifiable list.  Variants are in order they were injected.
+	 */
+	public List<FileVariant> getFileVariants() {
+		return Collections.unmodifiableList(filevariants);
+	}
+	
+	/**
+	 * Returns the directory variants in an unmodifiable list.  Variants are in the order they were injected.
+	 * @return the directory variants in an unmodifiable list.  Variants are in the order they were injected.
+	 */
+	public List<DirectoryVariant> getDirectoryVariants() {
+		return Collections.unmodifiableList(directoryvariants);
+	}
 	
 	/**
 	 * Creates a fork of the system contained in systemdir of the specified source language, and stores it in the specified forkdir.

@@ -44,6 +44,7 @@ public class FileUtil {
 		Files.walkFileTree(directory, opts, Integer.MAX_VALUE, visitor);
 		return visitor.getInventory();
 	}
+	
 	public static class InventoryFiles extends SimpleFileVisitor<Path> {
 		List<Path> inventory;
 		
@@ -125,12 +126,22 @@ public class FileUtil {
 		if(!Files.isDirectory(directory)) {
 			throw new IllegalArgumentException("Specified path is not a directory.");
 		}
-		DirectoryStream<Path> ds = Files.newDirectoryStream(directory);
 		
-		for(Path p : ds) {
-			if(Files.isDirectory(p)) {
-				return false;
+		DirectoryStream<Path> ds = null;
+		try {
+			ds = Files.newDirectoryStream(directory);
+			for(Path p : ds) {
+				if(Files.isDirectory(p)) {
+					ds.close();
+					return false;
+				}
 			}
+			ds.close();
+		} catch (IOException e) {
+			if(ds != null) {
+				try {ds.close();} catch (IOException ee){};
+			}
+			throw e;
 		}
 		return true;
 	}
@@ -156,13 +167,22 @@ public class FileUtil {
 		Files.createDirectories(dest);
 		
 		//Copy contents
-		DirectoryStream<Path> ds = Files.newDirectoryStream(src);
-		for(Path p : ds) {
-			if(Files.isDirectory(p)) {
-				FileUtil.copyDirectory(p, dest.resolve(p.getFileName()));
-			} else {
-				Files.copy(p, dest.resolve(p.getFileName()));
+		DirectoryStream<Path> ds = null;
+		try {
+			ds = Files.newDirectoryStream(src);
+			for(Path p : ds) {
+				if(Files.isDirectory(p)) {
+					FileUtil.copyDirectory(p, dest.resolve(p.getFileName()));
+				} else {
+					Files.copy(p, dest.resolve(p.getFileName()));
+				}
 			}
+			ds.close();
+		} catch(IOException e) {
+			if(ds != null) {
+				try {ds.close();} catch (IOException ee){};
+			}
+			throw e;
 		}
 	}
 	
@@ -177,13 +197,22 @@ public class FileUtil {
 		FileUtil.requireDirectory(directory);
 		
 		//Delete Contents
-		DirectoryStream<Path> ds = Files.newDirectoryStream(directory);
-		for(Path p : ds) {
-			if(Files.isDirectory(p)) {
-				deleteDirectory(p);
-			} else {
-				Files.delete(p);
+		DirectoryStream<Path> ds = null;
+		try {
+			ds = Files.newDirectoryStream(directory);
+			for(Path p : ds) {
+				if(Files.isDirectory(p)) {
+					deleteDirectory(p);
+				} else {
+					Files.delete(p);
+				}
 			}
+			ds.close();
+		} catch (IOException e) {
+			if(ds != null) {
+				try {ds.close();} catch(IOException ee){};
+			}
+			throw e;
 		}
 		
 		//Delete Self

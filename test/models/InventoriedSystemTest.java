@@ -18,6 +18,7 @@ public class InventoriedSystemTest {
 	public void testInventoriedSystem() {
 		try {
 			InventoriedSystem is = new InventoriedSystem(Paths.get("testdata/inventoriedSystem/"), "java");
+
 		//Check file list
 			//Get list it got
 			List<Path> files = is.getFiles();
@@ -86,6 +87,10 @@ public class InventoriedSystemTest {
 			Path p;
 			
 		//Check random files no repeats
+
+			while((p = is.getRandomFileNoRepeats()) != null) {
+				assertTrue("getRandomFileNoRepeats returned a file not in the list, or repeated a file.",files_rc.remove(p));
+			}
 			while((p = is.getRandomFileNoRepeats()) != null) {
 				assertTrue("getRandomFileNoRepeats returned a file not in the list, or repeated a file.",files_rc.remove(p));
 			}
@@ -107,6 +112,7 @@ public class InventoriedSystemTest {
 			}
 			assertTrue("getRandomFileNoRepeats returend null before it ran out of selections [after resetRandomFileRepeat].",files_rc.size() == 0);
 			
+
 		//Check random directories no repeats
 			while((p = is.getRandomDirectoryNoRepeats()) != null) {
 				assertTrue("getRandomDirectory returned a directroy that is not in the list, or is a repeat.", dirs_rc.remove(p));
@@ -124,6 +130,8 @@ public class InventoriedSystemTest {
 			//check directory random reset
 			is.resetRandomDirectoryRepeat();
 			dirs_rc = new LinkedList<Path>(dirs);
+
+			is.resetRandomDirectoryRepeat();
 			while((p = is.getRandomDirectoryNoRepeats()) != null) {
 				assertTrue("getRandomDirectory returned a directroy that is not in the list, or is a repeat [after reset].", dirs_rc.remove(p));
 			}
@@ -146,6 +154,7 @@ public class InventoriedSystemTest {
 			//check directory random reset
 			is.resetRandomLeafDirectoryRepeat();
 			leafs_rc = new LinkedList<Path>(leafs);
+			is.resetRandomLeafDirectoryRepeat();
 			while((p = is.getRandomLeafDirectoryNoRepeats()) != null) {
 				assertTrue("getRandomLeafDirectory returned a directory not in the list or repeated a directory [after reset].",leafs_rc.remove(p));
 			}
@@ -241,7 +250,9 @@ public class InventoriedSystemTest {
 			caught = true;
 		} catch (IOException e) {
 			e.printStackTrace();
+			fail("");
 		}
 		assertTrue("IllegalArgumentException failed to be thrown for file as system directory.",caught);
+
 	}
 }

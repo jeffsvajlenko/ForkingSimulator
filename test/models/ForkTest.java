@@ -24,7 +24,7 @@ public class ForkTest {
 	public void testFork() {
 		try {
 			//Create
-			Fork f = new Fork(Paths.get("testdata/inventoriedSystem/"), Paths.get("testdata/testfork/"), "java");
+			new Fork(Paths.get("testdata/inventoriedSystem/"), Paths.get("testdata/testfork/"), "java");
 			
 			//Test properly captured files
 			List<Path> files = new LinkedList<Path>();
@@ -137,7 +137,7 @@ public class ForkTest {
 			List<Path> files = new LinkedList<Path>(is.getFiles());
 			List<Path> dirs = new LinkedList<Path>(is.getDirectories());
 			
-			for(int i = 1; i <= 100; i++) {
+			for(int i = 1; i <= 1; i++) {
 				//inject the file
 				FileVariant fv = f.injectFile(Paths.get("testdata/forktest/files/" + i));
 				
@@ -172,7 +172,91 @@ public class ForkTest {
 				for(Path p : dirs) {
 					assertTrue("A directory is missing from the fork that should be there..." + p, dirs_r.contains(p));
 				}
+				
+				//check variant lists
+				assertEquals("", fv, f.getVariants().get(f.getVariants().size()-1));
+				assertEquals("", fv, f.getFileVariants().get(f.getVariants().size()-1));
+				assertTrue("", f.getVariants().size() == 1);
+				assertTrue("", f.getFileVariants().size() == 1);
+				assertTrue("", f.getDirectoryVariants().size() == 0);
 			}
+			//cleanup
+			FileUtil.deleteDirectory(Paths.get("testdata/testfork/"));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testInjectFile_many() {
+		try {
+			//create fork
+			Fork f = new Fork(Paths.get("testdata/inventoriedSystem/"), Paths.get("testdata/testfork/"), "java");
+			
+			//inventory the fork
+			InventoriedSystem is = new InventoriedSystem(Paths.get("testdata/testfork/"), "java");
+			
+			//initial inventory
+			List<Path> files = new LinkedList<Path>(is.getFiles());
+			List<Path> dirs = new LinkedList<Path>(is.getDirectories());
+			
+			//Variant tracking
+			List<Variant> variants = new LinkedList<Variant>();
+			List<FileVariant> filevariants = new LinkedList<FileVariant>();
+			
+			for(int i = 1; i <= 100; i++) {
+				//inject the file
+				FileVariant fv = f.injectFile(Paths.get("testdata/forktest/files/" + i));
+				variants.add(fv);
+				filevariants.add(fv);
+				
+				//Check return value
+				assertTrue("FileVariant returned is null.", fv!=null);
+				assertEquals("FileVariant does not refer to the file to be injected.", Paths.get("testdata/forktest/files/" + i).toAbsolutePath().normalize(), fv.getOriginalFile().toAbsolutePath().normalize());
+				assertTrue("Injected file not injected in proper place.", fv.getInjectedFile().startsWith(Paths.get("testdata/testfork/").toAbsolutePath().normalize()));
+				
+				//Check file content
+				Scanner s = new Scanner(fv.getInjectedFile().toFile());
+				String line = s.nextLine();
+				assertTrue("File was not injected properly (contents are wrong).", line.equals("" + i + "") && !s.hasNextLine());
+				s.close();
+				
+				//Update correct inventory
+				files.add(fv.getInjectedFile());
+				
+				//Inventory system
+				List<Path> files_r = FileUtil.fileInventory(Paths.get("testdata/testfork/"));
+				List<Path> dirs_r = FileUtil.directoryInventory(Paths.get("testdata/testfork/"));
+				
+				//Check fork's contents
+				for(Path p : files_r) {
+					assertTrue("A file exists in the fork that shouldn't be there..." + p, files.contains(p));
+				}
+				for(Path p : files) {
+					assertTrue("A file is missing from the fork that should be there..." + p, files_r.contains(p));
+				}
+				for(Path p : dirs_r) {
+					assertTrue("A directory exists in the fork that shouldn't be there..." + p, dirs.contains(p));
+				}
+				for(Path p : dirs) {
+					assertTrue("A directory is missing from the fork that should be there..." + p, dirs_r.contains(p));
+				}
+				
+				//check variants
+				assertTrue(f.getVariants().get(f.getVariants().size()-1).equals(fv));
+				assertTrue(f.getFileVariants().get(f.getFileVariants().size()-1).equals(fv));
+				
+			}
+			
+			//check variants
+			assertTrue(f.getVariants().size() == 100);
+			assertTrue(f.getFileVariants().size() == 100);
+			assertTrue(f.getDirectoryVariants().size() == 0);
+			for(int i = 0; i < 100; i++) {
+				assertTrue(f.getVariants().get(i).equals(variants.get(i)));
+				assertTrue(f.getFileVariants().get(i).equals(filevariants.get(i)));
+			}
+			
 			//cleanup
 			FileUtil.deleteDirectory(Paths.get("testdata/testfork/"));
 		} catch (IOException e) {
@@ -192,10 +276,14 @@ public class ForkTest {
 			//initial inventory
 			List<Path> files = new LinkedList<Path>(is.getFiles());
 			List<Path> dirs = new LinkedList<Path>(is.getDirectories());
+			List<Variant> variants = new LinkedList<Variant>();
+			List<DirectoryVariant> dirvariants = new LinkedList<DirectoryVariant>();
 			
-			for(int i = 1; i <= 100; i++) {
+			for(int i = 1; i <= 1; i++) {
 				//inject the file
 				DirectoryVariant dv = f.injectDirectory(Paths.get("testdata/forktest/folders/" + i));
+				variants.add(dv);
+				dirvariants.add(dv);
 				
 				//Check return value
 				assertTrue("DirectoryVariant returned is null.", dv!=null);
@@ -241,9 +329,106 @@ public class ForkTest {
 				for(Path p : dirs) {
 					assertTrue("A directory is missing from the fork that should be there..." + p, dirs_r.contains(p));
 				}
+				
+				//check variants
+				assertTrue(f.getVariants().get(f.getVariants().size()-1).equals(dv));
+				assertTrue(f.getDirectoryVariants().get(f.getDirectoryVariants().size()-1).equals(dv));
 			}
 			//cleanup
 			FileUtil.deleteDirectory(Paths.get("testdata/testfork/"));
+			
+			//check variants
+			assertTrue(f.getVariants().size()==1);
+			assertTrue(f.getDirectoryVariants().size()==1);
+			assertTrue(f.getFileVariants().size()==0);
+			assertTrue(f.getVariants().get(0).equals(variants.get(0)));
+			assertTrue(f.getDirectoryVariants().get(0).equals(dirvariants.get(0)));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testInjectDirectory_many() {
+		try {
+			//create fork
+			Fork f = new Fork(Paths.get("testdata/inventoriedSystem/"), Paths.get("testdata/testfork/"), "java");
+			
+			//inventory the fork
+			InventoriedSystem is = new InventoriedSystem(Paths.get("testdata/testfork/"), "java");
+			
+			//initial inventory
+			List<Path> files = new LinkedList<Path>(is.getFiles());
+			List<Path> dirs = new LinkedList<Path>(is.getDirectories());
+			List<Variant> variants = new LinkedList<Variant>();
+			List<DirectoryVariant> dirvariants = new LinkedList<DirectoryVariant>();
+			
+			for(int i = 1; i <= 100; i++) {
+				//inject the file
+				DirectoryVariant dv = f.injectDirectory(Paths.get("testdata/forktest/folders/" + i));
+				variants.add(dv);
+				dirvariants.add(dv);
+				
+				//Check return value
+				assertTrue("DirectoryVariant returned is null.", dv!=null);
+				assertEquals("DirectoryVariant does not refer to the file to be injected.", Paths.get("testdata/forktest/folders/" + i).toAbsolutePath().normalize(), dv.getOriginalDirectory().toAbsolutePath().normalize());
+				assertTrue("Injected directory not injected in proper place.", dv.getInjectedDirectory().startsWith(Paths.get("testdata/testfork/").toAbsolutePath().normalize()));
+				
+				//Check directory content
+				DirectoryStream<Path> ds = Files.newDirectoryStream(dv.getInjectedDirectory());
+				List<Path> contents = new LinkedList<Path>();
+				for(Path p : ds) {
+					contents.add(p.toAbsolutePath().normalize());
+				}
+				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("1").toAbsolutePath().normalize())));
+				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("2").toAbsolutePath().normalize())));
+				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("3").toAbsolutePath().normalize())));
+				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("d1").toAbsolutePath().normalize())));
+				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("d2").toAbsolutePath().normalize())));
+				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("d3").toAbsolutePath().normalize())));
+				
+				//Update correct inventory
+				dirs.add(dv.getInjectedDirectory());
+				files.add(dv.getInjectedDirectory().resolve(Paths.get("1")).toAbsolutePath().normalize());
+				files.add(dv.getInjectedDirectory().resolve(Paths.get("2")).toAbsolutePath().normalize());
+				files.add(dv.getInjectedDirectory().resolve(Paths.get("3")).toAbsolutePath().normalize());
+				dirs.add(dv.getInjectedDirectory().resolve(Paths.get("d1")).toAbsolutePath().normalize());
+				dirs.add(dv.getInjectedDirectory().resolve(Paths.get("d2")).toAbsolutePath().normalize());
+				dirs.add(dv.getInjectedDirectory().resolve(Paths.get("d3")).toAbsolutePath().normalize());
+				
+				//Inventory system
+				List<Path> files_r = FileUtil.fileInventory(Paths.get("testdata/testfork/"));
+				List<Path> dirs_r = FileUtil.directoryInventory(Paths.get("testdata/testfork/"));
+				
+				//Check fork's contents
+				for(Path p : files_r) {
+					assertTrue("A file exists in the fork that shouldn't be there..." + p, files.contains(p));
+				}
+				for(Path p : files) {
+					assertTrue("A file is missing from the fork that should be there..." + p, files_r.contains(p));
+				}
+				for(Path p : dirs_r) {
+					assertTrue("A directory exists in the fork that shouldn't be there..." + p, dirs.contains(p));
+				}
+				for(Path p : dirs) {
+					assertTrue("A directory is missing from the fork that should be there..." + p, dirs_r.contains(p));
+				}
+				
+				//check variants
+				assertTrue(f.getVariants().get(f.getVariants().size()-1).equals(dv));
+				assertTrue(f.getDirectoryVariants().get(f.getDirectoryVariants().size()-1).equals(dv));
+			}
+			//cleanup
+			FileUtil.deleteDirectory(Paths.get("testdata/testfork/"));
+			
+			//check variants
+			assertTrue(f.getVariants().size()==100);
+			assertTrue(f.getDirectoryVariants().size()==100);
+			assertTrue(f.getFileVariants().size()==0);
+			for(int i = 0; i < 100; i++) {
+				assertTrue(f.getVariants().get(i).equals(variants.get(i)));
+				assertTrue(f.getDirectoryVariants().get(i).equals(dirvariants.get(i)));
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
