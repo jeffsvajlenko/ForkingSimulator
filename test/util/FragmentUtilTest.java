@@ -204,13 +204,13 @@ public class FragmentUtilTest {
 		
 		//Check exception cases
 		boolean thrown;
-		thrown=false;
-		try {
-			FragmentUtil.isFunction(null, "java");
-		} catch (NullPointerException e) {
-			thrown=true;
-		}
-		assertTrue("Failed to throw null pointer exception for function path.", thrown);
+		//thrown=false;
+		//try {
+		//	FragmentUtil.isFunction(null, "java");
+		//} catch (NullPointerException e) {
+		//	thrown=true;
+		//}
+		//assertTrue("Failed to throw null pointer exception for function path.", thrown);
 		
 		thrown=false;
 		try {
@@ -223,7 +223,7 @@ public class FragmentUtilTest {
 		thrown=false;
 		try {
 			FragmentUtil.isFunction(Paths.get("testdata/FragmentUtilTest/function324234324"), "java");
-		} catch (IllegalArgumentException e) {
+		} catch (FileNotFoundException e) {
 			thrown=true;
 		}
 		assertTrue("Failed to throw illegal argument exception for non-existant function.", thrown);

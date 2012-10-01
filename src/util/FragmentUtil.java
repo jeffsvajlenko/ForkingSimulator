@@ -125,6 +125,53 @@ public class FragmentUtil {
 	}
 	
 	/**
+	 * Returns if the fragment represents a function.  Will return true if the code slice represented by the start/end lines of the fragment
+	 * is a function of the specified language.  Will return false if it is not a function.  Note that if the fragment includes a function,
+	 * but also includes other syntax external to the function (not including comments) it will return false.
+	 * @param fragment The fragment to check.  Fragment must be valid (source file exists, is a regular file, and is readable; start/end-lines must be valid with respect to source file.)
+	 * @param language The language of the fragment (must be of a language supported by this class).
+	 * @return True if the fragment captures a function (in its entirity and without other external features except comments), false if it does not.
+	 * @throws FileNotFoundException If the source file can not be found.
+	 * @throws IOException If an IO error occurs.
+	 * @throws IllegalArgumentException If one of the argument preconditions is broken: fragment is invalid (source file does not exist, is not a regular file, or is not readable, or start/endlines invalid) or if language is not supported.
+	 * @throws NullPointerException if fragment of language are specified as null.
+	 */
+	public static boolean isFunction(Fragment fragment, String language) throws FileNotFoundException, IOException {
+		//Check Input
+		Objects.requireNonNull(fragment);
+		Objects.requireNonNull(language);
+		if(!supportedLanguage(language)) {
+			throw new IllegalArgumentException("Language not supported.");
+		}
+		if(!Files.exists(fragment.getSrcFile())) {
+			throw new FileNotFoundException("Fragment source file does not exist.");
+		}
+		if(!Files.isReadable(fragment.getSrcFile())) {
+			throw new IllegalArgumentException("File specified by fragment is not readable.");
+		}
+		if(!Files.isRegularFile(fragment.getSrcFile())) {
+			throw new IllegalArgumentException("File specified by fragment is not a regular file.");
+		}
+		int numlines = FragmentUtil.countLines(fragment.getSrcFile());
+		if(fragment.getEndLine() > numlines) {
+			throw new IllegalArgumentException("Fragment is invalid, endline proceeds end of file.");
+		}
+		
+		//Prep fragment
+		Path tmpfile = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "FragmentUtil-isFunction", null);
+		FragmentUtil.extractFragment(fragment, tmpfile);
+		
+		//check is function
+		boolean retval = FragmentUtil.isFunction(tmpfile, language);
+		
+		//Cleanup
+		Files.delete(tmpfile);
+		
+		//return answer
+		return retval;
+	}
+	
+	/**
 	 * Determines if a file contains a single function of the specified language.  True means 
 	 * the file contains a function, false means it does not or that parsing failed (Grammar
 	 * may not be perfect, do not rely on false meaning not a function!  Grammar should be good
@@ -133,13 +180,14 @@ public class FragmentUtil {
 	 * @param language The language of the syntax.
 	 * @return true if the file specified by the path function is a function, or false if it is not.
 	 * @throws IOException If an IOException occurs during analysis.
+	 * @throws FileNotFoundException If function does not point to an existing file.
 	 */
-	public static boolean isFunction(Path function, String language) throws IOException {
+	public static boolean isFunction(Path function, String language) throws FileNotFoundException, IOException {
 		//Check Input
 		Objects.requireNonNull(function);
 		Objects.requireNonNull(language);
 		if(!Files.exists(function)) {
-			throw new IllegalArgumentException("Function does not exist.");
+			throw new FileNotFoundException("Function does not exist.");
 		}
 		if(!Files.isReadable(function)) {
 			throw new IllegalArgumentException("Function is not readable.");
@@ -155,6 +203,9 @@ public class FragmentUtil {
 		
 		//Run isFunction txl program
 		int retval = SystemUtil.runTxl(txlscript.toAbsolutePath().normalize(), function.toAbsolutePath().normalize(), tmpout.toAbsolutePath().normalize());
+		
+		//Cleanup
+		Files.delete(tmpout);
 		
 		//Check
 		if(retval == 0) {
@@ -215,7 +266,11 @@ public class FragmentUtil {
 		Path fragmentfile = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "FragmentUtil-injectFragment-fragment", null);
 		FragmentUtil.extractFragment(f, fragmentfile);
 		
+		//Inject fragment
 		injectFragment(file,location,fragmentfile);
+		
+		//cleanup
+		Files.delete(fragmentfile);
 	}
 	
 	/**
@@ -282,6 +337,7 @@ public class FragmentUtil {
 			tmpwriter.flush(); tmpwriter.close();
 			try {fileIn.close();} catch (IOException ee) {};
 			try {fragIn.close();} catch (IOException ee) {};
+			try {Files.delete(tmp);} catch (IOException ee) {};
 			throw e;
 		}
 		tmpwriter.close();
@@ -299,11 +355,15 @@ public class FragmentUtil {
 		}
 		catch (IOException e) {
 			try {reader.close();} catch (IOException ee) {};
-			writer.flush(); writer.close();;
+			writer.flush(); writer.close();
+			try {Files.delete(tmp);} catch (IOException ee) {};
 			throw e;
 		}
 		writer.flush(); writer.close();
 		reader.close();
+		
+		//Cleanup
+		Files.deleteIfExists(tmp);
 	}
 	
 	private static boolean supportedLanguage(String language) {

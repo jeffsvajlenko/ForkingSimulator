@@ -3,6 +3,7 @@ package models;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -10,9 +11,12 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import util.FileUtil;
+import util.FragmentUtil;
+import util.SystemUtil;
 
 import java.util.List;
 import java.util.LinkedList;
@@ -435,22 +439,136 @@ public class ForkTest {
 	}
 
 	@Test
-	public void testInjectFragment() {
-		//try {
-		//	Fork f = new Fork(Paths.get("testdata/inventoriedSystem/"), Paths.get("testdata/testfork/"), "java");
-		//} catch (IOException e) {
-		//	e.printStackTrace();
-		//}
-		fail("injectFragment not implemented.");
+	public void testInjectFunctionFragment() {
+		try {
+			Fork fork = new Fork(Paths.get("testdata/inventoriedSystem/"), Paths.get("testdata/testfork/"), "java");
+			InventoriedSystem repository = new InventoriedSystem(Paths.get("testdata/JHotDraw54b1/"), "java");
+			FunctionFragment f = repository.getRandomFunctionFragment();
+			FragmentVariant fv = fork.injectFunctionFragment(f);
+			
+			Path tmp1 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "testInjectionFunctionFragment", null);
+			Path tmp2 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "testInjectionFunctionFragment", null);
+			
+			FragmentUtil.extractFragment(fv.getOriginalFragment(), tmp1);
+			FragmentUtil.extractFragment(fv.getInjectedFragment(), tmp2);
+			
+			assertTrue("Original and injected fragments do not much.", filesEqual(tmp1,tmp2));
+			assertTrue(FragmentUtil.isFunction(tmp1, "java"));
+			assertTrue(FragmentUtil.isFunction(tmp2, "java"));
+			
+			Files.deleteIfExists(tmp1);
+			Files.deleteIfExists(tmp2);
+			
+			assertTrue(fork.getVariants().size() == 1);
+			assertTrue(fork.getDirectoryVariants().size() == 0);
+			assertTrue(fork.getFileVariants().size() == 0);
+			assertTrue(fork.getFunctionFragmentVariants().size() == 1);
+			assertTrue(fork.getVariants().get(0).equals(fv));
+			assertTrue(fork.getFunctionFragmentVariants().get(0).equals(fv));
+			
+			InventoriedSystem check = new InventoriedSystem(Paths.get("testdata/testfork/"), "java");
+			assertTrue(check.getFunctionFragments().contains(fv.getInjectedFragment()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	@After 
+	@Test
+	public void testInjectFunctionFragment_many() {
+		try {
+			Fork fork = new Fork(Paths.get("testdata/inventoriedSystem/"), Paths.get("testdata/testfork/"), "java");
+			InventoriedSystem repository = new InventoriedSystem(Paths.get("testdata/JHotDraw54b1/"), "java");
+			List<FragmentVariant> fv_c = new LinkedList<FragmentVariant>();
+			List<Path> modifiedfile = new LinkedList<Path>();
+			int i = 0;
+			for(; i < 300; i++) {
+				FunctionFragment f = repository.getRandomFunctionFragment();
+				FragmentVariant fv = fork.injectFunctionFragment(f);
+				if(fv == null) {
+					break;
+				}
+				fv_c.add(fv);
+				assertTrue("The same file was modified twice...", !modifiedfile.contains(fv.getInjectedFragment().getSrcFile().toAbsolutePath().normalize()));
+				modifiedfile.add(fv.getInjectedFragment().getSrcFile().toAbsolutePath().normalize());
+				
+				Path tmp1 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "testInjectionFunctionFragment", null);
+				Path tmp2 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "testInjectionFunctionFragment", null);
+				
+				FragmentUtil.extractFragment(fv.getOriginalFragment(), tmp1);
+				FragmentUtil.extractFragment(fv.getInjectedFragment(), tmp2);
+				
+				assertTrue("Original and injected fragments do not much.", filesEqual(tmp1,tmp2));
+				assertTrue(FragmentUtil.isFunction(tmp1, "java"));
+				assertTrue(FragmentUtil.isFunction(tmp2, "java"));
+				
+				Files.deleteIfExists(tmp1);
+				Files.deleteIfExists(tmp2);
+				
+				assertTrue(fork.getVariants().size() == i+1);
+				assertTrue(fork.getDirectoryVariants().size() == 0);
+				assertTrue(fork.getFileVariants().size() == 0);
+				assertTrue(fork.getFunctionFragmentVariants().size() == i+1);
+				assertTrue(fork.getVariants().get(i).equals(fv));
+				assertTrue(fork.getFunctionFragmentVariants().get(i).equals(fv));
+			}
+			
+			//Check variant info
+			assertTrue(fork.getVariants().size() == i);
+			assertTrue(fork.getFunctionFragmentVariants().size() == i);
+			assertTrue(fork.getFileVariants().size() == 0);
+			assertTrue(fork.getDirectoryVariants().size() == 0);
+			for(int j = 0; j < i; j++) {
+				fork.getVariants().get(j).equals(fv_c.get(j));
+			}
+			for(int j = 0; j < i; j++) {
+				fork.getFunctionFragmentVariants().get(j).equals(fv_c.get(j));
+			}
+			
+			InventoriedSystem check = new InventoriedSystem(Paths.get("testdata/testfork/"), "java");
+			for(int j = 0; j < fv_c.size(); j++) {
+				assertTrue(check.getFunctionFragments().contains(fv_c.get(j).getInjectedFragment()));
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Before
 	public void method() {
 		//Cleanup
 		try {
 			FileUtil.deleteDirectory(Paths.get("testdata/testfork/"));
 		} catch (Exception e) {
 		}
+	}
+	
+	private boolean filesEqual(Path f1, Path f2) throws FileNotFoundException {
+		List<String> file1 = new LinkedList<String>();
+		List<String> file2 = new LinkedList<String>();
+		
+		Scanner s = new Scanner(f1.toFile());
+		while(s.hasNextLine()) {
+			file1.add(s.nextLine());
+		}
+		s.close();
+		
+		s = new Scanner(f2.toFile());
+		while(s.hasNextLine()) {
+			file2.add(s.nextLine());
+		}
+		s.close();
+		
+		if(file1.size() != file2.size()) {
+			return false;
+		}
+		
+		for(int i = 0; i < file1.size(); i++) {
+			if(!file1.get(i).equals(file2.get(i))) {
+				return false;
+			}
+		}
+		
+		return true;
 	}
 	
 }
