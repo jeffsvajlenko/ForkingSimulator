@@ -533,6 +533,81 @@ public class ForkTest {
 		}
 	}
 	
+	@Test
+	public void testInjectionsMixed() throws IOException {
+		Fork fork = new Fork(Paths.get("testdata/inventoriedSystem/"), Paths.get("testdata/testfork/"), "java");
+		InventoriedSystem repository = new InventoriedSystem(Paths.get("testdata/JHotDraw54b1/"), "java");
+		
+		List<Variant> v_c = new LinkedList<Variant>();
+		List<DirectoryVariant> dirv_c = new LinkedList<DirectoryVariant>();
+		List<FileVariant> filev_c = new LinkedList<FileVariant>();
+		List<FragmentVariant> fragv_c = new LinkedList<FragmentVariant>();
+		
+		List<Path> modfile = new LinkedList<Path>();
+		//Perform injections (check correctness of injectiosn during as well, partilaly)
+		for(int n = 0; n < 55; n++) {
+			//File
+			Path f = repository.getRandomFileNoRepeats();
+			FileVariant fv = fork.injectFile(f);
+			assertTrue("Ran out of files injections before end of test...",fv!=null);
+			v_c.add(fv);
+			filev_c.add(fv);
+			assertTrue("Injected and original file do not match.", filesEqual(fv.getOriginalFile(), fv.getInjectedFile()));
+			
+			//Directory
+			Path d = repository.getRandomLeafDirectoryNoRepeats();
+			DirectoryVariant dv = fork.injectDirectory(d);
+			assertTrue("Ran out of directory injects before end of test...",dv!=null);
+			v_c.add(dv);
+			dirv_c.add(dv);
+			assertTrue("Injected and original directory do not match.", leafDirectoryEqual(dv.getOriginalDirectory(),dv.getInjectedDirectory()));
+			
+			//Fragment
+			FunctionFragment ff = repository.getRandomFunctionFragmentNoRepeats();
+			FragmentVariant ffv = fork.injectFunctionFragment(ff);
+			assertTrue("Ran out of function fragment injects before end of test...",ffv!=null);
+			v_c.add(ffv);
+			fragv_c.add(ffv);
+			assertTrue("Function injection modified the same file twice.", !modfile.contains(ffv.getInjectedFragment().getSrcFile().toAbsolutePath().normalize()));
+			modfile.add(ffv.getInjectedFragment().getSrcFile().toAbsolutePath().normalize());
+			assertTrue("Injected and original function fragments do not match.", fragEqual(ffv.getOriginalFragment(), ffv.getInjectedFragment()));
+		}
+		
+		//check variant lists
+		assertTrue(fork.getVariants().size() == 165);
+		assertTrue(fork.getFileVariants().size() == 55);
+		assertTrue(fork.getDirectoryVariants().size() == 55);
+		assertTrue(fork.getFunctionFragmentVariants().size() == 55);
+		for(int i = 0; i < fork.getVariants().size(); i++) {
+			assertTrue("Error in fork's variant list.", fork.getVariants().get(i).equals(v_c.get(i)));
+		}
+		for(int i = 0; i < fork.getFileVariants().size(); i++) {
+			assertTrue("Error in fork's file variant list.", fork.getFileVariants().get(i).equals(filev_c.get(i)));
+		}
+		for(int i = 0; i < fork.getDirectoryVariants().size(); i++) {
+			assertTrue("Error in fork's dir variant list.", fork.getDirectoryVariants().get(i).equals(dirv_c.get(i)));
+		}
+		for(int i = 0; i < fork.getFunctionFragmentVariants().size(); i++) {
+			assertTrue("Error in fork's function fragment variant list.", fork.getFunctionFragmentVariants().get(i).equals(fragv_c.get(i)));
+		}
+		
+		//Check system contents
+		InventoriedSystem check = new InventoriedSystem(Paths.get("testdata/testfork/"), "java");
+		for(FileVariant fv : filev_c) {
+			assertTrue("Injected file missing from fork.", check.getFiles().contains(fv.getInjectedFile()));
+			assertTrue("Injected and original files do not match", filesEqual(fv.getOriginalFile(), fv.getInjectedFile()));
+		}
+		for(DirectoryVariant dv : dirv_c) {
+			assertTrue("Injected directory missing from fork.", check.getDirectories().contains(dv.getInjectedDirectory()));
+			assertTrue("Injected directory is not a leaf directory?", FileUtil.isLeafDirectory(dv.getInjectedDirectory()));
+			assertTrue("Injected and original directories do not match", leafDirectoryEqual(dv.getOriginalDirectory(), dv.getInjectedDirectory()));
+		}
+		for(FragmentVariant fv : fragv_c) {
+			assertTrue("Injected function fragment missing form fork.", check.getFunctionFragments().contains(fv.getInjectedFragment()));
+			assertTrue("Injected and original function fragmetns do not match.", fragEqual(fv.getOriginalFragment(), fv.getInjectedFragment()));
+		}
+	}
+	
 	@Before
 	public void method() {
 		//Cleanup
@@ -540,6 +615,17 @@ public class ForkTest {
 			FileUtil.deleteDirectory(Paths.get("testdata/testfork/"));
 		} catch (Exception e) {
 		}
+	}
+	
+	private boolean fragEqual(Fragment f1, Fragment f2) throws IOException {
+		Path frag1 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "testInjectiosMixed", null);
+		Path frag2 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "testInjectiosMixed", null);
+		FragmentUtil.extractFragment(f1, frag1);
+		FragmentUtil.extractFragment(f2, frag2);
+		boolean retval = filesEqual(frag1,frag2);
+		Files.delete(frag1);
+		Files.delete(frag2);
+		return retval;
 	}
 	
 	private boolean filesEqual(Path f1, Path f2) throws FileNotFoundException {
@@ -568,6 +654,32 @@ public class ForkTest {
 			}
 		}
 		
+		return true;
+	}
+	
+	private boolean leafDirectoryEqual(Path d1, Path d2) throws IOException {
+		DirectoryStream<Path> ds1, ds2;
+		List<Path> dc1 = new LinkedList<Path>();
+		List<Path> dc2 = new LinkedList<Path>();
+		ds1 = Files.newDirectoryStream(d1);
+		ds2 = Files.newDirectoryStream(d2);
+		for(Path p : ds1) {
+			dc1.add(p.toAbsolutePath().normalize());
+		}
+		for(Path p : ds2) {
+			dc2.add(p.toAbsolutePath().normalize());
+		}
+		
+		for(Path p : dc1) {
+			if(!dc2.contains(Paths.get(p.toString().replaceFirst(d1.toString(), d2.toString())))) {
+				return false;
+			}
+		}
+		for(Path p : dc2) {
+			if(!dc1.contains(Paths.get(p.toString().replaceFirst(d2.toString(), d1.toString())))) {
+				return false;
+			}
+		}
 		return true;
 	}
 	

@@ -160,6 +160,7 @@ public class Fork {
 	 */
 	public DirectoryVariant injectDirectory(Path directory) throws IOException {
 		//Check input
+		Objects.requireNonNull(directory);
 		if(!Files.exists(directory)) {
 			throw new IllegalArgumentException("Directory does not exist.");
 		}
