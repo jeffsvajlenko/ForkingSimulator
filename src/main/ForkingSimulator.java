@@ -28,8 +28,9 @@ public class ForkingSimulator {
 		installdir = Paths.get(ForkingSimulator.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 		
 	//Handle Input Parameters
-		if(args.length != 1 || args.length != 2) {
+		if(args.length != 1 && args.length != 2) {
 			printUsage();
+			return;
 		}
 		Path propertiesfile;
 		try {
@@ -335,7 +336,7 @@ public class ForkingSimulator {
 		
 		//Initialize selectFrom list with all integers [0,max) (no repeats)
 		List<Integer> selectFrom = new LinkedList<Integer>();
-		for(int i = 0; i <= max; i++) {
+		for(int i = 0; i < max; i++) {
 			selectFrom.add(i);
 		}
 		
