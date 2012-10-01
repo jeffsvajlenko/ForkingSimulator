@@ -201,6 +201,14 @@ public class FragmentUtilTest {
 		//Check success cases
 		assertTrue(FragmentUtil.isFunction(Paths.get("testdata/FragmentUtilTest/function"), "java"));
 		assertFalse(FragmentUtil.isFunction(Paths.get("testdata/FragmentUtilTest/notfunction"), "java"));
+		assertTrue(FragmentUtil.isFunction(Paths.get("testdata/FragmentUtilTest/cfunction"), "c"));
+		assertFalse(FragmentUtil.isFunction(Paths.get("testdata/FragmentUtilTest/cnotfunction1"), "c"));
+		assertFalse(FragmentUtil.isFunction(Paths.get("testdata/FragmentUtilTest/cnotfunction2"), "c"));
+		assertTrue(FragmentUtil.isFunction(Paths.get("testdata/FragmentUtilTest/csfunction1"), "cs"));
+		assertTrue(FragmentUtil.isFunction(Paths.get("testdata/FragmentUtilTest/csfunction2"), "cs"));
+		assertFalse(FragmentUtil.isFunction(Paths.get("testdata/FragmentUtilTest/csnotfunction1"), "cs"));
+		assertFalse(FragmentUtil.isFunction(Paths.get("testdata/FragmentUtilTest/csnotfunction2"), "cs"));
+		
 		
 		//Check exception cases
 		boolean thrown;
