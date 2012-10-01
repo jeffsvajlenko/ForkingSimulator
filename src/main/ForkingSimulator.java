@@ -232,13 +232,13 @@ public class ForkingSimulator {
 			
 		//Check success (increment counter) and report effects
 			if(t_variants.size() != 0) {
-				numf++;
-				System.out.println(numf + " : " + dir.toAbsolutePath().normalize().toString());
+				numd++;
+				System.out.println(numd + " : " + dir.toAbsolutePath().normalize().toString());
 				for(int i = 0; i < t_forks.size(); i++) {
 					System.out.println("\t" + t_forks.get(i) + " : " + t_variants.get(i).getInjectedDirectory());
 				}
 				try {
-					FileUtil.copyDirectory(dir, dirVariantDir.resolve("" + numf));
+					FileUtil.copyDirectory(dir, dirVariantDir.resolve("" + numd));
 				} catch (IOException e) {
 					System.err.println("Failed to save injected dir record...");
 					System.exit(-1);
