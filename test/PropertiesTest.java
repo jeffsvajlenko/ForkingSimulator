@@ -2,6 +2,8 @@ import static org.junit.Assert.*;
 
 import java.nio.file.Paths;
 
+import main.Properties;
+
 import org.junit.Test;
 
 
