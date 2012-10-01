@@ -182,7 +182,7 @@ public class ForkingSimulator {
 				numf++;
 				System.out.println(numf + " " + t_variants.size() + " " + file.toAbsolutePath().normalize().toString());
 				for(int i = 0; i < t_forks.size(); i++) {
-					System.out.println("\t" + t_forks.get(i) + " : " + t_variants.get(i).getInjectedFile());
+					System.out.println("\t" + t_forks.get(i) + " " + t_variants.get(i).getInjectedFile());
 				}
 				try {
 					Files.copy(file, outputdir.resolve("files/" + numf));
@@ -247,9 +247,9 @@ public class ForkingSimulator {
 		//Check success (increment counter) and report effects
 			if(t_variants.size() != 0) {
 				numd++;
-				System.out.println(numd + " : " + dir.toAbsolutePath().normalize().toString());
+				System.out.println(numd + " " + t_forks.size() + " " + dir.toAbsolutePath().normalize().toString());
 				for(int i = 0; i < t_forks.size(); i++) {
-					System.out.println("\t" + t_forks.get(i) + " : " + t_variants.get(i).getInjectedDirectory());
+					System.out.println("\t" + t_forks.get(i) + " " + t_variants.get(i).getInjectedDirectory());
 				}
 				try {
 					FileUtil.copyDirectory(dir, dirVariantDir.resolve("" + numd));
@@ -312,9 +312,9 @@ public class ForkingSimulator {
 		// Check success (increment counter) and report efforts
 			if(t_variants.size() > 0) {
 				numff++;
-				System.out.println(numff + " : " + functionfragment.getSrcFile() + ":" + functionfragment.getStartLine() + "-" + functionfragment.getEndLine());
+				System.out.println(numff + " " + functionfragment.getSrcFile() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine());
 				for(int i = 0; i < t_forks.size(); i++) {
-					System.out.println("\t" + t_forks.get(i) + " : " + t_variants.get(i).getInjectedFragment().getSrcFile() + ":" + t_variants.get(i).getInjectedFragment().getStartLine() + "-" + t_variants.get(i).getInjectedFragment().getEndLine());
+					System.out.println("\t" + t_forks.get(i) + " " + t_variants.get(i).getInjectedFragment().getSrcFile() + " " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine());
 				}
 				try {
 					Files.createDirectory(outputdir.resolve("function_fragments").resolve("" + numff));
