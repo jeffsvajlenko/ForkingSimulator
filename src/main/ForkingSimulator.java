@@ -195,7 +195,7 @@ public class ForkingSimulator {
 		System.out.println("END: FileVariants");
 		
 	// Create Leaf Directory Variants
-		System.out.println("BEGIN: DirVariants");
+		System.out.println("BEGIN: DirectoryVariants");
 		
 		//prep
 		int numd = 0;
@@ -312,7 +312,7 @@ public class ForkingSimulator {
 		// Check success (increment counter) and report efforts
 			if(t_variants.size() > 0) {
 				numff++;
-				System.out.println(numff + " " + functionfragment.getSrcFile() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine());
+				System.out.println(numff + " " +  t_forks.size() + " " + functionfragment.getSrcFile() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine());
 				for(int i = 0; i < t_forks.size(); i++) {
 					System.out.println("\t" + t_forks.get(i) + " " + t_variants.get(i).getInjectedFragment().getSrcFile() + " " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine());
 				}
