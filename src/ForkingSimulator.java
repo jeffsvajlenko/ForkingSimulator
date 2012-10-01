@@ -8,9 +8,14 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import util.FileUtil;
+import util.FragmentUtil;
+
 import models.FileVariant;
 import models.DirectoryVariant;
 import models.Fork;
+import models.FragmentVariant;
+import models.FunctionFragment;
 import models.InventoriedSystem;
 
 
@@ -109,8 +114,18 @@ public class ForkingSimulator {
 		
 	// Create File Variants
 		System.out.println("BEGIN: FileVariants");
+		
+		//prep
 		int numf = 0;
+		try {
+			Files.createDirectory(outputdir.resolve("files"));
+		} catch (IOException e1) {
+			System.err.println("Failed to create directory to store file variants.");
+			System.exit(-1);
+		}
+		
 		while (numf < properties.getNumfiles()) {
+		
 		//Get file to inject (from repository) without repeats
 			Path file = repository.getRandomFileNoRepeats();
 			
@@ -147,11 +162,17 @@ public class ForkingSimulator {
 			assert(t_forks.size() == t_variants.size()) : "t_forks and t_variants not same size... debug";
 			
 		//Check success (increment counter) and report effects
-			if(t_variants.size() != 0) {
+			if(t_variants.size() > 0) {
 				numf++;
 				System.out.println(numf + " : " + file.toAbsolutePath().normalize().toString());
 				for(int i = 0; i < t_forks.size(); i++) {
 					System.out.println("\t" + t_forks.get(i) + " : " + t_variants.get(i).getInjectedFile());
+				}
+				try {
+					Files.copy(file, outputdir.resolve("files/" + numf));
+				} catch (IOException e) {
+					System.err.println("Failed to save injected file record...");
+					System.exit(-1);
 				}
 			}
 		}
@@ -159,7 +180,17 @@ public class ForkingSimulator {
 		
 	// Create Leaf Directory Variants
 		System.out.println("BEGIN: DirVariants");
+		
+		//prep
 		int numd = 0;
+		Path dirVariantDir = null;
+		try {
+			dirVariantDir = Files.createDirectory(outputdir.resolve("dirs"));
+		} catch (IOException e1) {
+			System.err.println("Failed to create directory to store directory variants.");
+			System.exit(-1);
+		}
+		
 		while (numd < properties.getNumdirectories()) {
 		
 		//Get directory to inject (from repository) without repeats
@@ -204,12 +235,80 @@ public class ForkingSimulator {
 				for(int i = 0; i < t_forks.size(); i++) {
 					System.out.println("\t" + t_forks.get(i) + " : " + t_variants.get(i).getInjectedDirectory());
 				}
+				try {
+					FileUtil.copyDirectory(dir, dirVariantDir.resolve("" + numf));
+				} catch (IOException e) {
+					System.err.println("Failed to save injected dir record...");
+					System.exit(-1);
+				}
 			}
 		}
 		System.out.println("END: DirectoryVariants");
 	
 		
 	// Create Fragment Variants
+		System.out.println("BEGIN: FunctionFragmentVariants");
+		
+		//prep
+		int numff = 0;
+		try {
+			Files.createDirectory(outputdir.resolve("function_fragments"));
+		} catch (IOException e) {
+			System.err.println("Failed to create directory to store function fragment variant records.");
+		}
+		
+		while(numff < properties.getNumfragments()) {
+		// Get function fragment to inject
+			FunctionFragment functionfragment = repository.getRandomFunctionFragmentNoFileRepeats();
+			
+		//Out of options before goal?
+			if(functionfragment == null) {
+				break;
+			}
+		
+		//Randomly select number of forks to inject into;
+			int numinjections = random.nextInt(properties.getMaxinjectnum()) + 1;
+			
+		//Chose the forks to inject into (the numbers in the forks list)
+			List<Integer> injects = pickRandomNumbers(numinjections,properties.getNumforks());
+			Collections.sort(injects);
+		
+		//Inject the function fragment into the forks
+			//track the forks effected/variants created
+			List<Integer> t_forks = new LinkedList<Integer>();
+			List<FragmentVariant> t_variants = new LinkedList<FragmentVariant>();
+			
+			//perform injections
+			for(int forkn : injects) {
+				try {
+					FragmentVariant ffv = forks.get(forkn).injectFunctionFragment(functionfragment);
+					if(ffv != null) {
+						t_forks.add(forkn);
+						t_variants.add(ffv);
+					} 
+				} catch (IOException e) {
+						System.out.println("Failed to inject function fragment into fork (IOException).  Could be a permission error, or something else is interacting with the fork's files.");
+						System.exit(-1);
+				}
+			}
+			assert(t_forks.size() == t_variants.size()) : "t_forks and t_variants not same size... debug";
+			
+		// Check success (increment counter) and report efforts
+			if(t_variants.size() > 0) {
+				numff++;
+				System.out.println(numff + " : " + functionfragment.getSrcFile() + ":" + functionfragment.getStartLine() + "-" + functionfragment.getEndLine());
+				for(int i = 0; i < t_forks.size(); i++) {
+					System.out.println("\t" + t_forks.get(i) + " : " + t_variants.get(i).getInjectedFragment().getSrcFile() + ":" + t_variants.get(i).getInjectedFragment().getStartLine() + "-" + t_variants.get(i).getInjectedFragment().getEndLine());
+				}
+				try {
+					FragmentUtil.extractFragment(functionfragment, outputdir.resolve("function_fragments/" + numff));
+				} catch (IOException e) {
+					System.err.println("Failed to save injected function fragment record...");
+					System.exit(-1);
+				}
+			}
+		}
+		System.out.println("END: FunctionFragmentVariants");
 		
 	}
 	
