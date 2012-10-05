@@ -239,21 +239,21 @@ public class Properties {
 	/**
 	 * @return The number of file variants to create.
 	 */
-	public int getNumfiles() {
+	public int getNumFiles() {
 		return numfiles;
 	}
 
 	/**
 	 * @return The number of directory variants to create.
 	 */
-	public int getNumdirectories() {
+	public int getNumDirectories() {
 		return numdirectories;
 	}
 
 	/**
 	 * @return The number of fragment variants to create.
 	 */
-	public int getNumfragments() {
+	public int getNumFragments() {
 		return numfragments;
 	}
 
@@ -267,14 +267,14 @@ public class Properties {
 	/**
 	 * @return The number of forked systems to create.
 	 */
-	public int getNumforks() {
+	public int getNumForks() {
 		return numforks;
 	}
 
 	/**
 	 * @return The chance that a fragment variant is mutated before injection into a fork.
 	 */
-	public double getMutationrate() {
+	public double getMutationRate() {
 		return mutationrate;
 	}
 }

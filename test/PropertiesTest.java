@@ -15,23 +15,23 @@ public class PropertiesTest {
 		assertEquals(Paths.get("/path/to/system/").toAbsolutePath().normalize(), p.getSystem());
 		assertEquals(Paths.get("/path/to/repository/").toAbsolutePath().normalize(), p.getRepository());
 		assertEquals("java", p.getLanguage());
-		assertEquals(10, p.getNumfiles());
-		assertEquals(15, p.getNumdirectories());
-		assertEquals(5, p.getNumfragments());
+		assertEquals(10, p.getNumFiles());
+		assertEquals(15, p.getNumDirectories());
+		assertEquals(5, p.getNumFragments());
 		assertEquals(2, p.getMaxinjectnum());
-		assertEquals(11, p.getNumforks());
-		assertEquals(0.25, p.getMutationrate(), 0.0001);
+		assertEquals(11, p.getNumForks());
+		assertEquals(0.25, p.getMutationRate(), 0.0001);
 		
 		p = new Properties(Paths.get("testdata/testproperties/properties2"));
 		assertEquals(Paths.get("/path/to/folder/system/").toAbsolutePath().normalize(), p.getSystem());
 		assertEquals(Paths.get("/path/to/other/repository/").toAbsolutePath().normalize(), p.getRepository());
 		assertEquals("c", p.getLanguage());
-		assertEquals(2, p.getNumfiles());
-		assertEquals(4, p.getNumdirectories());
-		assertEquals(6, p.getNumfragments());
+		assertEquals(2, p.getNumFiles());
+		assertEquals(4, p.getNumDirectories());
+		assertEquals(6, p.getNumFragments());
 		assertEquals(8, p.getMaxinjectnum());
-		assertEquals(10, p.getNumforks());
-		assertEquals(0.75, p.getMutationrate(), 0.0001);
+		assertEquals(10, p.getNumForks());
+		assertEquals(0.75, p.getMutationRate(), 0.0001);
 		
 		boolean caught;
 		
@@ -185,28 +185,28 @@ public class PropertiesTest {
 	@Test
 	public void testGetNumfiles() {
 		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals(10, p.getNumfiles());
+		assertEquals(10, p.getNumFiles());
 		
 		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(2, p.getNumfiles());
+		assertEquals(2, p.getNumFiles());
 	}
 
 	@Test
 	public void testGetNumdirectories() {
 		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals(15, p.getNumdirectories());
+		assertEquals(15, p.getNumDirectories());
 		
 		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(4, p.getNumdirectories());
+		assertEquals(4, p.getNumDirectories());
 	}
 
 	@Test
 	public void testGetNumfragments() {
 		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals(5, p.getNumfragments());
+		assertEquals(5, p.getNumFragments());
 		
 		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(6, p.getNumfragments());
+		assertEquals(6, p.getNumFragments());
 	}
 
 	@Test
@@ -221,19 +221,19 @@ public class PropertiesTest {
 	@Test
 	public void testGetNumforks() {
 		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals(11, p.getNumforks());
+		assertEquals(11, p.getNumForks());
 		
 		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(10, p.getNumforks());
+		assertEquals(10, p.getNumForks());
 	}
 
 	@Test
 	public void testGetMutationrate() {
 		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals(0.25, p.getMutationrate(), 0.0001);
+		assertEquals(0.25, p.getMutationRate(), 0.0001);
 		
 		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(0.75, p.getMutationrate(), 0.0001);
+		assertEquals(0.75, p.getMutationRate(), 0.0001);
 	}
 
 }

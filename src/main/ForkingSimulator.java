@@ -64,7 +64,7 @@ public class ForkingSimulator {
 		Path outputdir;
 		if(args.length == 1) {
 			try {
-				outputdir = Files.createTempDirectory(Paths.get(""), "ForkSimulation");
+				outputdir = Files.createTempDirectory(Paths.get(""), "ForkSimulation_");
 			} catch (IOException e) {
 				System.out.println("Could not create an output directory in the current working directory.");
 				return;
@@ -91,6 +91,20 @@ public class ForkingSimulator {
 			}
 		}
 		
+	// Output Properties
+		System.out.println("BEGIN: Properties");
+		System.out.println("\t" + "output_directory=" + outputdir.toAbsolutePath().normalize().toString());
+		System.out.println("\t" + "system_directory=" + properties.getSystem().toAbsolutePath().normalize());
+		System.out.println("\t" + "repository_directory=" + properties.getRepository().toAbsolutePath().normalize());
+		System.out.println("\t" + "language=" + properties.getLanguage());
+		System.out.println("\t" + "#forks=" + properties.getNumForks());
+		System.out.println("\t" + "max#injects=" + properties.getMaxinjectnum());
+		System.out.println("\t" + "#files=" + properties.getNumFiles());
+		System.out.println("\t" + "#dirs=" + properties.getNumDirectories());
+		System.out.println("\t" + "#fragments=" + properties.getNumFragments());
+		System.out.println("\t" + "mutationrate=" + properties.getMutationRate());
+		System.out.println("END: Properties");
+		
 	//Set up repository
 		InventoriedSystem repository;
 		try {
@@ -101,8 +115,8 @@ public class ForkingSimulator {
 		}
 		
 	//Create fork bases
-		List<Fork> forks = new ArrayList<Fork>(properties.getNumforks());
-		for(int i = 0; i < properties.getNumforks(); i++) {
+		List<Fork> forks = new ArrayList<Fork>(properties.getNumForks());
+		for(int i = 0; i < properties.getNumForks(); i++) {
 			try {
 				forks.add(new Fork(properties.getSystem(), outputdir.resolve(Paths.get("" + i + "")), properties.getLanguage()));
 			} catch (IOException e) {
@@ -126,7 +140,7 @@ public class ForkingSimulator {
 			System.exit(-1);
 		}
 		
-		while (numf < properties.getNumfiles()) {
+		while (numf < properties.getNumFiles()) {
 		
 		//Get file to inject (from repository) without repeats
 			Path file = repository.getRandomFileNoRepeats();
@@ -140,7 +154,7 @@ public class ForkingSimulator {
 			int numinjections = random.nextInt(properties.getMaxinjectnum()) + 1;
 			
 		//Chose the forks to inject into (the numbers in the forks list)
-			List<Integer> injects = pickRandomNumbers(numinjections,properties.getNumforks());
+			List<Integer> injects = pickRandomNumbers(numinjections,properties.getNumForks());
 			Collections.sort(injects);
 			
 		//Inject the file into the forks
@@ -166,7 +180,7 @@ public class ForkingSimulator {
 		//Check success (increment counter) and report effects
 			if(t_variants.size() > 0) {
 				numf++;
-				System.out.println(numf + " : " + file.toAbsolutePath().normalize().toString());
+				System.out.println(numf + " " + t_variants.size() + " " + file.toAbsolutePath().normalize().toString());
 				for(int i = 0; i < t_forks.size(); i++) {
 					System.out.println("\t" + t_forks.get(i) + " : " + t_variants.get(i).getInjectedFile());
 				}
@@ -193,7 +207,7 @@ public class ForkingSimulator {
 			System.exit(-1);
 		}
 		
-		while (numd < properties.getNumdirectories()) {
+		while (numd < properties.getNumDirectories()) {
 		
 		//Get directory to inject (from repository) without repeats
 			Path dir = repository.getRandomLeafDirectoryNoRepeats();
@@ -207,7 +221,7 @@ public class ForkingSimulator {
 			int numinjections = random.nextInt(properties.getMaxinjectnum()) + 1;
 			
 		//Chose the forks to inject into (the numbers in the forks list)
-			List<Integer> injects = pickRandomNumbers(numinjections,properties.getNumforks());
+			List<Integer> injects = pickRandomNumbers(numinjections,properties.getNumForks());
 			Collections.sort(injects);
 			
 		//Inject the file into the forks
@@ -259,7 +273,7 @@ public class ForkingSimulator {
 			System.err.println("Failed to create directory to store function fragment variant records.");
 		}
 		
-		while(numff < properties.getNumfragments()) {
+		while(numff < properties.getNumFragments()) {
 		// Get function fragment to inject
 			FunctionFragment functionfragment = repository.getRandomFunctionFragmentNoFileRepeats();
 			
@@ -272,7 +286,7 @@ public class ForkingSimulator {
 			int numinjections = random.nextInt(properties.getMaxinjectnum()) + 1;
 			
 		//Chose the forks to inject into (the numbers in the forks list)
-			List<Integer> injects = pickRandomNumbers(numinjections,properties.getNumforks());
+			List<Integer> injects = pickRandomNumbers(numinjections,properties.getNumForks());
 			Collections.sort(injects);
 		
 		//Inject the function fragment into the forks
@@ -303,9 +317,14 @@ public class ForkingSimulator {
 					System.out.println("\t" + t_forks.get(i) + " : " + t_variants.get(i).getInjectedFragment().getSrcFile() + ":" + t_variants.get(i).getInjectedFragment().getStartLine() + "-" + t_variants.get(i).getInjectedFragment().getEndLine());
 				}
 				try {
-					FragmentUtil.extractFragment(functionfragment, outputdir.resolve("function_fragments/" + numff));
+					Files.createDirectory(outputdir.resolve("function_fragments").resolve("" + numff));
+					FragmentUtil.extractFragment(functionfragment, outputdir.resolve("function_fragments/" + numff + "/original"));
+					for(int i = 0; i < t_forks.size(); i++) {
+						FragmentUtil.extractFragment(t_variants.get(i).getInjectedFragment(), outputdir.resolve("function_fragments/" + numff + "/" + t_forks.get(i)));
+					}
 				} catch (IOException e) {
 					System.err.println("Failed to save injected function fragment record...");
+					e.printStackTrace();
 					System.exit(-1);
 				}
 			}
