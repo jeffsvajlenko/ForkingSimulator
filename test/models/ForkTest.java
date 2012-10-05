@@ -300,21 +300,15 @@ public class ForkTest {
 				for(Path p : ds) {
 					contents.add(p.toAbsolutePath().normalize());
 				}
-				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("1").toAbsolutePath().normalize())));
-				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("2").toAbsolutePath().normalize())));
-				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("3").toAbsolutePath().normalize())));
-				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("d1").toAbsolutePath().normalize())));
-				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("d2").toAbsolutePath().normalize())));
-				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("d3").toAbsolutePath().normalize())));
+				assertTrue(contents.contains(dv.getInjectedDirectory().resolve("1")));
+				assertTrue(contents.contains(dv.getInjectedDirectory().resolve("2")));
+				assertTrue(contents.contains(dv.getInjectedDirectory().resolve("3")));
 				
 				//Update correct inventory
 				dirs.add(dv.getInjectedDirectory());
-				files.add(dv.getInjectedDirectory().resolve(Paths.get("1")).toAbsolutePath().normalize());
-				files.add(dv.getInjectedDirectory().resolve(Paths.get("2")).toAbsolutePath().normalize());
-				files.add(dv.getInjectedDirectory().resolve(Paths.get("3")).toAbsolutePath().normalize());
-				dirs.add(dv.getInjectedDirectory().resolve(Paths.get("d1")).toAbsolutePath().normalize());
-				dirs.add(dv.getInjectedDirectory().resolve(Paths.get("d2")).toAbsolutePath().normalize());
-				dirs.add(dv.getInjectedDirectory().resolve(Paths.get("d3")).toAbsolutePath().normalize());
+				files.add(dv.getInjectedDirectory().resolve("1"));
+				files.add(dv.getInjectedDirectory().resolve("2"));
+				files.add(dv.getInjectedDirectory().resolve("3"));
 				
 				//Inventory system
 				List<Path> files_r = FileUtil.fileInventory(Paths.get("testdata/testfork/"));
@@ -384,21 +378,15 @@ public class ForkTest {
 				for(Path p : ds) {
 					contents.add(p.toAbsolutePath().normalize());
 				}
-				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("1").toAbsolutePath().normalize())));
-				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("2").toAbsolutePath().normalize())));
-				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("3").toAbsolutePath().normalize())));
-				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("d1").toAbsolutePath().normalize())));
-				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("d2").toAbsolutePath().normalize())));
-				assert(contents.contains(dv.getInjectedDirectory().resolve(Paths.get("d3").toAbsolutePath().normalize())));
+				assertTrue(contents.contains(dv.getInjectedDirectory().resolve("1")));
+				assertTrue(contents.contains(dv.getInjectedDirectory().resolve("2")));
+				assertTrue(contents.contains(dv.getInjectedDirectory().resolve("3")));
 				
 				//Update correct inventory
 				dirs.add(dv.getInjectedDirectory());
-				files.add(dv.getInjectedDirectory().resolve(Paths.get("1")).toAbsolutePath().normalize());
-				files.add(dv.getInjectedDirectory().resolve(Paths.get("2")).toAbsolutePath().normalize());
-				files.add(dv.getInjectedDirectory().resolve(Paths.get("3")).toAbsolutePath().normalize());
-				dirs.add(dv.getInjectedDirectory().resolve(Paths.get("d1")).toAbsolutePath().normalize());
-				dirs.add(dv.getInjectedDirectory().resolve(Paths.get("d2")).toAbsolutePath().normalize());
-				dirs.add(dv.getInjectedDirectory().resolve(Paths.get("d3")).toAbsolutePath().normalize());
+				files.add(dv.getInjectedDirectory().resolve("1"));
+				files.add(dv.getInjectedDirectory().resolve("2"));
+				files.add(dv.getInjectedDirectory().resolve("3"));
 				
 				//Inventory system
 				List<Path> files_r = FileUtil.fileInventory(Paths.get("testdata/testfork/"));
