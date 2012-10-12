@@ -4,6 +4,8 @@ include "bom.grm"
 redefine program
 	[method_declaration]
 | 	[constructor_declaration]
+|	[class_member_declaration]
+|	[block]
 end define
 
 function main
