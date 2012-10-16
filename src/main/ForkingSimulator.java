@@ -11,6 +11,7 @@ import java.util.Random;
 
 import util.FileUtil;
 import util.FragmentUtil;
+import util.SystemUtil;
 
 import models.FileVariant;
 import models.DirectoryVariant;
@@ -18,6 +19,7 @@ import models.Fork;
 import models.FragmentVariant;
 import models.FunctionFragment;
 import models.InventoriedSystem;
+import models.Operator;
 
 
 public class ForkingSimulator {
@@ -26,6 +28,26 @@ public class ForkingSimulator {
 	public static void main(String args[]) {
 	//Get installation directory
 		installdir = Paths.get(ForkingSimulator.class.getProtectionDomain().getCodeSource().getLocation().getPath());
+	
+	//Setup Operators
+		Operator[] operators = new Operator[15];
+		operators[0] = new Operator("mCC_BT", "Random change in comments.  /* */ style added between two tokens..", 1, Paths.get("operators/mCC_BT"));
+		operators[1] = new Operator("mCC_EOL", "Random change in comments.  // style added at the end of a line.", 1, Paths.get("operators/mCC_EOL"));
+		operators[2] = new Operator("mCF_A", "Random change in formatting.  A newline is randomly added.", 1, Paths.get("operators/mCF_A"));
+		operators[3] = new Operator("mCF_R", "Random change in formatting.  A newline is removed.", 1, Paths.get("operators/mCF_R"));
+		operators[4] = new Operator("mCW_A", "Random change in whitespace.  A space is added.", 1, Paths.get("operators/mCW_A"));
+		operators[5] = new Operator("mCW_R", "Random change in whitesapce.  A space is removed.", 1, Paths.get("operators/mCW_R"));
+		
+		operators[6] = new Operator("mRL_N", "Random change in literal.  A number is changed.", 2, Paths.get("operators/mRL_N"));
+		operators[7] = new Operator("mRL_S", "Random change in literal.  A string is changed.", 2, Paths.get("operators/mRL_S"));
+		operators[8] = new Operator("mSRI", "Random renaming of a all instances of a single identifier.", 2, Paths.get("operators/mSRI"));
+		operators[9] = new Operator("mARI", "Random renaming of a single identifier instance.", 2, Paths.get("operators/mARI"));
+		
+		operators[10] = new Operator("mDL", "Random deletion of a line of source code (simple lines only).", 3, Paths.get("operators/mDL"));
+		operators[11] = new Operator("mIL", "Random insertion of a line of source code (simple line)", 3, Paths.get("operators/mIL"));
+		operators[12] = new Operator("mML", "Random modification of a line of source code (entire line).", 3, Paths.get("operators/mML"));
+		operators[13] = new Operator("mSDL", "Random small deletion within a line.", 3, Paths.get("operators/mSDL"));
+		operators[14] = new Operator("mSIL", "Random small insertion within a line.", 3, Paths.get("operators/mSIL"));
 		
 	//Handle Input Parameters
 		if(args.length != 1 && args.length != 2) {
@@ -264,6 +286,7 @@ public class ForkingSimulator {
 		
 	// Create Fragment Variants
 		System.out.println("BEGIN: FunctionFragmentVariants");
+		int cur_opnum = 0;
 		
 		//prep
 		int numff = 0;
@@ -275,7 +298,15 @@ public class ForkingSimulator {
 		
 		while(numff < properties.getNumFragments()) {
 		// Get function fragment to inject
-			FunctionFragment functionfragment = repository.getRandomFunctionFragmentNoFileRepeats();
+			FunctionFragment functionfragment = null;
+			int functionfragment_length;
+			do {
+				functionfragment = repository.getRandomFunctionFragmentNoFileRepeats();
+				if(functionfragment == null) {
+					break;
+				}
+				functionfragment_length = functionfragment.getEndLine() - functionfragment.getStartLine() + 1;
+			} while(functionfragment_length < properties.getFunctionFragmentMinSize() || functionfragment_length > properties.getFunctionFragmentMaxSize());
 			
 		//Out of options before goal?
 			if(functionfragment == null) {
@@ -297,7 +328,57 @@ public class ForkingSimulator {
 			//perform injections
 			for(int forkn : injects) {
 				try {
-					FragmentVariant ffv = forks.get(forkn).injectFunctionFragment(functionfragment);
+					FragmentVariant ffv = null;
+					
+					//mutate case
+					if(random.nextInt(100) < properties.getMutationRate()) {
+						
+						boolean success = false;//keep track if works
+						
+						//prep alternative operator list
+						List<Integer> opids = new LinkedList<Integer>();
+						for(int i = 0; i < operators.length; i++) {
+							if(i != cur_opnum) {
+								opids.add(i);
+							}
+						}
+						int opnum = cur_opnum;
+						
+						//First attempt queued op, then if fail try the others randomly, if all fails don't mutate
+						do {
+							try {
+								ffv = forks.get(forkn).injectFunctionFragment(functionfragment, operators[opnum], properties.getNumMutationAttempts(), properties.getLanguage());
+							} catch (InterruptedException e) {
+								e.printStackTrace();
+								System.exit(-1);
+							}
+							if(ffv != null) {
+								success = true;
+								if(opnum == cur_opnum) {
+									//System.out.println(opnum);
+									cur_opnum = ForkingSimulator.nextRollingNumber(cur_opnum, operators.length-1);
+								} else {
+									//System.out.println("--");
+								}
+								break;
+							}
+							if(opids.size() != 0) {
+								opnum = opids.remove(random.nextInt(opids.size()));
+							}
+						} while(opids.size() != 0);
+						
+						//if all mutation attempt fail, just inject as is
+						if(!success) {
+							//System.out.println("-");
+							ffv = forks.get(forkn).injectFunctionFragment(functionfragment);
+						}
+						
+					//no mutate case
+					} else {
+						ffv = forks.get(forkn).injectFunctionFragment(functionfragment);
+					}
+					
+					//if success, remember for later
 					if(ffv != null) {
 						t_forks.add(forkn);
 						t_variants.add(ffv);
@@ -314,7 +395,11 @@ public class ForkingSimulator {
 				numff++;
 				System.out.println(numff + " " +  t_forks.size() + " " + functionfragment.getSrcFile() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine());
 				for(int i = 0; i < t_forks.size(); i++) {
-					System.out.println("\t" + t_forks.get(i) + " " + t_variants.get(i).getInjectedFragment().getSrcFile() + " " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine());
+					if(t_variants.get(i).getOperator() == null) {
+						System.out.println("\t" + t_forks.get(i) + " " + t_variants.get(i).getInjectedFragment().getSrcFile() + " " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine() + " none 1");
+					} else {
+						System.out.println("\t" + t_forks.get(i) + " " + t_variants.get(i).getInjectedFragment().getSrcFile() + " " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine() + " " + t_variants.get(i).getOperator().getId() + " " + t_variants.get(i).getOperator().getTargetCloneType());
+					}
 				}
 				try {
 					Files.createDirectory(outputdir.resolve("function_fragments").resolve("" + numff));
@@ -344,7 +429,7 @@ public class ForkingSimulator {
 	 * @param max The maximum value of number to pick (exclusive).
 	 * @return A list of randomly selected numbers (no repeats) ranging from 0 (inclusive) to max (exclusive).
 	 */
-	private static List<Integer> pickRandomNumbers(int num, int max) {
+	protected static List<Integer> pickRandomNumbers(int num, int max) {
 		//Check input parameters
 		if(num > max) {
 			throw new IllegalArgumentException("'num' must not be greater than 'max'.");
@@ -369,4 +454,21 @@ public class ForkingSimulator {
 		return selected;
 	}
 	
+	/**
+	 * Increments an integer from 0 to maximum, with roll around.
+	 * @param current The current value.
+	 * @param maximum The maximum value.
+	 * @return the next value.
+	 * @throws IllegalArgumentException if current is greater than maximum or less than 0.
+	 */
+	protected static int nextRollingNumber(int current, int maximum) {
+		if(current > maximum || current < 0) {
+			throw new IllegalArgumentException();
+		}
+		int next = current+1;
+		if(next > maximum) {
+			next = 0;
+		}
+		return next;
+	}
 }
