@@ -135,6 +135,9 @@ public class Fork {
 				return null;
 			}
 			injectin = fork.getRandomDirectory();
+			if(injectin == null) {
+				return null;
+			}
 			if(!Files.exists(Paths.get(injectin.toString(), file.getFileName().toString()))) {
 				break;
 			}
@@ -179,6 +182,9 @@ public class Fork {
 				return null;
 			}
 			injectin = fork.getRandomDirectory();
+			if(injectin == null) {
+				return null;
+			}
 			if(!Files.exists(Paths.get(injectin.toString(), directory.getFileName().toString()))) {
 				break;
 			}

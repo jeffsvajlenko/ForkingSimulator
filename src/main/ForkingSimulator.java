@@ -68,7 +68,8 @@ public class ForkingSimulator {
 		try {
 			properties = new Properties(propertiesfile);
 		} catch (Exception e) {
-			System.out.println("Error in properties file.");
+			System.out.println("Error in properties file: " + e.getMessage());
+			e.printStackTrace();
 			return;
 		}
 		

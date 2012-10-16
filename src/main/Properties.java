@@ -98,7 +98,7 @@ public class Properties {
 					} else if (line.startsWith("language=")) {
 						line = line.substring(9).toLowerCase();
 						this.language = line;
-						if(!(language.equals("java") || language.equals("c") || language.equals("c#"))) {
+						if(!(language.equals("java") || language.equals("c") || language.equals("cs"))) {
 							s.close();
 							throw new IllegalArgumentException("Propety 'language' is invalid.");
 						}
