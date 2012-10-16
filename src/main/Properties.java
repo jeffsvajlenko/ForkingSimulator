@@ -33,8 +33,17 @@ public class Properties {
 	private int numforks;
 	private boolean setnumforks=false;
 	
-	private double mutationrate;
+	private int mutationrate;
 	private boolean setmutationrate=false;
+	
+	private int mutationattempts;
+	private boolean setmutationattempts=false;
+	
+	private int functionfragmentminsize;
+	private boolean setfunctionfragmentminsize=false;
+	
+	private int functionfragmentmaxsize;
+	private boolean setfunctionfragmentmaxsize=false;
 	
 	/**
 	 * Creates a Properties object with the properties specified by the properties file.
@@ -157,27 +166,69 @@ public class Properties {
 							this.maxinjectnum = Integer.parseInt(line);
 						} catch (Exception e) {
 							s.close();
-							throw new IllegalArgumentException("Propety 'maxinjectnum' is invalid.");
+							throw new IllegalArgumentException("Property 'maxinjectnum' is invalid.");
 						}
 						if(this.maxinjectnum <= 0) {
 							s.close();
-							throw new IllegalArgumentException("Propety 'maxinjectnum' is invalid.");
+							throw new IllegalArgumentException("Property 'maxinjectnum' is invalid.");
 						}
 						this.setmaxinjectnum=true;
 					//mutation rate
 					} else if (line.startsWith("mutationrate=")) {
 						line = line.substring(13);
 						try {
-							this.mutationrate = Double.parseDouble(line);
+							this.mutationrate = Integer.parseInt(line);
 						} catch (Exception e) {
 							s.close();
-							throw new IllegalArgumentException("Propety 'mutationrate' is invalid.");
+							throw new IllegalArgumentException("Property 'mutationrate' is invalid.");
 						}
-						if(this.mutationrate < 0.0 || this.mutationrate > 1.0) {
+						if(this.mutationrate < 0 || this.mutationrate > 100) {
 							s.close();
-							throw new IllegalArgumentException("Propety 'mutationrate' is invalid.");
+							throw new IllegalArgumentException("Property 'mutationrate' is invalid.");
 						}
 						this.setmutationrate=true;
+					//mutation attempts
+					} else if (line.startsWith("mutationattempts=")) {
+						line = line.substring(17);
+						try {
+							this.mutationattempts = Integer.parseInt(line);
+						} catch (Exception e) {
+							s.close();
+							throw new IllegalArgumentException("Property 'mutationattempts' is invalid.");
+						}
+						if(this.mutationattempts <= 0) {
+							s.close();
+							throw new IllegalArgumentException("Property 'mutationattempts' is invalid.");
+						}
+						this.setmutationattempts=true;
+					//functionfragmentminsize
+					} else if (line.startsWith("functionfragmentminsize=")) {
+						line = line.substring(24);
+						try {
+							this.functionfragmentminsize = Integer.parseInt(line);
+						} catch(Exception e) {
+							s.close();
+							throw new IllegalArgumentException("Property 'functionfragmentminsize' is invalid.");
+						}
+						if(this.functionfragmentminsize <= 0) {
+							s.close();
+							throw new IllegalArgumentException("Property 'functionfragmentminsize' is invalid.");
+						}
+						this.setfunctionfragmentminsize=true;
+					//functionfragmentmaxsize
+					} else if (line.startsWith("functionfragmentmaxsize=")) {
+						line = line.substring(24);
+						try {
+							this.functionfragmentmaxsize = Integer.parseInt(line);
+						} catch(Exception e) {
+							s.close();
+							throw new IllegalArgumentException("Property 'functionfragmentmaxsize' is invalid.");
+						}
+						if(this.functionfragmentmaxsize <= 0) {
+							s.close();
+							throw new IllegalArgumentException("Property 'functionfragmentmaxsize' is invalid.");
+						}
+						this.setfunctionfragmentmaxsize=true;
 					}
 				}
 			}
@@ -209,6 +260,18 @@ public class Properties {
 			}
 			if(!this.setsystem) {
 				throw new IllegalArgumentException("Property 'system' was not specified.");
+			}
+			if(!this.setmutationattempts) {
+				throw new IllegalArgumentException("Property 'mutationattempts' was not specified.");
+			}
+			if(!this.setfunctionfragmentminsize) {
+				throw new IllegalArgumentException("Property 'functionfragmentminsize' was not specified.");
+			}
+			if(!this.setfunctionfragmentmaxsize) {
+				throw new IllegalArgumentException("Property 'functionfragmentmaxsize' was not specified.");
+			}
+			if(this.functionfragmentminsize > this.functionfragmentmaxsize) {
+				throw new IllegalArgumentException("Property 'functionfragmentminsize' is greater than 'functionfragmentmaxsize'.");
 			}
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("Propertiesfile must refer to an existing file.");
@@ -274,7 +337,28 @@ public class Properties {
 	/**
 	 * @return The chance that a fragment variant is mutated before injection into a fork.
 	 */
-	public double getMutationRate() {
+	public int getMutationRate() {
 		return mutationrate;
+	}
+	
+	/**
+	 * @return How many times to attempt a fragment mutation.
+	 */
+	public int getNumMutationAttempts() {
+		return mutationattempts;
+	}
+	
+	/**
+	 * @return The minimum size of function fragments to select.
+	 */
+	public int getFunctionFragmentMinSize() {
+		return this.functionfragmentminsize;
+	}
+	
+	/**
+	 * @return The maximum size of function fragments to select.
+	 */
+	public int getFunctionFragmentMaxSize() {
+		return this.functionfragmentmaxsize;
 	}
 }

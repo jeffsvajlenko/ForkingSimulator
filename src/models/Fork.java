@@ -11,6 +11,7 @@ import java.util.Objects;
 
 import util.FileUtil;
 import util.FragmentUtil;
+import util.SystemUtil;
 
 
 public class Fork {
@@ -197,10 +198,102 @@ public class Fork {
 	}
 	
 	/**
+	 * Injects a function fragment into the fork, after mutation.
+	 * @param fragment The fragment to inject.
+	 * @param op The operator to mutate the fragment with.
+	 * @param numattempts The number of times to attempt mutation before giving up.
+	 * @param language The source language.
+	 * @return a FragmentVariant describing the variant created, or null if either an injection location can not be found or the mutation is unsuccessful.
+	 * @throws IOException If an IOException occurs.  If this occurs, integrity of the Fork is not guaranteed.
+	 * @throws InterruptedException If the mutation process is interrupted.
+	 */
+	public FragmentVariant injectFunctionFragment(FunctionFragment fragment, Operator op, int numattempts, String language) throws IOException, InterruptedException {
+		//Check Input
+				//Check pointers
+				Objects.requireNonNull(fragment);
+				Objects.requireNonNull(op);
+				
+				//Check fragment file
+				if(!Files.exists(fragment.getSrcFile())) {
+					new NoSuchFileException("Fragment's source file does not exist.");
+				}
+				if(!Files.isReadable(fragment.getSrcFile())) {
+					new IllegalArgumentException("Fragment's source file is not readable.");
+				}
+				if(!Files.isRegularFile(fragment.getSrcFile())) {
+					new IllegalArgumentException("Fragment's source file is not readable.");
+				}
+				
+			//Check fragment validity
+				int numlines = FragmentUtil.countLines(fragment.getSrcFile());
+				if(fragment.getEndLine() > numlines) {
+					new IllegalArgumentException("Fragment is invalid (endline proceeds ends of file).");
+				}
+				if(!FragmentUtil.isFunction(fragment, fork.getLanguage())) {
+					new IllegalArgumentException("Fragment is invalid (does not specify a function).");
+				}
+				
+			//Get location to inject at
+				FunctionFragment f;
+				//continue to choose until a suitable location is found, or all exhausted
+				while(true) {
+					//pick a previously unchosen function fragment at random
+					f = fork.getRandomFunctionFragmentNoRepeats();
+					
+					//if all exhausted, return failure
+					if(f == null) {
+						return null;
+					}
+					
+					//ensure fragment perfectly frames a function, and that the file it is hasn't previously been modified
+					if(FragmentUtil.isFunction(f, fork.getLanguage())) {
+						if(!changedFiles.contains(f.getSrcFile().toAbsolutePath().normalize())) {
+							//This is the fragment to use, add its file to changed files and continue
+							changedFiles.add(f.getSrcFile().toAbsolutePath().normalize());
+							break;
+						}
+					}
+				}
+				
+				//Mutate
+					//Create temporary files
+				Path tmpfile1 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "injectFunctionFragment", null);
+				Path tmpfile2 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "injectFunctionFragment", null);
+				
+					//extract function to file
+				FragmentUtil.extractFragment(fragment, tmpfile1);
+				
+					//Mutate function
+				if(0 != op.performOperator(tmpfile1, tmpfile2, numattempts, language)) {
+					Files.deleteIfExists(tmpfile1);
+					Files.deleteIfExists(tmpfile2);
+					return null;
+				}
+				
+				//Create fragment representation of mutated function
+				numlines = FragmentUtil.countLines(tmpfile2);
+				FunctionFragment mutatedfragment = new FunctionFragment(tmpfile2, 1, numlines);
+				
+				//Inject into file
+				FragmentUtil.injectFragment(f.getSrcFile(), f.getEndLine()+1, mutatedfragment);
+				
+				//Make record
+				FragmentVariant fv = new FragmentVariant(fragment, new FunctionFragment(f.getSrcFile(), f.getEndLine()+1, (f.getEndLine() + 1) + (numlines - 1)), op);
+				variants.add(fv);
+				functionfragmentvariants.add(fv);
+				
+				Files.deleteIfExists(tmpfile1);
+				Files.deleteIfExists(tmpfile2);
+				
+				//Return variant
+				return fv;
+	}
+	
+	/**
 	 * Injects a function fragment into the fork.
 	 * @param fragment The fragment to inject.  Must refer to an existing and readable regular file, fragment lines must be valid with respect to the file.  Source lines must perfectly frame a single function (i.e. no source within the lines except the function in its enterity and comments)
 	 * @return A variant describing the change.
-	 * @throws NoSuchFileException If the source file specied by the fragment does not exist.
+	 * @throws NoSuchFileException If the source file specified by the fragment does not exist.
 	 * @throws IOException If the IO error occurs.  If this occurs then the integrity of this fork is no longer guarenteed.
 	 * @throws NullPointerException If the argument is null.
 	 * @throws IllegalArgumentException If the fragment is invalid: source file is invalid (not readable, not a regular file), or if endline proceeds end of source file.
@@ -256,7 +349,7 @@ public class Fork {
 		FragmentUtil.injectFragment(f.getSrcFile(), f.getEndLine()+1, fragment);
 		
 		//Make record
-		FragmentVariant fv = new FragmentVariant(fragment, new FunctionFragment(f.getSrcFile(), f.getEndLine()+1, f.getEndLine() + 1 + (fragment.getEndLine()-fragment.getStartLine())));
+		FragmentVariant fv = new FragmentVariant(fragment, new FunctionFragment(f.getSrcFile(), f.getEndLine()+1, f.getEndLine() + 1 + (fragment.getEndLine()-fragment.getStartLine())), null);
 		variants.add(fv);
 		functionfragmentvariants.add(fv);
 		

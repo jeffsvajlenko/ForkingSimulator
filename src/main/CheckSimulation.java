@@ -1,16 +1,15 @@
 package main;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
-import models.Fragment;
 import models.FunctionFragment;
 import models.InventoriedSystem;
 import util.FileUtil;
@@ -18,6 +17,7 @@ import util.FragmentUtil;
 import util.SystemUtil;
 
 public class CheckSimulation {
+	@SuppressWarnings("unused")
 	public static void main(String args[]) throws IOException {
 		if (args.length != 1) {
 			System.out.println("Require output file.");
@@ -251,6 +251,7 @@ public class CheckSimulation {
 		}
 
 		// Fragment Variants
+		System.out.println("Checking Function Fragment Variants:");
 		line = in.nextLine(); // BEGIN;
 		if (!line.startsWith("BEGIN: FunctionFragmentVariants")) {
 			System.out.println("Expected 'BEGIN: FunctionFragmentVariants' but saw " + line + ".");
@@ -302,13 +303,12 @@ public class CheckSimulation {
 				System.exit(-1);
 			}
 			
-			Path tmpfile = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "CheckSimulation", null);
-			FragmentUtil.extractFragment(originalfragment, tmpfile);
-			if (!filesEqual(tmpfile, outputdir.resolve("function_fragments/" + fnum + "/original"))) {
+			Path tmpfileo = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "CheckSimulation", null);
+			FragmentUtil.extractFragment(originalfragment, tmpfileo);
+			if (!filesEqual(tmpfileo, outputdir.resolve("function_fragments/" + fnum + "/original"))) {
 				System.out.println("Original fragment for function fragment variant " + fnum + " was not recorded properly in function_fragments/ (record does not match original).");
 				System.exit(-1);
 			}
-			Files.delete(tmpfile);
 
 			// Read and check file variant injections (output and validity)
 			for (int i = 0; i < numinject; i++) {
@@ -325,6 +325,8 @@ public class CheckSimulation {
 				lin = new Scanner(line);
 				int forknum = lin.nextInt();
 				FunctionFragment injectedfragment = new FunctionFragment(Paths.get(lin.next()), lin.nextInt(), lin.nextInt());
+				String opname = lin.next();
+				int clonetype = lin.nextInt();
 				lin.close();
 
 				// track added file
@@ -339,26 +341,120 @@ public class CheckSimulation {
 					System.out.println("Source file containing injected function fragment is not a regular file. Variant: " + fnum + " Fork: " + forknum + " File: " + injectedfragment.getSrcFile());
 					System.exit(-1);
 				}
+				
 				if(!FragmentUtil.isFunction(injectedfragment, language)) {
-					System.out.println("Injected function fragment is not a function.  Fork: " + forknum + " Fragment: " + injectedfragment);
+					System.out.println("Injected function fragment is not a function." + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
 					System.exit(-1);
 				}
 				numlines = FragmentUtil.countLines(injectedfragment.getSrcFile());
 				if(numlines < injectedfragment.getEndLine()) {
-					System.out.println("Injected function fragment (specification) is invalid (endline proceeds end of file). " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+					System.out.println("Injected function fragment (specification) is invalid (endline proceeds end of file). " + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
 					System.exit(-1);
 				}
+				
+				//check record
 				if(!Files.exists(outputdir.resolve("function_fragments/" + fnum + "/" + forknum))) {
 					System.out.println("Injected function fragment record is missing. Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
 				}
-				tmpfile = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "CheckSimulation", null);
-				FragmentUtil.extractFragment(injectedfragment, tmpfile);
-				if(!filesEqual(tmpfile, outputdir.resolve("function_fragments/" + fnum + "/" + forknum))) {
-					System.out.println("Injected function fragment record is incorrect. Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+				Path tmpfilei = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "CheckSimulation", null);
+				FragmentUtil.extractFragment(injectedfragment, tmpfilei);
+				if(!filesEqual(tmpfilei, outputdir.resolve("function_fragments/" + fnum + "/" + forknum))) {
+					System.out.println("Injected function fragment record is incorrect. Variant: " + " Fragment: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
 					System.exit(-1);
 				}
-
+				
+				//check mutation
+				Path tmpfileoe = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "CheckSimulation", null);
+				Files.copy(tmpfileo, tmpfileoe, StandardCopyOption.REPLACE_EXISTING);
+				if(opname.equals("none")) {
+					if(!org.apache.commons.io.FileUtils.contentEquals(tmpfileo.toFile(), tmpfilei.toFile())) {
+						System.out.println("Mutation: 'none' was not applied correctly. Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+					}
+				} else {
+					if(clonetype == 1) {
+						if(org.apache.commons.io.FileUtils.contentEquals(tmpfileo.toFile(), tmpfilei.toFile())) {
+							System.out.println("Mutation : " + opname + " was not properly applied.  No difference between fragments."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(0 != SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("PrettyPrintFragment.txl"), tmpfilei, tmpfilei)) {
+							System.out.println("Mutation : " + opname + " was not properly applied.  Fragment syntax not valid/parsable."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(0 != SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("PrettyPrintFragment.txl"), tmpfileoe, tmpfileoe)) {
+							System.out.println("Normalizing original fragment failed..."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(!org.apache.commons.io.FileUtils.contentEquals(tmpfileoe.toFile(), tmpfilei.toFile())) {
+							System.out.println("Mutation : " + opname + " was not properly applied.  Expected type 1, but fragments not same after normalization."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+					} else if(clonetype == 2) {
+						if(org.apache.commons.io.FileUtils.contentEquals(tmpfileo.toFile(), tmpfilei.toFile())) {
+							System.out.println("Mutation : " + opname + " was not properly applied.  No difference between fragments."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(0 != SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("PrettyPrintFragment.txl"), tmpfilei, tmpfilei)) {
+							System.out.println("Mutation : " + opname + " was not properly applied.  Fragment syntax not valid/parsable."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(0 != SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("PrettyPrintFragment.txl"), tmpfileoe, tmpfileoe)) {
+							System.out.println("Normalizing original fragment failed..."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(org.apache.commons.io.FileUtils.contentEquals(tmpfileoe.toFile(), tmpfilei.toFile())) {
+							System.out.println("Mutation : " + opname + " was not properly applied.  Expected type 2, but fragments are same after type 1 normalization."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(0 != SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("BlindRenameFragment.txl"), tmpfilei, tmpfilei)) {
+							System.out.println("Mutation : " + opname + " was not properly applied.  Fragment syntax not valid/parsable."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(0 != SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("BlindRenameFragment.txl"), tmpfileoe, tmpfileoe)) {
+							System.out.println("Normalizing original fragment failed..."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(!org.apache.commons.io.FileUtils.contentEquals(tmpfileoe.toFile(), tmpfilei.toFile())) {
+							System.out.println("Mutation : " + opname + " was not properly applied.  Expected type 2, but fragments not same after normalization."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+					} else if(clonetype == 3) {
+						if(org.apache.commons.io.FileUtils.contentEquals(tmpfileo.toFile(), tmpfilei.toFile())) {
+							System.out.println("Mutation : " + opname + " was not properly applied.  No difference between fragments."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(0 != SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("PrettyPrintFragment.txl"), tmpfilei, tmpfilei)) {
+							System.out.println("Mutation : " + opname + " was not properly applied.  Fragment syntax not valid/parsable."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(0 != SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("PrettyPrintFragment.txl"), tmpfileoe, tmpfileoe)) {
+							System.out.println("Normalizing original fragment failed..."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(org.apache.commons.io.FileUtils.contentEquals(tmpfileoe.toFile(), tmpfilei.toFile())) {
+							System.out.println("Mutation : " + opname + " was not properly applied.  Expected type 2, but fragments are same after type 1 normalization."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(0 != SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("BlindRenameFragment.txl"), tmpfilei, tmpfilei)) {
+							System.out.println("Mutation : " + opname + " was not properly applied.  Fragment syntax not valid/parsable."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(0 != SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("BlindRenameFragment.txl"), tmpfileoe, tmpfileoe)) {
+							System.out.println("Normalizing original fragment failed..."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+						if(org.apache.commons.io.FileUtils.contentEquals(tmpfileoe.toFile(), tmpfilei.toFile())) {
+							System.out.println("Mutation : " + opname + " was not properly applied.  Expected type 3, but fragments are same after normalization."  + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+							System.exit(-1);
+						}
+					} else {
+						System.out.println("Clone type is invalid." + " Variant: " + fnum + " Fork: " + forknum + " Fragment: " + injectedfragment);
+					}
+				}
+				Files.delete(tmpfileoe);
+				Files.delete(tmpfilei);
 			}
+			Files.delete(tmpfileo);
+			
 		}
 		if (numExpected > numfragments) {
 			System.out.println("More file variants were created then desired, " + numExpected + " > " + numfragments + ".");
@@ -401,16 +497,16 @@ public class CheckSimulation {
 
 	}
 
-	private static boolean fragEqual(Fragment f1, Fragment f2) throws IOException {
-		Path frag1 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "testInjectiosMixed", null);
-		Path frag2 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "testInjectiosMixed", null);
-		FragmentUtil.extractFragment(f1, frag1);
-		FragmentUtil.extractFragment(f2, frag2);
-		boolean retval = filesEqual(frag1, frag2);
-		Files.delete(frag1);
-		Files.delete(frag2);
-		return retval;
-	}
+//	private static boolean fragEqual(Fragment f1, Fragment f2) throws IOException {
+//		Path frag1 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "testInjectiosMixed", null);
+//		Path frag2 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "testInjectiosMixed", null);
+//		FragmentUtil.extractFragment(f1, frag1);
+//		FragmentUtil.extractFragment(f2, frag2);
+//		boolean retval = filesEqual(frag1, frag2);
+//		Files.delete(frag1);
+//		Files.delete(frag2);
+//		return retval;
+//	}
 
 	private static boolean filesEqual(Path f1, Path f2) throws IOException {
 		return org.apache.commons.io.FileUtils.contentEquals(f1.toFile(), f2.toFile());

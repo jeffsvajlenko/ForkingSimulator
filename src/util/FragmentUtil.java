@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.LineNumberReader;
 import java.io.PrintWriter;
 import java.io.RandomAccessFile;
@@ -373,5 +374,77 @@ public class FragmentUtil {
 		} else {
 			return false;
 		}
+	}
+	
+	/**
+	 * Returns the % similarity (by line) between two files.
+	 * @param file1 The first file.
+	 * @param file2 The second file.
+	 * @return the similarity ratio, or a negative number if there was a file error.
+	 */
+	
+	/**
+	 * Returns the % similarity (by line) between the two files.  Similarity is measured by first finding the ratio of the lines in each
+	 * fragment which is unique to that fragment.  Similarity is reported as one minus this ratio from the fragment with the largest ratio
+	 * of unique lines.  Empty lines are ignored during this measurement.  Lines which differ by extra whitespace are considered equivalent.
+	 * @param file1 The first file.  Must exist, be a regular file, and be readable.
+	 * @param file2 The second file.  Must exist, be a regular file, and be readable.
+	 * @return the similarity between the fragments.
+	 * @throws FileNotFoundException If either of file1 or file2 does not exist.
+	 * @throws IllegalArgumentExcpetion If either of file1 or file 2 are not regular files or are not readable.
+	 * @throws IOException If an IO exception occurs during the reading of these files.
+	 */
+	public static double getSimilarity(Path file1, Path file2) throws FileNotFoundException, IOException {
+		//Check input
+		Objects.requireNonNull(file1);
+		Objects.requireNonNull(file2);
+		if(!Files.exists(file1)) {
+			throw new FileNotFoundException("File1 does not exist.");
+		}
+		if(!Files.exists(file2)) {
+			throw new FileNotFoundException("File2 does not exist.");
+		}
+		if(!Files.isRegularFile(file1)) {
+			throw new IllegalArgumentException("File 1 is not a regular file.");
+		}
+		if(!Files.isRegularFile(file2)) {
+			throw new IllegalArgumentException("File 2 is not a regular file.");
+		}
+		if(!Files.isReadable(file1)) {
+			throw new IllegalArgumentException("File 1 is not readable.");
+		}
+		if(!Files.isReadable(file2)) {
+			throw new IllegalArgumentException("File 2 is not readable.");
+		}
+		
+		// Get line counts
+		int fileSize1 = FragmentUtil.countLines(file1);
+		int fileSize2 = FragmentUtil.countLines(file2);
+		
+		//Check similarity
+		double leftUnique=0.0;
+		double rightUnique=0.0;
+		Process p = Runtime.getRuntime().exec("diff -Bbi " + file1.toAbsolutePath().normalize().toString() + " " + file2.toAbsolutePath().normalize().toString());
+		int leftDistinct=0; 
+		int rightDistinct=0;
+		
+		BufferedReader in = new BufferedReader(new InputStreamReader(p.getInputStream()));
+		new StreamGobbler(p.getErrorStream()).start();
+		
+		String line = null;
+		
+		while ((line = in.readLine()) != null) {
+			if (line.substring(0,1).contains("<")) {
+				leftDistinct++;
+			}
+			if(line.substring(0,1).contains(">")) {
+				rightDistinct++;
+			}
+		}          
+		leftUnique = ((double) ((double)leftDistinct / (double)(fileSize1)));
+		rightUnique = ((double) ((double)rightDistinct / (double)(fileSize2)));
+
+		//Return similarity
+		return 1.0d - Math.max(leftUnique, rightUnique);
 	}
 }

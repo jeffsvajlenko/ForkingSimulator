@@ -32,6 +32,11 @@ public class SystemUtilTest {
 	public void testGetTxlDirectoryString() {
 		fail("Not yet implemented");
 	}
+	
+	@Test
+	public void testGetTxlExecutable() {
+		assertEquals(Paths.get("/usr/local/bin/txl"), SystemUtil.getTxlExecutable());
+	}
 
 	@Test
 	public void testRunTxl() {

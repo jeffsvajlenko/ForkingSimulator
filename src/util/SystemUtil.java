@@ -1,6 +1,8 @@
 package util;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -52,6 +54,49 @@ public class SystemUtil {
 		else {
 			return null;
 		}
+	}
+	
+	private static Path txl = null;
+	/**
+	 * Returns a path to the TXL executable, or null if TXL is not installed.  Relies on 
+	 * @return a path to the TXL executable, or null if TXL is not installed.
+	 */
+	public static Path getTxlExecutable() {
+		 if (txl == null) {
+			 BufferedReader br = null;
+			 try {
+				Process p = Runtime.getRuntime().exec("which txl");
+				br = new BufferedReader(new InputStreamReader(p.getInputStream()));
+				new StreamGobbler(p.getErrorStream()).start();
+				String s = br.readLine();
+				txl = Paths.get(s);
+				br.close();
+				p.destroy();
+			} catch (IOException e) {
+				if(br != null) {
+					try{br.close();} catch(IOException ee){};
+				}
+				return null;
+			}
+		 }
+		 return txl;
+	}
+	
+	/**
+	 * Returns the root directory of the mutators.
+	 * @return the root directory of the mutators.
+	 */
+	public static Path getOperatorDirectory() {
+		return getInstallRoot().resolve("operators").toAbsolutePath().normalize();
+	}
+	
+	/**
+	 * Returns the directory containing the mutators for the specified language.
+	 * @param language the language
+	 * @return the directory containing the mutators for the specified language.
+	 */
+	public static Path getOperatorDirectory(String language) {
+		return getOperatorDirectory().resolve(language);
 	}
 	
 	/**
