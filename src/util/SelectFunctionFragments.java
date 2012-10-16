@@ -92,6 +92,27 @@ public class SelectFunctionFragments {
 		// Cleanup
 		new File(srcloc.getAbsolutePath() + "/_functions.xml").delete(); // no longer need this file, so trash it
 		
+		//Cleanup ifdef
+		String command =  SystemUtil.getScriptsLocation().toString() + "/RemoveIfDefed " + srcloc.getAbsolutePath() + "/";
+		Runtime runtime = Runtime.getRuntime();
+		Process process;
+		try {
+			process = runtime.exec(command);
+			new StreamGobbler(process.getErrorStream()).start();
+			new StreamGobbler(process.getInputStream()).start();
+			process.waitFor();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+		
+		
+		
 		// Return
 		return functions;
 	}

@@ -1,6 +1,6 @@
-system=/home/jeff/Development/java/workspace/ForkingSimulator/system/cs/greenshot/
-repository=/home/jeff/Development/java/workspace/ForkingSimulator/system/cs/greenshot/
-language=cs
+system=/home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/
+repository=/home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/
+language=c
 numfiles=10
 numdirectories=10
 numfragments=10
