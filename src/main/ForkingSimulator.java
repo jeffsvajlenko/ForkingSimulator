@@ -426,7 +426,7 @@ public class ForkingSimulator {
 	
 	/**
 	 * Returns a list of randomly selected numbers (no repeats) ranging from 0 (inclusive) to max (exclusive).
-	 * @param num The number of values to select (must be <= max).
+	 * @param num The number of values to select (must be <= max and > 0).
 	 * @param max The maximum value of number to pick (exclusive).
 	 * @return A list of randomly selected numbers (no repeats) ranging from 0 (inclusive) to max (exclusive).
 	 */
@@ -434,6 +434,12 @@ public class ForkingSimulator {
 		//Check input parameters
 		if(num > max) {
 			throw new IllegalArgumentException("'num' must not be greater than 'max'.");
+		}
+		if(max < 0) {
+			throw new IllegalArgumentException("max must be >= 0.");
+		}
+		if(num < 1) {
+			throw new IllegalArgumentException("num must be > 0.");
 		}
 		
 		//Random number generator
@@ -447,7 +453,7 @@ public class ForkingSimulator {
 		
 		//Create list of randomly selected (non-repeating) integers of size num
 		List<Integer> selected = new LinkedList<Integer>();
-		for(int i = 0; i <= num; i++) {
+		for(int i = 0; i < num; i++) {
 			selected.add(selectFrom.remove(random.nextInt(selectFrom.size())));
 		}
 		
