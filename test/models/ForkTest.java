@@ -10,6 +10,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -27,8 +28,14 @@ public class ForkTest {
 	@Test
 	public void testFork() {
 		try {
+			//Cleanup
+			FileUtils.deleteQuietly(Paths.get("testdata/forktest/testfork/").toFile());
+			
 			//Create
-			new Fork(Paths.get("testdata/inventoriedSystem/"), Paths.get("testdata/testfork/"), "java");
+			Fork f = new Fork(Paths.get("testdata/inventoriedSystem/"), Paths.get("testdata/forktest/testfork/"), "java");
+			
+			//Test Getters
+			assertTrue(f.getLocation().toAbsolutePath().normalize().equals(Paths.get("testdata/forktest/testfork/").toAbsolutePath().normalize()));
 			
 			//Test properly captured files
 			List<Path> files = new LinkedList<Path>();
@@ -57,7 +64,7 @@ public class ForkTest {
 			}
 			
 			//Cleanup
-			//FileUtil.deleteDirectory(Paths.get("testdata/testfork/"));
+			FileUtils.deleteDirectory(Paths.get("testdata/forktest/testfork/").toFile());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -185,7 +192,7 @@ public class ForkTest {
 				assertTrue("", f.getDirectoryVariants().size() == 0);
 			}
 			//cleanup
-			FileUtil.deleteDirectory(Paths.get("testdata/testfork/"));
+			FileUtils.deleteDirectory(Paths.get("testdata/testfork/").toFile());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -262,7 +269,7 @@ public class ForkTest {
 			}
 			
 			//cleanup
-			FileUtil.deleteDirectory(Paths.get("testdata/testfork/"));
+			FileUtils.deleteDirectory(Paths.get("testdata/testfork/").toFile());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -333,7 +340,7 @@ public class ForkTest {
 				assertTrue(f.getDirectoryVariants().get(f.getDirectoryVariants().size()-1).equals(dv));
 			}
 			//cleanup
-			FileUtil.deleteDirectory(Paths.get("testdata/testfork/"));
+			FileUtils.deleteDirectory(Paths.get("testdata/testfork/").toFile());
 			
 			//check variants
 			assertTrue(f.getVariants().size()==1);
@@ -411,7 +418,7 @@ public class ForkTest {
 				assertTrue(f.getDirectoryVariants().get(f.getDirectoryVariants().size()-1).equals(dv));
 			}
 			//cleanup
-			FileUtil.deleteDirectory(Paths.get("testdata/testfork/"));
+			FileUtils.deleteDirectory(Paths.get("testdata/testfork/").toFile());
 			
 			//check variants
 			assertTrue(f.getVariants().size()==100);
@@ -596,11 +603,16 @@ public class ForkTest {
 		}
 	}
 	
+	@Test
+	public void testGetLocation() {
+		assertTrue();
+	}
+	
 	@Before
 	public void method() {
 		//Cleanup
 		try {
-			FileUtil.deleteDirectory(Paths.get("testdata/testfork/"));
+			FileUtils.deleteDirectory(Paths.get("testdata/testfork/").toFile());
 		} catch (Exception e) {
 		}
 	}

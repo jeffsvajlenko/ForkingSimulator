@@ -34,24 +34,22 @@ public class SystemUtil {
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * @return The directory containing the txl scripts.
 	 */
 	public static Path getTxlDirectory() {
 		return getInstallRoot().resolve("txl").toAbsolutePath().normalize();
 	}
 	
 	/**
-	 * 
-	 * @param language
-	 * @return
+	 * Returns the txl script directory for the following language.  Returns null if it does not exist.
+	 * @param language String representation of the language (must match directory name).
+	 * @return the txl script directory for the following language.  Returns null if it does not exist.
 	 */
 	public static Path getTxlDirectory(String language) {
 		Path p = getTxlDirectory().resolve(language);
 		if(Files.isDirectory(p)) {
-			return p.toAbsolutePath().normalize();
-		}
-		else {
+			return p.toAbsolutePath().toAbsolutePath().normalize();
+		} else {
 			return null;
 		}
 	}

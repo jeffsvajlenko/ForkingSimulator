@@ -66,7 +66,7 @@ public class FragmentUtil {
 		out.flush();
 		out.close();
 		
-		//Check success
+		//Check success (should have been caught previosuly though)
 		if(linenum != endline) {
 			throw new IOException("EOF was reached before endline.");
 		}

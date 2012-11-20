@@ -20,18 +20,11 @@ public class PropertiesTest {
 		assertEquals(5, p.getNumFragments());
 		assertEquals(2, p.getMaxinjectnum());
 		assertEquals(11, p.getNumForks());
-		assertEquals(0.25, p.getMutationRate(), 0.0001);
-		
-		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(Paths.get("/path/to/folder/system/").toAbsolutePath().normalize(), p.getSystem());
-		assertEquals(Paths.get("/path/to/other/repository/").toAbsolutePath().normalize(), p.getRepository());
-		assertEquals("c", p.getLanguage());
-		assertEquals(2, p.getNumFiles());
-		assertEquals(4, p.getNumDirectories());
-		assertEquals(6, p.getNumFragments());
-		assertEquals(8, p.getMaxinjectnum());
-		assertEquals(10, p.getNumForks());
-		assertEquals(0.75, p.getMutationRate(), 0.0001);
+		assertEquals(25, p.getMutationRate());
+		assertEquals(50, p.getInjectionReptitionRate());
+		assertEquals(25, p.getMutationRate());
+		assertEquals(10, p.getFunctionFragmentMinSize());
+		assertEquals(100, p.getFunctionFragmentMaxSize());
 		
 		boolean caught;
 		
@@ -125,6 +118,46 @@ public class PropertiesTest {
 		}
 		assertTrue(caught);
 		
+		//injectionreptitionrate missing
+		caught = false;
+		try {
+			p = new Properties(Paths.get("testdata/testproperties/injectionrepetitionratemissing"));
+		} catch (IllegalArgumentException e) {
+			if(e.getMessage().equals("Property 'injectionrepetitionrate' was not specified."))
+				caught = true;
+		}
+		assertTrue(caught);
+		
+		//mutationattempts missing
+		caught = false;
+		try {
+			p = new Properties(Paths.get("testdata/testproperties/mutationattemptsmissing"));
+		} catch (IllegalArgumentException e) {
+			if(e.getMessage().equals("Property 'mutationattempts' was not specified."))
+				caught = true;
+		}
+		assertTrue(caught);
+		
+		//functionfragmentminsize missing
+		caught = false;
+		try {
+			p = new Properties(Paths.get("testdata/testproperties/functionfragmentminsizemissing"));
+		} catch (IllegalArgumentException e) {
+			if(e.getMessage().equals("Property 'functionfragmentminsize' was not specified."))
+				caught = true;
+		}
+		assertTrue(caught);
+		
+		//functionfragmentmaxsize missing
+		caught = false;
+		try {
+			p = new Properties(Paths.get("testdata/testproperties/functionfragmentmaxsizemissing"));
+		} catch (IllegalArgumentException e) {
+			if(e.getMessage().equals("Property 'functionfragmentmaxsize' was not specified."))
+				caught = true;
+		}
+		assertTrue(caught);
+		
 		//null parameter
 		caught = false;
 		try {
@@ -154,86 +187,4 @@ public class PropertiesTest {
 		}
 		assertTrue(caught);
 	}
-
-	@Test
-	public void testGetSystem() {
-		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals(Paths.get("/path/to/system/").toAbsolutePath().normalize(), p.getSystem());
-		
-		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(Paths.get("/path/to/folder/system/").toAbsolutePath().normalize(), p.getSystem());
-	}
-
-	@Test
-	public void testGetRepository() {
-		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals(Paths.get("/path/to/repository/").toAbsolutePath().normalize(), p.getRepository());
-		
-		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(Paths.get("/path/to/other/repository/").toAbsolutePath().normalize(), p.getRepository());
-	}
-
-	@Test
-	public void testGetLanguage() {
-		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals("java", p.getLanguage());
-		
-		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals("c", p.getLanguage());
-	}
-
-	@Test
-	public void testGetNumfiles() {
-		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals(10, p.getNumFiles());
-		
-		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(2, p.getNumFiles());
-	}
-
-	@Test
-	public void testGetNumdirectories() {
-		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals(15, p.getNumDirectories());
-		
-		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(4, p.getNumDirectories());
-	}
-
-	@Test
-	public void testGetNumfragments() {
-		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals(5, p.getNumFragments());
-		
-		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(6, p.getNumFragments());
-	}
-
-	@Test
-	public void testGetMaxinjectnum() {
-		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals(2, p.getMaxinjectnum());
-		
-		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(8, p.getMaxinjectnum());
-	}
-
-	@Test
-	public void testGetNumforks() {
-		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals(11, p.getNumForks());
-		
-		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(10, p.getNumForks());
-	}
-
-	@Test
-	public void testGetMutationrate() {
-		Properties p = new Properties(Paths.get("testdata/testproperties/properties"));
-		assertEquals(0.25, p.getMutationRate(), 0.0001);
-		
-		p = new Properties(Paths.get("testdata/testproperties/properties2"));
-		assertEquals(0.75, p.getMutationRate(), 0.0001);
-	}
-
 }

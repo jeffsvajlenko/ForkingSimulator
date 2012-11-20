@@ -9,6 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import org.apache.commons.io.FileUtils;
+
 import util.FileUtil;
 import util.FragmentUtil;
 import util.InventoriedSystem;
@@ -126,6 +128,7 @@ public class ForkingSimulator {
 		System.out.println("\t" + "#dirs=" + properties.getNumDirectories());
 		System.out.println("\t" + "#fragments=" + properties.getNumFragments());
 		System.out.println("\t" + "mutationrate=" + properties.getMutationRate());
+		System.out.println("\t" + "injectionrepititionrate=" + properties.getInjectionReptitionRate());
 		System.out.println("END: Properties");
 		
 	//Set up repository
@@ -134,6 +137,23 @@ public class ForkingSimulator {
 			repository = new InventoriedSystem(properties.getRepository(), properties.getLanguage());
 		} catch (IOException e) {
 			System.out.println("Failed to inventory the repository.  Did you modify the files?");
+			return;
+		}
+	
+	//Set Up Original
+		try {
+			FileUtils.copyDirectory(properties.getSystem().toFile(), outputdir.resolve("originalSystem").toFile());
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Failed to copy original system into output directory.  Did you modify the files?");
+			return;
+		}
+		InventoriedSystem originalSystem;
+		try {
+			originalSystem = new InventoriedSystem(outputdir, properties.getLanguage());
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Failed to inventory the original system.  Did you modify the files?");
 			return;
 		}
 		
@@ -275,7 +295,7 @@ public class ForkingSimulator {
 					System.out.println("\t" + t_forks.get(i) + " " + t_variants.get(i).getInjectedDirectory());
 				}
 				try {
-					FileUtil.copyDirectory(dir, dirVariantDir.resolve("" + numd));
+					FileUtils.copyDirectory(dir.toFile(), dirVariantDir.resolve("" + numd).toFile());
 				} catch (IOException e) {
 					System.err.println("Failed to save injected dir record...");
 					System.exit(-1);

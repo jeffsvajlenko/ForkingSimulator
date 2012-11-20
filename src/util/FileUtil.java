@@ -12,7 +12,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * 
@@ -145,89 +144,4 @@ public class FileUtil {
 		}
 		return true;
 	}
-	
-	/**
-	 * Copies a directory from src to dest.  Destination directory must not exist before call.
-	 * @param src The directory to copy.
-	 * @param dest The destination of the copy, specified as the root of the copied file tree.  Copied root may have different name from source.
-	 * @throws IOException If an IOException occurs during the copy operation.
-	 * @throws IllegalArgumentException if dest specifies an existing file or directory.
-	 */
-	public static void copyDirectory(Path src, Path dest) throws IOException {
-		//Check input
-		Objects.requireNonNull(src);
-		Objects.requireNonNull(dest);
-		FileUtil.requireDirectory(src);
-		
-		if(Files.exists(dest)) {
-			throw new IllegalArgumentException("Destination already exists.");
-		}
-		
-		//Create destination directory
-		Files.createDirectories(dest);
-		
-		//Copy contents
-		DirectoryStream<Path> ds = null;
-		try {
-			ds = Files.newDirectoryStream(src);
-			for(Path p : ds) {
-				if(Files.isDirectory(p)) {
-					FileUtil.copyDirectory(p, dest.resolve(p.getFileName()));
-				} else {
-					Files.copy(p, dest.resolve(p.getFileName()));
-				}
-			}
-			ds.close();
-		} catch(IOException e) {
-			if(ds != null) {
-				try {ds.close();} catch (IOException ee){};
-			}
-			throw e;
-		}
-	}
-	
-	/**
-	 * Deletes the specified directory and its contents.  If function fails it may leave the directory partially deleted.
-	 * @param directory The directory to delete.
-	 * @throws IOException If an IO error occurs, such as a file/directory being impossible to delete (ex: permissions).
-	 */
-	public static void deleteDirectory(Path directory) throws IOException {
-		//Check input
-		Objects.requireNonNull(directory);
-		FileUtil.requireDirectory(directory);
-		
-		//Delete Contents
-		DirectoryStream<Path> ds = null;
-		try {
-			ds = Files.newDirectoryStream(directory);
-			for(Path p : ds) {
-				if(Files.isDirectory(p)) {
-					deleteDirectory(p);
-				} else {
-					Files.delete(p);
-				}
-			}
-			ds.close();
-		} catch (IOException e) {
-			if(ds != null) {
-				try {ds.close();} catch(IOException ee){};
-			}
-			throw e;
-		}
-		
-		//Delete Self
-		Files.delete(directory);
-	}
-	
-	private static void requireDirectory(Path directory) {
-		if(!Files.isDirectory(directory)) {
-			throw new IllegalArgumentException(directory.toString() + " is not a directory.");
-		}
-	}
-	
-	//private static void requireRegularFile(Path file) {
-	//	if(!Files.isRegularFile(file)) {
-	//		throw new IllegalArgumentException(file.toString() + " is not a directory.");
-	//	}
-	//}
 }

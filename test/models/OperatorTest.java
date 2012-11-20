@@ -56,6 +56,13 @@ public class OperatorTest {
 		} catch (IllegalArgumentException e) {
 			throwexception = true;
 		}
+		
+		throwexception = false;
+		try {
+			new Operator("id", "description", 5, Paths.get("operators/mCC_EOL"));
+		} catch (IllegalArgumentException e) {
+			throwexception = true;
+		}
 	}
 
 	@Test
@@ -115,6 +122,7 @@ public class OperatorTest {
 		assertTrue(!o.equals(od2));
 		assertTrue(!o.equals(od3));
 		assertTrue(!o.equals(od4));
+		assertTrue(!o.equals(null));
 	}
 
 	@Test

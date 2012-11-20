@@ -88,7 +88,7 @@ public class FragmentUtilTest {
 		}
 		assertTrue("Failed to throw illegal argument exception for invalid fragment.", thrown);
 		
-		Files.setPosixFilePermissions(Paths.get("testdata/FragmentUtilTest/cantread"), PosixFilePermissions.fromString("r--r-----"));
+		Files.setPosixFilePermissions(Paths.get("testdata/FragmentUtilTest/cantread"), PosixFilePermissions.fromString("-w--w----"));
 		thrown = false;
 		try {
 			FragmentUtil.extractFragment(new FunctionFragment(Paths.get("testdata/FragmentUtilTest/cantread"), 39, 84), Paths.get("testdata/FragmentUtilTest/ExtractTest"));

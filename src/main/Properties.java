@@ -39,6 +39,9 @@ public class Properties {
 	private int mutationattempts;
 	private boolean setmutationattempts=false;
 	
+	private int injectionrepetitionrate;
+	private boolean setinjectionrepetitionrate=false;
+	
 	private int functionfragmentminsize;
 	private boolean setfunctionfragmentminsize=false;
 	
@@ -201,6 +204,20 @@ public class Properties {
 							throw new IllegalArgumentException("Property 'mutationattempts' is invalid.");
 						}
 						this.setmutationattempts=true;
+					//injectionreptitionrate
+					} else if (line.startsWith("injectionrepetitionrate=")) {
+						line = line.substring(24);
+						try {
+							this.injectionrepetitionrate = Integer.parseInt(line);
+						} catch (Exception e) {
+							s.close();
+							throw new IllegalArgumentException("Property 'injectionrepetitionrate' is invalid.");
+						}
+						if(this.injectionrepetitionrate < 0 || this.injectionrepetitionrate > 100) {
+							s.close();
+							throw new IllegalArgumentException("Property 'injectionrepetitionrate' is invalid.");
+						}
+						this.setinjectionrepetitionrate = true;
 					//functionfragmentminsize
 					} else if (line.startsWith("functionfragmentminsize=")) {
 						line = line.substring(24);
@@ -269,6 +286,9 @@ public class Properties {
 			}
 			if(!this.setfunctionfragmentmaxsize) {
 				throw new IllegalArgumentException("Property 'functionfragmentmaxsize' was not specified.");
+			}
+			if(!this.setinjectionrepetitionrate){
+				throw new IllegalArgumentException("Property 'injectionrepetitionrate' was not specified.");
 			}
 			if(this.functionfragmentminsize > this.functionfragmentmaxsize) {
 				throw new IllegalArgumentException("Property 'functionfragmentminsize' is greater than 'functionfragmentmaxsize'.");
@@ -360,5 +380,12 @@ public class Properties {
 	 */
 	public int getFunctionFragmentMaxSize() {
 		return this.functionfragmentmaxsize;
+	}
+	
+	/**
+	 * @return The injection repetition rate.
+	 */
+	public int getInjectionReptitionRate() {
+		return this.injectionrepetitionrate;
 	}
 }
