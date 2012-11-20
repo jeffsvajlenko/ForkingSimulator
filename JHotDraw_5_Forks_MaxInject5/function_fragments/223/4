@@ -1,9 +1,0 @@
-  synchronized public static org.omg.CORBA.TypeCode type ()
-  {
-    if (__typeCode == null)
-    {
-      __typeCode = org.omg.CORBA.ORB.init ().create_sequence_tc (0, __typeCode);
-      __typeCode = org.omg.CORBA.ORB.init ().create_alias_tc (org.omg.CORBA.StringSeqHelper.id (), "StringSeq", __typeCode);
-    }
-    return __typeCode;
-  }

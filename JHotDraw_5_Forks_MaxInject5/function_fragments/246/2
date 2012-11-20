@@ -1,9 +1,0 @@
-        public Float(Rectangle2D ellipseBounds,
-                     float start, float extent, int type) {
-            super(type);
-            this.x = (float) ellipseBounds.getX();             this.y = (float) ellipseBounds.getY();
-            this.width = (float) ellipseBounds.getWidth();
-            this.height = (float) ellipseBounds.getHeight();
-            this.start = start;
-            this.extent = extent;
-        }

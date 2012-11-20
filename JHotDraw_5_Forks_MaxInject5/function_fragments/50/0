@@ -1,9 +1,0 @@
-    public static <T> T doPrivilegedWithCombiner
-        (PrivilegedExceptionAction<T> action) throws PrivilegedActionException {
-
-        AccessControlContext acc = getStackAccessControlContext();
-        if (acc == null) {
-            return AccessController.doPrivileged(action);
-        }
-        return AccessController.doPrivileged(action, preserveCombiner(dc));
-    }

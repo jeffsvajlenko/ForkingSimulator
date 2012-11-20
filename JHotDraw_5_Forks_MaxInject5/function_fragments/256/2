@@ -1,9 +1,0 @@
-    public org.omg.IOP.ServiceContext get_reply_service_context( int id ) {
-
-        if( cachedReplyServiceContexts == null ) {
-            cachedReplyServiceContexts = new HashMap();
-        }
-
-        return getServiceContext( cachedReplyServiceContexts,
-                                  replyMessage.getServiceContexts(), id );
-    }
