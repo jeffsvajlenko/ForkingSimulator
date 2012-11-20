@@ -8,8 +8,10 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Random;
 
-import util.FileUtil;
+import org.apache.commons.io.FileUtils;
+
 import util.FragmentUtil;
 import util.InventoriedSystem;
 import util.SystemUtil;
@@ -20,17 +22,17 @@ public class Fork {
 	//Inventory of the fork pre-modification
 	private InventoriedSystem fork;
 	
-	//Max number of attempts to inject before fail
-	private final int MAX_ATTEMPTS = 100;
-	
 	//Variant tracking
 	private List<Variant> variants;
 	private List<FileVariant> filevariants;
 	private List<DirectoryVariant> directoryvariants;
 	private List<FragmentVariant> functionfragmentvariants;
 	
-	//track files modified (in order to prevent modifying the same file twice, which is more difficult to track)
+	//track files modified (in order to prevent modifying the same file twice, which is more difficult to track since line numbers change)
 	private List<Path> changedFiles;
+	
+	//For random
+	private Random random;
 	
 	/**
 	 * Returns the variants in an unmodifiable list.  Variants are in the order they were injected.
@@ -95,7 +97,10 @@ public class Fork {
 		}
 		
 		//Copy the original directory
-		FileUtil.copyDirectory(systemdir, forkdir);
+		FileUtils.copyDirectory(systemdir.toFile(), forkdir.toFile());
+		
+		//init random
+		random = new Random();
 		
 		//Initialize variant lists
 		variants = new LinkedList<Variant>();
@@ -128,32 +133,69 @@ public class Fork {
 		
 		//Find a directory to inject this file into
 		Path injectin;
-		int attempts = 0;
+		List<Path> directories = new LinkedList<Path>(this.fork.getDirectories());
 		
 		while(true) {
-			attempts++;
-			if(attempts == MAX_ATTEMPTS) {
+			if(directories.isEmpty()) {
 				return null;
+			} else {
+				injectin = directories.remove(random.nextInt(directories.size()));
+				if(!Files.exists(Paths.get(injectin.toString(), file.getFileName().toString()))) { //check file does not already exist with same name in the location
+					break;
+				}
 			}
-			injectin = fork.getRandomDirectory();
-			if(injectin == null) {
-				return null;
-			}
-			if(!Files.exists(Paths.get(injectin.toString(), file.getFileName().toString()))) {
-				break;
-			}
+		}
+		
+		return injectFile(file, injectin);
+	}
+	
+	/**
+	 * Injects a file into the fork into a specified directory of the fork.
+	 * @param file The file to inject.
+	 * @param injectin The directory to inject into.  Must be in the fork (has fork as root directory).
+	 * @return The file variant.
+	 * @throws IOException If an IO error occurs during file copy.  An IOException occurring may leave the Fork in a bad state!
+	 * @throws NullPointerException If file or injectin are null.
+	 * @throws IllegalArgumnetException If file is invalid (does not exist, is not a regular file), or if injectin is invalid (does not exist, is not a directory, is not in fork).
+	 */
+	public FileVariant injectFile(Path file, Path injectin) throws IOException, NullPointerException, IllegalArgumentException {
+		//check input
+		Objects.requireNonNull(file);
+		Objects.requireNonNull(injectin);
+		injectin = injectin.toAbsolutePath().normalize();
+		file = file.toAbsolutePath().normalize();
+		if(!Files.exists(file)) {
+			throw new IllegalArgumentException("File does not exist.");
+		}
+		if(!Files.isRegularFile(file)) {
+			throw new IllegalArgumentException("File is not a regular file.");
+		}
+		if(!Files.exists(injectin)) {
+			throw new IllegalArgumentException("Directory does not exist.");
+		}
+		if(!Files.isDirectory(injectin)) {
+			throw new IllegalArgumentException("directory is not a directory.");
+		}
+		if(!injectin.startsWith(this.fork.getLocation())) {
+			throw new IllegalArgumentException("directory is not from the fork.");
+		}
+		
+		//Check injection will not overwrite anything
+		if(Files.exists(injectin.resolve(file.getFileName()))) {
+			throw new IllegalArgumentException("Can not inject there, already exists file with same name.");
 		}
 		
 		//Inject the file
 		Path injected = Files.copy(file, Paths.get(injectin.toString(), file.getFileName().toString()));
-		
+				
 		//Make a record of this interaction
 		FileVariant v = new FileVariant(file.toAbsolutePath().normalize(), injected.toAbsolutePath().normalize());
 		variants.add(v);
 		filevariants.add(v);
-		
+				
 		//Return success
 		return v;
+		
 	}
 	
 	/**
@@ -173,35 +215,71 @@ public class Fork {
 			throw new IllegalArgumentException("Directory is not a directory.");
 		}
 		
-		//Find a directory to inject this directory into
+		//Find a directory to inject this file into
 		Path injectin;
-		int attempts = 0;
+		List<Path> directories = new LinkedList<Path>(this.fork.getDirectories());
 		
 		while(true) {
-			attempts++;
-			if(attempts == MAX_ATTEMPTS) {
+			if(directories.isEmpty()) {
 				return null;
-			}
-			injectin = fork.getRandomDirectory();
-			if(injectin == null) {
-				return null;
-			}
-			if(!Files.exists(Paths.get(injectin.toString(), directory.getFileName().toString()))) {
-				break;
+			} else {
+				injectin = directories.remove(random.nextInt(directories.size()));
+				if(!Files.exists(Paths.get(injectin.toString(), directory.getFileName().toString()))) { //check file does not already exist with same name in the location
+					break;
+				}
 			}
 		}
 		
+		return injectDirectory(directory, injectin);
+	}
+	
+	/**
+	 * Injects a file into the fork into a specified directory of the fork.
+	 * @param directory The directory to inject.
+	 * @param injectin The directory to inject into.  Must be in the fork (has fork as root directory).
+	 * @return The directory variant.
+	 * @throws IOException If an IO error occurs during file copy.  An IOException occurring may leave the Fork in a bad state!
+	 * @throws NullPointerException If directory or injectin are null.
+	 * @throws IllegalArgumnetException If directory is invalid (does not exist, is not a directory), or if injectin is invalid (does not exist, is not a directory, is not in fork).
+	 */
+	public DirectoryVariant injectDirectory(Path directory, Path injectin) throws IOException, NullPointerException, IllegalArgumentException {
+		//Check input
+		Objects.requireNonNull(directory);
+		Objects.requireNonNull(injectin);
+		directory = directory.toAbsolutePath().normalize();
+		injectin = injectin.toAbsolutePath().normalize();
+		if(!Files.exists(directory)) {
+			throw new IllegalArgumentException("Directory does not exist.");
+		}
+		if(!Files.isDirectory(directory)) {
+			throw new IllegalArgumentException("Directory is not a directory.");
+		}
+		if(!Files.exists(injectin)) {
+			throw new IllegalArgumentException("Directory does not exist.");
+		}
+		if(!Files.isDirectory(injectin)) {
+			throw new IllegalArgumentException("directory is not a directory.");
+		}
+		if(!injectin.startsWith(this.fork.getLocation())) {
+			throw new IllegalArgumentException("directory is not from the fork.");
+		}
+		
+		//Check injection will not overwrite anything
+		if(Files.exists(injectin.resolve(directory.getFileName()))) {
+			throw new IllegalArgumentException("Can not inject there, already exists file with same name.");
+		}
+		
 		//Inject the directory
-		FileUtil.copyDirectory(directory, Paths.get(injectin.toString(), directory.getFileName().toString()));
+		FileUtils.copyDirectory(directory.toFile(), Paths.get(injectin.toString(), directory.getFileName().toString()).toFile());
 		
 		//Make a record of this interaction
 		DirectoryVariant v = new DirectoryVariant(directory.toAbsolutePath().normalize(), Paths.get(injectin.toString(), directory.getFileName().toString()).toAbsolutePath().normalize());
 		variants.add(v);
 		directoryvariants.add(v);
 		
-		
 		//Return success
 		return v;
+		
 	}
 	
 	/**
@@ -215,85 +293,85 @@ public class Fork {
 	 * @throws InterruptedException If the mutation process is interrupted.
 	 */
 	public FragmentVariant injectFunctionFragment(FunctionFragment fragment, Operator op, int numattempts, String language) throws IOException, InterruptedException {
-		//Check Input
-				//Check pointers
-				Objects.requireNonNull(fragment);
-				Objects.requireNonNull(op);
-				
-				//Check fragment file
-				if(!Files.exists(fragment.getSrcFile())) {
-					new NoSuchFileException("Fragment's source file does not exist.");
+	//Check Input
+		//Check pointers
+		Objects.requireNonNull(fragment);
+		Objects.requireNonNull(op);
+		
+		//Check fragment file
+		if(!Files.exists(fragment.getSrcFile())) {
+			new NoSuchFileException("Fragment's source file does not exist.");
+		}
+		if(!Files.isReadable(fragment.getSrcFile())) {
+			new IllegalArgumentException("Fragment's source file is not readable.");
+		}
+		if(!Files.isRegularFile(fragment.getSrcFile())) {
+			new IllegalArgumentException("Fragment's source file is not readable.");
+		}
+		
+	//Check fragment validity
+		int numlines = FragmentUtil.countLines(fragment.getSrcFile());
+		if(fragment.getEndLine() > numlines) {
+			new IllegalArgumentException("Fragment is invalid (endline proceeds ends of file).");
+		}
+		if(!FragmentUtil.isFunction(fragment, fork.getLanguage())) {
+			new IllegalArgumentException("Fragment is invalid (does not specify a function).");
+		}
+		
+	//Get location to inject at
+		FunctionFragment f;
+		//continue to choose until a suitable location is found, or all exhausted
+		while(true) {
+			//pick a previously unchosen function fragment at random
+			f = fork.getRandomFunctionFragmentNoRepeats();
+			
+			//if all exhausted, return failure
+			if(f == null) {
+				return null;
+			}
+			
+			//ensure fragment perfectly frames a function, and that the file it is hasn't previously been modified
+			if(FragmentUtil.isFunction(f, fork.getLanguage())) {
+				if(!changedFiles.contains(f.getSrcFile().toAbsolutePath().normalize())) {
+					//This is the fragment to use, add its file to changed files and continue
+					changedFiles.add(f.getSrcFile().toAbsolutePath().normalize());
+					break;
 				}
-				if(!Files.isReadable(fragment.getSrcFile())) {
-					new IllegalArgumentException("Fragment's source file is not readable.");
-				}
-				if(!Files.isRegularFile(fragment.getSrcFile())) {
-					new IllegalArgumentException("Fragment's source file is not readable.");
-				}
-				
-			//Check fragment validity
-				int numlines = FragmentUtil.countLines(fragment.getSrcFile());
-				if(fragment.getEndLine() > numlines) {
-					new IllegalArgumentException("Fragment is invalid (endline proceeds ends of file).");
-				}
-				if(!FragmentUtil.isFunction(fragment, fork.getLanguage())) {
-					new IllegalArgumentException("Fragment is invalid (does not specify a function).");
-				}
-				
-			//Get location to inject at
-				FunctionFragment f;
-				//continue to choose until a suitable location is found, or all exhausted
-				while(true) {
-					//pick a previously unchosen function fragment at random
-					f = fork.getRandomFunctionFragmentNoRepeats();
-					
-					//if all exhausted, return failure
-					if(f == null) {
-						return null;
-					}
-					
-					//ensure fragment perfectly frames a function, and that the file it is hasn't previously been modified
-					if(FragmentUtil.isFunction(f, fork.getLanguage())) {
-						if(!changedFiles.contains(f.getSrcFile().toAbsolutePath().normalize())) {
-							//This is the fragment to use, add its file to changed files and continue
-							changedFiles.add(f.getSrcFile().toAbsolutePath().normalize());
-							break;
-						}
-					}
-				}
-				
-				//Mutate
-					//Create temporary files
-				Path tmpfile1 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "injectFunctionFragment", null);
-				Path tmpfile2 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "injectFunctionFragment", null);
-				
-					//extract function to file
-				FragmentUtil.extractFragment(fragment, tmpfile1);
-				
-					//Mutate function
-				if(0 != op.performOperator(tmpfile1, tmpfile2, numattempts, language)) {
-					Files.deleteIfExists(tmpfile1);
-					Files.deleteIfExists(tmpfile2);
-					return null;
-				}
-				
-				//Create fragment representation of mutated function
-				numlines = FragmentUtil.countLines(tmpfile2);
-				FunctionFragment mutatedfragment = new FunctionFragment(tmpfile2, 1, numlines);
-				
-				//Inject into file
-				FragmentUtil.injectFragment(f.getSrcFile(), f.getEndLine()+1, mutatedfragment);
-				
-				//Make record
-				FragmentVariant fv = new FragmentVariant(fragment, new FunctionFragment(f.getSrcFile(), f.getEndLine()+1, (f.getEndLine() + 1) + (numlines - 1)), op);
-				variants.add(fv);
-				functionfragmentvariants.add(fv);
-				
-				Files.deleteIfExists(tmpfile1);
-				Files.deleteIfExists(tmpfile2);
-				
-				//Return variant
-				return fv;
+			}
+		}
+		
+		//Mutate
+			//Create temporary files
+		Path tmpfile1 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "injectFunctionFragment", null);
+		Path tmpfile2 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "injectFunctionFragment", null);
+		
+			//extract function to file
+		FragmentUtil.extractFragment(fragment, tmpfile1);
+		
+			//Mutate function
+		if(0 != op.performOperator(tmpfile1, tmpfile2, numattempts, language)) {
+			Files.deleteIfExists(tmpfile1);
+			Files.deleteIfExists(tmpfile2);
+			return null;
+		}
+		
+		//Create fragment representation of mutated function
+		numlines = FragmentUtil.countLines(tmpfile2);
+		FunctionFragment mutatedfragment = new FunctionFragment(tmpfile2, 1, numlines);
+		
+		//Inject into file
+		FragmentUtil.injectFragment(f.getSrcFile(), f.getEndLine()+1, mutatedfragment);
+		
+		//Make record
+		FragmentVariant fv = new FragmentVariant(fragment, new FunctionFragment(f.getSrcFile(), f.getEndLine()+1, (f.getEndLine() + 1) + (numlines - 1)), op);
+		variants.add(fv);
+		functionfragmentvariants.add(fv);
+		
+		Files.deleteIfExists(tmpfile1);
+		Files.deleteIfExists(tmpfile2);
+		
+		//Return variant
+		return fv;
 	}
 	
 	/**
@@ -335,16 +413,19 @@ public class Fork {
 		//continue to choose until a suitable location is found, or all exhausted
 		while(true) {
 			//pick a previously unchosen function fragment at random
-			f = fork.getRandomFunctionFragmentNoRepeats();
+			f = fork.getRandomFunctionFragmentNoFileRepeats();
 			
 			//if all exhausted, return failure
 			if(f == null) {
 				return null;
 			}
 			
-			//ensure fragment perfectly frames a function, and that the file it is hasn't previously been modified
+			//ensure fragment perfectly frames a function
 			if(FragmentUtil.isFunction(f, fork.getLanguage())) {
+				
+				//ensure file has not been previously modified (this shouldn't occur)
 				if(!changedFiles.contains(f.getSrcFile().toAbsolutePath().normalize())) {
+					
 					//This is the fragment to use, add its file to changed files and continue
 					changedFiles.add(f.getSrcFile().toAbsolutePath().normalize());
 					break;
