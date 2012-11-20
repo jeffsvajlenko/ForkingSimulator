@@ -603,11 +603,6 @@ public class ForkTest {
 		}
 	}
 	
-	@Test
-	public void testGetLocation() {
-		assertTrue();
-	}
-	
 	@Before
 	public void method() {
 		//Cleanup

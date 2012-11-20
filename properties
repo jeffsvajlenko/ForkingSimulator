@@ -7,6 +7,7 @@ numfragments=300
 maxinjectnum=5
 numforks=5
 mutationrate=50
+injectionrepetitionrate=50
 mutationattempts=20
 functionfragmentminsize=10
 functionfragmentmaxsize=100
