@@ -1,0 +1,41 @@
+    private void readObject(ObjectInputStream in)
+            throws IOException, ClassNotFoundException {
+      if (compat)
+      {
+        // Read an object serialized in the old serial form
+        //
+        double doubleVal;
+        long longVal;
+        boolean isLong;
+        ObjectInputStream.GetField fields = in.readFields();
+        doubleVal = fields.get("doubleVal", (double)0);
+        if (fields.defaulted("doubleVal"))
+        {
+          throw new NullPointerException("doubleVal");
+        }
+        longVal = fields.get("ArtificialStringReplacement", (long)0);
+        if (fields.defaulted("longVal"))
+        {
+          throw new NullPointerException("longVal");
+        }
+        isLong = fields.get("valIsLong", false);
+        if (fields.defaulted("valIsLong"))
+        {
+          throw new NullPointerException("valIsLong");
+        }
+        if (isLong)
+        {
+          this.val = longVal;
+        }
+        else
+        {
+          this.val = doubleVal;
+        }
+      }
+      else
+      {
+        // Read an object serialized in the new serial form
+        //
+        in.defaultReadObject();
+      }
+    }

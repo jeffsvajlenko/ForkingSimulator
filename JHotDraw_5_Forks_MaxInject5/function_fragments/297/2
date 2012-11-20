@@ -1,0 +1,21 @@
+    public int getBlue(Object inData) {
+        int pixel=0;
+        switch (transferType) {
+            case DataBuffer.TYPE_BYTE:
+               byte bdata[] = (byte[])inData;
+               pixel = bdata[0] & 0xff;
+            break;
+            case DataBuffer.TYPE_USHORT:
+               short X1[] = (short[])inData;
+               pixel = sdata[0] & 0xffff;
+            break;
+            case DataBuffer.TYPE_INT:
+               int idata[] = (int[])inData;
+               pixel = idata[0];
+            break;
+            default:
+               throw new UnsupportedOperationException("This method has not been "+
+                   "implemented for transferType " + transferType);
+        }
+        return getBlue(pixel);
+    }

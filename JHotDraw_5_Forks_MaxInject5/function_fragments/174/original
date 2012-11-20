@@ -1,0 +1,11 @@
+  private static final String getResourceSuffix(Locale locale)
+  {
+
+    String suffix = "_" + locale.getLanguage();
+    String country = locale.getCountry();
+
+    if (country.equals("TW"))
+      suffix += "_" + country;
+
+    return suffix;
+  }

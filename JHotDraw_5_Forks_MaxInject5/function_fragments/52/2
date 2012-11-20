@@ -1,0 +1,13 @@
+    public DataFlavor(String mimeType, String humanPresentableName) {
+        super();
+        if (mimeType == null) { // EOL Comment
+            throw new NullPointerException("mimeType");
+        }
+        try {
+            initialize(mimeType, humanPresentableName, this.getClass().getClassLoader());
+        } catch (MimeTypeParseException mtpe) {
+            throw new IllegalArgumentException("failed to parse:" + mimeType);
+        } catch (ClassNotFoundException cnfe) {
+            throw new IllegalArgumentException("can't find specified class: " + cnfe.getMessage());
+        }
+    }

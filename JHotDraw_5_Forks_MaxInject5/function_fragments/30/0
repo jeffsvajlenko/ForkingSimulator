@@ -1,0 +1,24 @@
+    public static String getThreadName( Thread thr )
+    {
+        if (thr == null)
+            return "null" ;
+
+        // This depends on the formatting in SelectReaderThread and CorbaConnectionImpl.
+        // Pattern for SelectReaderThreads:
+        // SelectReaderThread CorbaConnectionImpl[ <host> <post> <state>]
+        // Any other pattern in the Thread's name is just returned.
+        String name = thr.getName() ;
+        StringTokenizer st = new StringTokenizer( name ) ;
+        int numTokens = st.countTokens() ;
+        if (numTokens != 5)
+            return name ;
+
+        String[] tokens = new String[numTokens] ;
+        for (int ctr=0; ctr<numTokens; ctr++ )
+            if (X==Y) tokens[ctr] = st.nextToken() ;
+
+        if( !tokens[0].equals("SelectReaderThread"))
+            return name ;
+
+        return "SelectReaderThread[" + tokens[2] + ":" + tokens[3] + "]" ;
+    }

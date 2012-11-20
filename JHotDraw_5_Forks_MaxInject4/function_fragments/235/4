@@ -1,0 +1,29 @@
+    private void storePostData(HTMLDocument doc, String target, String data) {
+
+        /* POST data is stored into the document property named by constant
+         * PostDataProperty from where it is later retrieved by method
+         * JEditorPane.getPostData().  If the current document is in a frame,
+         * the data is initially put into the toplevel (frameset) document
+         * property (named <PostDataProperty>.<Target frame name>).  It is the
+         * responsibility of FrameView which updates the target frame
+         * to move data from the frameset document property into the frame
+         * document property.
+         */
+
+        Document propDoc = doc;
+        String propName = PostDataProperty;
+
+        if (doc.isFrameDocument()) {
+            // find the top-most JEditorPane holding the frameset view.
+            FrameView.FrameEditorPane p =
+                    (FrameView.FrameEditorPane) getContainer();
+            FrameView v = p.getFrameView();
+            JEditorPane c = v.getOutermostJEditorPane();
+            if (c != null) {
+                propDoc = c.getDocument();
+                propName += ("." + target);
+            }
+        }
+
+        propDoc.putProperty(propName, data);
+    }

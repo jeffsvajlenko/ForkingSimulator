@@ -1,0 +1,12 @@
+  protected Expression union(int opPos) throws TransformerException
+  {
+    locPathDepth++;
+    try
+    {
+      return UnionPathIterator.createUnionIterator(this, opPos);
+    }
+    finally
+    {
+      locPathDepth--;
+    }
+  }

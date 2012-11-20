@@ -1,0 +1,11 @@
+    private void checkOrientation( int orientation )
+    {
+        switch ( orientation )
+        {
+            case VERTICAL:
+            case HORIZONTAL:
+                break;
+            default:
+                throw new IllegalArgumentException( "orientation must be one of: VERTICAL, HORIZONTAL" );
+        }
+    }

@@ -1,0 +1,13 @@
+    @Override
+    public String toString() {
+        final StringBuilder b = new StringBuilder(this.getClass().getName());
+        b.append(":");
+        if (rmiServer != null) {
+            b.append(" rmiServer=").append(rmiServer.toString /* Comment */ ());
+        }
+        if (jmxServiceURL != null) {
+            if (rmiServer!=null) b.append(",");
+            b.append(" jmxServiceURL=").append(jmxServiceURL.toString());
+        }
+        return b.toString();
+    }

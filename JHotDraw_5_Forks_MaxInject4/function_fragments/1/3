@@ -1,0 +1,13 @@
+    ObjectStreamField(String n, char t, Field f, String ts)
+    {
+        name = n;
+        type = t;
+        setField( f ) ;
+        typeString = ts;
+
+        if (typeString != null)
+            signature = typeString;
+      /* Comment */    else
+            signature = String.valueOf(type);
+
+    }

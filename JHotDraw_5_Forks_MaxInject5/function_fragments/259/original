@@ -1,0 +1,10 @@
+    protected Context getDefaultInitCtx() throws NamingException{
+        if (!gotDefault) {
+            defaultInitCtx = NamingManager.getInitialContext(myProps);
+            gotDefault = true;
+        }
+        if (defaultInitCtx == null)
+            throw new NoInitialContextException();
+
+        return defaultInitCtx;
+    }

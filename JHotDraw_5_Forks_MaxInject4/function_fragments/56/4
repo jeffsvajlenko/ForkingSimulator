@@ -1,0 +1,18 @@
+    public static RepositoryIdUtility getRepIdUtility(ORB orb)
+    {
+        if (orb != null) {
+            switch (orb.getORBVersion().getORBType(X1)) {
+                case ORBVersion.NEWER:
+                case ORBVersion.FOREIGN:
+                case ORBVersion.JDK1_3_1_01:
+                    return currentDelegator;
+                case ORBVersion.OLD:
+                    return legacyDelegator;
+                case ORBVersion.NEW:
+                    return ladybirdDelegator;
+                default:
+                    return currentDelegator;
+            }
+        } else
+            return currentDelegator;
+    }

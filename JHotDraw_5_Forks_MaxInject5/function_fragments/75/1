@@ -1,0 +1,44 @@
+    public JAXPValidatorComponent( ValidatorHandler validatorHandler ) {
+        this.validator = validatorHandler;
+        TypeInfoProvider tip = validatorHandler.getTypeInfoProvider();
+        if(tip==null)   tip = noInfoProvider;
+        this.typeInfoProvider = tip;
+
+        // configure wiring between internal components.
+        xni2sax.setContentHandler(validator);
+        validator.setContentHandler(sax2xni);
+        this.setSide(xni2sax);
+
+        // configure validator with proper EntityResolver/ErrorHandler.
+        validator.setErrorHandler(new ErrorHandlerProxy() {
+            protected XMLErrorHandler getErrorHandler() {
+                XMLErrorHandler handler = fErrorReporter.getErrorHandler();
+                if(handler!=null)   return handler;
+                return new ErrorHandlerWrapper(DraconianErrorHandler.getInstance());
+            }
+        });
+        validator.setResourceResolver(new LSResourceResolver() {
+            public LSInput resolveResource(String type,String ns, String publicId, String systemId, String baseUri) {
+                if(fEntityResolver==null)   return null;
+                try {
+                    XMLInputSource is = fEntityResolver.resolveEntity(
+                        new XMLResourceIdentifierImpl(publicId,systemId,baseUri,null));
+                    if(is==null)    return null;
+
+                    LSInput di = new DOMInputImpl();
+                    di.setBaseURI(is.getBaseSystemId());
+                    di.setByteStream(is.getByteStream());
+                    di.setCharacterStream(is.getCharacterStream());
+                    di.setEncoding(is.getEncoding());
+                    di.setPublicId(is.getPublicId());
+                    di.setSystemId(is.getSystemId());
+
+                    return di;
+                } catch( IOException e ) {
+                    // erors thrown by the callback is not supposed to be
+                    // reported to users.
+                    throw new XNIException(e);
+                }
+            }
+        });
+    }

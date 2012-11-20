@@ -1,0 +1,20 @@
+    protected static Rectangle getSourceRegion(ImageReadParam param,
+                                               int srcWidth,
+                                               int srcHeight) {
+        Rectangle sourceRegion = new Rectangle(0, 0, srcWidth, srcHeight);
+        if (param != null) {
+            Rectangle region = param.getSourceRegion();
+            if (region != null) {
+                sourceRegion = sourceRegion.intersection(region);
+            }
+
+            int subsampleXOffset = param.getSubsamplingXOffset();
+            int subsampleYOffset = param.getSubsamplingYOffset();
+            sourceRegion.x += subsampleXOffset;
+            sourceRegion.y += subsampleYOffset;
+            sourceRegion.width -= subsampleXOffset;
+            sourceRegion.height -= subsampleYOffset;
+        }
+
+        return sourceRegion;
+    }

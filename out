@@ -1,0 +1,155 @@
+BEGIN: Properties
+	output_directory=/home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938
+	system_directory=/home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2
+	repository_directory=/home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2
+	language=c
+	#forks=10
+	max#injects=5
+	#files=10
+	#dirs=10
+	#fragments=10
+	mutationrate=100
+END: Properties
+BEGIN: FileVariants
+1 4 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/daemonize.c
+	0 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/0/m4/daemonize.c
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/m4/daemonize.c
+	3 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/3/process/daemonize.c
+	5 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/5/process/daemonize.c
+2 2 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/protocols/dwp.c
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/external/dwp.c
+	5 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/5/doc/dwp.c
+3 5 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/device/sysdep_LINUX.c
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/doc/sysdep_LINUX.c
+	4 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/4/m4/sysdep_LINUX.c
+	6 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/6/http/sysdep_LINUX.c
+	8 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/8/external/sysdep_LINUX.c
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/external/sysdep_LINUX.c
+4 5 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/README.SSL
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/device/README.SSL
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/external/README.SSL
+	3 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/3/m4/README.SSL
+	7 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/7/protocols/README.SSL
+	8 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/8/external/README.SSL
+5 4 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/state.c
+	0 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/0/http/state.c
+	6 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/6/m4/state.c
+	8 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/8/external/state.c
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/protocols/state.c
+6 4 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/README
+	0 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/0/process/README
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/device/README
+	4 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/4/external/README
+	5 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/5/doc/README
+7 6 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/sha.c
+	0 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/0/device/sha.c
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/m4/sha.c
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/doc/sha.c
+	4 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/4/external/sha.c
+	7 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/7/device/sha.c
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/external/sha.c
+8 4 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/process/sysdep_OPENBSD.c
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/contrib/sysdep_OPENBSD.c
+	4 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/4/contrib/sysdep_OPENBSD.c
+	8 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/8/doc/sysdep_OPENBSD.c
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/external/sysdep_OPENBSD.c
+9 3 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/validate.c
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/protocols/validate.c
+	3 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/3/m4/validate.c
+	5 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/5/contrib/validate.c
+10 5 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/protocols/rdate.c
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/m4/rdate.c
+	3 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/3/doc/rdate.c
+	4 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/4/m4/rdate.c
+	6 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/6/device/rdate.c
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/doc/rdate.c
+END: FileVariants
+BEGIN: DirectoryVariants
+1 5 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/external
+	0 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/0/protocols/external
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/process/external
+	4 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/4/device/external
+	8 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/8/http/external
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/m4/external
+2 6 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/contrib
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/device/contrib
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/device/contrib
+	3 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/3/process/contrib
+	4 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/4/contrib/contrib
+	6 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/6/http/contrib
+	8 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/8/protocols/contrib
+3 2 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/process
+	3 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/3/protocols/process
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/m4/process
+4 5 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/http
+	0 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/0/http/http
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/http/http
+	5 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/5/device/http
+	8 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/8/device/http
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/doc/http
+5 3 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/m4
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/m4/m4
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/doc/m4
+	6 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/6/device/m4
+6 5 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/device
+	0 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/0/process/device
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/external/device
+	6 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/6/http/device
+	7 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/7/contrib/device
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/m4/device
+7 3 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/protocols
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/m4/protocols
+	3 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/3/protocols/protocols
+	6 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/6/contrib/protocols
+8 3 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/doc
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/m4/doc
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/http/doc
+	7 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/7/http/doc
+END: DirectoryVariants
+BEGIN: FunctionFragmentVariants
+1 5 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/ssl.c 580 673
+	0 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/0/monitor.c 331 424 mCC_BT 1
+	4 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/4/event.c 352 445 mCC_EOL 1
+	5 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/5/http/cervlet.c 1141 1235 mCF_A 1
+	6 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/6/protocols/ftp.c 96 188 mCF_R 1
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/control.c 422 515 mCW_A 1
+2 2 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/http/cervlet.c 178 219
+	3 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/3/md5.c 75 116 mCW_R 1
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/sha.c 85 126 mSRI 2
+3 2 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/http/processor.c 1001 1036
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/validate.c 1115 1150 mRL_N 2
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/monitor.c 432 468 mIL 3
+4 3 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/state.c 263 276
+	5 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/5/process/process_common.c 115 128 mCC_EOL 1
+	7 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/7/protocols/default.c 40 53 mCW_R 1
+	8 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/8/socket.c 353 366 mSIL 3
+5 2 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/monitor.c 634 667
+	5 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/5/event.c 266 299 mRL_S 2
+	6 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/6/gc.c 133 166 mSRI 2
+6 4 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/process/sysdep_HPUX.c 109 136
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/net.c 422 449 mARI 2
+	3 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/3/files.c 123 149 mDL 3
+	4 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/4/device/sysdep_FREEBSD.c 112 138 mCF_R 1
+	6 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/6/xmalloc.c 118 144 mCF_R 1
+7 6 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/device/sysdep_LINUX.c 70 100
+	0 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/0/net.c 600 631 mIL 3
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/device/sysdep_HPUX.c 124 154 mML 3
+	3 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/3/util.c 1467 1497 mSDL 3
+	6 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/6/process.c 102 132 mSIL 3
+	7 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/7/device/sysdep_FREEBSD.c 81 111 mCC_BT 1
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/socket.c 324 354 mCC_EOL 1
+8 2 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/protocols/protocol.c 68 85
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/control.c 285 303 mCF_A 1
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/http/processor.c 800 816 mCF_R 1
+9 4 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/protocols/ftp.c 47 95
+	1 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/1/protocols/ssh.c 70 118 mCW_A 1
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/protocols/imap.c 91 139 mCW_R 1
+	7 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/7/socket.c 211 259 mRL_N 2
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/validate.c 156 204 mRL_S 2
+10 5 /home/jeff/Development/java/workspace/ForkingSimulator/dependencies/NiCad/examples/monit-4.2/util.c 1360 1374
+	2 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/2/process/sysdep_DARWIN.c 369 383 mSRI 2
+	5 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/5/protocols/dwp.c 104 118 mARI 2
+	6 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/6/ssl.c 1506 1519 mDL 3
+	8 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/8/process/process_common.c 171 185 mCW_R 1
+	9 /home/jeff/Development/java/workspace/ForkingSimulator/ForkSimulation_931913901798846938/9/net.c 197 211 mCW_A 1
+END: FunctionFragmentVariants

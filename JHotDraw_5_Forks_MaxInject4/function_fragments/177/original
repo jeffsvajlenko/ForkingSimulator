@@ -1,0 +1,17 @@
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append("role name: " + roleName);
+        if (roleValue != null) {
+            result.append("; value: ");
+            for (Iterator<ObjectName> objNameIter = roleValue.iterator();
+                 objNameIter.hasNext();) {
+                ObjectName currObjName = objNameIter.next();
+                result.append(currObjName.toString());
+                if (objNameIter.hasNext()) {
+                    result.append(", ");
+                }
+            }
+        }
+        result.append("; problem type: " + problemType);
+        return result.toString();
+    }

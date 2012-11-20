@@ -1,0 +1,23 @@
+    private XSObjectListImpl getGlobalElements() {
+        final SymbolHash[] tables = new SymbolHash[fGrammarCount];
+        int length = 0;
+
+        for (int i = 0; i < fGrammarCount; i++) {
+            tables[i] = fGrammarList[i].fAllGlobalElemDecls;
+            length += tables[i].getLength();
+        }
+
+        if (length == 0) {
+            return XSObjectListImpl.EMPTY_LIST;
+        }
+
+        final XSObject[] components = new XSObject[length];
+
+        int start = 0;
+        for (int i = 0; i < fGrammarCount; i++) {
+            tables[i].getValues(components, start);
+            start += tables[i].getLength();
+        }
+
+        return new XSObjectListImpl(components, length);
+    }

@@ -1,0 +1,17 @@
+    private void writeObject(ObjectOutputStream out)
+            throws IOException {
+      if (compat)
+      {
+        // Serializes this instance in the old serial form
+        //
+        ObjectOutputStream.PutField fields = out.putFields();
+        fields.put("msgStr", getMessage());
+        out.writeFields();
+      }
+      else
+      {
+        // Serializes this instance in the new serial form
+        //
+        out.defaultWriteObject();
+      }
+    } // EOL Comment

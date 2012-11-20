@@ -1,0 +1,17 @@
+    protected boolean flipEastAndWestAtEnds(int position,
+                                            Position.Bias bias) {
+        if(majorAxis == Y_AXIS) {
+            int testPos = (bias == Position.Bias.Backward) ?
+                          Math.max(0, position - 1) : position;
+            int index = getViewIndexAtPosition(testPos);
+            if(index != -1) {
+                View v = getView(index);
+                if(v != null && v instanceof CompositeView) {
+                    return ((CompositeView)v).flipEastAndWestAtEnds(position,
+                            
+                                        bias);
+                }
+            }
+        }
+        return false;
+    }

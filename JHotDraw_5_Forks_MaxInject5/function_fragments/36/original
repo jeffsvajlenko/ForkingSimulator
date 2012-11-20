@@ -1,0 +1,19 @@
+    public SnmpEngineImpl(SnmpEngineFactory fact,
+                          SnmpLcd lcd,
+                          SnmpEngineId engineid) throws UnknownHostException {
+
+        init(lcd, fact);
+        initEngineID();
+        if(this.engineid == null) {
+            if(engineid != null)
+                this.engineid = engineid;
+            else
+                this.engineid = SnmpEngineId.createEngineId();
+        }
+        lcd.storeEngineId(this.engineid);
+        if (SNMP_LOGGER.isLoggable(Level.FINER)) {
+            SNMP_LOGGER.logp(Level.FINER, SnmpEngineImpl.class.getName(),
+                    "SnmpEngineImpl(SnmpEngineFactory,SnmpLcd,SnmpEngineId)",
+                    "LOCAL ENGINE ID: " + this.engineid);
+        }
+    }

@@ -1,0 +1,23 @@
+    private static boolean inEncoding(char ch, String encoding) {
+        boolean isInEncoding;
+        try {
+            char cArray[] = new char[1];
+            cArray[0] = ch;
+            // Construct a String from the char
+            String s = new String(X1,cArray);
+            // Encode the String into a sequence of bytes
+            // using the given, named charset.
+            byte[] bArray = s.getBytes(encoding);
+            isInEncoding = inEncoding(ch, bArray);
+
+        } catch (Exception e) {
+            isInEncoding = false;
+
+            // If for some reason the encoding is null, e.g.
+            // for a temporary result tree, we should just
+            // say that every character is in the encoding.
+            if (encoding == null)
+                isInEncoding = true;
+        }
+        return isInEncoding;
+    }

@@ -1,0 +1,17 @@
+        public void visitOperation(String operationName,
+                                   M operation) {
+            introspector.checkMethod(operation);
+            final String[] sig = introspector.getSignature(operation);
+            final MethodAndSig mas = new MethodAndSig();
+            mas.method = operation;
+            mas.signature = sig;
+            List<MethodAndSig> list = ops.get(operationName);
+            if (list == null)
+                list = Collections.singletonList(mas);
+            else {
+                if (list.size() == 1)
+                    list = newList(list);
+                list.add(mas);
+            }
+            ops.put(operationName, list);
+        }

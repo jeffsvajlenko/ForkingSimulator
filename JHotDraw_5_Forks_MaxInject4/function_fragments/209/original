@@ -1,0 +1,12 @@
+    public Component getLastComponent(Container aContainer) {
+        if (aContainer == null) {
+            throw new IllegalArgumentException("aContainer cannot be null");
+        }
+        Comparator comparator = getComparator();
+        if (comparator instanceof LayoutComparator) {
+            ((LayoutComparator)comparator).
+                setComponentOrientation(aContainer.
+                                        getComponentOrientation());
+        }
+        return super.getLastComponent(aContainer);
+    }

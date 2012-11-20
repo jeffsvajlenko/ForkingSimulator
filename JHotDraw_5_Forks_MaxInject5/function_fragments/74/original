@@ -1,0 +1,14 @@
+        public void addAccessibleSelection(int i) {
+            if (i < 0 || i >= getItemCount()) {
+                return;
+            }
+            JMenuItem mi = getItem(i);
+            if (mi != null) {
+                if (mi instanceof JMenu) {
+                    MenuElement me[] = buildMenuElementArray((JMenu) mi);
+                    MenuSelectionManager.defaultManager().setSelectedPath(me);
+                } else {
+                    MenuSelectionManager.defaultManager().setSelectedPath(null);
+                }
+            }
+        }

@@ -1,0 +1,24 @@
+    private static void checkNSSubset(XSWildcardDecl dWildcard, int min1, int max1,
+            XSWildcardDecl bWildcard, int min2, int max2)         throws XMLSchemaException {
+
+        // check Occurrence ranges
+        if (!checkOccurrenceRange(min1,max1,min2,max2)) {
+            throw new XMLSchemaException("rcase-NSSubset.2", new Object[]{
+                    Integer.toString(min1),
+                    max1==SchemaSymbols.OCCURRENCE_UNBOUNDED?"unbounded":Integer.toString(max1),
+                            Integer.toString(min2),
+                            max2==SchemaSymbols.OCCURRENCE_UNBOUNDED?"unbounded":Integer.toString(max2)});
+        }
+
+        // check wildcard subset
+        if (!dWildcard.isSubsetOf(bWildcard)) {
+            throw new XMLSchemaException("rcase-NSSubset.1", null);
+        }
+
+        if (dWildcard.weakerProcessContents(bWildcard)) {
+            throw new XMLSchemaException("rcase-NSSubset.3",
+                    new Object[]{dWildcard.getProcessContentsAsString(),
+                    bWildcard.getProcessContentsAsString()});
+        }
+
+    }

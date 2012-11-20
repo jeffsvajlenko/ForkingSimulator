@@ -1,0 +1,11 @@
+    public TargetedNotification(Notification notification,
+                                Integer listenerID) {
+        // If we replace integer with int...
+        // this(notification,intValue(listenerID));
+        if (notification == null) throw new
+            IllegalArgumentException("Invalid notification: null");
+        if (listenerID == null) throw new
+            IllegalArgumentException("Invalid listener ID: null");
+        this.notif = notification;
+        this.id = listenerID;
+    }

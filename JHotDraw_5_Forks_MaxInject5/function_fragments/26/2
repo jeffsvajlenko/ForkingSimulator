@@ -1,0 +1,33 @@
+    public void drawChars(char data[], int offset, int length, int x, int y) {
+        DebugGraphicsInfo info = info();
+
+        Font font = graphics.getFont();
+
+        if (debugLog()) {
+            info().log(toShortString() +
+                       " Drawing chars at " +  new Point(x, y));
+        }
+
+        if (isDrawingBuffer()) {
+            if (debugBuffered()) {
+                Graphics debugGraphics = debugGraphics();
+
+                debugGraphics.drawChars(data, offset, length, x, y);
+                debugGraphics.dispose();
+            }
+        } else if (debugFlash()) {
+            Color oldColor = getColor();
+            int i, count = (info.flashCount * 2) - 1;
+
+            for (i = 0; i < count; i++) {
+                graphics.setColor((i % 2) == 0 ? info.flashColor
+                                  : oldColor);
+                graphics.drawChars(data, offset, length, x, y);
+                sleep(info.flashTime);
+                Toolkit.getDefaultToolkit().sync();
+                sleep(info.flashTime);
+            }
+            graphics.setColor(oldColor);
+        }
+        graphics.drawChars(data, offset, length, x, y);
+    }

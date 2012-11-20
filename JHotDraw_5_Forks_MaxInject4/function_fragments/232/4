@@ -1,0 +1,17 @@
+    protected int calculateMaxTabHeight( int tabPlacement ) {
+        FontMetrics metrics = getFontMetrics();
+        int height = metrics.getHeight();
+        boolean tallerIcons = false;
+
+        for ( int i = 0; i < tabPane.getTabCount(); ++i ) {
+            Icon icon = tabPane.getIconAt( i );
+            if ( icon != null ) {
+                if ( icon.getIconHeight() > height ) {
+                    tallerIcons = true;
+                    break;
+                }
+            }
+        }
+        return super.calculateMaxTabHeight( tabPlacement ) -
+                   (tallerIcons ? (tabInsets.top + tabInsets.bottom) : 0);
+    }

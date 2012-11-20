@@ -1,0 +1,10 @@
+    public static Class findProviderClass(String className, boolean doFallback)
+        throws ClassNotFoundException, ConfigurationError
+    {
+        if (System.getSecurityManager()!=null) {
+            return Class.forName(className);
+        } else {
+            return findProviderClass (className,
+                findClassLoader (),doFallback);
+        }
+    }

@@ -1,0 +1,18 @@
+  public void detach()
+  {
+    if(m_allowDetach)
+    {
+      // sb: allow reusing of cached nodes when possible?
+      // m_cachedNodes = null;
+      m_execContext = null;
+      // m_prefixResolver = null;  sb: Why would this ever want to be null?
+      m_cdtm = null;
+      m_length = -1;
+      m_pos = 0;
+      m_lastFetched = DTM.NULL;
+      m_context = DTM.NULL;
+      m_currentContextNode = DTM.NULL;
+
+      m_clones.freeInstance(this);
+    }
+  }

@@ -1,0 +1,10 @@
+    public void installUI(JComponent c) {
+        header = (JTableHeader)c;
+
+        rendererPane = new CellRendererPane();
+        header.add(rendererPane);
+
+        installDefaults();
+        installListeners();
+        installKeyboardActions();
+    }

@@ -1,0 +1,11 @@
+    protected final void setScannerState(int state) {
+
+        fScannerState = state;
+        if (DEBUG_SCANNER_STATE) {
+            System.out.print("### setScannerState: ");
+            //System.out.print(fScannerState);
+            System.out.print(getScannerStateName(state));
+            System.out.println();
+        }
+
+    } // setScannerState(int)

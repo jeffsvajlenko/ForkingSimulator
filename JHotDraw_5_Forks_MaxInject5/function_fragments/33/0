@@ -1,0 +1,40 @@
+    public Dimension minimumLayoutSize(Container target) {
+      synchronized (target.getTreeLock()) {
+        Dimension dim = new Dimension(0, 0);
+
+        boolean ltr = target.getComponentOrientation().isLeftToRight();
+        Component c = null;
+
+        if ((c=getChild(EAST,ltr)) != null) {
+            Dimension d = c.getMinimumSize();
+            dim.width += d.width + hgap;
+            dim.height = Math.max(d.height, dim.height);
+        }
+        if ((c=getChild(WEST,ltr)) != null) {
+            Dimension d = c.getMinimumSize();
+           dim.width += d.width + hgap;
+            dim.height = Math.max(d.height, dim.height);
+        }
+        if ((c=getChild(CENTER,ltr)) != null) {
+            Dimension d = c.getMinimumSize();
+            dim.width += d.width;
+            dim.height = Math.max(d.height, dim.height);
+        }
+        if ((c=getChild(NORTH,ltr)) != null) {
+            Dimension d = c.getMinimumSize();
+            dim.width = Math.max(d.width, dim.width);
+            dim.height += d.height + vgap;
+        }
+        if ((c=getChild(SOUTH,ltr)) != null) {
+            Dimension d = c.getMinimumSize();
+            dim.width = Math.max(d.width, dim.width);
+            dim.height += d.height + vgap;
+        }
+
+        Insets insets = target.getInsets();
+        dim.width += insets.left + insets.right;
+        dim.height += insets.top + insets.bottom;
+
+        return dim;
+      }
+    }

@@ -1,0 +1,10 @@
+    public static <T> T newMBeanProxy(MBeanServerConnection connection,
+                                      ObjectName objectName,
+                                      Class<X1> interfaceClass,
+                                      boolean notificationEmitter) {
+        return MBeanServerInvocationHandler.newProxyInstance(
+                connection,
+                objectName,
+                interfaceClass,
+                notificationEmitter);
+    }

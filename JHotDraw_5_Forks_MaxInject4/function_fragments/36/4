@@ -1,0 +1,18 @@
+    private Policies(
+        int threadModel,
+        int lifespan,
+        int idUniqueness,
+        int idAssignment,
+        int implicitActivation,
+        int retention,
+        int requestProcessing )
+    {
+        poaPolicyValues = new int[] {
+            threadModel,
+            lifespan,
+            idUniqueness,
+            idAssignment,
+            implicitActivation,
+            retention,
+            requestProcessing };
+    }

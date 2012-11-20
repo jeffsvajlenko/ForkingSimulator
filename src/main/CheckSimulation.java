@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Scanner;
 
 import models.FunctionFragment;
-import models.InventoriedSystem;
 import util.FileUtil;
 import util.FragmentUtil;
+import util.InventoriedSystem;
 import util.SystemUtil;
 
 public class CheckSimulation {

@@ -1,0 +1,25 @@
+    protected void uninstallListeners()
+    {
+        list.removeFocusListener(focusListener);
+        list.removeMouseListener(mouseInputListener);
+        list.removeMouseMotionListener(mouseInputListener);
+        list.removePropertyChangeListener(propertyChangeListener);
+        list.removeKeyListener(getHandler());
+
+        ListModel model = list.getModel();
+        if (model != null) {
+            model.removeListDataListener(listDataListener);
+        }
+
+        ListSelectionModel selectionModel = list.getSelectionModel();
+        if (selectionModel != null) {
+            selectionModel.removeListSelectionListener(listSelectionListener);
+        }
+
+        focusListener = null;
+        mouseInputListener  = null;
+        listSelectionListener = null;
+        listDataListener = null;
+        propertyChangeListener = null;
+        handler = null;
+    }

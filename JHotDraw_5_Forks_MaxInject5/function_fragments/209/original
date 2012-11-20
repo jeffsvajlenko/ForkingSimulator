@@ -1,0 +1,11 @@
+    public synchronized Throwable initCause(Throwable cause) {
+        if (this.cause != null) {
+            throw new IllegalStateException("Can't override cause");
+        }
+        if (cause == this) {
+            throw new IllegalArgumentException("Self-causation not permitted");
+        }
+        this.cause = cause;
+
+        return this;
+    }

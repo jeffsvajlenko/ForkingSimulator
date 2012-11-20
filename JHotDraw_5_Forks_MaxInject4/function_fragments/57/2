@@ -1,0 +1,28 @@
+    public ShortBuffer put(short[] src, int offset, int length) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        throw new ReadOnlyBufferException();
+
+    }

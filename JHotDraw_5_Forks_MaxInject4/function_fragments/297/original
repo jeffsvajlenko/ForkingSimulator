@@ -1,0 +1,66 @@
+    private void run(String[] args)
+    {
+        try {
+            redirectIOStreams() ;
+
+            String serverClassName = System.getProperty(
+                ORBConstants.SERVER_NAME_PROPERTY ) ;
+
+            // determine the class loader to be used for loading the class
+            // since ServerMain is going to be in JDK and we need to have this
+            // class to load application classes, this is required here.
+            ClassLoader cl = Thread.currentThread().getContextClassLoader();
+
+            if (cl == null)
+                cl = ClassLoader.getSystemClassLoader();
+
+            // determine the main class
+            Class serverClass = null;
+
+            try {
+                // determine the main class, try loading with current class loader
+                serverClass = Class.forName( serverClassName ) ;
+            } catch (ClassNotFoundException ex) {
+                // eat the exception and try to load using SystemClassLoader
+                serverClass = Class.forName( serverClassName, true, cl);
+            }
+
+            if (debug)
+                System.out.println("class " + serverClassName + " found");
+
+            // get the main method
+            Method mainMethod = getMainMethod( serverClass ) ;
+
+            // This piece of code is required, to verify the server definition
+            // without launching it.
+
+            // verify the server
+
+            boolean serverVerifyFlag = Boolean.getBoolean(
+                ORBConstants.SERVER_DEF_VERIFY_PROPERTY) ;
+            if (serverVerifyFlag) {
+                if (mainMethod == null)
+                    logTerminal("", NO_MAIN_METHOD);
+                else {
+                    if (debug)
+                        System.out.println("Valid Server");
+                    logTerminal("", OK);
+                }
+            }
+
+
+            registerCallback( serverClass ) ;
+
+            // build args to the main and call it
+            Object params [] = new Object [1];
+            params[0] = args;
+            mainMethod.invoke(null, params);
+
+        } catch (ClassNotFoundException e) {
+            logTerminal("ClassNotFound exception: " + e.getMessage(),
+                MAIN_CLASS_NOT_FOUND);
+        } catch (Exception e) {
+            logTerminal("Exception: " + e.getMessage(),
+                APPLICATION_ERROR);
+        }
+    }

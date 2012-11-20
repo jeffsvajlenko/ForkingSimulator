@@ -1,0 +1,40 @@
+    public FloatBuffer put() {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        throw new ReadOnlyBufferException();
+
+    }

@@ -1,0 +1,29 @@
+    private void initMembers(String relationId,
+                             ObjectName relationServiceName,
+                             MBeanServer relationServiceMBeanServer,
+                             String relationTypeName,
+                             RoleList list)
+        throws InvalidRoleValueException,
+               IllegalArgumentException {
+
+        if (relationId == null ||
+            relationServiceName == null ||
+            relationTypeName == null) {
+            String excMsg = "Invalid parameter.";
+           throw new IllegalArgumentException(excMsg);
+        }
+
+        RELATION_LOGGER.entering(RelationSupport.class.getName(),
+                "initMembers", new Object[] {relationId, relationServiceName,
+                relationServiceMBeanServer, relationTypeName, list});
+
+        myRelId = relationId;
+        myRelServiceName = relationServiceName;
+        myRelServiceMBeanServer = relationServiceMBeanServer;
+        myRelTypeName = relationTypeName;
+        // Can throw InvalidRoleValueException
+        initRoleMap(list);
+
+        RELATION_LOGGER.exiting(RelationSupport.class.getName(), "initMembers");
+        return;
+    }

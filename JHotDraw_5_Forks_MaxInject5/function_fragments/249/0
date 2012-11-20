@@ -1,0 +1,18 @@
+    private void paintBackgroundEnabled(Graphics2D g) {
+        roundRect = decodeRoundRect1();
+        g.setPaint(color1);
+        g.fill(roundRect);
+        roundRect = decodeRoundRect2();
+        g.setPaint(decodeGradient1(roundRect));
+        g.fill(roundRect);
+        roundRect = decodeRoundRect3();
+        g.setPaint(decodeGradient2(roundRect));
+        g.fill(roundRect);
+        rect = decodeRect1();
+        g.setPaint(color7);
+        g.fill(rect);
+        rect = decodeRect2();
+        g.setPaint(color8);
+        g.fill(rect);
+
+    }

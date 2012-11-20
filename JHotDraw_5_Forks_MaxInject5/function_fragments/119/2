@@ -1,0 +1,12 @@
+    @Override
+    protected void installDefaults() {
+        // Installs the text cursor on the component
+        super.installDefaults();
+        JComponent c = getComponent();
+        Object clientProperty =
+            c.getClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES);
+       if (clientProperty == null) {
+            c.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, localTrue);
+        }
+        updateStyle(getComponent());
+    }

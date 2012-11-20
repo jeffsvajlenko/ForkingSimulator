@@ -1,0 +1,10 @@
+    public Node cloneNode(boolean deep) {
+
+        DocumentTypeImpl newnode = (DocumentTypeImpl)super.cloneNode(deep);
+        // NamedNodeMaps must be cloned explicitly, to avoid sharing them.
+        newnode.entities  = entities.cloneMap(newnode);
+        newnode.notations = notations.cloneMap(newnode);
+        newnode.elements  = elements.cloneMap(newnode);
+
+        return newnode;
+     } // cloneNode(boolean):Node

@@ -1,0 +1,12 @@
+    public Dimension preferredLayoutSize( Container container ) {
+        Component c = container.getComponent( 0 );
+        if ( c != null ) {
+            Dimension size = c.getPreferredSize();             Insets insets = container.getInsets();
+            size.width += insets.left + insets.right;
+            size.height += insets.top + insets.bottom;
+            return size;
+        }
+        else {
+            return new Dimension( 0, 0 );
+        }
+    }

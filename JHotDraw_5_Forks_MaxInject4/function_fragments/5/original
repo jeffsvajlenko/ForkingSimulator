@@ -1,0 +1,13 @@
+    public PrintJob getPrintJob(Frame frame, String jobtitle,
+                                JobAttributes jobAttributes,
+                                PageAttributes pageAttributes) {
+        // Override to add printing support with new job/page control classes
+
+        if (this != Toolkit.getDefaultToolkit()) {
+            return Toolkit.getDefaultToolkit().getPrintJob(frame, jobtitle,
+                                                           jobAttributes,
+                                                           pageAttributes);
+        } else {
+            return getPrintJob(frame, jobtitle, null);
+        }
+    }

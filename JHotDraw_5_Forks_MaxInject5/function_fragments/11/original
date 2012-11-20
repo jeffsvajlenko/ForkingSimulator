@@ -1,0 +1,37 @@
+    private static String mangleOverloadedMethod(String mangledName, Method m) {
+
+        IDLTypesUtil idlTypesUtil = new IDLTypesUtil();
+
+        // Start by appending the separator string
+        String newMangledName = mangledName + OVERLOADED_TYPE_SEPARATOR;
+
+        Class[] parameterTypes = m.getParameterTypes();
+
+        for(int i = 0; i < parameterTypes.length; i++) {
+            Class nextParamType = parameterTypes[i];
+
+            if( i > 0 ) {
+                newMangledName = newMangledName + OVERLOADED_TYPE_SEPARATOR;
+            }
+            IDLType idlType = classToIDLType(nextParamType);
+
+            String moduleName = idlType.getModuleName();
+            String memberName = idlType.getMemberName();
+
+            String typeName = (moduleName.length() > 0) ?
+                moduleName + UNDERSCORE + memberName : memberName;
+
+            if( !idlTypesUtil.isPrimitive(nextParamType) &&
+                (idlTypesUtil.getSpecialCaseIDLTypeMapping(nextParamType)
+                 == null) &&
+                isIDLKeyword(typeName) ) {
+                typeName = mangleIDLKeywordClash(typeName);
+            }
+
+            typeName = mangleUnicodeChars(typeName);
+
+            newMangledName = newMangledName + typeName;
+        }
+
+        return newMangledName;
+    }

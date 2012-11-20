@@ -1,0 +1,12 @@
+  protected void initFromFile(ByteSequence bytes, boolean wide) throws IOException
+  {
+    this.wide = wide;
+
+    if(wide) {
+      index  = bytes.readUnsignedShort();
+      length = 4;
+    } else {
+      index = bytes.readUnsignedByte();
+      length = 2;
+    }
+  }

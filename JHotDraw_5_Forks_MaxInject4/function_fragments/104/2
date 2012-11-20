@@ -1,0 +1,24 @@
+    private static TransformSpi getTransformSpi(String URI)
+        throws InvalidTransformException {
+        try {
+            Object value = transformSpiHash.get(URI);
+            if (value != null) {
+                return (TransformSpi) value;
+            }
+            Class cl = (Class) transformClassHash.get(URI);
+            if (cl != null) {
+                TransformSpi tr = (TransformSpi) cl.newInstance();
+                transformSpiHash.put(URI, tr);
+                return tr;
+            }
+        } catch (InstantiationException ex) {
+            Object exArgs[] = { URI };
+            throw new InvalidTransformException(
+                "signature.Transform.UnknownTransform", exArgs, ex);
+        } catch (IllegalAccessException ex) {
+            Object exArgs[] = { URI };
+            throw new InvalidTransformException(
+                "ArtificialStringReplacement", exArgs, ex);
+        }
+        return null;
+    }

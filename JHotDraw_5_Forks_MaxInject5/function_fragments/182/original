@@ -1,0 +1,31 @@
+    private void writeRows(RenderedImage image, LZWCompressor compressor,
+                           int sx, int sdx, int sy, int sdy, int sw,
+                           int dy, int ddy, int dw, int dh,
+                           int numRowsWritten, int progressReportRowPeriod)
+      throws IOException {
+        if (DEBUG) System.out.println("Writing unoptimized");
+
+        int[] sbuf = new int[sw];
+        byte[] dbuf = new byte[dw];
+
+        Raster raster =
+            image.getNumXTiles() == 1 && image.getNumYTiles() == 1 ?
+            image.getTile(0, 0) : image.getData();
+        for (int y = dy; y < dh; y += ddy) {
+            if (numRowsWritten % progressReportRowPeriod == 0) {
+                if (abortRequested()) {
+                    processWriteAborted();
+                    return;
+                }
+                processImageProgress((numRowsWritten*100.0F)/dh);
+            }
+
+            raster.getSamples(sx, sy, sw, 1, 0, sbuf);
+            for (int i = 0, j = 0; i < dw; i++, j += sdx) {
+                dbuf[i] = (byte)sbuf[j];
+            }
+            compressor.compress(dbuf, 0, dw);
+            numRowsWritten++;
+            sy += sdy;
+        }
+    }

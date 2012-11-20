@@ -1,0 +1,11 @@
+        @Override
+        public String toString()
+        {
+            return
+                "ModelMBeanAttributeInfo: " + this.getName() +
+                " ; Description: " + this.getDescription() +
+                " ; Types: " + this.getType() +
+                " ; isReadable: " + this.isReadable() +
+                " ; isWritable: " + this.isWritable() +
+                " ; Descriptor: " + this.getDescriptor();
+        }

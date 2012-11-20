@@ -1,0 +1,13 @@
+    void checkNormalizationAfterRemove(ChildNode previousSibling) {
+        // See if removal caused this node to be unnormalized.
+        // If the adjacent siblings of the removed child were both text nodes,
+        // flag this node as unnormalized.
+        if (previousSibling != null &&
+            previousSibling.getNodeType() == Node.TEXT_NODE) {
+
+            ChildNode next = previousSibling.nextSibling;
+            if (next != null && next.getNodeType() == Node.TEXT_NODE) {
+                isNormalized(false);
+            }
+        }
+    } // checkNormalizationAfterRemove(Node)

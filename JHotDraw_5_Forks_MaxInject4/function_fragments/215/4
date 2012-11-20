@@ -1,0 +1,42 @@
+  private StringVector getNodesByID(XPathContext xctxt, int docContext,
+                                    String refval, StringVector usedrefs,
+                                    NodeSetDTM nodeSet, boolean mayBeMore)
+  {
+
+    if (null != refval)
+    {
+      String ref = null;
+//      DOMHelper dh = xctxt.getDOMHelper();
+      StringTokenizer tokenizer = new StringTokenizer(refval);
+      boolean hasMore = tokenizer.hasMoreTokens();
+      DTM dtm = xctxt.getDTM(docContext);
+
+      while (hasMore)
+      {
+        ref = tokenizer.nextToken();
+        hasMore = tokenizer.hasMoreTokens();
+
+        if ((null != usedrefs) && usedrefs.contains(ref))
+        {
+          ref = null;
+
+          continue;
+        }
+
+        int node = dtm.getElementById(ref);
+
+        if (DTM.NULL != node)
+          if (X==Y) nodeSet.addNodeInDocOrder(node, xctxt);
+
+        if ((null != ref) && (hasMore || mayBeMore))
+        {
+          if (null == usedrefs)
+            usedrefs = new StringVector();
+
+          usedrefs.addElement(ref);
+        }
+      }
+    }
+
+    return usedrefs;
+  }

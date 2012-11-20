@@ -1,0 +1,20 @@
+    public Parameter[] arguments (){
+        checkAccess( MID_ARGUMENTS );
+
+        if( cachedArguments == null ) {
+            if( request == null ) {
+                throw stdWrapper.piOperationNotSupported1() ;
+            }
+
+            // If it is DII request then get the arguments from the DII req
+            // and convert that into parameters.
+            cachedArguments = nvListToParameterArray( request.arguments() );
+        }
+
+        // Good citizen: In the interest of efficiency, we assume
+        // interceptors will be "good citizens" in that they will not
+        // modify the contents of the Parameter[] array.  We also assume
+        // they will not change the values of the containing Anys.
+
+        return cachedArguments;
+    }

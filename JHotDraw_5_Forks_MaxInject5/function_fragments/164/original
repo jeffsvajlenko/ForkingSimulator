@@ -1,0 +1,43 @@
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        // if obj is not a CompositeData, return false
+        if (!(obj instanceof CompositeData)) {
+            return false;
+        }
+
+        CompositeData other = (CompositeData) obj;
+
+        // their compositeType should be equal
+        if (!this.getCompositeType().equals(other.getCompositeType()) ) {
+            return false;
+        }
+
+        if (contents.size() != other.values().size()) {
+            return false;
+        }
+
+        for (Map.Entry<String,Object> entry : contents.entrySet()) {
+            Object e1 = entry.getValue();
+            Object e2 = other.get(entry.getKey());
+
+            if (e1 == e2)
+                continue;
+            if (e1 == null)
+                return false;
+
+            boolean eq = e1.getClass().isArray() ?
+                Arrays.deepEquals(new Object[] {e1}, new Object[] {e2}) :
+                e1.equals(e2);
+
+            if (!eq)
+                return false;
+        }
+
+        // All tests for equality were successful
+        //
+        return true;
+    }

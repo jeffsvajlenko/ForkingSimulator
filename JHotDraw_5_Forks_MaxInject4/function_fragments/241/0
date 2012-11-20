@@ -1,0 +1,25 @@
+    private void writeApplicationExtension(GIFWritableImageMetadata im)
+      throws IOException {
+        if (im.applicationIDs != null) {
+            Iterator iterIDs = im.applicationIDs.iterator();
+            Iterator iterCodes = im.authenticationCodes.iterator();
+            Iterator iterData = im.applicationData.iterator();
+
+            while (iterIDs.hasNext()) {
+                try {
+                    stream.write(0x21);
+                    stream.write(0xff);
+
+                    stream.write(11);
+                    stream.write((byte[])iterIDs.next(), 0, 8);
+                    stream.write((byte[])iterCodes.next(), 0, 3);
+
+                    writeBlocks((byte[])iterData.next());
+
+                    stream.write(0x00);
+                } catch (IOException e) {
+                    throw new IIOException("I/O error writing Application Extension!", e);
+                }
+            }
+        }
+    }

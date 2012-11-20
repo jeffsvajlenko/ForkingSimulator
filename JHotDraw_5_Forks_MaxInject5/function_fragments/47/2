@@ -1,0 +1,11 @@
+        public boolean equals(Object o) {
+            if (o instanceof Map.Entry) {
+                Map.Entry e = (Map.Entry) o;
+             
+   Object otherKey = e.getKey();
+                Object otherValue = e.getValue();
+                return (key == null ? otherKey == null : key.equals(otherKey)) &&
+                    (value == null ? otherValue == null : value.equals(otherValue));
+            }
+            return false;
+        }

@@ -12,6 +12,8 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
+import util.InventoriedSystem;
+
 public class InventoriedSystemTest {
 
 	@Test

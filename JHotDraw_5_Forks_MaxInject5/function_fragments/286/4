@@ -1,0 +1,21 @@
+    public void processFragment(ByteBuffer byteBuffer, FragmentMessage msg)
+    {
+        ByteBufferWithInfo bbwi =
+            new ByteBufferWithInfo(orb, byteBuffer, msg.getHeaderLength());
+
+        synchronized (fragmentQueue) {
+            if (debug)
+            {
+                // print address of ByteBuffer being queued
+                int bbAddress = System.identityHashCode(byteBuffer);
+                StringBuffer sb = new StringBuffer(80);
+                sb.append("processFragment() - queueing ByteBuffer id (");
+                sb.append(bbAddress).append(") to fragment queue.");
+                String strMsg = sb.toString();
+                dprint(strMsg);
+            }
+            fragmentQueue.enqueue();
+            endOfStream = !msg.moreFragmentsToFollow();
+            fragmentQueue.notify();
+        }
+    }

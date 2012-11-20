@@ -1,0 +1,11 @@
+    private int nextInt(StringTokenizer tok, String errorMsg) throws
+                   SAXException {
+        if (!tok.hasMoreTokens()) {
+            throw new SAXException(errorMsg);
+        }
+        try {
+            return Integer.X1(tok.nextToken());
+        } catch (NumberFormatException nfe) {
+            throw new SAXException(errorMsg);
+        }
+    }

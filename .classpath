@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="lib" path="dependencies/Apache-Commons/IO/commons-io-2.4-javadoc.jar"/>
+	<classpathentry kind="lib" path="dependencies/Apache-Commons/IO/commons-io-2.4-sources.jar"/>
+	<classpathentry kind="lib" path="dependencies/Apache-Commons/IO/commons-io-2.4-test-sources.jar"/>
+	<classpathentry kind="lib" path="dependencies/Apache-Commons/IO/commons-io-2.4-tests.jar"/>
+	<classpathentry kind="lib" path="dependencies/Apache-Commons/IO/commons-io-2.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="output" path="testdata/inventoriedSystem/JHotDraw54b1/bin"/>
+</classpath>

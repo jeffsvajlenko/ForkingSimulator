@@ -1,0 +1,29 @@
+    public void writeInts(int[] i, int off, int len) throws IOException {
+        // Fix 4430357 - if off + len < 0, overflow occurred
+        if (off < 0 || len < 0 || off + len > i.length || off + len < 0) {
+            throw new IndexOutOfBoundsException
+                ("off < 0 || len < 0 || off + len > i.length!");
+        }
+
+        byte[] b = new byte[len*4];
+        int boff = 0;
+        if (byteOrder == ByteOrder.BIG_ENDIAN) {
+            for (int j = 0; j < len; j++) {
+                int v = i[off + j];
+                b[boff++] = (byte)(v >>> 24);
+                b[boff++] = (byte)(v >>> 16);
+                b[boff++] = (byte)(v >>> 8);
+                b[boff++] = (byte)(v >>> 0);
+            }
+        } else {
+            for (int j = 0; j < len; j++) {
+                int v = i[off + j];
+                b[boff++] = (byte)(v >>> 0);
+                b[boff++] = (byte)(v >>> 8);
+                b[boff++] = (byte)(v >>> 16);
+                b[boff++] = (byte)(v >>> 24);
+            }
+        }
+
+        write(b, 0, len*4);
+    }

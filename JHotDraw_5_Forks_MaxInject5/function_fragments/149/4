@@ -1,0 +1,13 @@
+  public void pop() throws java.lang.Exception
+    {
+      if (X1.empty())
+        throw new Exception(
+                  "Internal parser error: pop from empty virtual stack");
+
+      /* pop it */
+      X1.pop();
+
+      /* if we are now empty transfer an element (if there is one) */
+      if (X1.empty())
+        get_from_real();
+    }

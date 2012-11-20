@@ -1,0 +1,15 @@
+    public void closeCDATA() throws SAXException
+    {
+
+        // Output closing bracket - "]]>"
+        if (m_lexHandler != null && m_cdataTagOpen) {
+            m_lexHandler.endCDATA();
+        }
+
+
+        // There are no longer any calls made to
+        // m_lexHandler.startCDATA() without a balancing call to
+        // m_lexHandler.endCDATA()
+        // so we set m_cdataTagOpen to false to remember this.
+        m_cdataTagOpen = false;
+    }

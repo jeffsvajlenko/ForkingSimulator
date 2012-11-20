@@ -1,0 +1,20 @@
+    public void scrollByBlock(int direction)    {
+        synchronized(slider)    {
+            int blockIncrement =
+                (slider.getMaximum() - slider.getMinimum()) / 10;
+            if (blockIncrement == 0) {
+                blockIncrement = 1;
+            }
+
+            if (slider.getSnapToTicks()) {
+                int tickSpacing = getTickSpacing();
+
+                if (blockIncrement < tickSpacing) {
+                    blockIncrement = tickSpacing;
+                }
+            }
+
+            int delta = blockIncrement * ((direction > 0) ? POSITIVE_SCROLL : NEGATIVE_SCROLL);
+            slider.setValue(slider.getValue() + delta);
+        }
+    }

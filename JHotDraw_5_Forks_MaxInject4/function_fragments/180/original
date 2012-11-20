@@ -1,0 +1,24 @@
+    private void initializeData(Locale desiredLocale) {
+        locale = desiredLocale;
+
+        // Copy values of a cached instance if any.
+        SoftReference<DateFormatSymbols> ref = cachedInstances.get(locale);
+        DateFormatSymbols dfs;
+        if (ref != null && (dfs = ref.get()) != null) {
+            copyMembers(dfs, this);
+            return;
+        }
+
+        // Initialize the fields from the ResourceBundle for locale.
+        ResourceBundle resource = LocaleData.getDateFormatData(locale);
+
+        eras = resource.getStringArray("Eras");
+        months = resource.getStringArray("MonthNames");
+        shortMonths = resource.getStringArray("MonthAbbreviations");
+        ampms = resource.getStringArray("AmPmMarkers");
+        localPatternChars = resource.getString("DateTimePatternChars");
+
+        // Day of week names are stored in a 1-based array.
+        weekdays = toOneBasedArray(resource.getStringArray("DayNames"));
+        shortWeekdays = toOneBasedArray(resource.getStringArray("DayAbbreviations"));
+    }

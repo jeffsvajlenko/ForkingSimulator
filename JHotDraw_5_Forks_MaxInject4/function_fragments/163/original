@@ -1,0 +1,15 @@
+    private Set collectRootSet()
+    {
+        final Set result = new HashSet() ;
+
+        Iterator iter = nodeToData.entrySet().iterator() ;
+        while (iter.hasNext()) {
+            Map.Entry entry = (Map.Entry)iter.next() ;
+            Node node = (Node)entry.getKey() ;
+            NodeData nd = (NodeData)entry.getValue() ;
+            if (nd.isRoot())
+                result.add( node ) ;
+        }
+
+        return result ;
+    }

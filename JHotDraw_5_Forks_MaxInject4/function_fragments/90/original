@@ -1,0 +1,15 @@
+    protected CorbaMessageMediator sendingReply(CorbaMessageMediator req)
+    {
+        try {
+            if (orb.subcontractDebugFlag) {
+                dprint(".sendingReply->: " + opAndId(req));
+            }
+
+            ServiceContexts scs = new ServiceContexts(orb);
+            return req.getProtocolHandler().createResponse(req, scs);
+        } finally {
+            if (orb.subcontractDebugFlag) {
+                dprint(".sendingReply<-: " + opAndId(req));
+            }
+        }
+    }

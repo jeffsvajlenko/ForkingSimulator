@@ -1,0 +1,15 @@
+  static public IncrementalSAXSource
+  createIncrementalSAXSource(SAXParser parser) {
+                try
+                {
+                        return new IncrementalSAXSource_Xerces(parser);
+                }
+                catch(NoSuchMethodException e)
+                {
+                        // Xerces version mismatch; neither Xerces1 nor Xerces2 succeeded.
+                        // Fall back on filtering solution.
+                        IncrementalSAXSource_Filter X1=new IncrementalSAXSource_Filter();
+                        iss.setXMLReader(parser);
+                        return iss;
+                }
+  }

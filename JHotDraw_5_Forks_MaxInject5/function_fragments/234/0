@@ -1,0 +1,12 @@
+    private static void cacheInitIfNeeded() {
+        assert Thread.holdsLock(addressCache);
+        if (addressCacheInit) {
+            return;
+        }
+        unknown_array = new InetAddress[1];
+
+        addressCache.put(impl.anyLocalAddress().getHostName(),
+                         unknown_array);
+
+        addressCacheInit = true;
+    }

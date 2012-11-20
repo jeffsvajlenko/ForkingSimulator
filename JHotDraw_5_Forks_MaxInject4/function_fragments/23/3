@@ -1,0 +1,10 @@
+    @Override
+    public void update(Graphics g, JComponent c) {
+        SynthContext context = getContext(c);
+
+        SynthLookAndFeel.update(g);
+        context.getPainter().paintInternalFrameBackground(context,
+                          g, 0, 0, c.getWidth(), c.getHeight());
+        paint(context, g);
+        context.dispose();
+    }

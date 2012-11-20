@@ -1,0 +1,20 @@
+        public Rectangle getCharacterBounds(int i) {
+            View view = (View) JLabel.this.getClientProperty("html");
+            if (view != null) {
+                Rectangle r = getTextRectangle();
+        if (r == null) {
+            return null;
+        }
+                Rectangle2D.Float shape =
+                    new Rectangle2D.Float(r.x, r.y, r.width, r.height);
+                try {
+                    Shape charShape =
+                        view.modelToView(i, shape, Position.Bias.Forward);
+                    return charShape.getBounds();
+                } catch (BadLocationException e) {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        }

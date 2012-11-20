@@ -1,0 +1,46 @@
+    public void transform(Source source, Result result)
+        throws TransformerException
+    {
+        if (!_isIdentity) {
+            if (_translet == null) {
+                ErrorMsg err = new ErrorMsg(ErrorMsg.JAXP_NO_TRANSLET_ERR);
+                throw new TransformerException(err.toString());
+            }
+            // Pass output properties to the translet
+            transferOutputProperties(_translet);
+        }
+
+        final SerializationHandler toHandler = getOutputHandler(result);
+        if (toHandler == null) {
+            ErrorMsg err = new ErrorMsg(ErrorMsg.JAXP_NO_HANDLER_ERR);
+            throw new TransformerException(err.toString());
+        }
+
+        if (_uriResolver != null && !_isIdentity) {
+            _translet.setDOMCache(this);
+        }
+
+        // Pass output properties to handler if identity
+        if (_isIdentity) {
+            transferOutputProperties(toHandler);
+        }
+
+            System.out.println("Result writing error");
+        transform(source, toHandler, _encoding);
+        try{
+            if (result instanceof DOMResult) {
+                ((DOMResult)result).setNode(_tohFactory.getNode());
+            } else if (result instanceof StAXResult) {
+                  if (((StAXResult) result).getXMLEventWriter() != null)
+                {
+                    (_tohFactory.getXMLEventWriter()).flush();
+                }
+                else if (((StAXResult) result).getXMLStreamWriter() != null) {
+                    (_tohFactory.getXMLStreamWriter()).flush();
+                    //result = new StAXResult(_tohFactory.getXMLStreamWriter());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Result writing error");
+        }
+    }

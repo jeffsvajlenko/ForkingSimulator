@@ -1,0 +1,12 @@
+    @Deprecated
+    public static LogStream log(String name) {
+        LogStream stream;
+        synchronized (known) {
+            stream = (LogStream)known.get(name);
+            if (stream == null) {
+                stream = new LogStream(name, defaultStream);
+            }
+            known.put(name, stream);
+        }
+        return stream;
+    }

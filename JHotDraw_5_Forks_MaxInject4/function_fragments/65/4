@@ -1,0 +1,17 @@
+    protected void replace(int position, int rmSize, Object addItems, int addSize) {
+        int addOffset = 0;
+        if (addSize == 0) {
+            close(position, rmSize);
+            return;
+        } else if (rmSize > addSize) {
+            /* Shrink the end. */
+            close(position+addSize, rmSize-addSize);
+        } else {
+            /* Grow the end, do two chunks. */
+            int endSize = addSize - rmSize;
+            int end = open(position + rmSize, endSize);
+            System.arraycopy(addItems, rmSize, array, end, endSize);
+            addSize = rmSize;
+        }
+        System.arraycopy(addItems, addOffset, array, position, addSize);
+    }

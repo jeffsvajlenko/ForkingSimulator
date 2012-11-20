@@ -1,0 +1,15 @@
+    public void translateTo(ClassGenerator classGen, MethodGenerator methodGen,
+                            StringType type) {
+        final ConstantPoolGen cpg = classGen.getConstantPool();
+        final InstructionList il = methodGen.getInstructionList();
+
+        il.append(DUP);
+        final BranchHandle ifNull = il.append(new IFNULL(null));
+        il.append(new INVOKEVIRTUAL(cpg.addMethodref(_javaClassName,
+                                                    "toString",
+                                                    "ArtificialStringReplacement" + STRING_SIG)));
+        final BranchHandle gotobh = il.append(new GOTO(null));
+        ifNull.setTarget(il.append(POP));
+        il.append(new PUSH(cpg, ""));
+        gotobh.setTarget(il.append(NOP));
+    }

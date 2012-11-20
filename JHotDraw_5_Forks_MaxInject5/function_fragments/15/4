@@ -1,0 +1,11 @@
+  public void insert_longlong (long value) throws org.omg.DynamicAny.DynAnyPackage.TypeMismatch, org.omg.DynamicAny.DynAnyPackage.InvalidValue
+  {
+      org.omg.CORBA.portable.ServantObject $so = _servant_preinvoke ("insert_longlong", _opsClass);
+      DynEnumOperations  $self = (DynEnumOperations) $so.servant;
+
+      try {
+         $self.insert_longlong (value);
+      } finally {
+          _servant_postinvoke ($so);
+      }
+  } // insert_longlong

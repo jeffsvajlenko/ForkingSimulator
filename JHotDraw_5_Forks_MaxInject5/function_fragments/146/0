@@ -1,0 +1,13 @@
+    public BAD_PARAM transientNameServerBadPort( CompletionStatus cs, Throwable t ) {
+        BAD_PARAM exc = new BAD_PARAM( TRANSIENT_NAME_SERVER_BAD_PORT, cs ) ;
+        if (t != null)
+            exc.initCause( t ) ;
+        
+        if (logger.isLoggable( Level.WARNING )) {
+            Object[] parameters = null ;
+            doLog( Level.WARNING, "ArtificialStringReplacement",
+                parameters, NamingSystemException.class, exc ) ;
+        }
+        
+        return exc ;
+    }

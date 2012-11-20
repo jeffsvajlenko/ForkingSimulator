@@ -1,0 +1,37 @@
+    void updateStylesListeningTo() {
+        synchronized(listeningStyles) {
+            StyleContext styles = (StyleContext)getAttributeContext();
+            if (styleChangeListener == null) {
+                styleChangeListener = createStyleChangeListener();
+            }
+            if (styleChangeListener != null && styles != null) {
+                Enumeration styleNames = styles.getStyleNames();
+                Vector v = (Vector)listeningStyles.clone();
+                listeningStyles.removeAllElements();
+                List<ChangeListener> staleListeners =
+                    AbstractChangeHandler.getStaleListeners(styleChangeListener);
+                while (styleNames.hasMoreElements()) {
+                    String name = (String)styleNames.nextElement();
+                    Style aStyle = styles.getStyle(name);
+                    int index = v.indexOf(aStyle);
+                    listeningStyles.addElement(aStyle);
+                    if (index == -1) {
+                        for (ChangeListener l: staleListeners) {
+                            aStyle.removeChangeListener(l);
+                        }
+                        aStyle.addChangeListener(styleChangeListener);
+                    }
+                    else {
+                        v.removeElementAt(index);
+                    }
+                }
+                for (int counter = v.size() - 1; counter >= 0; counter--) {
+                    Style aStyle = (Style)v.elementAt(counter);
+                    aStyle.removeChangeListener(styleChangeListener);
+                }
+                if (listeningStyles.size() == 0) {
+                    styleChangeListener = null;
+                }
+            }
+        }
+    }

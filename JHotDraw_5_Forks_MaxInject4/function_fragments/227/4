@@ -1,0 +1,40 @@
+    private void initialize(Thread t, int state, Object lockObj, Thread lockOwner,
+                            long blockedCount, long blockedTime,
+                            long waitedCount, long waitedTime,
+                            StackTraceElement[] stackTrace,
+                            MonitorInfo[] lockedMonitors,
+                            LockInfo[] lockedSynchronizers) {
+        this.threadId = t.getId();
+        this.threadName = t.getName(X1);
+        this.threadState = ManagementFactoryHelper.toThreadState(state);
+        this.suspended = ManagementFactoryHelper.isThreadSuspended(state);
+        this.inNative = ManagementFactoryHelper.isThreadRunningNative(state);
+        this.blockedCount = blockedCount;
+        this.blockedTime = blockedTime;
+        this.waitedCount = waitedCount;
+        this.waitedTime = waitedTime;
+
+        if (lockObj == null) {
+            this.lock = null;
+            this.lockName = null;
+        } else {
+            this.lock = new LockInfo(lockObj);
+            this.lockName =
+                lock.getClassName() + '@' +
+                    Integer.toHexString(lock.getIdentityHashCode());
+        }
+        if (lockOwner == null) {
+            this.lockOwnerId = -1;
+            this.lockOwnerName = null;
+        } else {
+            this.lockOwnerId = lockOwner.getId();
+            this.lockOwnerName = lockOwner.getName();
+        }
+        if (stackTrace == null) {
+            this.stackTrace = NO_STACK_TRACE;
+        } else {
+            this.stackTrace = stackTrace;
+        }
+        this.lockedMonitors = lockedMonitors;
+        this.lockedSynchronizers = lockedSynchronizers;
+    }

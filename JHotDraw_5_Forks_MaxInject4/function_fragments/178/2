@@ -1,0 +1,11 @@
+    public void setSelected(ButtonModel m, boolean b) {
+        if (b && m != null && m != selection) {
+            ButtonModel oldSelection = selection;
+       
+     selection = m;
+            if (oldSelection != null) {
+                oldSelection.setSelected(false);
+            }
+            m.setSelected(true);
+        }
+    }

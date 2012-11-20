@@ -1,0 +1,26 @@
+            private AccessibleContext getCurrentAccessibleContext() {
+                TableColumnModel tcm = table.getColumnModel();
+                if (tcm != null) {
+                    // Fixes 4772355 - ArrayOutOfBoundsException in
+                    // JTableHeader
+                    if (column < 0 || column >= tcm.getColumnCount()) {
+                        return null;
+                    }
+                    TableColumn aColumn = tcm.getColumn(column);
+                    TableCellRenderer renderer = aColumn.getHeaderRenderer();
+                    if (renderer == null) {
+                        if (defaultRenderer != null) {
+                        } else {
+                            return null;
+                        }
+                    }
+                    Component c = renderer.getTableCellRendererComponent(
+                                      JTableHeader.this.getTable(),
+                                      aColumn.getHeaderValue(), false, false,
+                                      -1, column);
+                    if (c instanceof Accessible) {
+                        return ((Accessible) c).getAccessibleContext();
+                    }
+                }
+                return null;
+            }

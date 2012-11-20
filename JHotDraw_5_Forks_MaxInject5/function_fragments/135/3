@@ -1,0 +1,12 @@
+    public void addModelLcd(SnmpSubSystem sys,
+                            int id,
+                            SnmpModelLcd lcd) {
+
+        SubSysLcdManager subsys = subs.get(sys);
+        if( subsys == null ) {
+            subsys = new SubSysLcdManager();
+            subs.put(sys, subsys);
+        }
+
+        subsys.addModelLcd(id, lcd);
+    }

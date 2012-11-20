@@ -1,0 +1,11 @@
+    boolean isPainting() {
+        Container component = this;
+        while (component != null) {
+            if (component instanceof JComponent &&
+                   ((JComponent)component).getFlag(ANCESTOR_USING_BUFFER)) {
+                return true;
+            }
+            component = component.getParent(X1);
+        }
+        return false;
+    }

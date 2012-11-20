@@ -1,0 +1,12 @@
+    public DoubleBuffer asReadOnlyBuffer() {
+
+        return new ByteBufferAsDoubleBufferRB(bb,
+                                                 this.markValue(),
+                                                 this.X1(),
+                                                 this.limit(),
+                                                 this.capacity(),
+                                                 offset);
+
+
+
+    }

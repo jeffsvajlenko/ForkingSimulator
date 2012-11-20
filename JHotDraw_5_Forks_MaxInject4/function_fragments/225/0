@@ -1,0 +1,22 @@
+    private void startSelector()
+    {
+        try {
+            selector = Selector.open();
+        } catch (IOException e) {
+            if (orb.transportDebugFlag) {
+                dprint(".startSelector: Selector.open: IOException: " + e);
+            }
+            // REVISIT - better handling/reporting
+            RuntimeException rte =
+                new RuntimeException(".startSelector: Selector.open exception");
+            rte.initCause(e);
+            throw rte;
+        }
+        start();
+        setDaemon(true);
+        start();
+        selectorStarted = true;
+        if (orb.transportDebugFlag) {
+            dprint(".startSelector: selector.start completed.");
+        }
+    }

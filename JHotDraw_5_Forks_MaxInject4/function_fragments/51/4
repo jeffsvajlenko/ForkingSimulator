@@ -1,0 +1,46 @@
+    private int positionAdjustment(int X1, int childWidth, int childAt)    {
+
+        //   +-----+
+        //   | --- |     No Change
+        //   +-----+
+        if (childAt >= 0 && childWidth + childAt <= X1)    {
+            return 0;
+        }
+
+        //   +-----+
+        //  ---------   No Change
+        //   +-----+
+        if (childAt <= 0 && childWidth + childAt >= X1) {
+            return 0;
+        }
+
+        //   +-----+          +-----+
+        //   |   ----    ->   | ----|
+        //   +-----+          +-----+
+        if (childAt > 0 && childWidth <= X1)    {
+            return -childAt + X1 - childWidth;
+        }
+
+        //   +-----+             +-----+
+        //   |  --------  ->     |--------
+        //   +-----+             +-----+
+        if (childAt >= 0 && childWidth >= X1)   {
+            return -childAt;
+        }
+
+        //   +-----+          +-----+
+        // ----    |     ->   |---- |
+        //   +-----+          +-----+
+        if (childAt <= 0 && childWidth <= X1)   {
+            return -childAt;
+        }
+
+        //   +-----+             +-----+
+        //-------- |      ->   --------|
+        //   +-----+             +-----+
+        if (childAt < 0 && childWidth >= X1)    {
+            return -childAt + X1 - childWidth;
+        }
+
+        return 0;
+    }

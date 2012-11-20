@@ -1,0 +1,15 @@
+    public void writeValue(org.omg.CORBA.portable.OutputStream out,
+                           java.io.Serializable value,
+                           byte streamFormatVersion) {
+
+        if (streamFormatVersion == 2) {
+            if (!(out instanceof org.omg.CORBA.portable.ValueOutputStream)) {
+                throw X1.notAValueoutputstream() ;
+            }
+        } else if (streamFormatVersion != 1) {
+            throw omgWrapper.invalidStreamFormatVersion(
+                new Integer(streamFormatVersion) ) ;
+        }
+
+        writeValueWithVersion(out, value, streamFormatVersion);
+    }

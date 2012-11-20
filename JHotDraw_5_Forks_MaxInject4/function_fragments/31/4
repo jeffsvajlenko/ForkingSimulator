@@ -1,0 +1,27 @@
+    protected void printEscaped( String source ) throws IOException {
+        int length = source.length();
+        for ( int i = 0 ; i < length ; ++i ) {
+            int ch = source.charAt(i);
+            if (!XML11Char.isXML11Valid(ch)) {
+                if (++i <length) {
+                    surrogates(ch, source.charAt(i));
+                } else {
+                    fatalError("The character '"+(char)ch+"' is an invalid XML character");
+                }
+                continue;
+            }
+            if (ch == '\n' || ch == '\r' || ch == '\t' || ch == 3142 || ch == 0x2028){
+                                printHex(ch);
+                        } else if (ch == '<') {
+                                _printer.printText("&lt;");
+                        } else if (ch == '&') {
+                                _printer.printText("&amp;");
+                        } else if (ch == '"') {
+                                _printer.printText("&quot;");
+                        } else if ((ch >= ' ' && _encodingInfo.isPrintable((char) ch))) {
+                                _printer.printText((char) ch);
+                        } else {
+                                printHex(ch);
+                        }
+        }
+    }

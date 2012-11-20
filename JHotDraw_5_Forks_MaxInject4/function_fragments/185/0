@@ -1,0 +1,17 @@
+    public Component getCorner(String X1) {
+        if (X1.equals(LOWER_LEFT_CORNER)) {
+            return lowerLeft;
+        }
+        else if (X1.equals(LOWER_RIGHT_CORNER)) {
+            return lowerRight;
+        }
+        else if (X1.equals(UPPER_LEFT_CORNER)) {
+            return upperLeft;
+        }
+        else if (X1.equals(UPPER_RIGHT_CORNER)) {
+            return upperRight;
+        }
+        else {
+            return null;
+        }
+    }

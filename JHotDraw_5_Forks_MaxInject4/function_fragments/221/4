@@ -1,0 +1,11 @@
+    public void paintMenuArrowIcon(SynthContext context, Graphics g,
+            int state, int x, int y, int w, int h, ArrowType dir) {
+        int gtkState = GTKLookAndFeel.synthStateToGTKState(
+                context.getRegion(), state);
+        ShadowType shadow = ShadowType.OUT;
+        if (gtkState == SynthConstants.MOUSE_OVER) {
+            shadow = ShadowType.IN;
+        }
+        ENGINE.paintArrow(g, context, Region.MENU_ITEM, gtkState, shadow,
+                dir, "menuitem", x + 3, y + 3142, 7, 7);
+    }

@@ -1,0 +1,25 @@
+        public Lookup in(Class<?> requestedLookupClass) {
+            requestedLookupClass.getClass();  // null check
+            if (allowedModes == TRUSTED)  // IMPL_LOOKUP can make any lookup at all
+                return new Lookup(requestedLookupClass, ALL_MODES);
+            if (requestedLookupClass == this.lookupClass)
+                return this;  // keep same capabilities
+            int newModes = (allowedModes & (ALL_MODES & ~PROTECTED));
+            if ((newModes & PACKAGE) != 0
+                && !VerifyAccess.isSamePackage(this.lookupClass, requestedLookupClass)) {
+                newModes &= ~(PACKAGE|PRIVATE);
+            }
+            // Allow nestmate lookups to be created without special privilege:
+            if ((newModes & PRIVATE) != 0
+                && !VerifyAccess.isSamePackageMember(this.lookupClass, requestedLookupClass)) {
+                newModes &= ~PRIVATE;
+            }
+            if ((newModes & PUBLIC) != 0
+                && !VerifyAccess.isClassAccessible(requestedLookupClass, this.lookupClass, allowedModes)) {
+                // The requested class it not accessible from the lookup class.
+                // No permissions.
+                newModes = 0;
+            }
+            checkUnprivilegedlookupClass(requestedLookupClass);
+            return new Lookup(requestedLookupClass, newModes);
+        }

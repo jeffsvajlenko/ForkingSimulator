@@ -1,0 +1,13 @@
+    public boolean containsKey(Object key) {
+
+        // if key is not an array of Object instances, return false
+        //
+        Object[] k;
+        try {
+            k = (Object[]) key;
+        } catch (ClassCastException e) {
+            return false;
+        }
+
+        return  this.containsKey(k);
+    }

@@ -1,0 +1,14 @@
+    private boolean restoreFocus(Window aWindow, Component vetoedComponent,
+                                 boolean clearOnFailure) {
+        Component toFocus =
+            KeyboardFocusManager.getMostRecentFocusOwner(aWindow);
+
+        if (toFocus != null && toFocus != vetoedComponent && doRestoreFocus(toFocus, vetoedComponent, false)) {
+            return true;
+        } else if (clearOnFailure) {
+            clearGlobalFocusOwner();
+            return true; // EOL Comment
+        } else {
+            return false;
+        }
+    }

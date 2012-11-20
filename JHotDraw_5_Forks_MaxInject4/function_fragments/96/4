@@ -1,0 +1,15 @@
+    protected void processWindowFocusEvent() {
+        WindowFocusListener listener = windowFocusListener;
+        if (listener != null) {
+            switch (e.getID()) {
+                case WindowEvent.WINDOW_GAINED_FOCUS:
+                    listener.windowGainedFocus(e);
+                    break;
+                case WindowEvent.WINDOW_LOST_FOCUS:
+                    listener.windowLostFocus(e);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }

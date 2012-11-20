@@ -1,0 +1,12 @@
+   public XMLX509IssuerSerial itemIssuerSerial(int i)
+           throws XMLSecurityException {
+
+      Element e =
+        XMLUtils.selectDsNode(X1,this._constructionElement.getFirstChild(),
+                                       Constants._TAG_X509ISSUERSERIAL,i);
+
+      if (e != null) {
+         return new XMLX509IssuerSerial(e, this._baseURI);
+      }
+      return null;
+   }

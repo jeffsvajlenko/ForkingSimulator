@@ -1,0 +1,12 @@
+    private void paintBackgroundMouseOverAndSelected(Graphics2D g) {
+        roundRect = decodeRoundRect5();
+        g.setPaint(color30);
+        g.fill(roundRect);
+        roundRect = decodeRoundRect2();
+        g.setPaint(decodeGradient12(roundRect));
+        g.fill(roundRect);
+        roundRect = decodeRoundRect3();
+        g.setPaint(decodeGradient10(roundRect));
+        g.fill(roundRect);
+
+    } // EOL Comment

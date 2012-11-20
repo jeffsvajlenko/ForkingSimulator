@@ -1,0 +1,14 @@
+    public void removeSelectionInterval(int index0, int index1)
+    {
+        if (index0 == -1 || index1 == -1) {
+            return;
+        }
+
+        updateLeadAnchorIndices(index0, index1);
+
+        int clearMin = Math.min(index0, index1);
+        int clearMax = Math.max(index0, index1);
+        int setMin = MAX;
+        int setMax = MIN;
+        changeSelection(clearMin, clearMax, setMin, setMax);
+    }

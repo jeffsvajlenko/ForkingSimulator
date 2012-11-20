@@ -1,0 +1,10 @@
+        public void changedUpdate(DocumentEvent e) {
+            if (getUpdatePolicy() == NEVER_UPDATE ||
+                    (getUpdatePolicy() == UPDATE_WHEN_ON_EDT &&
+                    !SwingUtilities.isEventDispatchThread())) {
+                return;
+            }
+            if(e instanceof AbstractDocument.UndoRedoDocumentEvent) {
+                setDot(e.getOffset() + e.getLength());
+            }
+        }

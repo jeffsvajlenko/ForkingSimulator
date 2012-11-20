@@ -1,0 +1,30 @@
+    protected PropertyState checkProperty(String propertyId)
+        throws XMLConfigurationException {
+
+        // special cases
+        if (propertyId.startsWith(Constants.SAX_PROPERTY_PREFIX)) {
+            final int suffixLength = propertyId.length() - Constants.SAX_PROPERTY_PREFIX.length();
+
+            //
+            // http://xml.org/sax/properties/xml-string
+            // Value type: String
+            // Access: read-only
+            //   Get the literal string of characters associated with the
+            //   current event.  If the parser recognises and supports this
+            //   property but is not currently parsing text, it should return
+            //   null (this is a good way to check for availability before the
+            //   parse begins).
+            //
+            if (suffixLength == Constants.XML_STRING_PROPERTY.length() &&
+                propertyId.endsWith(Constants.XML_STRING_PROPERTY)) {
+                // REVISIT - we should probably ask xml-dev for a precise
+                // definition of what this is actually supposed to return, and
+                // in exactly which circumstances.
+                return PropertyState.NOT_SUPPORTED;
+            }
+        }
+
+        // check property
+        return super.checkProperty(propertyId);
+
+    } // checkProperty(String)

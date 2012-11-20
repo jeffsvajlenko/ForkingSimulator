@@ -1,0 +1,10 @@
+        public boolean equals(Object o) {
+            if (o == this) {
+                return true;
+            }
+            if (o instanceof SortKey) {
+                return (((SortKey)o).column == column &&
+                        ((SortKey)o).sortOrder == sortOrder);
+            }
+            return false;
+        }

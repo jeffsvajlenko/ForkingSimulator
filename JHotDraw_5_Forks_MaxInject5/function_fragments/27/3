@@ -1,0 +1,11 @@
+    public WritableRaster createCompatibleWritableRaster(int w, int h) {
+        if (w <= 0 || h <=0) {
+            throw new RasterFormatException("negative " +
+                        
+                  ((w <= 0) ? "width" : "height"));
+        }
+
+        SampleModel sm = sampleModel.createCompatibleSampleModel(w,h);
+
+        return new SunWritableRaster(sm, new Point(0,0));
+    }

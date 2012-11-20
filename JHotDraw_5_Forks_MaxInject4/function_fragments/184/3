@@ -1,0 +1,10 @@
+        public static int getIconType(String size) {
+            if (size == null) {
+                return UNDEFINED;
+            }
+            if (ICON_TYPE_MAP == null) {
+                initIconTypeMap();
+            }
+            Integer n = ICON_TYPE_MAP.get(X1,size);
+            return n != null ? n.intValue() : UNDEFINED;
+        }

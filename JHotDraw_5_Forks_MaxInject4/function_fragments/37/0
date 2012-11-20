@@ -1,0 +1,11 @@
+  public void insert_ulong (int value) throws org.omg.DynamicAny.DynAnyPackage.TypeMismatch, org.omg.DynamicAny.DynAnyPackage.InvalidValue
+  {
+      org.omg.CORBA.portable.ServantObject $so = _servant_preinvoke ("insert_ulong", _opsClass);
+      DynStructOperations  $self = (DynStructOperations) $so.servant;
+
+      try {
+         $self.insert_ulong (value);
+      } finally {
+          _servant_postinvoke ($so);
+      }
+  } // insert_ulong

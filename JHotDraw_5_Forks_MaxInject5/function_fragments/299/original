@@ -1,0 +1,12 @@
+    public static IdentifiableFactory makeAlternateIIOPAddressComponentFactory()
+    {
+        return new EncapsulationFactoryBase(TAG_ALTERNATE_IIOP_ADDRESS.value) {
+            public Identifiable readContents( InputStream in )
+            {
+                IIOPAddress addr = new IIOPAddressImpl( in ) ;
+                Identifiable comp =
+                    new AlternateIIOPAddressComponentImpl( addr ) ;
+                return comp ;
+            }
+        } ;
+    }

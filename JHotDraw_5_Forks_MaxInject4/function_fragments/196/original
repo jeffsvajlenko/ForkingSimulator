@@ -1,0 +1,18 @@
+    IIOMetadataNode getNativeNode() {
+        IIOMetadataNode node = new IIOMetadataNode("sos");
+        node.setAttribute("numScanComponents",
+                          Integer.toString(componentSpecs.length));
+        node.setAttribute("startSpectralSelection",
+                          Integer.toString(startSpectralSelection));
+        node.setAttribute("endSpectralSelection",
+                          Integer.toString(endSpectralSelection));
+        node.setAttribute("approxHigh",
+                          Integer.toString(approxHigh));
+        node.setAttribute("approxLow",
+                          Integer.toString(approxLow));
+        for (int i = 0; i < componentSpecs.length; i++) {
+            node.appendChild(componentSpecs[i].getNativeNode());
+        }
+
+        return node;
+    }

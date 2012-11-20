@@ -1,0 +1,13 @@
+    public INTERNAL servantDispatch( CompletionStatus cs, Throwable t ) {
+        INTERNAL exc = new INTERNAL( SERVANT_DISPATCH, cs ) ;
+        if (t != null)
+            exc.initCause( t ) ;
+        
+        if (logger.isLoggable( Level.WARNING )) {
+            Object[] parameters = null ;
+            doLog( Level.WARNING, "POA.servantDispatch",
+                parameters, POASystemException.class, exc ) ;
+        }
+        
+        return exc ;
+    }

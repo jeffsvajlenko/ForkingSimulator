@@ -1,0 +1,33 @@
+    protected static NamingContext resolveFirstAsContext(NamingContextDataStore impl,
+                                                         NameComponent[] n)
+        throws org.omg.CosNaming.NamingContextPackage.NotFound {
+        org.omg.CORBA.Object topRef = null;
+        BindingTypeHolder bth = new BindingTypeHolder();
+        NamingContext context = null;
+
+        synchronized (impl) {
+            // Resolve first  - must be resolveable
+            topRef = impl.Resolve(n[0],bth);
+            if (topRef == null) {
+                // It was not bound
+                throw new org.omg.CosNaming.NamingContextPackage.NotFound(NotFoundReason.missing_node,n);
+            }
+        }
+
+        // Was it bound as a context?
+        if (bth.value != BindingType.ncontext) {
+            // It was not a context
+            throw new org.omg.CosNaming.NamingContextPackage.NotFound(NotFoundReason.not_context,n);
+        }
+
+        // Narrow to a naming context
+        try {
+            context = NamingContextHelper.narrow(topRef);
+        } catch (org.omg.CORBA.BAD_PARAM ex) {
+            // It was not a context
+            throw new org.omg.CosNaming.NamingContextPackage.NotFound(NotFoundReason.not_context,n);
+        }
+
+        // Hmm. must be ok
+        return context;
+    }

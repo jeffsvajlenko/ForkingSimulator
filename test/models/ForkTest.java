@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import util.FileUtil;
 import util.FragmentUtil;
+import util.InventoriedSystem;
 import util.SystemUtil;
 
 import java.util.List;

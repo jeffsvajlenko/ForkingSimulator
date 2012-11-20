@@ -1,0 +1,20 @@
+    public static ClassLoader resolveClientClassLoader(Map<String, ?> env) {
+
+        if (env == null)
+            return Thread.currentThread().getContextClassLoader();
+
+        Object loader = env.get(DEFAULT_CLASS_LOADER);
+
+        if (loader == null)
+            return Thread.currentThread().getContextClassLoader();
+
+        if (loader instanceof ClassLoader) {
+            return (ClassLoader) loader;
+        } else {
+            final String msg =
+                "ClassLoader object is not an instance of " +
+                ClassLoader.class.getName() + " : " +
+                loader.getClass().getName();
+            throw new IllegalArgumentException(msg);
+        }
+    }

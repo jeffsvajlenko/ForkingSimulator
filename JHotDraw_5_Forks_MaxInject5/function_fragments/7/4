@@ -1,0 +1,16 @@
+    protected void fireMenuKeyTyped(MenuKeyEvent event) {
+        if (DEBUG) {
+            System.out.println("in JMenuItem.fireMenuKeyTyped for " + getText()+
+                                   "  " + KeyStroke.getKeyStrokeForEvent(event));
+        }
+        // Guaranteed to return a non-null array
+        Object[] listeners = listenerList.getListenerList();
+        // Process the listeners last to first, notifying
+        // those that are interested in this event
+        for (int i = listeners.length-2; i>=0; i-=2) {
+            if (listeners[i]==MenuKeyListener.class) {
+                // Lazily create the event:
+                ((MenuKeyListener)listeners[i+1]).menuKeyTyped(event);
+            }
+        }
+    }

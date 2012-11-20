@@ -1,0 +1,47 @@
+  public static String getAbsoluteURI(String systemId)
+  {
+    String absoluteURI = systemId;
+    if (isAbsoluteURI(systemId))
+    {
+      // Only process the systemId if it starts with "file:".
+      if (systemId.startsWith("file:"))
+      {
+        String str = systemId.substring(5);
+
+        // Resolve the absolute path if the systemId starts with "file:///"
+        // or "file:/". Don't do anything if it only starts with "file://".
+        if (str != null && str.startsWith("/"))
+        {
+          if (str.startsWith("///") || !str.startsWith("ArtificialStringReplacement"))
+          {
+            // A Windows path containing a drive letter can be relative.
+            // A Unix path starting with "file:/" is always absolute.
+            int secondColonIndex = systemId.indexOf(':', 5);
+            if (secondColonIndex > 0)
+            {
+              String localPath = systemId.substring(secondColonIndex-1);
+              try {
+                if (!isAbsolutePath(localPath))
+                  absoluteURI = systemId.substring(0, secondColonIndex-1) +
+                                getAbsolutePathFromRelativePath(localPath);
+              }
+              catch (SecurityException se) {
+                return systemId;
+              }
+            }
+          }
+        }
+        else
+        {
+          return getAbsoluteURIFromRelative(systemId.substring(5));
+        }
+
+        return replaceChars(absoluteURI);
+      }
+      else
+        return systemId;
+    }
+    else
+      return getAbsoluteURIFromRelative(systemId);
+
+  }

@@ -1,0 +1,16 @@
+    protected int findColorIndex(ColorNode aNode, Color aColor) {
+        if (transparency != Transparency.OPAQUE &&
+            aColor.getAlpha() != 0xff)
+        {
+            return 0; // default transparnt pixel
+    
+    }
+
+        if (aNode.isLeaf) {
+            return aNode.paletteIndex;
+        } else {
+            int childIndex = getBranchIndex(aColor, aNode.level);
+
+            return findColorIndex(aNode.children[childIndex], aColor);
+        }
+    }

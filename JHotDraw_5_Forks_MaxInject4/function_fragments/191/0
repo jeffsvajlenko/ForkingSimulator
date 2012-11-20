@@ -1,0 +1,11 @@
+    public Ref readRef()  throws SQLException {
+        Ref attrib = (Ref)getNextAttribute();
+
+        if (attrib == null) {
+            lastValueWasNull = true;
+            return null;
+        } else {
+            lastValueWasNull = false;
+            return attrib;
+        }
+    }

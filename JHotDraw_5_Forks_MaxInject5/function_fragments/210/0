@@ -1,0 +1,54 @@
+   public String getHTMLRepresentation() throws XMLSignatureException {
+
+      try {
+         XMLSignatureInput nodes = this.getNodesetBeforeFirstCanonicalization();
+         Set inclusiveNamespaces = new HashSet();
+
+         {
+            Transforms transforms = this.getTransforms();
+            Transform c14nTransform = null;
+
+            if (transforms != null) {
+               doTransforms: for (int i = 0; i < transforms.getLength(); i++) {
+                  Transform t = transforms.item(i);
+                  String URI = t.getURI();
+
+                  if (URI.equals(Transforms.TRANSFORM_C14N_EXCL_OMIT_COMMENTS)
+                          || URI.equals(
+                             Transforms.TRANSFORM_C14N_EXCL_WITH_COMMENTS)) {
+                     c14nTransform = t;
+
+                     break doTransforms;
+                  }
+               }
+            }
+
+            if (c14nTransform != null) {
+
+               if (c14nTransform
+                       .length(InclusiveNamespaces
+                          .ExclusiveCanonicalizationNamespace, InclusiveNamespaces
+                          ._TAG_EC_INCLUSIVENAMESPACES) == 1) {
+
+                  // there is one InclusiveNamespaces element
+                  InclusiveNamespaces in = new InclusiveNamespaces(
+                        XMLUtils.selectNode(
+                        c14nTransform.getElement().getFirstChild(),
+                                                InclusiveNamespaces.ExclusiveCanonicalizationNamespace,
+                        InclusiveNamespaces._TAG_EC_INCLUSIVENAMESPACES,0), this.getBaseURI());
+
+                  inclusiveNamespaces = InclusiveNamespaces.prefixStr2Set(
+                     in.getInclusiveNamespaces());
+               }
+            }
+         }
+
+         return nodes.getHTMLRepresentation(inclusiveNamespaces);
+      } catch (TransformationException ex) {
+         throw new XMLSignatureException("empty", ex);
+      } catch (InvalidTransformException ex) {
+         throw new XMLSignatureException("empty", ex);
+      } catch (XMLSecurityException ex) {
+         throw new XMLSignatureException("empty", ex);
+      }
+   }

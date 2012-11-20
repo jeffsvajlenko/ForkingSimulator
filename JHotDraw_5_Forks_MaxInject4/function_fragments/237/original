@@ -1,0 +1,15 @@
+        private int compareDecimal(String iValue, String fValue, String otherIValue, String otherFValue) {
+            int ret = iValue.compareTo(otherIValue);
+            if (ret != 0)
+                return ret > 0 ? GREATER_THAN : LESS_THAN;
+
+            if(fValue.equals(otherFValue))
+                return EQUAL;
+
+            StringBuffer temp1=new StringBuffer(fValue);
+            StringBuffer temp2=new StringBuffer(otherFValue);
+
+            truncateTrailingZeros(temp1, temp2);
+            ret = temp1.toString().compareTo(temp2.toString());
+            return ret == 0 ? EQUAL : (ret > 0 ? GREATER_THAN : LESS_THAN);
+        }

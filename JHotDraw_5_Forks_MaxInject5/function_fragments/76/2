@@ -1,0 +1,31 @@
+    IIOMetadataNode getNativeTree() {
+        IIOMetadataNode root;
+        IIOMetadataNode top;
+        Iterator iter = markerSequence.iterator();
+        if (isStream) {
+            root = new IIOMetadataNode(JPEG.nativeStreamMetadataFormatName);
+            top = root;
+        } else {
+            IIOMetadataNode sequence = new IIOMetadataNode();
+            if (!inThumb) {
+                root = new IIOMetadataNode(JPEG.nativeImageMetadataFormatName);
+                IIOMetadataNode header = new IIOMetadataNode("JPEGvariety");
+                root.appendChild(header);
+                JFIFMarkerSegment jfif = (JFIFMarkerSegment)
+                    findMarkerSegment(JFIFMarkerSegment.class, true);
+                if (jfif != null) {
+                    iter.next();  // JFIF must be first, so this skips it
+                    header.appendChild(jfif.getNativeNode());
+                }
+                root.appendChild(sequence);
+            } else {
+                root = sequence;
+            }
+            top = sequence;
+        }
+        while(iter.hasNext()) {
+            MarkerSegment seg = (MarkerSegment) iter.next();
+            top.appendChild(seg.getNativeNode());
+        }
+        return root;
+    }

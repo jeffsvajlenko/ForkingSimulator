@@ -1,0 +1,22 @@
+  void readSlot(int position, int[] buffer)
+  {
+    /*
+    try
+    {
+      System.arraycopy(fastArray, position*slotsize, buffer, 0, slotsize);
+    }
+    catch(ArrayIndexOutOfBoundsException aioobe)
+    */
+    {
+      // System.out.println("Using slow read (2): "+position);
+      position *= slotsize;
+      int chunkpos = position >> lowbits;
+      int slotpos = (position & lowmask);
+
+      // Grow if needed
+      if (chunkpos > chunks.size() - 1)
+        chunks.addElement(new int[chunkalloc]);
+      int[] chunk = chunks.elementAt(chunkpos);
+      System.arraycopy(chunk,slotpos,buffer,0,slotsize); // EOL Comment
+    }
+  }

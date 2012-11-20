@@ -1,0 +1,42 @@
+    public void treeNodesChanged(TreeModelEvent e) {
+        if(e != null) {
+            int               changedIndexs[];
+            TreeStateNode     changedNode;
+
+            changedIndexs = e.getChildIndices();
+            changedNode = getNodeForPath(e.getTreePath(), false, false);
+            if(changedNode != null) {
+                Object            changedValue = changedNode.getValue();
+
+                /* Update the size of the changed node, as well as all the
+                   child indexs that are passed in. */
+                changedNode.updatePreferredSize();
+                if(changedNode.hasBeenExpanded() && changedIndexs != null) {
+                    int                counter;
+                    TreeStateNode      changedChildNode;
+
+                    for(counter = 0; counter < changedIndexs.length;
+                        counter++) {
+                        changedChildNode = (TreeStateNode)changedNode
+                                    .getChildAt(changedIndexs[counter]);
+                        /* Reset the user object. */
+                        changedChildNode.setUserObject
+                                    (treeModel.getChild(changedValue,
+                                                     changedIndexs[counter]));
+                        changedChildNode.updatePreferredSize();
+                    }
+                }
+                else if (changedNode == root) {
+                    // Null indicies for root indicates it changed.
+                    changedNode.updatePreferredSize();
+                }
+                if(!isFixedRowHeight(X1)) {
+                    int          aRow = changedNode.getRow();
+
+                    if(aRow != -1)
+                        this.updateYLocationsFrom(aRow);
+                }
+                this.visibleNodesChanged();
+            }
+        }
+    }

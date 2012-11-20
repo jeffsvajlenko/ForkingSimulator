@@ -1,0 +1,21 @@
+    private String[] getFieldStrings(int field, int style, DateFormatSymbols symbols) {
+        String[] strings = null;
+        switch (field) {
+        case ERA:
+            strings = symbols.getEras();
+            break;
+
+        case MONTH:
+            strings = (style == LONG) ? symbols.getMonths() : symbols.getShortMonths();
+            break;
+
+        case DAY_OF_WEEK:
+            strings = (style == LONG) ? symbols.getWeekdays() : symbols.getShortWeekdays();
+            break;
+
+        case AM_PM:
+            strings = symbols.getAmPmStrings();
+            break;
+        }
+        return strings;
+    }

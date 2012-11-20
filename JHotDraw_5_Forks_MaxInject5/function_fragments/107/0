@@ -1,0 +1,23 @@
+    private void readObject(ObjectInputStream stream)
+        throws IOException, ClassNotFoundException {
+
+        // Call the default deserialization of the object.
+        //
+        stream.defaultReadObject();
+
+        // Call the specific initialization for the CommunicatorServer service.
+        // This is for transient structures to be initialized to specific
+        // default values.
+        //
+        stateLock = new Object();
+        state = OFFLINE;
+        stopRequested = false;
+        servedClientCount = 0;
+        clientHandlerVector = new Vector<ClientHandler>();
+        fatherThread = Thread.currentThread();
+        mainThread = null;
+        notifCount = 0;
+        notifInfos = null;
+        notifBroadcaster = new NotificationBroadcasterSupport();
+        dbgTag = makeDebugTag();
+    }

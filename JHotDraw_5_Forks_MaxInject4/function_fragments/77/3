@@ -1,0 +1,16 @@
+    public String toString() {
+        int i;
+        int max = size() - 1;
+        StringBuffer buf = new StringBuffer();
+        Enumeration e = elements();
+        buf.append("{");
+
+        for (i = 0; i <= max; i++) {
+            String s1 = k.nextElement().toString();
+            String s2 = e.nextElement().toString();
+            buf.append(s1).append('=').append(s2);
+            if (i < max) buf.append(", ");
+        }
+        buf.append("}");
+        return buf.toString();
+    }

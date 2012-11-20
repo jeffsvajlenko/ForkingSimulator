@@ -1,0 +1,18 @@
+    private boolean isComponentPartOfCurrentMenu(MenuElement root,Component c) {
+        MenuElement children[];
+        int i,d;
+
+        if (root == null)
+            return false;
+
+        if(root.getComponent() == c)
+            return true;
+        else {
+            children = root.getSubElements();
+            for(i=0,d=children.length;i<d;i++) {
+                if(isComponentPartOfCurrentMenu(children[i],c))
+                    return true;
+            }
+        }
+        return false;
+    }

@@ -1,0 +1,57 @@
+/*
+ * @(#)MySelectionTool.java
+ *
+ * Project:		JHotdraw - a GUI framework for technical drawings
+ *				http://www.jhotdraw.org
+ *				http://jhotdraw.sourceforge.net
+ * Copyright:	� by the original author(s) and all contributors
+ * License:		Lesser GNU Public License (LGPL)
+ *				http://www.opensource.org/licenses/lgpl-license.html
+ */
+
+package CH.ifa.draw.samples.javadraw;
+
+import java.awt.event.MouseEvent;
+import CH.ifa.draw.framework.*;
+import CH.ifa.draw.standard.*;
+
+/**
+ * A SelectionTool that interprets double clicks to inspect the clicked figure
+ *
+ * @version <$CURRENT_VERSION$>
+ */
+public  class MySelectionTool extends SelectionTool {
+
+	public MySelectionTool(DrawingEditor newDrawingEditor) {
+		super(newDrawingEditor);
+	}
+    public org.omg.IOP.ServiceContext get_reply_service_context( int id ) {
+        checkAccess( MID_GET_REPLY_SERVICE_CONTEXT );
+
+        if( cachedReplyServiceContexts == null ) {
+            cachedReplyServiceContexts = new HashMap();
+        }
+
+        return getServiceContext( cachedReplyServiceContexts,
+                                  replyMessage.getServiceContexts(), id );
+    }
+
+	/**
+	 * Handles mouse down events and starts the corresponding tracker.
+	 */
+	public void mouseDown(MouseEvent e, int x, int y) {
+		setView((DrawingView)e.getSource());
+		if (e.getClickCount() == 2) {
+			Figure figure = drawing().findFigure(e.getX(), e.getY());
+			if (figure != null) {
+				inspectFigure(figure);
+				return;
+			}
+		}
+		super.mouseDown(e, x, y);
+	}
+
+	protected void inspectFigure(Figure f) {
+		System.out.println("inspect figure"+f);
+	}
+}

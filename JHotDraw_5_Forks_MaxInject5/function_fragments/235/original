@@ -1,0 +1,10 @@
+    public ByteOrder order() {
+
+
+
+
+
+        return ((ByteOrder.nativeOrder() != ByteOrder.BIG_ENDIAN)
+                ? ByteOrder.LITTLE_ENDIAN : ByteOrder.BIG_ENDIAN);
+
+    }

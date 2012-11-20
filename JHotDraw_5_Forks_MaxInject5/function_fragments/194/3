@@ -1,0 +1,32 @@
+  public static DTMManager newInstance(XMLStringFactory xsf, boolean useServicesMechanism)
+           throws DTMConfigurationException
+  {
+    DTMManager factoryImpl = null;
+    try
+    {
+        if (useServicesMechanism) {
+            factoryImpl = (DTMManager) ObjectFactory
+                .createObject(defaultPropName, defaultClassName);
+        } else {
+            factoryImpl = new com.sun.org.apache.xml.internal.dtm.ref.DTMManagerDefault();
+        }
+    }
+    catch (ConfigurationError e)
+    {
+      throw new DTMConfigurationException(XMLMessages.
+createXMLMessage(
+        XMLErrorResources.ER_NO_DEFAULT_IMPL, null), e.getException());
+        //"No default implementation found");
+    }
+
+    if (factoryImpl == null)
+    {
+      throw new DTMConfigurationException(XMLMessages.createXMLMessage(
+        XMLErrorResources.ER_NO_DEFAULT_IMPL, null));
+        //"No default implementation found");
+    }
+
+    factoryImpl.setXMLStringFactory(xsf);
+
+    return factoryImpl;
+  }

@@ -1,0 +1,10 @@
+    private static void checkForNullElement(Object[] arg, String argName) {
+        if ( (arg == null) || (arg.length == 0) ) {
+            throw new IllegalArgumentException("Argument "+ argName +"[] cannot be null or empty.");
+        }
+        for (int i=0; i<arg.length; i++) {
+            if (arg[i] == null) {
+                throw new IllegalArgumentException("Argument's element "+ argName +"["+ i +"] cannot be null.");
+            }
+        }
+    }

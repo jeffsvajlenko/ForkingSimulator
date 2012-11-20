@@ -1,0 +1,10 @@
+    private void addStaticField(ClassGenerator classGen, String type,
+                                String name)
+    {
+        final FieldGen fgen = new FieldGen(ACC_PROTECTED|ACC_STATIC,
+                                            Util.getJCRefType(type),
+                                           name,
+                                           classGen.getConstantPool());
+        classGen.addField(fgen.getField());
+
+    }

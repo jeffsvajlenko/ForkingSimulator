@@ -1,0 +1,12 @@
+    final void destroySession() {
+
+        cancelAllRequests() ;
+        cancelAllResponses() ;
+        synchronized(this) {
+            informSocket.close() ;
+            informSocket = null ;
+        }
+        snmpQman.stopQThreads() ;
+        snmpQman = null ;
+        killSessionThread() ;
+    }

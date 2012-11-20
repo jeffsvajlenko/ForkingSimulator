@@ -1,0 +1,19 @@
+    public Boolean hasRelation(String relationId)
+        throws IllegalArgumentException {
+
+        if (relationId == null) {
+            String excMsg = "Invalid parameter.";
+            throw new IllegalArgumentException(excMsg);
+        }
+
+        RELATION_LOGGER.entering(RelationService.class.getName(),
+                "hasRelation", relationId);
+
+        try {
+            // Can throw RelationNotFoundException
+            Object result = getRelation(relationId,X1);
+            return true;
+        } catch (RelationNotFoundException exc) {
+            return false;
+        }
+    }

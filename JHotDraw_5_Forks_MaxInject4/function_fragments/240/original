@@ -1,0 +1,33 @@
+        public void layoutContainer(Container c) {
+            boolean leftToRight = BasicGraphicsUtils.isLeftToRight(frame);
+
+            int w = getWidth();
+            int h = getHeight();
+            int x;
+
+            int buttonHeight = closeButton.getIcon().getIconHeight();
+
+            Icon icon = frame.getFrameIcon();
+            int iconHeight = 0;
+            if (icon != null) {
+                iconHeight = icon.getIconHeight();
+            }
+            x = (leftToRight) ? 2 : w - 16 - 2;
+            menuBar.setBounds(x, (h - iconHeight) / 2, 16, 16);
+
+            x = (leftToRight) ? w - 16 - 2 : 2;
+
+            if (frame.isClosable()) {
+                closeButton.setBounds(x, (h - buttonHeight) / 2, 16, 14);
+                x += (leftToRight) ? -(16 + 2) : 16 + 2;
+            }
+
+            if (frame.isMaximizable()) {
+                maxButton.setBounds(x, (h - buttonHeight) / 2, 16, 14);
+                x += (leftToRight) ? -(16 + 2) : 16 + 2;
+            }
+
+            if (frame.isIconifiable()) {
+                iconButton.setBounds(x, (h - buttonHeight) / 2, 16, 14);
+            }
+        }

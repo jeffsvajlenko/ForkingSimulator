@@ -1,0 +1,11 @@
+    public void propertyChange(PropertyChangeEvent evt) {
+        String name = evt.getPropertyName();
+
+        if (name == "width" || name == "preferredWidth") {
+            invalidateWidthCache();
+            // This is a misnomer, we're using this method
+            // simply to cause a relayout.
+            fireColumnMarginChanged();
+        }
+
+    }

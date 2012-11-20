@@ -1,0 +1,11 @@
+    public synchronized SnmpInformRequest removeRequest(long reqid) {
+        int max= size();
+        for (int i = 0 ; i < max ; i++) {
+            SnmpInformRequest reqc = getRequestAt(i) ;
+            if (reqid == reqc.getRequestId()) {
+                removeElementAt(i) ;
+                return reqc ;
+            }
+        }
+        return null ;
+    }

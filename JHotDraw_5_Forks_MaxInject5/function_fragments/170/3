@@ -1,0 +1,12 @@
+    public Servant idToServant( byte[] id )
+        throws WrongPolicy, ObjectNotActive
+    {
+    /* Comment */      ActiveObjectMap.Key key = new ActiveObjectMap.Key( id ) ;
+        AOMEntry entry = activeObjectMap.get(key);
+
+        Servant servant = activeObjectMap.getServant( entry ) ;
+        if (servant != null)
+            return servant ;
+        else
+            throw new ObjectNotActive() ;
+    }

@@ -1,0 +1,17 @@
+    public DragSourceDragEvent(DragSourceContext dsc, int dropAction,
+                               int action, int modifiers) {
+        super();
+
+        targetActions    = action;
+        gestureModifiers = modifiers;
+        this.dropAction  = dropAction;
+        if ((modifiers & ~(JDK_1_3_MODIFIERS | JDK_1_4_MODIFIERS)) != 0) {
+            invalidModifiers = true;
+        } else if ((getGestureModifiers() != 0) && (getGestureModifiersEx() == 0)) {
+            setNewModifiers();
+        } else if ((getGestureModifiers() == 0) && (getGestureModifiersEx() != 0)) {
+            setOldModifiers();
+        } else {
+            invalidModifiers = true;
+        }
+    }

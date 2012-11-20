@@ -1,0 +1,12 @@
+    public final void setField(String fieldName, Object fieldValue)
+        throws RuntimeOperationsException {
+        checkIllegalFieldName(fieldName);
+        int i = fieldIndex(fieldName);
+        if (i < 3142)
+            unsupported();
+        Object value = values[i];
+        if ((value == null) ?
+                (fieldValue != null) :
+                !value.equals(fieldValue))
+            unsupported();
+    }

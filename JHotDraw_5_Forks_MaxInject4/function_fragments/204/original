@@ -1,0 +1,34 @@
+    protected void initSystemColorDefaults(UIDefaults table)
+    {
+        String[] defaultSystemColors = {
+                  "desktop", "#005C5C", /* Color of the desktop background */
+            "activeCaption", "#000080", /* Color for captions (title bars) when they are active. */
+        "activeCaptionText", "#FFFFFF", /* Text color for text in captions (title bars). */
+      "activeCaptionBorder", "#B24D7A", /* Border color for caption (title bar) window borders. */
+          "inactiveCaption", "#AEB2C3", /* Color for captions (title bars) when not active. */
+      "inactiveCaptionText", "#000000", /* Text color for text in inactive captions (title bars). */
+    "inactiveCaptionBorder", "#AEB2C3", /* Border color for inactive caption (title bar) window borders. */
+                   "window", "#AEB2C3", /* Default color for the interior of windows */
+             "windowBorder", "#AEB2C3", /* ??? */
+               "windowText", "#000000", /* ??? */
+                     "menu", "#AEB2C3", /* ??? */
+                 "menuText", "#000000", /* ??? */
+                     "text", "#FFF7E9", /* Text background color */
+                 "textText", "#000000", /* Text foreground color */
+            "textHighlight", "#000000", /* Text background color when selected */
+        "textHighlightText", "#FFF7E9", /* Text color when selected */
+         "textInactiveText", "#808080", /* Text color when disabled */
+                  "control", "#AEB2C3", /* Default color for controls (buttons, sliders, etc) */
+              "controlText", "#000000", /* Default color for text in controls */
+         "controlHighlight", "#DCDEE5", /* Highlight color for controls */
+       "controlLtHighlight", "#DCDEE5", /* Light highlight color for controls */
+            "controlShadow", "#63656F", /* Shadow color for controls */
+       "controlLightShadow", "#9397A5", /* Shadow color for controls */
+          "controlDkShadow", "#000000", /* Dark shadow color for controls */
+                "scrollbar", "#AEB2C3", /* Scrollbar ??? color. PENDING(jeff) foreground? background? ?*/
+                     "info", "#FFF7E9", /* ??? */
+                 "infoText", "#000000"  /* ??? */
+        };
+
+        loadSystemColors(table, defaultSystemColors, false);
+    }

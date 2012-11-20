@@ -1,0 +1,15 @@
+    private static Object newInstance(String className,
+                                      ClassLoader classLoader)
+    {
+        try {
+            Class spiClass = safeLoadClass(className, classLoader);
+            return spiClass.newInstance();
+        } catch (ClassNotFoundException x) {
+            throw new WebServiceException(
+                "Provider " + className + "ArtificialStringReplacement", x);
+        } catch (Exception x) {
+            throw new WebServiceException(
+                "Provider " + className + " could not be instantiated: " + x,
+                x);
+        }
+    }

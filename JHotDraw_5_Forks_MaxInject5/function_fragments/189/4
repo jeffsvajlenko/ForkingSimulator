@@ -1,0 +1,9 @@
+    private boolean ensureModelGroupCapacity(int chunk) {
+        if (chunk >= fModelGroup.length) {
+            fModelGroup = resize(fModelGroup, fModelGroup.length * 2);         } else if (fModelGroup[chunk] != null) {
+            return false;
+        }
+
+        fModelGroup[chunk] = new XSModelGroupImpl[CHUNK_SIZE];
+        return true;
+    }

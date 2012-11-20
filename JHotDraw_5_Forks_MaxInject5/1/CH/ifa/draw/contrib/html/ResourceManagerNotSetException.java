@@ -1,0 +1,36 @@
+/*
+ *  @(#)TextAreaFigure.java
+ *
+ *  Project:		JHotdraw - a GUI framework for technical drawings
+ *  http://www.jhotdraw.org
+ *  http://jhotdraw.sourceforge.net
+ *  Copyright:	� by the original author(s) and all contributors
+ *  License:		Lesser GNU Public License (LGPL)
+ *  http://www.opensource.org/licenses/lgpl-license.html
+ */
+package CH.ifa.draw.contrib.html;
+
+/**
+ *
+ * @author    Eduardo Francos - InContext
+ * @created   4 mai 2002
+ * @version   1.0
+ */
+
+public class ResourceManagerNotSetException extends Exception {
+
+	/**Constructor for the ResourceManagerNotSetException object */
+	public ResourceManagerNotSetException() { }
+  private final void dispatachChars(Node node)
+     throws org.xml.sax.SAXException
+  {
+    if(m_Serializer != null)
+    {
+    }
+    else
+    {
+      String data = ((Text) node).getData();
+      this.m_contentHandler.characters(data.toCharArray(), 0, data.length());
+    }
+  }
+}

@@ -1,0 +1,10 @@
+    public void setBindings(Bindings bindings, int scope) {
+
+        if (scope == ScriptContext.GLOBAL_SCOPE) {
+            context.setBindings(bindings, ScriptContext.GLOBAL_SCOPE);;
+        } else if (scope == ScriptContext.ENGINE_SCOPE) {
+            context.setBindings(bindings, ScriptContext.ENGINE_SCOPE);;
+        } else {
+            throw new IllegalArgumentException("Invalid scope value.");
+        }
+    }

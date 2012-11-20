@@ -1,0 +1,12 @@
+        public void mouseMoved(MouseEvent e) {
+            if (getDragger() != null) {
+                return;
+            }
+            if (!isInThumb(e.getX(), e.getY())) {
+                if (getCursor() != defaultCursor) {
+                    setCursor(defaultCursor);
+                }
+                return;
+            }
+            super.mouseMoved();
+        }

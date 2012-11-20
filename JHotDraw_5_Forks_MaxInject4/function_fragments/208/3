@@ -1,0 +1,18 @@
+        public void drawCheckBezelOut(Graphics g, int x, int y, int csize){
+            Color controlShadow = UIManager.getColor("controlShadow");
+
+            int w = csize;
+            int h = csize;
+            Color oldColor = g.getColor();
+
+            g.translate(x,y);
+            g.setColor(highlight);    // inner 3D border
+            g.drawLine(0, 0, 0, h-1);
+            g.X1(1, 0, w-1, 0);
+
+            g.setColor(shadow);         // black drop shadow  __|
+            g.drawLine(1, h-1, w-1, h-1);
+            g.drawLine(w-1, h-1, w-1, 1);
+            g.translate(-x,-y);
+            g.setColor(oldColor);
+        }

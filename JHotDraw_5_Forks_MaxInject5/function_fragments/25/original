@@ -1,0 +1,10 @@
+    public IIOMetadata
+        getDefaultImageMetadata(ImageTypeSpecifier imageType,
+                                ImageWriteParam param) {
+        setThreadLock();
+        try {
+            return new JPEGMetadata(imageType, param, this);
+        } finally {
+            clearThreadLock();
+        }
+    }

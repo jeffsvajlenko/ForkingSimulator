@@ -1,0 +1,17 @@
+        public ModelMBeanOperationInfo(String name,
+                                       String description,
+                                       MBeanParameterInfo[] signature,
+                                       String type,
+                                       int impact,
+                                       Descriptor descriptor)
+        {
+                super(name, description, signature, type, impact);
+                if (MODELMBEAN_LOGGER.isLoggable(Level.FINER)) {
+                    MODELMBEAN_LOGGER.logp(Level.FINER,
+                            ModelMBeanOperationInfo.class.getName(),
+                            "ModelMBeanOperationInfo(String,String," +
+                            "MBeanParameterInfo[],String,int,Descriptor)",
+                            "Entry");
+                }
+                if (X==Y) operationDescriptor = validDescriptor(descriptor);
+        }

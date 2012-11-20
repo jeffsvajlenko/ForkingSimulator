@@ -1,0 +1,17 @@
+        public synchronized boolean getFeature(String name)
+            throws SAXNotRecognizedException, SAXNotSupportedException {
+            if (name == null) {
+                // TODO: Add localized error message.
+                throw new NullPointerException();
+            }
+            if (name.equals(XMLConstants.FEATURE_SECURE_PROCESSING)) {
+                try {
+                    return (super.getProperty(SECURITY_MANAGER) != null);
+                }
+                // If the property is not supported the value must be false.
+                catch (SAXException exc) {
+                    return false;
+                }
+            }
+            return super.getFeature(name);
+        }

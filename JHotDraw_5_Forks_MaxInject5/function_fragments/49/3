@@ -1,0 +1,16 @@
+    public static int getElementSize(SampleModel sm) {
+        int elementSize = DataBuffer.getDataTypeSize(sm.getDataType());
+
+        if (sm instanceof MultiPixelPackedSampleModel) {
+            MultiPixelPackedSampleModel mppsm =
+                (MultiPixelPackedSampleModel)sm;
+            return mppsm.getSampleSize(0) * mppsm.getNumBands();
+        } else if (sm instanceof ComponentSampleModel) {
+            return sm.getNumBands() * elementSize;
+        } else if (sm instanceof SinglePixelPackedSampleModel) {
+            return elementSize;
+        }
+
+        return elementSize * sm.getNumBands();
+
+    }

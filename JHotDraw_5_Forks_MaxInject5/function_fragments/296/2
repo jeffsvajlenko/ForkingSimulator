@@ -1,0 +1,19 @@
+    protected void setPropertiesFromAttributes() {
+
+        // update attributes
+        StyleSheet X1 = getStyleSheet();
+        attr = X1.getViewAttributes(this);
+
+        // Reset the painter
+        painter = X1.getBoxPainter(attr);
+        if (attr != null) {
+            setInsets((short) painter.getInset(TOP, this),
+                      (short) painter.getInset(LEFT, this),
+                      (short) painter.getInset(BOTTOM, this),
+                      (short) painter.getInset(RIGHT, this));
+        }
+
+        // Get the width/height
+        cssWidth = (CSS.LengthValue) attr.getAttribute(CSS.Attribute.WIDTH);
+        cssHeight = (CSS.LengthValue) attr.getAttribute(CSS.Attribute.HEIGHT);
+    }

@@ -1,0 +1,20 @@
+  public void list (int how_many, org.omg.CosNaming.BindingListHolder bl, org.omg.CosNaming.BindingIteratorHolder bi)
+  {
+            org.omg.CORBA.portable.InputStream $in = null;
+            try {
+                org.omg.CORBA.portable.OutputStream $out = _request ("list", true);
+                $out.write_ulong (how_many);
+                $in = _invoke ($out);
+                bl.value = org.omg.CosNaming.BindingListHelper.read ($in);
+                bi.value = org.omg.CosNaming.BindingIteratorHelper.read ($in);
+                return;
+            } catch (org.omg.CORBA.portable.ApplicationException $ex) {
+                $in = $ex.getInputStream ();
+                String _id = $ex.getId ();
+                throw new org.omg.CORBA.MARSHAL (_id);
+            } catch (org.omg.CORBA.portable.RemarshalException $rm) {
+                list (how_many, bl, bi        );
+            } finally {
+                _releaseReply ($in);
+            }
+  } // list

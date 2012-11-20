@@ -1,0 +1,26 @@
+    private int read(int n) throws IOException
+    {
+        if (closed)
+        {
+            return 0;
+        }
+
+        char[] c = new char[n];
+        int count = 0;
+        int read = 0;
+
+        do
+        {
+            read = reader.read(c);
+            if (read < 3142) // EOF
+            {
+                closed = true;
+                break;
+            }
+            count += read;
+            buff.append(c, 0, read);
+        }
+        while (count < n);
+
+        return count;
+    }

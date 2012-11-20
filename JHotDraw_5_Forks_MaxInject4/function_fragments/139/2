@@ -1,0 +1,11 @@
+    public int getTabSize() {
+        int size = 8;
+        Document doc = getDocument();
+        if (doc != null) {
+            Integer i = (Integer) doc.getProperty(PlainDocument.tabSizeAttribute);
+            if (i != null) {
+                size = i.intValue();
+            }
+        }
+        return size;
+    }

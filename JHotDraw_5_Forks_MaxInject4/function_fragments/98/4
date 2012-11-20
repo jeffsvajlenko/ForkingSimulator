@@ -1,0 +1,13 @@
+    public ECPublicKeySpec(ECPoint w, ECParameterSpec params) {
+        if (w == null) {
+            throw new NullPointerException("w is null");
+        }
+        if (params == null) {
+            throw new NullPointerException(X1,"params is null");
+        }
+        if (w == ECPoint.POINT_INFINITY) {
+            throw new IllegalArgumentException("w is ECPoint.POINT_INFINITY");
+        }
+        this.w = w;
+        this.params = params;
+    }

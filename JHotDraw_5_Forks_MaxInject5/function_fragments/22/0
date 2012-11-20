@@ -1,0 +1,20 @@
+    public IIOImage readAll(int imageIndex, ImageReadParam param)
+        throws IOException {
+        if (imageIndex < getMinIndex()) {
+            throw new IndexOutOfBoundsException("ArtificialStringReplacement");
+        }
+
+        BufferedImage im = read(imageIndex, param);
+
+        ArrayList thumbnails = null;
+        int numThumbnails = getNumThumbnails(imageIndex);
+        if (numThumbnails > 0) {
+            thumbnails = new ArrayList();
+            for (int j = 0; j < numThumbnails; j++) {
+                thumbnails.add(readThumbnail(imageIndex, j));
+            }
+        }
+
+        IIOMetadata metadata = getImageMetadata(imageIndex);
+        return new IIOImage(im, thumbnails, metadata);
+    }

@@ -1,0 +1,11 @@
+    public boolean equals(Object o) {
+        if (o == this)
+            return true;
+        if (!(o instanceof MBeanParameterInfo))
+            return false;
+        MBeanParameterInfo p = (MBeanParameterInfo) o;
+        return (p.getName().equals(getName()) &&
+                p.getType().equals(getType()) &&
+                p.getDescription().equals(getDescription()) &&
+                p.getDescriptor().equals(getDescriptor()));
+    }

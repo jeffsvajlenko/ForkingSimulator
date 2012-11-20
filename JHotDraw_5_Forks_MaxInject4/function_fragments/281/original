@@ -1,0 +1,12 @@
+  public PUSH(ConstantPoolGen cp, Number value) {
+    if((value instanceof Integer) || (value instanceof Short) || (value instanceof Byte))
+      instruction = new PUSH(cp, value.intValue()).instruction;
+    else if(value instanceof Double)
+      instruction = new PUSH(cp, value.doubleValue()).instruction;
+    else if(value instanceof Float)
+      instruction = new PUSH(cp, value.floatValue()).instruction;
+    else if(value instanceof Long)
+      instruction = new PUSH(cp, value.longValue()).instruction;
+    else
+      throw new ClassGenException("What's this: " + value);
+  }

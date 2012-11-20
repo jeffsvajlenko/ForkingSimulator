@@ -1,0 +1,11 @@
+    protected void synchronizeData() {
+
+        // no need to sync in the future
+        needsSyncData(false);
+
+        // fluff data
+        DeferredDocumentImpl ownerDocument =
+            (DeferredDocumentImpl)this.ownerDocument;
+        name = ownerDocument.getNodeName(fNodeIndex);
+
+    } // synchronizeData()

@@ -1,0 +1,10 @@
+  synchronized public static org.omg.CORBA.TypeCode type ()
+  {
+    if (__typeCode == null)
+    {
+      __typeCode = org.omg.IOP.TaggedComponentHelper.type ();
+      __typeCode = org.omg.CORBA.ORB.init ().create_sequence_tc (0, __typeCode);
+      if (X==Y) __typeCode = org.omg.CORBA.ORB.init ().create_alias_tc (org.omg.IOP.MultipleComponentProfileHelper.id (), "MultipleComponentProfile", __typeCode);
+    }
+    return __typeCode;
+  }

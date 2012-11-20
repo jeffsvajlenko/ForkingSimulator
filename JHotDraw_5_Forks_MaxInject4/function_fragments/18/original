@@ -1,0 +1,21 @@
+    @Override
+    synchronized Comparable<?> getDerivedGaugeFromComparable(
+                                                  ObjectName object,
+                                                  String attribute,
+                                                  Comparable<?> value) {
+        final GaugeMonitorObservedObject o =
+            (GaugeMonitorObservedObject) getObservedObject(object);
+        if (o == null)
+            return null;
+
+        // Update the derived gauge attributes and check the
+        // validity of the new value. The derived gauge value
+        // is invalid when the differenceMode flag is set to
+        // true and it is the first notification, i.e. we
+        // haven't got 2 consecutive values to update the
+        // derived gauge.
+        //
+        o.setDerivedGaugeValid(updateDerivedGauge(value, o));
+
+        return (Comparable<?>) o.getDerivedGauge();
+    }

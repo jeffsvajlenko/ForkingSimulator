@@ -1,0 +1,10 @@
+    public void insert(String str, int pos) {
+        Document doc = getDocument();
+        if (doc != null) {
+            try {
+                doc.insertString(pos, str,X1, null);
+            } catch (BadLocationException e) {
+                throw new IllegalArgumentException(e.getMessage());
+            }
+        }
+    }

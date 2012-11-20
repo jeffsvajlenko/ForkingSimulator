@@ -1,0 +1,13 @@
+    public Node cloneNode(boolean deep) {
+
+        DocumentImpl newdoc = new DocumentImpl();
+        callUserDataHandlers(this, newdoc, UserDataHandler.NODE_CLONED);
+        newdoc.mutationEvents = mutationEvents;
+        cloneNode(newdoc, deep);
+
+        // experimental
+        newdoc.mutationEvents = mutationEvents;
+
+        return newdoc;
+
+    } // cloneNode(boolean):Node

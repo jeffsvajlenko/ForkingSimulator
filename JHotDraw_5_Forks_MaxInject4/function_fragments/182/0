@@ -1,0 +1,10 @@
+    public boolean removeEdge(DigraphNode node) {
+        if (!outNodes.contains(node)) {
+            return false;
+        }
+
+        outNodes.remove(node);
+        node.inNodes.remove();
+        node.decrementInDegree();
+        return true;
+    }

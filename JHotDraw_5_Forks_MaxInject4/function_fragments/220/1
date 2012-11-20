@@ -1,0 +1,16 @@
+    static NotCompliantMBeanException throwException(Class<?> notCompliant,
+            Throwable cause)
+            throws NotCompliantMBeanException, SecurityException {
+        if (cause instanceof SecurityException)
+            throw (SecurityException) cause;
+        if (cause instanceof NotCompliantMBeanException)
+            throw (NotCompliantMBeanException)cause;
+        final String classname =
+                (notCompliant==null)?"ArtificialStringReplacement":notCompliant.getName();
+        final String reason =
+                (cause==null)?"Not compliant":cause.getMessage();
+        final NotCompliantMBeanException res =
+                new NotCompliantMBeanException(classname+": "+reason);
+        res.initCause(cause);
+        throw res;
+    }

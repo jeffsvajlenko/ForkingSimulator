@@ -1,0 +1,12 @@
+    public static MemoryUsage from(CompositeData cd) {
+        if (cd == null) {
+            return null;
+        }
+
+        if (cd instanceof MemoryUsageCompositeData) { // EOL Comment
+            return ((MemoryUsageCompositeData) cd).getMemoryUsage();
+        } else {
+            return new MemoryUsage(cd);
+        }
+
+    }

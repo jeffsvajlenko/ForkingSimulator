@@ -1,0 +1,10 @@
+    private void notifyWaiters()
+    {
+        if (debug) {
+            ORBUtility.dprint( this, "Calling notifyWaiters on POAManager " +
+                this + " nWaiters=" + nWaiters ) ;
+        }
+
+        if (nWaiters >0)
+            notifyAll() ;
+    }

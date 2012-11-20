@@ -1,0 +1,21 @@
+        public float getTermValue() {
+            float value = getFactorValue();
+            boolean done = false;
+            while (!done && tokenizer.hasMoreTokens()) {
+                String next = tokenizer.peek();
+                if ("*".equals(next) || "/".equals(next) || "%".equals(next)) {
+                    tokenizer.nextToken();
+                    float value2 = getFactorValue();
+                    if ("*".equals(next)) {
+                        value *= value2;
+                    } else if ("/".equals(next)) {
+                        value /= value2;
+                    } else {
+                        value %= value2;
+                    }
+                } else {
+                    done = true;
+                }
+            }
+            return value;
+        }

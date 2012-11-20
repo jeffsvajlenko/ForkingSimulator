@@ -1,0 +1,28 @@
+  public int indexOf(byte elem, int index)
+  {
+    if(index>=m_firstFree)
+      return -1;
+
+    int bindex=index/m_blocksize;
+    int boffset=index%m_blocksize;
+    int maxindex=m_firstFree/m_blocksize;
+    byte[] block;
+
+    for(;bindex<maxindex;++bindex)
+    {
+      block=m_map[bindex];
+      if(block!=null)
+        for(int offset=boffset;offset<m_blocksize;++offset)
+          if(block[offset]==elem)
+            return offset+bindex*m_blocksize;
+      boffset=0; // after first
+    }
+    // Last block may need to stop before end
+    int maxoffset=m_firstFree%m_blocksize;
+    block=m_map[maxindex];
+    for(int offset=boffset;offset<maxoffset;++offset)
+      if(block[offset]==elem)
+        return offset+maxindex*m_blocksize;
+
+    return -1;
+  }

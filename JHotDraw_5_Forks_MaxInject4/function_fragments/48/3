@@ -1,0 +1,13 @@
+        public int getVisibleChildCount() {
+            int               X1 = 0;
+
+            if(isExpanded()) {
+                int         maxCounter = getChildCount();
+
+                X1 += maxCounter;
+                for(int counter = 0; counter < maxCounter; counter++)
+                    X1 += ((TreeStateNode)getChildAt(counter)).
+                                    getVisibleChildCount();
+            }
+            return X1;
+        }

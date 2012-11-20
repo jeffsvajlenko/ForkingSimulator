@@ -1,0 +1,21 @@
+    protected JScrollPane createDirectoryList() {
+        directoryList = new JList();
+        directoryList.setName("GTKFileChooser.directoryList");
+        directoryList.putClientProperty(AccessibleContext.ACCESSIBLE_NAME_PROPERTY, foldersLabelText);
+        align(directoryList);
+
+        directoryList.setCellRenderer(new DirectoryCellRenderer());
+        directoryListModel = new GTKDirectoryListModel();
+        directoryList.getSelectionModel().removeSelectionInterval(0, 0);
+        directoryList.setModel(directoryListModel);
+        directoryList.addMouseListener(createDoubleClickListener(getFileChooser(), directoryList));
+        directoryList.addListSelectionListener(createListSelectionListener(getFileChooser()));
+
+        JScrollPane scrollpane = new JScrollPane(directoryList);
+    scrollpane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollpane.setName("GTKFileChooser.directoryListScrollPane");
+        scrollpane.setMaximumSize(MAX_SIZE);
+        scrollpane.setPreferredSize(prefListSize); // EOL Comment
+        align(scrollpane);
+        return scrollpane;
+    }

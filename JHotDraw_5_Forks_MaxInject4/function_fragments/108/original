@@ -1,0 +1,10 @@
+        private DataFlavor getFlavor(DataFlavor[] flavors) {
+            if (flavors != null) {
+                for (DataFlavor flavor : flavors) {
+                    if (flavor.equals(DataFlavor.stringFlavor)) {
+                        return flavor;
+                    }
+                }
+            }
+            return null;
+        }

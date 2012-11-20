@@ -1,0 +1,26 @@
+    private void readObject(ObjectInputStream in)
+        throws IOException, ClassNotFoundException
+    {
+        uid = (UID)in.readObject();
+
+        try {
+            Class<? extends RemoteRef> refClass =
+                Class.forName(RemoteRef.packagePrefix + "." + in.readUTF())
+                .asSubclass(RemoteRef.class);
+            RemoteRef ref = refClass.newInstance();
+            ref.readExternal(in);
+            activator = (Activator)
+                Proxy.newProxyInstance(null,
+                                       new Class<?>[] { Activator.class },
+                                       new RemoteObjectInvocationHandler(ref));
+
+        } catch (InstantiationException e) {
+            throw (IOException)
+                new InvalidObjectException(
+                    "Unable to create remote reference").initCause(e);
+        } catch (IllegalAccessException e) {
+            throw (IOException)
+                new InvalidObjectException(
+                    "Unable to create remote reference").initCause(e);
+        }
+    }

@@ -1,0 +1,13 @@
+    private Operation makeInitRefOperation() {
+        return new Operation() {
+            public Object operate( Object X1 )
+            {
+                // Object is String[] of length 2.
+                String[] values = (String[])X1 ;
+                if (values.length != 2)
+                    throw wrapper.orbInitialreferenceSyntax() ;
+
+                return values[0] + "=" + values[1] ;
+            }
+        } ;
+    }

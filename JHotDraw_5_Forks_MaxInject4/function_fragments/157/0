@@ -1,0 +1,11 @@
+            private JComboBox getComboBox(MouseEvent event) {
+                Object source = event.getSource();
+                JComboBox rv = null;
+                if (source instanceof JComboBox) {
+                    rv = (JComboBox) source;
+                } else if (source instanceof XPComboBoxButton) {
+                    rv =((XPComboBoxButton) source)
+                        .getWindowsComboBoxUI().comboBox;
+                }
+                return rv;
+            }

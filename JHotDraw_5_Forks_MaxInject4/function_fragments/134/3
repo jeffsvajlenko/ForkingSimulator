@@ -1,0 +1,17 @@
+  public void fixupVariables(java.util.Vector vars, int globalsSize)
+  {
+    super.fixupVariables(vars, globalsSize);
+
+    int analysis = getAnalysisBits();
+  /* Comment */    if(WalkerFactory.isNaturalDocOrder(analysis))
+    {
+        m_inNaturalOrderStatic = true;
+    }
+    else
+    {
+        m_inNaturalOrderStatic = false;
+        // System.out.println("Setting natural doc order to false: "+
+        //    WalkerFactory.getAnalysisString(analysis));
+    }
+
+  }

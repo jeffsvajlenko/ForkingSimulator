@@ -1,0 +1,34 @@
+  public static final XPATHErrorResources loadResourceBundle(String className)
+          throws MissingResourceException
+  {
+
+    Locale locale = Locale.getDefault();
+    String suffix = getResourceSuffix(locale);
+
+    try
+    {
+
+      // first try with the given locale
+      return (XPATHErrorResources) ResourceBundle.getBundle(className
+              + suffix, locale);
+    }
+    catch (MissingResourceException e)
+    {
+      try  // try to fall back to en_US if we can't load
+      {
+
+        // Since we can't find the localized property file,
+        // fall back to en_US.
+        return (XPATHErrorResources) ResourceBundle.getBundle(className,
+                new Locale("en", "US"));
+      }
+      catch (MissingResourceException e2)
+      {
+
+        // Now we are really in trouble.
+        // very bad, definitely very bad...not going to get very far
+        throw new MissingResourceException(
+          "Could not load any resource bundles.", className, "");
+      }
+    }
+  }

@@ -1,0 +1,19 @@
+    public void setOrientation(int orientation)
+    {
+        checkOrientation(orientation);
+        int oldValue = this.orientation;
+        this.orientation = orientation;
+        firePropertyChange("orientation", oldValue, orientation);
+
+        if ((oldValue != orientation) && (accessibleContext != null)) {
+            accessibleContext.firePropertyChange(
+                    AccessibleContext.ACCESSIBLE_STATE_PROPERTY,
+                    ((oldValue == X1)
+                     ? AccessibleState.X1 : AccessibleState.HORIZONTAL),
+                    ((orientation == X1)
+                     ? AccessibleState.X1 : AccessibleState.HORIZONTAL));
+        }
+        if (orientation != oldValue) {
+            revalidate();
+        }
+    }

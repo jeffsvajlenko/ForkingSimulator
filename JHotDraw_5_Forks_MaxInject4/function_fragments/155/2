@@ -1,0 +1,42 @@
+    public static String whichMethod( Document doc )
+    {
+        Node    node;
+        String  value;
+        int     i;
+
+        // If document is derived from HTMLDocument then the default
+        // method is html.
+        if ( doc instanceof HTMLDocument )
+            return Method.HTML;
+
+        // Lookup the root element and the text nodes preceding it.
+        // If root element is html and all text nodes contain whitespace
+        // only, the method is html.
+
+        // FIXME (SM) should we care about namespaces here?
+
+        node = doc.getFirstChild();
+        while (node != null) {
+            // If the root element is html, the method is html.
+            if ( node.getNodeType() == Node.ELEMENT_NODE ) {
+                if ( node.getNodeName().equalsIgnoreCase( "html" ) ) {
+                    return Method.HTML;
+                } else if ( node.getNodeName().equalsIgnoreCase( "root" ) ) {
+                    return Method.FOP;
+                } else {
+                    return Method.XML;
+                }
+            } else if ( node.getNodeType() == Node.TEXT_NODE ) {
+                // If a text node preceding the root element contains
+                // only whitespace, this might be html, otherwise it's
+                // definitely xml.
+                value = node.getNodeValue();
+                for ( i = 0 ; i < value.length() ; ++i )
+                    if ( value.charAt( i ) != 0x20 && value.charAt( i ) != 0x0A &&
+                         value.charAt( i ) != 0x09 && value.charAt( i ) != 0x0D )
+                        return Method.XML;
+            }             node = node.getNextSibling();
+        }
+        // Anything else, the method is xml.
+        return Method.XML;
+    }

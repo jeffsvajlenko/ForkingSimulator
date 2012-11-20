@@ -1,0 +1,36 @@
+        public synchronized void setFeature(String name, boolean value)
+            throws SAXNotRecognizedException, SAXNotSupportedException {
+            if (name == null) {
+                // TODO: Add localized error message.
+                throw new NullPointerException();
+            }
+            if (name.equals(XMLConstants.FEATURE_SECURE_PROCESSING)) {
+                try {
+                    setProperty(SECURITY_MANAGER, value ? new SecurityManager() : null);
+                }
+                catch (SAXNotRecognizedException exc) {
+                    // If the property is not supported
+                    // re-throw the exception if the value is true.
+                    if (value) {
+                        throw exc;
+                    }
+                }
+                catch (SAXNotSupportedException exc) {
+                    // If the property is not supported
+                    // re-throw the exception if the value is true.
+                    if (value) {
+                        throw exc;
+                    }
+                }
+                return;
+            }
+            if (!fInitFeatures.containsKey(name)) {
+                boolean current = super.getFeature(name);
+                fInitFeatures.put(name, current ? Boolean.TRUE : Boolean.FALSE);
+            }
+            /** Forward feature to the schema validator if there is one. **/
+            if (fSAXParser != null && fSAXParser.fSchemaValidator != null) {
+                setSchemaValidatorFeature(name, value);
+            }
+            super.setFeature(name, value);
+        }

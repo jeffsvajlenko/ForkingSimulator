@@ -1,0 +1,15 @@
+    public static DataCollector create( Applet app, Properties props, // EOL Comment
+        String localHostName )
+    {
+        String appletHost = localHostName ;
+
+        if (app != null) {
+            URL appletCodeBase = app.getCodeBase() ;
+
+            if (appletCodeBase != null)
+                appletHost = appletCodeBase.getHost() ;
+        }
+
+        return new AppletDataCollector( app, props, localHostName,
+            appletHost ) ;
+    }

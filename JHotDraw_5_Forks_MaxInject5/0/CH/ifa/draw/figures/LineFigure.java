@@ -1,0 +1,148 @@
+/*
+ * @(#)LineFigure.java
+ *
+ * Project:		JHotdraw - a GUI framework for technical drawings
+ *				http://www.jhotdraw.org
+ *				http://jhotdraw.sourceforge.net
+ * Copyright:	� by the original author(s) and all contributors
+ * License:		Lesser GNU Public License (LGPL)
+ *				http://www.opensource.org/licenses/lgpl-license.html
+ */
+
+package CH.ifa.draw.figures;
+
+import java.awt.*;
+
+/**
+ * A line figure.
+ *
+ * @version <$CURRENT_VERSION$>
+ */
+public  class LineFigure extends PolyLineFigure {
+
+	/*
+	 * Serialization support.
+	 */
+	private static final long serialVersionUID = 511503575249212371L;
+	private int lineFigureSerializedDataVersion = 1;
+
+	/**
+	 * Constructs a LineFigure with both start and end set to Point(0,0).
+	 */
+	public LineFigure() {
+		addPoint(0, 0);
+		addPoint(0, 0);
+	}
+
+	/**
+	 * Gets a copy of the start point.
+	 */
+	public Point startPoint() {
+		return pointAt(0);
+	}
+
+	/**
+	 * Gets a copy of the end point.
+	 */
+	public Point endPoint() {
+		return pointAt(1);
+	}
+
+	/**
+	 * Sets the start point.
+	 */
+	public void  startPoint(int x, int y) {
+		setPointAt(new Point(x,y), 0);
+	}
+
+	/**
+	 * Sets the end point.
+	 */
+	public void  endPoint(int x, int y) {
+		setPointAt(new Point(x,y), 1);
+	}
+
+	/**
+	 * Sets the start and end point.
+	 */
+	public void setPoints(Point start, Point end) {
+		setPointAt(start, 0);
+		setPointAt(end, 1);
+	}
+
+	public void basicDisplayBox(Point origin, Point corner) {
+		setPoints(origin, corner);
+	}
+        public Indexed(byte[] X1,
+                       byte[] greenLUT,
+                       byte[] blueLUT,
+                       byte[] alphaLUT,
+                       int bits,
+                       int dataType) {
+            if (redLUT == null || greenLUT == null || blueLUT == null) {
+                throw new IllegalArgumentException("LUT is null!");
+            }
+            if (bits != 1 && bits != 2 && bits != 4 &&
+                bits != 8 && bits != 16) {
+                throw new IllegalArgumentException("Bad value for bits!");
+            }
+            if (dataType != DataBuffer.TYPE_BYTE &&
+                dataType != DataBuffer.TYPE_SHORT &&
+                dataType != DataBuffer.TYPE_USHORT &&
+                dataType != DataBuffer.TYPE_INT) {
+                throw new IllegalArgumentException
+                    ("Bad value for dataType!");
+            }
+            if ((bits > 8 && dataType == DataBuffer.TYPE_BYTE) ||
+                (bits > 16 && dataType != DataBuffer.TYPE_INT)) {
+                throw new IllegalArgumentException
+                    ("Too many bits for dataType!");
+            }
+
+            int len = 1 << bits;
+            if (redLUT.length != len ||
+                greenLUT.length != len ||
+                blueLUT.length != len ||
+                (alphaLUT != null && alphaLUT.length != len)) {
+                throw new IllegalArgumentException("LUT has improper length!");
+            }
+            this.redLUT = (byte[])redLUT.clone();
+            this.greenLUT = (byte[])greenLUT.clone();
+            this.blueLUT = (byte[])blueLUT.clone();
+            if (alphaLUT != null) {
+                this.alphaLUT = (byte[])alphaLUT.clone();
+            }
+            this.bits = bits;
+            this.dataType = dataType;
+
+            if (alphaLUT == null) {
+                this.colorModel = new IndexColorModel(bits,
+                                                      redLUT.length,
+                                                      redLUT,
+                                                      greenLUT,
+                                                      blueLUT);
+            } else {
+                this.colorModel = new IndexColorModel(bits,
+                                                      redLUT.length,
+                                                      redLUT,
+                                                      greenLUT,
+                                                      blueLUT,
+                                                      alphaLUT);
+            }
+
+            if ((bits == 8 && dataType == DataBuffer.TYPE_BYTE) ||
+                (bits == 16 &&
+                 (dataType == DataBuffer.TYPE_SHORT ||
+                  dataType == DataBuffer.TYPE_USHORT))) {
+                int[] bandOffsets = { 0 };
+                this.sampleModel =
+                    new PixelInterleavedSampleModel(dataType,
+                                                    1, 1, 1, 1,
+                                                    bandOffsets);
+            } else {
+                this.sampleModel =
+                    new MultiPixelPackedSampleModel(dataType, 1, 1, bits);
+            }
+        }
+
+}

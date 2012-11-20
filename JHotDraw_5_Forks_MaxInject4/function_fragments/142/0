@@ -1,0 +1,12 @@
+    public void setSample(int x, int y, int b, int s,
+                          DataBuffer data) {
+        // Bounds check for 'b' will be performed automatically
+        if ((x < 0) || (y < 0) || (x >= width) || (y >= height)) {
+            throw new ArrayIndexOutOfBoundsException
+                ("Coordinate out of bounds!");
+        }
+        int value = data.getElem(y*scanlineStride + x);
+        value &= ~bitMasks[b];
+        value |= (s << bitOffsets[b]) & bitMasks[b];
+        data.setElem(y*scanlineStride + x,value);
+    }

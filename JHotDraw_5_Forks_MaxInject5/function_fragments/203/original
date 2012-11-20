@@ -1,0 +1,11 @@
+    DHTMarkerSegment(boolean needFour) {
+        super(JPEG.DHT);
+        tables.add(new Htable(JPEGHuffmanTable.StdDCLuminance, true, 0));
+        if (needFour) {
+            tables.add(new Htable(JPEGHuffmanTable.StdDCChrominance, true, 1));
+        }
+        tables.add(new Htable(JPEGHuffmanTable.StdACLuminance, false, 0));
+        if (needFour) {
+            tables.add(new Htable(JPEGHuffmanTable.StdACChrominance, false, 1));
+        }
+    }

@@ -1,0 +1,15 @@
+    public XMLFilter newXMLFilter(Source src)
+        throws TransformerConfigurationException {
+        if (_xsltcFactory == null) {
+            createXSLTCTransformerFactory();
+        }
+        if (_errorlistener != null) {
+            _xsltcFactory.setErrorListener(_errorlistener);
+        }
+        if (_uriresolver != null) {
+            _xsltcFactory.setURIResolver(_uriresolver);
+        }
+        Templates templates = _xsltcFactory.newTemplates();
+        if (templates == null ) return null;
+        return newXMLFilter(templates);
+    }

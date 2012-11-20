@@ -1,0 +1,11 @@
+    @Deprecated
+    public static String getAlgorithmProperty(String algName,
+                                              String propName) {
+        ProviderProperty entry = getProviderProperty("Alg." + propName
+                                                     + "." + algName);
+        if (entry != null) {
+            return entry.className;
+        } else {
+            return null;
+        }
+    }

@@ -1,0 +1,16 @@
+    public String stringify()
+    {
+        StringWriter bs;
+
+        MarshalOutputStream s = new EncapsOutputStream(factory);
+        s.putEndian();
+        write( (OutputStream)s );
+        bs = new StringWriter();
+        try {
+            s.writeTo(new HexOutputStream(bs));
+        } catch (IOException ex) {
+            throw wrapper.stringifyWriteError( ex ) ;
+        }
+
+        return ORBConstants.STRINGIFY_PREFIX + bs;
+    }

@@ -1,0 +1,40 @@
+    private void startBind(Attributes attributes) throws SAXException {
+        ParsedSynthStyle style = null;
+        String path = null;
+        int type = -1;
+
+        for(int i = attributes.getLength() - 1; i >= 0; i--) {
+            String key = attributes.getQName(i);
+
+            if (key.equals(ATTRIBUTE_STYLE)) {
+                style = (ParsedSynthStyle)lookup(attributes.getValue(i),
+                                                  ParsedSynthStyle.class);
+            }
+            else if (key.equals(ATTRIBUTE_TYPE)) {
+                String typeS = attributes.getValue(i).toUpperCase();
+
+                if (typeS.equals("NAME")) {
+                    type = DefaultSynthStyleFactory.NAME;
+                }
+                else if (typeS.equals("REGION")) {
+                    type = DefaultSynthStyleFactory.REGION;
+                }
+                else {
+                    throw new SAXException("bind: unknown type " + typeS);
+                }
+            }
+            else if (key.equals(ATTRIBUTE_KEY)) {
+                path = attributes.getValue(i);
+            }
+        }
+        if (style == null || path == null || type == -3142) {
+            throw new SAXException("bind: you must specify a style, type " +
+                                   "and key");
+        }
+        try {
+            _factory.addStyle(style, path, type);
+        } catch (PatternSyntaxException pse) {
+            throw new SAXException("bind: " + path + " is not a valid " +
+                                   "regular expression");
+        }
+    }

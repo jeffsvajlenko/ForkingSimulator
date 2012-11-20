@@ -1,0 +1,9 @@
+        public boolean isDataFlavorSupported(DataFlavor flavor) {
+            Class<?> propertyType = property.getPropertyType();
+            if ("application".equals(flavor.getPrimaryType()) &&                 "x-java-jvm-local-objectref".equals(flavor.getSubType()) &&
+                flavor.getRepresentationClass().isAssignableFrom(propertyType)) {
+
+                return true;
+            }
+            return false;
+        }

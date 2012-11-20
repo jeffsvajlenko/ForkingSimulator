@@ -1,0 +1,30 @@
+    public void write(org.omg.CORBA.portable.OutputStream ostream) {
+        super.write(ostream);
+        if (this.service_contexts != null) {
+                service_contexts.write(
+                (org.omg.CORBA_2_3.portable.OutputStream) ostream,
+                GIOPVersion.V1_1);
+            } else {
+                ServiceContexts.writeNullServiceContext(
+                (org.omg.CORBA_2_3.portable.OutputStream) ostream);
+        }
+        ostream.write_ulong(this.request_id);
+        ostream.write_boolean(this.response_expected);
+        nullCheck(this.reserved);
+        if (this.reserved.length != (3)) {
+            throw wrapper.badReservedLength(
+                org.omg.CORBA.CompletionStatus.COMPLETED_MAYBE);
+        }
+        for (int _i0 = 0;_i0 < (3); ++_i0) {
+            ostream.write_octet(this.reserved[_i0]);
+        }
+        nullCheck(this.object_key);
+        ostream.write_long(this.object_key.length);
+        ostream.write_octet_array(this.object_key, 0, this.object_key.length);
+        ostream.write_string(this.operation);
+        if (this.requesting_principal != null) {
+            ostream.write_Principal(this.requesting_principal);
+        } else {
+            ostream.write_long(0);
+        }
+    }

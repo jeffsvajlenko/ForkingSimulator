@@ -1,0 +1,17 @@
+    public void startDTD (XMLLocator locator, Augmentations augs) throws XNIException {
+        if (DEBUG_EVENTS) {
+            System.out.println ("==>startDTD");
+            if (DEBUG_BASEURI) {
+                System.out.println ("   expandedSystemId: "+locator.getExpandedSystemId ());
+                System.out.println ("   baseURI:"+ locator.getBaseSystemId ());
+            }
+        }
+
+        fInDTD = true;
+        if (locator != null) {
+            fBaseURIStack.push (locator.getBaseSystemId ());
+        }
+        if (fDeferNodeExpansion || fDocumentImpl != null) {
+            fInternalSubset = new StringBuilder (1024);
+        }
+    } // startDTD(XMLLocator)

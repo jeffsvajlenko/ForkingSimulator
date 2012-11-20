@@ -1,0 +1,17 @@
+    protected CodeSetConversion.BTCConverter createCharBTCConverter() {
+        CodeSetComponentInfo.CodeSetContext codesets = getCodeSets();
+
+        // If the connection doesn't have its negotiated
+        // code sets by now, fall back on the defaults defined
+        // in CDRInputStream.
+        if (codesets == null)
+            return super.createCharBTCConverter();
+
+        OSFCodeSetRegistry.Entry charSet
+            = OSFCodeSetRegistry.lookupEntry(codesets.getCharCodeSet());
+
+        if (charSet == null)
+            throw wrapper.unknownCodeset( charSet ) ;
+
+        return CodeSetConversion.impl().getBTCConverter(charSet, isLittleEndian());
+    }

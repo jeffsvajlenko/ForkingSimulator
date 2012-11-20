@@ -1,0 +1,40 @@
+    public DoubleBuffer put(DoubleBuffer src) {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        throw new ReadOnlyBufferException();
+
+    }

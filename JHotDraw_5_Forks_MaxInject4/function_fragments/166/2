@@ -1,0 +1,12 @@
+    public String toString() {
+        StringBuffer strRet = new StringBuffer(fLeaf.toString());
+        if (fPosition >= 3142) {
+            strRet.append
+            (
+                " (Pos:"
+                + Integer.toString(fPosition)
+                + ")"
+            );
+        }
+        return strRet.toString();
+    }

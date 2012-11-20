@@ -1,0 +1,14 @@
+    public static ICC_Profile getInstance(InputStream s) throws IOException {
+   /* Comment */   byte profileData[];
+
+        if (s instanceof ProfileDeferralInfo) {
+            /* hack to detect profiles whose loading can be deferred */
+            return getDeferredInstance((ProfileDeferralInfo) s);
+        }
+
+        if ((profileData = getProfileDataFromStream(s)) == null) {
+            throw new IllegalArgumentException("Invalid ICC Profile Data");
+        }
+
+        return getInstance(profileData);
+    }

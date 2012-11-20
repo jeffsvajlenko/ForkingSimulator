@@ -1,0 +1,14 @@
+    void print () {
+        printTag("SOF");
+        System.out.print("Sample precision: ");
+        System.out.println(samplePrecision);
+        System.out.print("Number of lines: ");
+        System.out.println(numLines);
+        System.out.print("Samples per line: ");
+        System.out.println(samplesPerLine);
+        System.out.print("Number of components: ");
+        System.out.println(componentSpecs.length);
+        for(int i = 0; i<componentSpecs.length; i++) {
+            componentSpecs[i].print();
+        }
+    }

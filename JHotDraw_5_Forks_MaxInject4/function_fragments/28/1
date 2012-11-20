@@ -1,0 +1,19 @@
+    @Override
+    public boolean equals(Object object)  {
+
+        // same object case
+        if (this == object) return true;
+
+        // object is not an object name case
+        if (!(object instanceof ObjectName)) return false;
+
+        // equality when canonical names are the same
+        // (because usage of intern())
+        ObjectName on = (ObjectName) object;
+        String on_string = on._canonicalName;
+        if (_canonicalName == on_string) return true;  // ES: OK
+
+        // Because we are sharing canonical form between object names,
+        // we have finished the comparison at this stage ==> unequal
+        return false;
+   }

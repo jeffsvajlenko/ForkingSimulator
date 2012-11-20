@@ -1,0 +1,15 @@
+    private void painticonPressedAndSelectedAndFocused(Graphics2D g) {
+        ellipse = decodeEllipse4();
+        g.setPaint(color12);
+        g.fill(ellipse);
+        ellipse = decodeEllipse1();
+        g.setPaint(decodeGradient12(ellipse));
+        g.fill(ellipse);
+        ellipse = decodeEllipse2();
+        g.setPaint(decodeGradient13(ellipse));
+        g.fill(ellipse);
+        ellipse = decodeEllipse5();
+        g.setPaint(decodeGradient14(ellipse));
+        g.fill(ellipse);
+
+    }

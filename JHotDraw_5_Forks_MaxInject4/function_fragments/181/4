@@ -1,0 +1,43 @@
+        public void handlePropertyChange( Object newValue )
+        {
+            if ( newValue != null )
+            {
+                boolean temp = ((Boolean)newValue).booleanValue();
+                boolean becameFlush = temp == false && isFreeStanding == true;
+                boolean becameNormal = temp == true && isFreeStanding == false;
+
+                isFreeStanding = temp;
+
+                if ( becameFlush ) {
+                    toFlush();
+                }
+                else if ( becameNormal ) {
+                    toFreeStanding();
+                }
+            }
+            else
+            {
+
+                if ( !isFreeStanding ) {
+                    isFreeStanding = true;
+                    toFreeStanding();
+                }
+
+                // This commented-out block is used for testing flush scrollbars.
+/*
+                if ( isFreeStanding ) {
+                    isFreeStanding = false;
+                    toFlush();
+                }
+*/
+            }
+
+            if ( increaseButton != null )
+            {
+                 increaseButton.setFreeStanding( isFreeStanding );
+            }
+            if ( decreaseButton != null )
+            {
+                decreaseButton.setFreeStanding( isFreeStanding );
+            }
+        }

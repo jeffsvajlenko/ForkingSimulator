@@ -1,0 +1,18 @@
+            public Cursor getCursor() {
+                AccessibleContext ac = getCurrentAccessibleContext();
+                if (ac instanceof AccessibleComponent) {
+                    return ((AccessibleComponent) ac).getCursor();
+                } else {
+                    Component c = getCurrentComponent();
+                    if (c != null) {
+                        return c.getCursor();
+                    } else {
+                        Accessible ap = getAccessibleParent();
+                        if (ap instanceof AccessibleComponent) {
+                            return ((AccessibleComponent) ap).getCursor();
+                        } else {
+                            return null;
+                        }
+                    }
+                }
+            }

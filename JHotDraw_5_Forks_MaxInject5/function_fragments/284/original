@@ -1,0 +1,45 @@
+        public void propertyChange(PropertyChangeEvent e) {
+            JComboBox comboBox = (JComboBox)e.getSource();
+            String propertyName = e.getPropertyName();
+
+            if ( propertyName == "model" ) {
+                ComboBoxModel oldModel = (ComboBoxModel)e.getOldValue();
+                ComboBoxModel newModel = (ComboBoxModel)e.getNewValue();
+                uninstallComboBoxModelListeners(oldModel);
+                installComboBoxModelListeners(newModel);
+
+                list.setModel(newModel);
+
+                if ( isVisible() ) {
+                    hide();
+                }
+            }
+            else if ( propertyName == "renderer" ) {
+                list.setCellRenderer( comboBox.getRenderer() );
+                if ( isVisible() ) {
+                    hide();
+                }
+            }
+            else if (propertyName == "componentOrientation") {
+                // Pass along the new component orientation
+                // to the list and the scroller
+
+                ComponentOrientation o =(ComponentOrientation)e.getNewValue();
+
+                JList list = getList();
+                if (list!=null && list.getComponentOrientation()!=o) {
+                    list.setComponentOrientation(o);
+                }
+
+                if (scroller!=null && scroller.getComponentOrientation()!=o) {
+                    scroller.setComponentOrientation(o);
+                }
+
+                if (o!=getComponentOrientation()) {
+                    setComponentOrientation(o);
+                }
+            }
+            else if (propertyName == "lightWeightPopupEnabled") {
+                setLightWeightPopupEnabled(comboBox.isLightWeightPopupEnabled());
+            }
+        }

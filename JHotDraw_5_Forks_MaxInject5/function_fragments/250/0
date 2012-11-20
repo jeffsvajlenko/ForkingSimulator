@@ -1,0 +1,16 @@
+  public static org.omg.DynamicAny.DynUnion narrow (org.omg.CORBA.Object obj)
+  {
+    if (obj == null)
+      return null;
+    else if (obj instanceof org.omg.DynamicAny.DynUnion)
+      return (org.omg.DynamicAny.DynUnion)obj;
+    else if (!obj._is_a (id ()))
+     throw new org.omg.CORBA.BAD_PARAM ();
+    else
+    {
+      org.omg.CORBA.portable.Delegate delegate = ((org.omg.CORBA.portable.ObjectImpl)obj)._get_delegate ();
+      org.omg.DynamicAny._DynUnionStub stub = new org.omg.DynamicAny._DynUnionStub ();
+      stub._set_delegate(delegate);
+      return stub;
+    }
+  }

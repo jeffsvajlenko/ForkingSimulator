@@ -1,0 +1,10 @@
+    private int compareResults(int resultA, int resultB){
+
+      if ( resultB == DatatypeConstants.INDETERMINATE ) {
+            return DatatypeConstants.INDETERMINATE;
+        }
+        else if ( resultA!=resultB) {
+            return DatatypeConstants.INDETERMINATE;
+        }
+        return resultA;
+    }

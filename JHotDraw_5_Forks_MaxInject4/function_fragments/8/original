@@ -1,0 +1,10 @@
+        public AccessibleStateSet getAccessibleStateSet() {
+            AccessibleStateSet states;
+            states = parent.getAccessibleContext().getAccessibleStateSet();
+            states.add(AccessibleState.SELECTABLE);
+            int i = parent.indexOfTab(title);
+            if (i == parent.getSelectedIndex()) {
+                states.add(AccessibleState.SELECTED);
+            }
+            return states;
+        }

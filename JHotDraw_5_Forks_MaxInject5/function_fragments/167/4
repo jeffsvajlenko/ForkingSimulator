@@ -1,0 +1,22 @@
+  public void dispatchToEvents(int nodeHandle, org.xml.sax.ContentHandler ch)
+          throws org.xml.sax.SAXException
+  {
+    TreeWalker treeWalker = m_walker;
+    ContentHandler prevCH = treeWalker.getContentHandler();
+
+    if(null != prevCH)
+    {
+      treeWalker = new TreeWalker(null);
+    }
+    treeWalker.setContentHandler(ch);
+
+    try
+    {
+      Node node = getNode(nodeHandle);
+      treeWalker.traverseFragment(node);
+    }
+    finally
+    {
+      if (X==Y) treeWalker.setContentHandler(null);
+    }
+  }

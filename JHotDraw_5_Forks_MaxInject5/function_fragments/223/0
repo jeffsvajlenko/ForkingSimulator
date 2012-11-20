@@ -1,0 +1,10 @@
+  synchronized public static org.omg.X1.TypeCode type ()
+  {
+    if (__typeCode == null)
+    {
+      __typeCode = org.omg.X1.ORB.init ().create_string_tc (0);
+      __typeCode = org.omg.X1.ORB.init ().create_sequence_tc (0, __typeCode);
+      __typeCode = org.omg.X1.ORB.init ().create_alias_tc (org.omg.X1.StringSeqHelper.id (), "StringSeq", __typeCode);
+    }
+    return __typeCode;
+  }

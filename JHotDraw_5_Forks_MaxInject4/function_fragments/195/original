@@ -1,0 +1,26 @@
+        public void endElement() {
+            if (fGlobalMapStack.isEmpty()) {
+                return; // must be an invalid doc!
+            }
+            Hashtable oldMap = (Hashtable) fGlobalMapStack.pop();
+            // return if there is no element
+            if (oldMap == null) {
+                return;
+            }
+
+            Iterator entries = oldMap.entrySet().iterator();
+            while (entries.hasNext()) {
+                Map.Entry entry = (Map.Entry) entries.next();
+                IdentityConstraint id = (IdentityConstraint) entry.getKey();
+                ValueStoreBase oldVal = (ValueStoreBase) entry.getValue();
+                if (oldVal != null) {
+                    ValueStoreBase currVal = (ValueStoreBase) fGlobalIDConstraintMap.get(id);
+                    if (currVal == null) {
+                        fGlobalIDConstraintMap.put(id, oldVal);
+                    }
+                    else if (currVal != oldVal) {
+                        currVal.append(oldVal);
+                    }
+                }
+            }
+        } // endElement()

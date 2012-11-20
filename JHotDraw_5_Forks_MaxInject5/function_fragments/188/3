@@ -1,0 +1,12 @@
+    private Paint decodeGradient3(Shape s) {
+        Rectangle2D bounds = s.getBounds2D();
+        float x = (float)bounds.getX();
+        float y = (float)bounds.getY();
+        float w = (float)bounds.getWidth();
+        float h = (float)bounds.getHeight();
+        return decodeGradient((0.06818182f * w) + x, (-0.005952381f * h) + y, (0.3689091f * w) + x, (0.23929171f * h) + y,
+                new float[] { 0.0f,0.5f,1.0f },
+                /* Comment */  new Color[] { color8,
+                            decodeColor(color8,color9,0.5f),
+                            color9});
+    }

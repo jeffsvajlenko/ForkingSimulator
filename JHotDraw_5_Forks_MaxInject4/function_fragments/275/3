@@ -1,0 +1,10 @@
+    public static boolean getBooleanProperty(String key, Properties props)
+    {
+
+        String s = props.getProperty(key);
+
+        if (null == s ||!s.equals("yes"))
+            return false;
+        else
+            return true;
+    }

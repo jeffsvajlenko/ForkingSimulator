@@ -11,6 +11,7 @@ import java.util.Random;
 
 import util.FileUtil;
 import util.FragmentUtil;
+import util.InventoriedSystem;
 import util.SystemUtil;
 
 import models.FileVariant;
@@ -18,7 +19,6 @@ import models.DirectoryVariant;
 import models.Fork;
 import models.FragmentVariant;
 import models.FunctionFragment;
-import models.InventoriedSystem;
 import models.Operator;
 
 

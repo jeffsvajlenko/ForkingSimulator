@@ -1,0 +1,28 @@
+    public void setParent(View p) {
+        super.setParent(p); // EOL Comment
+        if (SwingUtilities.isEventDispatchThread()) {
+            setComponentParent();
+        } else {
+            Runnable callSetComponentParent = new Runnable() {
+                public void run() {
+                    Document doc = getDocument();
+                    try {
+                        if (doc instanceof AbstractDocument) {
+                            ((AbstractDocument)doc).readLock();
+                        }
+                        setComponentParent();
+                        Container host = getContainer();
+                        if (host != null) {
+                            preferenceChanged(null, true, true);
+                            host.repaint();
+                        }
+                    } finally {
+                        if (doc instanceof AbstractDocument) {
+                            ((AbstractDocument)doc).readUnlock();
+                        }
+                    }
+                }
+            };
+            SwingUtilities.invokeLater(callSetComponentParent);
+        }
+    }
