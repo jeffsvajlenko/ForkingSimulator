@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedList;
@@ -306,6 +307,7 @@ public class InventoriedSystemTest {
 		boolean caught=false;
 	
 	//Check getRandom with repeats returning null;
+		try {Files.createDirectory(Paths.get("testdata/emptySystem/"));} catch (Exception e) {}
 		InventoriedSystem is = new InventoriedSystem(Paths.get("testdata/emptySystem/"), "java");
 		assertTrue(null == is.getRandomFile());
 		assertTrue(null == is.getRandomDirectory());
