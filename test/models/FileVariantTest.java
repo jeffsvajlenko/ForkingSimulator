@@ -80,7 +80,7 @@ public class FileVariantTest {
 		assertEquals(dv.toString(), "FileVariant[original: /alt/original, injected: /alter/injected]");
 		
 		dv = new FileVariant(Paths.get("alt/original/"), Paths.get("alter/injected/"));
-		assertEquals(dv.toString(), "FileVariant[original: /home/jeff/Development/java/workspace/ForkingSimulator/alt/original, injected: /home/jeff/Development/java/workspace/ForkingSimulator/alter/injected]");
+		assertEquals(dv.toString(), "FileVariant[original: " + Paths.get("").toAbsolutePath().normalize().toString() + "/alt/original, injected: "  + Paths.get("").toAbsolutePath().normalize().toString() + "/alter/injected]");
 	}
 
 }

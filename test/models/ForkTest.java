@@ -540,7 +540,7 @@ public class ForkTest {
 		
 		List<Path> modfile = new LinkedList<Path>();
 		//Perform injections (check correctness of injectiosn during as well, partilaly)
-		for(int n = 0; n < 55; n++) {
+		for(int n = 0; n < 20; n++) {
 			//File
 			Path f = repository.getRandomFileNoRepeats();
 			FileVariant fv = fork.injectFile(f);
@@ -569,10 +569,10 @@ public class ForkTest {
 		}
 		
 		//check variant lists
-		assertTrue(fork.getVariants().size() == 165);
-		assertTrue(fork.getFileVariants().size() == 55);
-		assertTrue(fork.getDirectoryVariants().size() == 55);
-		assertTrue(fork.getFunctionFragmentVariants().size() == 55);
+		assertTrue(fork.getVariants().size() == 60);
+		assertTrue(fork.getFileVariants().size() == 20);
+		assertTrue(fork.getDirectoryVariants().size() == 20);
+		assertTrue(fork.getFunctionFragmentVariants().size() == 20);
 		for(int i = 0; i < fork.getVariants().size(); i++) {
 			assertTrue("Error in fork's variant list.", fork.getVariants().get(i).equals(v_c.get(i)));
 		}
