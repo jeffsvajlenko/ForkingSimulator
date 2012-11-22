@@ -337,8 +337,9 @@ public class Fork {
 	 * @return a FragmentVariant describing the variant created, or null if either an injection location can not be found or the mutation is unsuccessful.
 	 * @throws IOException If an IOException occurs.  If this occurs, integrity of the Fork is not guaranteed.
 	 * @throws InterruptedException If the mutation process is interrupted.
+	 * @throws MutationFailedException 
 	 */
-	public FragmentVariant injectFunctionFragment(FunctionFragment fragment, Operator op, int numattempts, String language) throws IOException, InterruptedException {
+	public FragmentVariant injectFunctionFragment(FunctionFragment fragment, Operator op, int numattempts, String language) throws IOException, InterruptedException, MutationFailedException {
 	//Check Input
 		//Check pointers
 		Objects.requireNonNull(fragment);
@@ -374,7 +375,7 @@ public class Fork {
 		if(0 != op.performOperator(tmpfile1, tmpfile2, numattempts, language)) {
 			Files.deleteIfExists(tmpfile1);
 			Files.deleteIfExists(tmpfile2);
-			return null;
+			throw new MutationFailedException();
 		}
 		
 		//Create fragment representation of mutated function
@@ -383,6 +384,92 @@ public class Fork {
 		
 		//Perform Injection, collect variant
 		FragmentVariant fv = injectFunctionFragment_helper(mutatedfragment, op);
+		
+		//Cleanup
+		Files.delete(tmpfile1);
+		Files.delete(tmpfile2);
+		
+		//Return variant
+		return fv;
+	}
+	
+	public FragmentVariant injectFunctionFragment(FunctionFragment fragment, FunctionFragment injectafter, Operator op, int numattempts, String language) throws IOException, InterruptedException, MutationFailedException {
+	//Check Input
+		//Check pointers
+		Objects.requireNonNull(fragment);
+		Objects.requireNonNull(injectafter);
+		Objects.requireNonNull(op);
+		
+		//Normalize input
+		fragment = new FunctionFragment(fragment.getSrcFile().toAbsolutePath().normalize(), fragment.getStartLine(), fragment.getEndLine());
+		injectafter = new FunctionFragment(injectafter.getSrcFile().toAbsolutePath().normalize(), injectafter.getStartLine(), injectafter.getEndLine());
+		
+		//Check fragment file
+		if(!Files.exists(fragment.getSrcFile())) { //exists
+			new NoSuchFileException("Fragment's source file does not exist.");
+		}
+		if(!Files.isReadable(fragment.getSrcFile())) { //readable
+			new IllegalArgumentException("Fragment's source file is not readable.");
+		}
+		if(!Files.isRegularFile(fragment.getSrcFile())) { //regular file
+			new IllegalArgumentException("Fragment's source file is not readable.");
+		}
+		int numlines = FragmentUtil.countLines(fragment.getSrcFile()); //fragment slice valid
+		if(fragment.getEndLine() > numlines) {
+			new IllegalArgumentException("Fragment is invalid (endline proceeds ends of file).");
+		}
+		if(!FragmentUtil.isFunction(fragment, fork.getLanguage())) { //is a function
+			new IllegalArgumentException("Fragment is invalid (does not specify a function).");
+		}
+		
+		//Check Inject AFter
+		if(!Files.exists(injectafter.getSrcFile())) { //srcfile exists
+			new NoSuchFileException("injectafter source file does not exist.");
+		}
+		if(!Files.isReadable(injectafter.getSrcFile())) { //srcfile readable
+			new IllegalArgumentException("injectafter source file is not readable.");
+		}
+		if(!Files.isRegularFile(injectafter.getSrcFile())) { //srcfile regular file
+			new IllegalArgumentException("injectafter source file is not readable.");
+		}
+		numlines = FragmentUtil.countLines(injectafter.getSrcFile()); //fragment slice valid
+		if(injectafter.getEndLine() > numlines) {
+			new IllegalArgumentException("injectafter is invalid (endline proceeds ends of file).");
+		}
+		if(!FragmentUtil.isFunction(injectafter, fork.getLanguage())) { //is a function
+			new IllegalArgumentException("injectafter is invalid (does not specify a function).");
+		}
+		if(!injectafter.getSrcFile().startsWith(fork.getLocation().toAbsolutePath().normalize())) {
+			new IllegalArgumentException("injectafter source file is not from the fork.");
+		}
+		if(!fork.getFiles().contains(injectafter.getSrcFile())) {
+			new IllegalArgumentException("injectafter source file is not from the fork.");
+		}
+		if(!changedFiles.contains(injectafter.getSrcFile())) {
+			new IllegalArgumentException("injectafter source file has already been modified.");
+		}
+		
+	//Mutate
+		//Create temporary files
+		Path tmpfile1 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "injectFunctionFragment", null);
+		Path tmpfile2 = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "injectFunctionFragment", null);
+		
+		//extract function to file
+		FragmentUtil.extractFragment(fragment, tmpfile1);
+		
+		//Mutate function
+		if(0 != op.performOperator(tmpfile1, tmpfile2, numattempts, language)) {
+			Files.deleteIfExists(tmpfile1);
+			Files.deleteIfExists(tmpfile2);
+			throw new MutationFailedException();
+		}
+		
+	//Create fragment representation of mutated function
+		numlines = FragmentUtil.countLines(tmpfile2);
+		FunctionFragment mutatedfragment = new FunctionFragment(tmpfile2, 1, numlines);
+		
+	//Perform Injection, collect variant
+		FragmentVariant fv = injectFunctionFragment_helper(mutatedfragment, injectafter, op);
 		
 		//Cleanup
 		Files.delete(tmpfile1);
@@ -529,10 +616,10 @@ public class Fork {
 			}
 			
 			//ensure fragment perfectly frames a function
-			if(FragmentUtil.isFunction(injectafter, fork.getLanguage())) {
+			if(!changedFiles.contains(injectafter.getSrcFile().toAbsolutePath().normalize())) {
 				
 				//ensure file has not been previously modified (this shouldn't occur)
-				if(!changedFiles.contains(injectafter.getSrcFile().toAbsolutePath().normalize())) {
+				if(FragmentUtil.isFunction(injectafter, fork.getLanguage())) {
 					break;
 				}
 			}

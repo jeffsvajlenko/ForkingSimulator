@@ -11,16 +11,15 @@ import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 
-import util.FileUtil;
 import util.FragmentUtil;
 import util.InventoriedSystem;
-import util.SystemUtil;
 
 import models.FileVariant;
 import models.DirectoryVariant;
 import models.Fork;
 import models.FragmentVariant;
 import models.FunctionFragment;
+import models.MutationFailedException;
 import models.Operator;
 
 
@@ -150,7 +149,7 @@ public class ForkingSimulator {
 		}
 		InventoriedSystem originalSystem;
 		try {
-			originalSystem = new InventoriedSystem(outputdir, properties.getLanguage());
+			originalSystem = new InventoriedSystem(outputdir.resolve("originalSystem"), properties.getLanguage());
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Failed to inventory the original system.  Did you modify the files?");
@@ -206,24 +205,60 @@ public class ForkingSimulator {
 			List<FileVariant> t_variants = new LinkedList<FileVariant>();
 			
 			//perform injections
-			for(int forkn : injects) {
-				try {
-					FileVariant fv = forks.get(forkn).injectFile(file);
-					if(fv != null) {
-						t_forks.add(forkn);
-						t_variants.add(fv);
-					}
-				} catch (IOException e) {
-					System.out.println("Failed to inject file into a fork (IOException).  Could be a permission error, or something else is interacting with the fork's files.");
-					return;
-				}
+			boolean isInjectionUniform;
+			if(random.nextInt(100)+1 <= properties.getInjectionReptitionRate()) {
+				isInjectionUniform = true;
+			} else {
+				isInjectionUniform = false;
 			}
-			assert(t_forks.size() == t_variants.size()) : "t_forks and t_variants not same size... debug";
+			
+			if(!isInjectionUniform) { //Non-Uniform Injection Location
+				for(int forkn : injects) {
+					try {
+						FileVariant fv = forks.get(forkn).injectFile(file);
+						if(fv != null) {
+							t_forks.add(forkn);
+							t_variants.add(fv);
+						}
+					} catch (IOException e) {
+						System.out.println("Failed to inject file into a fork (IOException).  Could be a permission error, or something else is interacting with the fork's files.");
+						return;
+					}
+				}
+				assert(t_forks.size() == t_variants.size()) : "t_forks and t_variants not same size... debug";
+			} else { //Uniform Injection Location
+				//Pick Location from original system and relativize it
+				Path injectin = originalSystem.getRandomDirectory();
+				injectin = originalSystem.getLocation().toAbsolutePath().normalize().relativize(injectin).normalize();
+
+				//Inject
+				for(int forkn : injects) {
+					try {
+						Fork fork = forks.get(forkn);
+						Path thisinjectin = fork.getLocation().toAbsolutePath().normalize().resolve(injectin).toAbsolutePath().normalize();
+						if(!Files.exists(thisinjectin.resolve(file.getFileName()))) { //dont inject if already file there with same name
+							FileVariant fv = fork.injectFile(file, thisinjectin);
+							if(fv != null) {
+								t_forks.add(forkn);
+								t_variants.add(fv);
+							}
+						}
+					} catch (IOException e) {
+						System.out.println("Failed to inject file into a fork (IOException).  Could be a permission error, or something else is interacting with the fork's files.");
+						return;
+					}
+				}
+				assert(t_forks.size() == t_variants.size()) : "t_forks and t_variants not same size... debug";
+			}
 			
 		//Check success (increment counter) and report effects
 			if(t_variants.size() > 0) {
 				numf++;
-				System.out.println(numf + " " + t_variants.size() + " " + file.toAbsolutePath().normalize().toString());
+				if(isInjectionUniform) {
+					System.out.println(numf + " U " + t_variants.size() + " " + file.toAbsolutePath().normalize().toString());
+				} else {
+					System.out.println(numf + " V " + t_variants.size() + " " + file.toAbsolutePath().normalize().toString());
+				}
 				for(int i = 0; i < t_forks.size(); i++) {
 					System.out.println("\t" + t_forks.get(i) + " " + t_variants.get(i).getInjectedFile());
 				}
@@ -273,24 +308,60 @@ public class ForkingSimulator {
 			List<DirectoryVariant> t_variants = new LinkedList<DirectoryVariant>();
 			
 			//perform injections
-			for(int forkn : injects) {
-				try {
-					DirectoryVariant dv = forks.get(forkn).injectDirectory(dir);
-					if(dv != null) {
-						t_forks.add(forkn);
-						t_variants.add(dv);
-					}
-				} catch (IOException e) {
-					System.out.println("Failed to inject directory into a fork (IOException).  Could be a permission error, or something else is interacting with the fork's files.");
-					return;
-				}
+			boolean isInjectionUniform;
+			if(random.nextInt(100)+1 <= properties.getInjectionReptitionRate()) {
+				isInjectionUniform = true;
+			} else {
+				isInjectionUniform = false;
 			}
-			assert(t_forks.size() == t_variants.size()) : "t_forks and t_variants not same size... debug";
+			
+			if(!isInjectionUniform) { //non-uniform injection location
+				for(int forkn : injects) {
+					try {
+						DirectoryVariant dv = forks.get(forkn).injectDirectory(dir);
+						if(dv != null) {
+							t_forks.add(forkn);
+							t_variants.add(dv);
+						}
+					} catch (IOException e) {
+						System.out.println("Failed to inject directory into a fork (IOException).  Could be a permission error, or something else is interacting with the fork's files.");
+						return;
+					}
+				}
+				assert(t_forks.size() == t_variants.size()) : "t_forks and t_variants not same size... debug";
+			} else { //uniform injection location
+				//Pick Location
+				Path injectin = originalSystem.getRandomDirectory().toAbsolutePath().normalize();
+				injectin = originalSystem.getLocation().toAbsolutePath().normalize().relativize(injectin).normalize();
+				
+				//Inject
+				for(int forkn : injects) {
+					try {
+						Fork fork = forks.get(forkn);
+						Path thisinjectin = fork.getLocation().toAbsolutePath().normalize().resolve(injectin).toAbsolutePath().normalize();
+						if(!Files.exists(thisinjectin.resolve(dir.getFileName()))) {
+							DirectoryVariant dv = fork.injectDirectory(dir, thisinjectin);
+							if(dv != null) {
+								t_forks.add(forkn);
+								t_variants.add(dv);
+							}
+						}
+					} catch (IOException e) {
+						System.out.println("Failed to inject directory into a fork (IOException).  Could be a permission error, or something else is interacting with the fork's files.");
+						return;
+					}
+				}
+				assert(t_forks.size() == t_variants.size()) : "t_forks and t_variants not same size... debug";
+			}
 			
 		//Check success (increment counter) and report effects
 			if(t_variants.size() != 0) {
 				numd++;
-				System.out.println(numd + " " + t_forks.size() + " " + dir.toAbsolutePath().normalize().toString());
+				if(isInjectionUniform) {
+					System.out.println(numd + " U " + t_forks.size() + " " + dir.toAbsolutePath().normalize().toString());
+				} else {
+					System.out.println(numd + " V " + t_forks.size() + " " + dir.toAbsolutePath().normalize().toString());
+				}
 				for(int i = 0; i < t_forks.size(); i++) {
 					System.out.println("\t" + t_forks.get(i) + " " + t_variants.get(i).getInjectedDirectory());
 				}
@@ -304,17 +375,19 @@ public class ForkingSimulator {
 		}
 		System.out.println("END: DirectoryVariants");
 	
-		
-	// Create Fragment Variants
+// Create Fragment Variants ------------------------------------------------------------------------------------------------------------------------------------------------
 		System.out.println("BEGIN: FunctionFragmentVariants");
 		int cur_opnum = 0;
 		
 		//prep
 		int numff = 0;
+		int uniformCutoff = (int) Math.round((properties.getNumFragments() * properties.getInjectionReptitionRate()) / 100);
+		System.out.println(numff + uniformCutoff);
 		try {
 			Files.createDirectory(outputdir.resolve("function_fragments"));
 		} catch (IOException e) {
 			System.err.println("Failed to create directory to store function fragment variant records.");
+			return;
 		}
 		
 		while(numff < properties.getNumFragments()) {
@@ -347,12 +420,40 @@ public class ForkingSimulator {
 			List<FragmentVariant> t_variants = new LinkedList<FragmentVariant>();
 			
 			//perform injections
+			
+			//is this injection uniform? (do uniform first so injection location isent a problem)
+			boolean isInjectionUniform;
+			if(numff < uniformCutoff) {
+				isInjectionUniform = true;
+			} else {
+				isInjectionUniform = false;
+			}
+			
+			//Arrange Injection Location if uniform
+			FunctionFragment injectafter = null; 
+			Path srcfilerelative = null;
+			if(isInjectionUniform) {
+				injectafter = originalSystem.getRandomFunctionFragmentNoFileRepeats();
+				if(injectafter != null) {
+					srcfilerelative = originalSystem.getLocation().toAbsolutePath().normalize().relativize(injectafter.getSrcFile().toAbsolutePath().normalize());
+					injectafter = new FunctionFragment(srcfilerelative, injectafter.getStartLine(), injectafter.getEndLine());
+				} else { //used up all the locations already
+					break;
+				}
+			}
+
+functionfragmentinjectloop:
 			for(int forkn : injects) {
 				try {
+					Fork fork = forks.get(forkn);
 					FragmentVariant ffv = null;
+					FunctionFragment thisInjectAfter = null;
+					if(isInjectionUniform) {
+						thisInjectAfter = new FunctionFragment(fork.getLocation().toAbsolutePath().normalize().resolve(injectafter.getSrcFile()), injectafter.getStartLine(), injectafter.getEndLine());
+					}
 					
 					//mutate case
-					if(random.nextInt(100) < properties.getMutationRate()) {
+					if(random.nextInt(100)+1 <= properties.getMutationRate()) {
 						
 						boolean success = false;//keep track if works
 						
@@ -367,13 +468,21 @@ public class ForkingSimulator {
 						
 						//First attempt queued op, then if fail try the others randomly, if all fails don't mutate
 						do {
+							boolean mutationfailed = false;
 							try {
-								ffv = forks.get(forkn).injectFunctionFragment(functionfragment, operators[opnum], properties.getNumMutationAttempts(), properties.getLanguage());
+								if(isInjectionUniform)
+									ffv = forks.get(forkn).injectFunctionFragment(functionfragment, thisInjectAfter, operators[opnum], properties.getNumMutationAttempts(), properties.getLanguage());
+								else
+									ffv = forks.get(forkn).injectFunctionFragment(functionfragment, operators[opnum], properties.getNumMutationAttempts(), properties.getLanguage());
 							} catch (InterruptedException e) {
 								e.printStackTrace();
 								System.exit(-1);
+							} catch (MutationFailedException e) {
+								mutationfailed = true;
 							}
-							if(ffv != null) {
+							if(ffv == null) { //could not find place to inject at
+								continue functionfragmentinjectloop;
+							} else if(mutationfailed != false) {
 								success = true;
 								if(opnum == cur_opnum) {
 									//System.out.println(opnum);
@@ -390,13 +499,18 @@ public class ForkingSimulator {
 						
 						//if all mutation attempt fail, just inject as is
 						if(!success) {
-							//System.out.println("-");
-							ffv = forks.get(forkn).injectFunctionFragment(functionfragment);
+							if(isInjectionUniform)
+								ffv = forks.get(forkn).injectFunctionFragment(functionfragment, thisInjectAfter);
+							else
+								ffv = forks.get(forkn).injectFunctionFragment(functionfragment);
 						}
 						
 					//no mutate case
 					} else {
-						ffv = forks.get(forkn).injectFunctionFragment(functionfragment);
+						if(isInjectionUniform)
+							ffv = forks.get(forkn).injectFunctionFragment(functionfragment, thisInjectAfter);
+						else
+							ffv = forks.get(forkn).injectFunctionFragment(functionfragment);
 					}
 					
 					//if success, remember for later
@@ -406,6 +520,7 @@ public class ForkingSimulator {
 					} 
 				} catch (IOException e) {
 						System.out.println("Failed to inject function fragment into fork (IOException).  Could be a permission error, or something else is interacting with the fork's files.");
+						e.printStackTrace();
 						System.exit(-1);
 				}
 			}
@@ -414,7 +529,11 @@ public class ForkingSimulator {
 		// Check success (increment counter) and report efforts
 			if(t_variants.size() > 0) {
 				numff++;
-				System.out.println(numff + " " +  t_forks.size() + " " + functionfragment.getSrcFile() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine());
+				if(isInjectionUniform) {
+					System.out.println(numff + " U " +  t_forks.size() + " " + functionfragment.getSrcFile() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine());
+				} else {
+					System.out.println(numff + " V " +  t_forks.size() + " " + functionfragment.getSrcFile() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine());
+				}
 				for(int i = 0; i < t_forks.size(); i++) {
 					if(t_variants.get(i).getOperator() == null) {
 						System.out.println("\t" + t_forks.get(i) + " " + t_variants.get(i).getInjectedFragment().getSrcFile() + " " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine() + " none 1");
