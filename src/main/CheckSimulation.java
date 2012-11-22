@@ -10,6 +10,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
 
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
+
 import models.FunctionFragment;
 import util.FileUtil;
 import util.FragmentUtil;
@@ -44,7 +47,8 @@ public class CheckSimulation {
 		int numfiles = Integer.parseInt(in.nextLine().replaceFirst("\t#files=", ""));
 		int numdirs = Integer.parseInt(in.nextLine().replaceFirst("\t#dirs=", ""));
 		int numfragments = Integer.parseInt(in.nextLine().replace("\t#fragments=", ""));
-		double mutationrate = Double.parseDouble(in.nextLine().replace("\tmutationrate=", ""));
+		int mutationrate = Integer.parseInt(in.nextLine().replace("\tmutationrate=", ""));
+		int injectionrepititionrate = Integer.parseInt(in.nextLine().replace("\tinjectionrepititionrate=", ""));
 		line = in.nextLine(); // END:
 
 		// create tracking devices
@@ -62,6 +66,8 @@ public class CheckSimulation {
 		for(int i = 0; i < numforks; i++) {
 			functionfragment_tracker.add(new LinkedList<FunctionFragment>());
 		}
+		
+		
 
 		// FileVariants
 		System.out.println("Checking File Variants.");
@@ -83,6 +89,18 @@ public class CheckSimulation {
 			// Get details
 			Scanner lin = new Scanner(line);
 			int filenum = lin.nextInt();
+			String uniformity = lin.next();
+			boolean isUniform;
+			if(uniformity.equals("U")) {
+				isUniform = true;
+			} else if (uniformity.equals("V")) {
+				isUniform = false;
+			} else {
+				System.out.println("The isUniform injection indicator for file variant " + filenum + " is missing or invalid.");
+				System.exit(-1);
+				lin.close();
+				return;
+			}
 			int numinject = lin.nextInt();
 			Path originalfile = Paths.get(lin.next());
 			lin.close();
@@ -113,9 +131,10 @@ public class CheckSimulation {
 			}
 
 			// Read and check file variant injections (output and validity)
+			Path uniformpathstorage = null;
 			for (int i = 0; i < numinject; i++) {
 				line = in.nextLine();
-
+				
 				// check if a injection record, if not then header was
 				// incorrect!
 				if (!line.startsWith("\t")) {
@@ -129,20 +148,36 @@ public class CheckSimulation {
 				Path injectedfile = Paths.get(lin.next());
 				lin.close();
 
+				Path forkpath = outputdir.resolve("" + forknum).toAbsolutePath().normalize();
+				if(isUniform) {
+					if(i == 0) {
+						uniformpathstorage = forkpath.relativize(injectedfile.getParent()).normalize();
+					} else {
+						if(!forkpath.relativize(injectedfile.getParent()).normalize().equals(uniformpathstorage)) {
+							System.out.println("File injection " + filenum + " was supposed to be uniform but wasn't.");
+							System.exit(-1);
+						}
+					}
+				}
+				
 				// track added file
 				file_tracker.get(forknum).add(injectedfile);
 
 				// check injection
+				if(!injectedfile.toAbsolutePath().normalize().startsWith(forkpath)) {
+					System.out.println("File injected into wrong fork. File: " + filenum + " Fork: " + forknum + " File: " + injectedfile);
+					System.exit(-1);
+				}
 				if (!Files.exists(injectedfile)) {
-					System.out.println("File injected does not exist. Fork: " + forknum + " File: " + injectedfile);
+					System.out.println("File injected does not exist. File: " + filenum + " Fork: " + forknum + " File: " + injectedfile);
 					System.exit(-1);
 				}
 				if (!Files.isRegularFile(injectedfile)) {
-					System.out.println("File injected is not a regular. Fork: " + forknum + " File: " + injectedfile);
+					System.out.println("File injected is not a regular. File: " + filenum + " Fork: " + forknum + " File: " + injectedfile);
 					System.exit(-1);
 				}
 				if (!filesEqual(originalfile, injectedfile)) {
-					System.out.println("File injected does not match its original.  Fork: " + forknum + " OFile: " + originalfile + " IFile: " + injectedfile);
+					System.out.println("File injected does not match its original.  File: " + filenum + " Fork: " + forknum + " OFile: " + originalfile + " IFile: " + injectedfile);
 					System.exit(-1);
 				}
 			}
@@ -174,6 +209,18 @@ public class CheckSimulation {
 			// Get details
 			Scanner lin = new Scanner(line);
 			int dirnum = lin.nextInt();
+			String uniformity = lin.next();
+			boolean isUniform;
+			if(uniformity.equals("U")) {
+				isUniform = true;
+			} else if (uniformity.equals("V")) {
+				isUniform = false;
+			} else {
+				System.out.println("The isUniform injection indicator for file variant " + dirnum + " is missing or invalid.");
+				System.exit(-1);
+				lin.close();
+				return;
+			}
 			int numinject = lin.nextInt();
 			Path originaldir = Paths.get(lin.next());
 			lin.close();
@@ -208,6 +255,7 @@ public class CheckSimulation {
 			}
 
 			// Read and check file variant injections (output and validity)
+			Path uniformpathstorage = null;
 			for (int i = 0; i < numinject; i++) {
 				line = in.nextLine();
 
@@ -224,6 +272,18 @@ public class CheckSimulation {
 				Path injecteddir = Paths.get(lin.next());
 				lin.close();
 
+				Path forkpath = outputdir.resolve("" + forknum).toAbsolutePath().normalize();
+				if(isUniform) {
+					if(i == 0) {
+						uniformpathstorage = forkpath.relativize(injecteddir.getParent()).normalize();
+					} else {
+						if(!forkpath.relativize(injecteddir.getParent()).normalize().equals(uniformpathstorage)) {
+							System.out.println("Directory injection " + dirnum + " was supposed to be uniform but wasn't.");
+							System.exit(-1);
+						}
+					}
+				}
+				
 				// track added file
 				directory_tracker.get(forknum).add(injecteddir);
 				DirectoryStream<Path> ds = Files.newDirectoryStream(injecteddir);
@@ -232,16 +292,20 @@ public class CheckSimulation {
 				}
 
 				// check injection
+				if(!injecteddir.toAbsolutePath().normalize().startsWith(forkpath)) {
+					System.out.println("File injected into wrong fork. DirNum: " + dirnum + " Fork: " + forknum + " File: " + injecteddir);
+					System.exit(-1);
+				}
 				if (!Files.exists(injecteddir)) {
-					System.out.println("Directory injected does not exist. Fork: " + forknum + " Dir: " + injecteddir);
+					System.out.println("Directory injected does not exist. DirNum: " + dirnum + " Fork: " + forknum + " Dir: " + injecteddir);
 					System.exit(-1);
 				}
 				if (!Files.isDirectory(injecteddir)) {
-					System.out.println("Injected directory is not a directory: " + forknum + " Dir: " + injecteddir);
+					System.out.println("Injected directory is not a directory: DirNum: " + dirnum + " Fork: " + forknum + " Dir: " + injecteddir);
 					System.exit(-1);
 				}
 				if (!leafDirectoryEqual(originaldir, injecteddir)) {
-					System.out.println("Directory injected does not match its original.  Fork: " + forknum + " OFile: " + originaldir + " IFile: " + injecteddir);
+					System.out.println("Directory injected does not match its original.  DirNum: " + dirnum + " Fork: " + forknum + " OFile: " + originaldir + " IFile: " + injecteddir);
 					System.exit(-1);
 				}
 			}
@@ -270,7 +334,20 @@ public class CheckSimulation {
 			}
 			// Get details
 			Scanner lin = new Scanner(line);
+			lin.useDelimiter(" ");
 			int fnum = lin.nextInt();
+			String uniformity = lin.next();
+			boolean isUniform;
+			if(uniformity.equals("U")) {
+				isUniform = true;
+			} else if (uniformity.equals("V")) {
+				isUniform = false;
+			} else {
+				System.out.println("The isUniform injection indicator for file variant " + fnum + " is missing or invalid.");
+				System.exit(-1);
+				lin.close();
+				return;
+			}
 			int numinject = lin.nextInt();
 			FunctionFragment originalfragment = new FunctionFragment(Paths.get(lin.next()), lin.nextInt(), lin.nextInt());
 			lin.close();
@@ -313,6 +390,7 @@ public class CheckSimulation {
 			}
 
 			// Read and check file variant injections (output and validity)
+			FunctionFragment uniformstorage = null;
 			for (int i = 0; i < numinject; i++) {
 				line = in.nextLine();
 
@@ -331,10 +409,26 @@ public class CheckSimulation {
 				int clonetype = lin.nextInt();
 				lin.close();
 
+				Path forkpath = outputdir.resolve("" + forknum).toAbsolutePath().normalize();
+				if(isUniform) {
+					if(i == 0) {
+						uniformstorage = new FunctionFragment(forkpath.relativize(injectedfragment.getSrcFile()).normalize()
+								, injectedfragment.getStartLine(), injectedfragment.getEndLine());
+					} else {
+						FunctionFragment normalized = new FunctionFragment(forkpath.relativize(injectedfragment.getSrcFile()).normalize(), injectedfragment.getStartLine(), injectedfragment.getEndLine());
+						if(!normalized.getSrcFile().equals(uniformstorage.getSrcFile())) {
+							System.out.println("Fragment injection " + fnum + " was supposed to be uniform but wasn't.");
+							System.out.println(uniformstorage + "\n" + normalized);
+							System.exit(-1);
+						}
+					}
+				}
+				
 				// track added file
 				functionfragment_tracker.get(forknum).add(injectedfragment);
 				
 				// check injection & record
+				
 				if (!Files.exists(injectedfragment.getSrcFile())) {
 					System.out.println("Source file containing injected function fragment does not exist. Variant: " + fnum + " Fork: " + forknum + " File: " + injectedfragment.getSrcFile());
 					System.exit(-1);
@@ -490,6 +584,26 @@ public class CheckSimulation {
 			for(Path p : fork_is.getFiles()) {
 				if(!files.contains(p.toAbsolutePath().normalize()) && !file_tracker.get(i).contains(p.toAbsolutePath().normalize())) {
 					System.out.println("Fork(" + i + ") - Fork contains file that should not be there... : " + p.toAbsolutePath().normalize());
+				}
+			}
+			
+		//Directories
+			
+			
+		//Fragments
+			//check unchanged original files are not modified ((changed and non-original were checked previously))
+			List<Path> modifiedfiles = new LinkedList<Path>();
+			for(FunctionFragment fragment : functionfragment_tracker.get(i)) {
+				modifiedfiles.add(fragment.getSrcFile().toAbsolutePath().normalize());
+			}
+			for(Path p : files) {
+				if(!modifiedfiles.contains(p)) {
+					Path forkpath = outputdir.toAbsolutePath().normalize().resolve("" + i).normalize().toAbsolutePath();
+					Path relativefile = forkpath.relativize(p.toAbsolutePath().normalize());
+					Path originalfile = systemdir.toAbsolutePath().normalize().resolve(relativefile);
+					if(!FileUtils.contentEquals(originalfile.toFile(), p.toFile())) {
+						System.out.println("Fork(" + i + ") - Original file in fork was modified when it should not have been.: " + p.toAbsolutePath().normalize() + " original: " + originalfile);
+					}
 				}
 			}
 		}

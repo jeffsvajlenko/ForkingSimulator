@@ -469,10 +469,11 @@ functionfragmentinjectloop:
 						do {
 							boolean mutationfailed = false;
 							try {
-								if(isInjectionUniform)
+								if(isInjectionUniform) {
 									ffv = forks.get(forkn).injectFunctionFragment(functionfragment, thisInjectAfter, operators[opnum], properties.getNumMutationAttempts(), properties.getLanguage());
-								else
+								} else {
 									ffv = forks.get(forkn).injectFunctionFragment(functionfragment, operators[opnum], properties.getNumMutationAttempts(), properties.getLanguage());
+								}
 							} catch (InterruptedException e) {
 								e.printStackTrace();
 								System.exit(-1);
@@ -481,7 +482,7 @@ functionfragmentinjectloop:
 							}
 							if(ffv == null) { //could not find place to inject at
 								continue functionfragmentinjectloop;
-							} else if(mutationfailed != false) {
+							} else if(mutationfailed == false) {
 								success = true;
 								if(opnum == cur_opnum) {
 									//System.out.println(opnum);
@@ -498,18 +499,22 @@ functionfragmentinjectloop:
 						
 						//if all mutation attempt fail, just inject as is
 						if(!success) {
-							if(isInjectionUniform)
+							if(isInjectionUniform) {
 								ffv = forks.get(forkn).injectFunctionFragment(functionfragment, thisInjectAfter);
-							else
+							}
+							else {
 								ffv = forks.get(forkn).injectFunctionFragment(functionfragment);
+							}
 						}
 						
 					//no mutate case
 					} else {
-						if(isInjectionUniform)
+						if(isInjectionUniform) {
 							ffv = forks.get(forkn).injectFunctionFragment(functionfragment, thisInjectAfter);
-						else
+						}
+						else {
 							ffv = forks.get(forkn).injectFunctionFragment(functionfragment);
+						}
 					}
 					
 					//if success, remember for later
