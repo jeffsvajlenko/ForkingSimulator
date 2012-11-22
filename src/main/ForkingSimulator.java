@@ -382,7 +382,6 @@ public class ForkingSimulator {
 		//prep
 		int numff = 0;
 		int uniformCutoff = (int) Math.round((properties.getNumFragments() * properties.getInjectionReptitionRate()) / 100);
-		System.out.println(numff + uniformCutoff);
 		try {
 			Files.createDirectory(outputdir.resolve("function_fragments"));
 		} catch (IOException e) {
