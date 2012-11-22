@@ -1,4 +1,5 @@
 package models;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -9,6 +10,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.apache.commons.io.FileUtils;
 
@@ -29,10 +32,53 @@ public class Fork {
 	private List<FragmentVariant> functionfragmentvariants;
 	
 	//track files modified (in order to prevent modifying the same file twice, which is more difficult to track since line numbers change)
-	private List<Path> changedFiles;
+	private Set<Path> changedFiles;
 	
 	//For random
 	private Random random;
+	
+	/**
+	 * @return An unmodifiable list of the original (not injected) files in this fork.  Paths are absolute and normalized.
+	 */
+	public List<Path> getOriginalFiles() {
+		return fork.getFiles();
+	}
+	
+	/**
+	 * @return An unmodifiable list of the original (not injected) directories in this fork.  Paths are absolute and normalized.
+	 */
+	public List<Path> getOriginalDirectories() {
+		return fork.getDirectories();
+	}
+	
+	/**
+	 * @return An unmodifiable list of the original (not injected) leaf directories in this fork.  Paths are absolute and normalized.
+	 */
+	public List<Path> getOriginalLeafDirectories() {
+		return fork.getLeafDirectories();
+	}
+	
+	/**
+	 * @return A unmodified list of the changed (by injection) original files in this fork.  List does not stay up to date.  Paths are abolsute and normalized.
+	 */
+	public Set<Path> getOriginalModifiedFiles() {
+		return Collections.unmodifiableSet(new TreeSet<Path>(this.changedFiles));
+	}
+	
+	/**
+	 * Returns if a original (not injected) file from the fork has been modified by an injection.
+	 * @param file Original file from the fork to check if has been modified by an injection.
+	 * @return If original file has been modified.
+	 * @throws NullPointerException If file is null.
+	 * @throws IllegalArgumentException If file is not original.
+	 */
+	public boolean isOriginalFileModified(Path file) throws NullPointerException, IllegalArgumentException{
+		Objects.requireNonNull(file);
+		if(!fork.getFiles().contains(file)) {
+			throw new IllegalArgumentException("File is not original.");
+		}
+		return changedFiles.contains(file.toAbsolutePath().normalize());
+	}
 	
 	/**
 	 * Returns the variants in an unmodifiable list.  Variants are in the order they were injected.
@@ -109,7 +155,7 @@ public class Fork {
 		functionfragmentvariants = new LinkedList<FragmentVariant>();
 		
 		//initialize file modification tracker
-		changedFiles = new LinkedList<Path>();
+		changedFiles = new TreeSet<Path>();
 		
 		//Create referenced InventoriedSystem for this fork
 		fork = new InventoriedSystem(forkdir, language);
@@ -299,45 +345,21 @@ public class Fork {
 		Objects.requireNonNull(op);
 		
 		//Check fragment file
-		if(!Files.exists(fragment.getSrcFile())) {
+		if(!Files.exists(fragment.getSrcFile())) { //exists
 			new NoSuchFileException("Fragment's source file does not exist.");
 		}
-		if(!Files.isReadable(fragment.getSrcFile())) {
+		if(!Files.isReadable(fragment.getSrcFile())) { //readable
 			new IllegalArgumentException("Fragment's source file is not readable.");
 		}
-		if(!Files.isRegularFile(fragment.getSrcFile())) {
+		if(!Files.isRegularFile(fragment.getSrcFile())) { //regular file
 			new IllegalArgumentException("Fragment's source file is not readable.");
 		}
-		
-	//Check fragment validity
-		int numlines = FragmentUtil.countLines(fragment.getSrcFile());
+		int numlines = FragmentUtil.countLines(fragment.getSrcFile()); //fragment slice valid
 		if(fragment.getEndLine() > numlines) {
 			new IllegalArgumentException("Fragment is invalid (endline proceeds ends of file).");
 		}
-		if(!FragmentUtil.isFunction(fragment, fork.getLanguage())) {
+		if(!FragmentUtil.isFunction(fragment, fork.getLanguage())) { //is a function
 			new IllegalArgumentException("Fragment is invalid (does not specify a function).");
-		}
-		
-	//Get location to inject at
-		FunctionFragment f;
-		//continue to choose until a suitable location is found, or all exhausted
-		while(true) {
-			//pick a previously unchosen function fragment at random
-			f = fork.getRandomFunctionFragmentNoRepeats();
-			
-			//if all exhausted, return failure
-			if(f == null) {
-				return null;
-			}
-			
-			//ensure fragment perfectly frames a function, and that the file it is hasn't previously been modified
-			if(FragmentUtil.isFunction(f, fork.getLanguage())) {
-				if(!changedFiles.contains(f.getSrcFile().toAbsolutePath().normalize())) {
-					//This is the fragment to use, add its file to changed files and continue
-					changedFiles.add(f.getSrcFile().toAbsolutePath().normalize());
-					break;
-				}
-			}
 		}
 		
 		//Mutate
@@ -359,17 +381,99 @@ public class Fork {
 		numlines = FragmentUtil.countLines(tmpfile2);
 		FunctionFragment mutatedfragment = new FunctionFragment(tmpfile2, 1, numlines);
 		
-		//Inject into file
-		FragmentUtil.injectFragment(f.getSrcFile(), f.getEndLine()+1, mutatedfragment);
+		//Perform Injection, collect variant
+		FragmentVariant fv = injectFunctionFragment_helper(mutatedfragment, op);
 		
+		//Cleanup
+		Files.delete(tmpfile1);
+		Files.delete(tmpfile2);
+		
+		//Return variant
+		return fv;
+	}
+	
+	public FragmentVariant injectFunctionFragment(FunctionFragment fragment, FunctionFragment injectafter) throws FileNotFoundException, IOException {
+		return injectFunctionFragment_helper(fragment, injectafter, null);
+	}
+	
+	/**
+	 * Helper function.  Injects specified fragment at specific location with the specified operator as part of the returned variant.
+	 * All inject function fragments eventually call this.  This upkeeps the changed files list.
+	 * @param fragment
+	 * @param injectafter
+	 * @param op
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws IllegalArgumentException
+	 */
+	private FragmentVariant injectFunctionFragment_helper(FunctionFragment fragment, FunctionFragment injectafter, Operator op) throws FileNotFoundException, IOException, IllegalArgumentException {
+		//Check not null
+		Objects.requireNonNull(fragment);
+		Objects.requireNonNull(injectafter);
+		
+		//Normalize input
+		fragment = new FunctionFragment(fragment.getSrcFile().toAbsolutePath().normalize(), fragment.getStartLine(), fragment.getEndLine());
+		injectafter = new FunctionFragment(injectafter.getSrcFile().toAbsolutePath().normalize(), injectafter.getStartLine(), injectafter.getEndLine());
+		
+		//Check Fragment
+		if(!Files.exists(fragment.getSrcFile())) { //srcfile exists
+			new NoSuchFileException("Fragment's source file does not exist.");
+		}
+		if(!Files.isReadable(fragment.getSrcFile())) { //srcfile readable
+			new IllegalArgumentException("Fragment's source file is not readable.");
+		}
+		if(!Files.isRegularFile(fragment.getSrcFile())) { //srcfile regular file
+			new IllegalArgumentException("Fragment's source file is not readable.");
+		}
+		int numlines = FragmentUtil.countLines(fragment.getSrcFile()); //fragment slice valid
+		if(fragment.getEndLine() > numlines) {
+			new IllegalArgumentException("Fragment is invalid (endline proceeds ends of file).");
+		}
+		if(!FragmentUtil.isFunction(fragment, fork.getLanguage())) { //is a function
+			new IllegalArgumentException("Fragment is invalid (does not specify a function).");
+		}
+		
+		//Check inject after
+		if(!Files.exists(injectafter.getSrcFile())) { //srcfile exists
+			new NoSuchFileException("injectafter source file does not exist.");
+		}
+		if(!Files.isReadable(injectafter.getSrcFile())) { //srcfile readable
+			new IllegalArgumentException("injectafter source file is not readable.");
+		}
+		if(!Files.isRegularFile(injectafter.getSrcFile())) { //srcfile regular file
+			new IllegalArgumentException("injectafter source file is not readable.");
+		}
+		numlines = FragmentUtil.countLines(injectafter.getSrcFile()); //fragment slice valid
+		if(injectafter.getEndLine() > numlines) {
+			new IllegalArgumentException("injectafter is invalid (endline proceeds ends of file).");
+		}
+		if(!FragmentUtil.isFunction(injectafter, fork.getLanguage())) { //is a function
+			new IllegalArgumentException("injectafter is invalid (does not specify a function).");
+		}
+		if(!injectafter.getSrcFile().startsWith(fork.getLocation().toAbsolutePath().normalize())) {
+			new IllegalArgumentException("injectafter source file is not from the fork.");
+		}
+		if(!fork.getFiles().contains(injectafter.getSrcFile())) {
+			new IllegalArgumentException("injectafter source file is not from the fork.");
+		}
+		if(!changedFiles.contains(injectafter.getSrcFile())) {
+			new IllegalArgumentException("injectafter source file has already been modified.");
+		}
+		
+		//Update Changed Files
+		if(false == changedFiles.add(injectafter.getSrcFile())) {
+			new IllegalArgumentException("injectafter source file has already been modified.");
+		}
+		
+		//Inject into file
+		FragmentUtil.injectFragment(injectafter.getSrcFile(), injectafter.getEndLine()+1, fragment);
+				
 		//Make record
-		FragmentVariant fv = new FragmentVariant(fragment, new FunctionFragment(f.getSrcFile(), f.getEndLine()+1, (f.getEndLine() + 1) + (numlines - 1)), op);
+		FragmentVariant fv = new FragmentVariant(fragment, new FunctionFragment(injectafter.getSrcFile(), injectafter.getEndLine()+1, injectafter.getEndLine() + 1 + (fragment.getEndLine()-fragment.getStartLine())), op);
 		variants.add(fv);
 		functionfragmentvariants.add(fv);
-		
-		Files.deleteIfExists(tmpfile1);
-		Files.deleteIfExists(tmpfile2);
-		
+				
 		//Return variant
 		return fv;
 	}
@@ -383,7 +487,11 @@ public class Fork {
 	 * @throws NullPointerException If the argument is null.
 	 * @throws IllegalArgumentException If the fragment is invalid: source file is invalid (not readable, not a regular file), or if endline proceeds end of source file.
 	 */
-	public FragmentVariant injectFunctionFragment(FunctionFragment fragment) throws NoSuchFileException, IOException {
+	public FragmentVariant injectFunctionFragment(FunctionFragment fragment) throws NoSuchFileException, IllegalArgumentException, IOException {
+		return injectFunctionFragment_helper(fragment, null);
+	}
+	
+	private FragmentVariant injectFunctionFragment_helper(FunctionFragment fragment, Operator op) throws NoSuchFileException, IllegalArgumentException, IOException {
 	//Check Input
 		//Check pointers
 		Objects.requireNonNull(fragment);
@@ -409,39 +517,28 @@ public class Fork {
 		}
 		
 	//Get location to inject at
-		FunctionFragment f;
+		FunctionFragment injectafter;
 		//continue to choose until a suitable location is found, or all exhausted
 		while(true) {
 			//pick a previously unchosen function fragment at random
-			f = fork.getRandomFunctionFragmentNoFileRepeats();
+			injectafter = fork.getRandomFunctionFragmentNoFileRepeats();
 			
 			//if all exhausted, return failure
-			if(f == null) {
+			if(injectafter == null) {
 				return null;
 			}
 			
 			//ensure fragment perfectly frames a function
-			if(FragmentUtil.isFunction(f, fork.getLanguage())) {
+			if(FragmentUtil.isFunction(injectafter, fork.getLanguage())) {
 				
 				//ensure file has not been previously modified (this shouldn't occur)
-				if(!changedFiles.contains(f.getSrcFile().toAbsolutePath().normalize())) {
-					
-					//This is the fragment to use, add its file to changed files and continue
-					changedFiles.add(f.getSrcFile().toAbsolutePath().normalize());
+				if(!changedFiles.contains(injectafter.getSrcFile().toAbsolutePath().normalize())) {
 					break;
 				}
 			}
 		}
-		
-		//Inject into file
-		FragmentUtil.injectFragment(f.getSrcFile(), f.getEndLine()+1, fragment);
-		
-		//Make record
-		FragmentVariant fv = new FragmentVariant(fragment, new FunctionFragment(f.getSrcFile(), f.getEndLine()+1, f.getEndLine() + 1 + (fragment.getEndLine()-fragment.getStartLine())), null);
-		variants.add(fv);
-		functionfragmentvariants.add(fv);
-		
-		//Return variant
-		return fv;
+	
+	//Inject and return
+		return injectFunctionFragment_helper(fragment, injectafter, op);
 	}
 }

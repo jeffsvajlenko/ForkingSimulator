@@ -460,6 +460,8 @@ public class ForkTest {
 			assertTrue(fork.getFunctionFragmentVariants().size() == 1);
 			assertTrue(fork.getVariants().get(0).equals(fv));
 			assertTrue(fork.getFunctionFragmentVariants().get(0).equals(fv));
+			assertTrue(fork.getOriginalModifiedFiles().size() == 1);
+			assertTrue(fork.getOriginalModifiedFiles().contains(fv.getInjectedFragment().getSrcFile().toAbsolutePath().normalize()));
 			
 			InventoriedSystem check = new InventoriedSystem(Paths.get("testdata/testfork/"), "java");
 			assertTrue(check.getFunctionFragments().contains(fv.getInjectedFragment()));
@@ -505,6 +507,7 @@ public class ForkTest {
 				assertTrue(fork.getFunctionFragmentVariants().size() == i+1);
 				assertTrue(fork.getVariants().get(i).equals(fv));
 				assertTrue(fork.getFunctionFragmentVariants().get(i).equals(fv));
+				assertTrue(fork.getOriginalModifiedFiles().size() == i+1);
 			}
 			
 			//Check variant info
@@ -522,6 +525,12 @@ public class ForkTest {
 			InventoriedSystem check = new InventoriedSystem(Paths.get("testdata/testfork/"), "java");
 			for(int j = 0; j < fv_c.size(); j++) {
 				assertTrue(check.getFunctionFragments().contains(fv_c.get(j).getInjectedFragment()));
+			}
+			
+			//check modified files
+			assertTrue(fork.getOriginalModifiedFiles().size() == fv_c.size());
+			for(FragmentVariant fv : fv_c) {
+				assertTrue(fork.getOriginalModifiedFiles().contains(fv.getInjectedFragment().getSrcFile().toAbsolutePath().normalize()));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
