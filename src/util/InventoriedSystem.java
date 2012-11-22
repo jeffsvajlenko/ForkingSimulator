@@ -123,24 +123,24 @@ public class InventoriedSystem {
 	}
 	
 	/**
-	 * Returns an unmodifiable list of all files in the system.
-	 * @return an unmodifiable list of all files in the system.
+	 * Returns an unmodifiable list of all files in the system.  The paths are absolute and normalized.
+	 * @return an unmodifiable list of all files in the system.  The paths are absolute and normalized.
 	 */
 	public List<Path> getFiles() {
 		return Collections.unmodifiableList(this.files);
 	}
 	
 	/**
-	 * Returns an unmodifiable list of all directories in the system.
-	 * @return an unmodifiable list of all directories in the system.
+	 * Returns an unmodifiable list of all directories in the system.  The paths are absolute and normalized.
+	 * @return an unmodifiable list of all directories in the system.  The paths are absolute and normalized.
 	 */
 	public List<Path> getDirectories() {
 		return Collections.unmodifiableList(this.directories);
 	}
 	
 	/**
-	 * Returns an unmodifiable list of all the leaf directories in the system.
-	 * @return an unmodifiable list of all the leaf directories in the system.
+	 * Returns an unmodifiable list of all the leaf directories in the system.  The paths are absolute and normalized.
+	 * @return an unmodifiable list of all the leaf directories in the system.  The paths are absolute and normalized.
 	 */
 	public List<Path> getLeafDirectories() {
 		return Collections.unmodifiableList(this.leafDirectories);
