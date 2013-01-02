@@ -588,7 +588,28 @@ public class CheckSimulation {
 			}
 			
 		//Directories
+			List<Path> directories = new LinkedList<Path>();
+			for(Path p : system_is.getDirectories()) {
+				Path np = Paths.get(p.toAbsolutePath().toString().replaceFirst(systemdir.toString(), outputdir.resolve("" + i).toString()));
+				directories.add(np.toAbsolutePath().normalize());
+			}
 			
+			//check
+			for(Path p : directory_tracker.get(i)) {
+				if(!fork_is.getDirectories().contains(p.toAbsolutePath().normalize())) {
+					System.out.println("Fork(" + i + ") - Fork is missing an injected directory : " + p);
+				}
+			}
+			for(Path p : directories) {
+				if(!fork_is.getDirectories().contains(p.toAbsolutePath().normalize())) {
+					System.out.println("Fork(" + i + ") - Fork is missing a directory from the original system : " + p);
+				}
+			}
+			for(Path p : fork_is.getDirectories()) {
+				if(!directories.contains(p.toAbsolutePath().normalize()) && !directory_tracker.get(i).contains(p.toAbsolutePath().normalize())) {
+					System.out.println("Fork(" + i + ") - Fork is missing a directory from the original system : " + p);
+				}
+			}
 			
 		//Fragments
 			//check unchanged original files are not modified ((changed and non-original were checked previously))
