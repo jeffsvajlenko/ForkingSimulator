@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Scanner;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
 
 import models.FunctionFragment;
 import util.FileUtil;

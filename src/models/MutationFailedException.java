@@ -2,6 +2,8 @@ package models;
 
 public class MutationFailedException extends Exception {
 
+	private static final long serialVersionUID = -3247087801513569682L;
+
 	public MutationFailedException() {
 		// TODO Auto-generated constructor stub
 	}
