@@ -22,6 +22,18 @@ public class FileVariant extends Variant {
 	}
 	
 	/**
+	 * Returns if the file variant's file name was mutated.
+	 * @return if the file variant's file name was mutated.
+	 */
+	public boolean isNameMutated() {
+		if(originalfile.getFileName().equals(injectedfile.getFileName())) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	/**
 	 * Returns the path to the original file.
 	 * @return the path to the original file.
 	 */

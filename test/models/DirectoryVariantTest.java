@@ -72,6 +72,15 @@ public class DirectoryVariantTest {
 	}
 	
 	@Test
+	public void testIsMutated() {
+		FileVariant fvn = new FileVariant(Paths.get("/path/to/file1/"), Paths.get("/newpath/to/file1/"));
+		FileVariant fvm = new FileVariant(Paths.get("/path/to/file1/"), Paths.get("/newpath/to/file2/"));
+		System.out.println("");
+		assertEquals(false, fvn.isNameMutated());
+		assertEquals(true, fvm.isNameMutated());
+	}
+	
+	@Test
 	public void testToString() {
 		DirectoryVariant dv = new DirectoryVariant(Paths.get("/original/"), Paths.get("/injected/"));
 		assertEquals(dv.toString(), "DirectoryVariant[original: /original, injected: /injected]");

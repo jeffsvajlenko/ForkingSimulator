@@ -70,6 +70,15 @@ public class FileVariantTest {
 		dv = new FileVariant(Paths.get("alt/original/"), Paths.get("alter/injected/"));
 		assertEquals(dv.getInjectedFile().toAbsolutePath().normalize().toString(), Paths.get("alter/injected/").toAbsolutePath().normalize().toString());
 	}
+	
+	@Test
+	public void testIsMutated() {
+		FileVariant fvn = new FileVariant(Paths.get("/path/to/file1"), Paths.get("/newpath/to/file1"));
+		FileVariant fvm = new FileVariant(Paths.get("/path/to/file1"), Paths.get("/newpath/to/file2"));
+		System.out.println("");
+		assertEquals(false, fvn.isNameMutated());
+		assertEquals(true, fvm.isNameMutated());
+	}
 
 	@Test
 	public void testToString() {

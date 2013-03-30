@@ -21,6 +21,18 @@ public class DirectoryVariant extends Variant {
 	}
 	
 	/**
+	 * Returns if the directory variant's directory name was mutated.
+	 * @return if the directory variant's directory name was mutated.
+	 */
+	public boolean isNameMutated() {
+		if(this.originaldirectory.getFileName().equals(injecteddirectory.getFileName())) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	/**
 	 * Returns a path to the original directory.
 	 * @return a path to the original directory.
 	 */
