@@ -5,5 +5,5 @@
 #$3 mutator
 #$4 infile
 #$5 outfile
-
-"$1" -o "$5" "$4"  "$3"/"$2"/mCW_R.txl
+ulimit -s hard
+"$1" -s 400 -o "$5" "$4"  "$3"/"$2"/mCW_R.txl

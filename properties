@@ -1,11 +1,11 @@
-system=resources/JHotDraw54b1_src/
-repository=resources/java_src
+system=experiment/JHotDraw54b1
+repository=experiment/OpenJDK6b27
 language=java
 numfiles=50
 numdirectories=10
-numfragments=480
+numfragments=150
 maxinjectnum=5
-numforks=6
+numforks=5
 mutationrate=50
 injectionrepetitionrate=30
 mutationattempts=20
