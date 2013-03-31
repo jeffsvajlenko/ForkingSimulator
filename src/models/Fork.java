@@ -167,9 +167,24 @@ public class Fork {
 	 * @return A FileVariant describing the injection, or null if a injection site could not be found.
 	 * @throws IOException If an IO exception occurs during injection.  An IOException occurring may leave the Fork in a bad state!
 	 * @throws IllegalArgumentException If the file path does not point to an existing file.
+	 * @throws NullPointerException If any of the arguments are null.
 	 */
-	public FileVariant injectFile(Path file) throws IOException {
+	public FileVariant injectFile(Path file) throws IOException, IllegalArgumentException, NullPointerException {
+		return injectFile(file, file.getFileName());
+	}
+	
+	/**
+	 * Injects a file into this fork.
+	 * @param file A path to the file to inject.
+	 * @return A FileVariant describing the injection, or null if a injection site could not be found.
+	 * @throws IOException If an IO exception occurs during injection.  An IOException occurring may leave the Fork in a bad state!
+	 * @throws IllegalArgumentException If the file path does not point to an existing file.
+	 * @throws NullPointerException If any of the arguments are null.
+	 */
+	public FileVariant injectFile(Path file, Path newName) throws IOException, IllegalArgumentException, NullPointerException {
 		//Check input
+		Objects.requireNonNull(file);
+		Objects.requireNonNull(newName);
 		if(!Files.exists(file)) {
 			throw new IllegalArgumentException("File does not exist.");
 		}
@@ -192,7 +207,7 @@ public class Fork {
 			}
 		}
 		
-		return injectFileAt(file, injectin);
+		return injectFileAt(file, newName, injectin);
 	}
 
 	/**
