@@ -11,6 +11,7 @@ import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 
+import util.FilenameGenerator;
 import util.FragmentUtil;
 import util.InventoriedSystem;
 
@@ -215,7 +216,12 @@ public class ForkingSimulator {
 			if(!isInjectionUniform) { //Non-Uniform Injection Location
 				for(int forkn : injects) {
 					try {
-						FileVariant fv = forks.get(forkn).injectFile(file);
+						FileVariant fv;
+						if(random.nextInt(100)+1 <= properties.getMutationRate()) {
+							fv = forks.get(forkn).injectFile(file, Paths.get(FilenameGenerator.getRandomFilename(5, 20)));
+						} else {
+							fv = forks.get(forkn).injectFile(file);
+						}
 						if(fv != null) {
 							t_forks.add(forkn);
 							t_variants.add(fv);
@@ -236,13 +242,27 @@ public class ForkingSimulator {
 					try {
 						Fork fork = forks.get(forkn);
 						Path thisinjectin = fork.getLocation().toAbsolutePath().normalize().resolve(injectin).toAbsolutePath().normalize();
-						if(!Files.exists(thisinjectin.resolve(file.getFileName()))) { //dont inject if already file there with same name
-							FileVariant fv = fork.injectFileAt(file, thisinjectin);
-							if(fv != null) {
-								t_forks.add(forkn);
-								t_variants.add(fv);
+						
+						FileVariant fv;
+						if(random.nextInt(100)+1 <= properties.getMutationRate()) {
+							String newName = FilenameGenerator.getRandomFilename(5, 20);
+							if(!Files.exists(thisinjectin.resolve(Paths.get(newName)))) { //dont inject if already file there with same name
+								fv = fork.injectFileAt(file, Paths.get(newName), thisinjectin);
+							} else {
+								fv = null;
+							}
+						} else {
+							if(!Files.exists(thisinjectin.resolve(file.getFileName()))) { //dont inject if already file there with same name
+								fv = fork.injectFileAt(file, thisinjectin);
+							} else {
+								fv = null;
 							}
 						}
+						if(fv != null) {
+							t_forks.add(forkn);
+							t_variants.add(fv);
+						}
+						
 					} catch (IOException e) {
 						System.out.println("Failed to inject file into a fork (IOException).  Could be a permission error, or something else is interacting with the fork's files.");
 						return;
@@ -251,22 +271,47 @@ public class ForkingSimulator {
 				assert(t_forks.size() == t_variants.size()) : "t_forks and t_variants not same size... debug";
 			}
 			
-		//Check success (increment counter) and report effects
+		//If successful (at leat one variant introduced), increment counter, and report effects (output)
 			if(t_variants.size() > 0) {
+				//Increment counter
 				numf++;
+				
+				//Make Referenced Data Directory
+				try {
+					Files.createDirectories(outputdir.resolve("files/" + numf));
+				} catch (IOException e1) {
+					System.err.println("Failed to create directory to store file injection records...");
+					System.exit(-1);
+				}
+				
+			//File Injection Header and Refereced Data
 				if(isInjectionUniform) {
 					System.out.println(numf + " U " + t_variants.size() + " " + file.toAbsolutePath().normalize().toString());
 				} else {
 					System.out.println(numf + " V " + t_variants.size() + " " + file.toAbsolutePath().normalize().toString());
 				}
-				for(int i = 0; i < t_forks.size(); i++) {
-					System.out.println("\t" + t_forks.get(i) + " " + t_variants.get(i).getInjectedFile());
-				}
+				//Save Original Copy
 				try {
-					Files.copy(file, outputdir.resolve("files/" + numf));
+					Files.copy(file, outputdir.resolve("files/" + numf + "/original"));
 				} catch (IOException e) {
-					System.err.println("Failed to save injected file record...");
+					System.err.println("Failed to save injected file record (original copy)...");
 					System.exit(-1);
+				}
+				
+			//Per Injection Information and Referenced Data
+				for(int i = 0; i < t_forks.size(); i++) {
+					if(t_variants.get(i).isNameMutated()) {
+						System.out.println("\t" + t_forks.get(i) + " M " + t_variants.get(i).getInjectedFile());
+					} else {
+						System.out.println("\t" + t_forks.get(i) + " O " + t_variants.get(i).getInjectedFile());
+					}
+					//Save copy of possibly mutated
+					try {
+						Files.copy(t_variants.get(i).getInjectedFile(), outputdir.resolve("files/" + numf + "/" + t_forks.get(i)));
+					} catch (IOException e) {
+						System.err.println("Failed to save injected file record (original copy)...");
+						System.exit(-1);
+					}
 				}
 			}
 		}
@@ -318,7 +363,12 @@ public class ForkingSimulator {
 			if(!isInjectionUniform) { //non-uniform injection location
 				for(int forkn : injects) {
 					try {
-						DirectoryVariant dv = forks.get(forkn).injectDirectory(dir);
+						DirectoryVariant dv;
+						if(random.nextInt(100)+1 <= properties.getMutationRate()) {
+							dv = forks.get(forkn).injectDirectory(dir, Paths.get(FilenameGenerator.getRandomFilename(5, 20)));
+						} else {
+							dv = forks.get(forkn).injectDirectory(dir);
+						}
 						if(dv != null) {
 							t_forks.add(forkn);
 							t_variants.add(dv);
@@ -339,12 +389,28 @@ public class ForkingSimulator {
 					try {
 						Fork fork = forks.get(forkn);
 						Path thisinjectin = fork.getLocation().toAbsolutePath().normalize().resolve(injectin).toAbsolutePath().normalize();
-						if(!Files.exists(thisinjectin.resolve(dir.getFileName()))) {
-							DirectoryVariant dv = fork.injectDirectory(dir, thisinjectin);
-							if(dv != null) {
-								t_forks.add(forkn);
-								t_variants.add(dv);
+						DirectoryVariant dv;
+						
+						//Mutate, or not mutate
+						if(random.nextInt(100)+1 <= properties.getMutationRate()) {
+							String newName = FilenameGenerator.getRandomFilename(5, 20);
+							//Check injection can succeed, else fail it
+							if(!Files.exists(thisinjectin.resolve(newName))) {
+								dv = fork.injectDirectoryAt(dir, Paths.get(newName), thisinjectin);
+							} else {
+								dv = null;
 							}
+						} else {
+							//Check injection can succeed, else fail it
+							if(!Files.exists(thisinjectin.resolve(dir.getFileName()))) {
+								dv = fork.injectDirectoryAt(dir, thisinjectin);
+							} else {
+								dv = null;
+							}
+						}
+						if(dv != null) {
+							t_forks.add(forkn);
+							t_variants.add(dv);
 						}
 					} catch (IOException e) {
 						System.out.println("Failed to inject directory into a fork (IOException).  Could be a permission error, or something else is interacting with the fork's files.");
@@ -357,20 +423,43 @@ public class ForkingSimulator {
 		//Check success (increment counter) and report effects
 			if(t_variants.size() != 0) {
 				numd++;
+				
+				//Create ref data folder
+				try {
+					Files.createDirectories(dirVariantDir.resolve("" + numd));
+				} catch (IOException e) {
+					System.err.println("Failed to create directory variant ref folder...");
+					System.exit(-1);
+				}
+				
 				if(isInjectionUniform) {
 					System.out.println(numd + " U " + t_forks.size() + " " + dir.toAbsolutePath().normalize().toString());
 				} else {
 					System.out.println(numd + " V " + t_forks.size() + " " + dir.toAbsolutePath().normalize().toString());
 				}
-				for(int i = 0; i < t_forks.size(); i++) {
-					System.out.println("\t" + t_forks.get(i) + " " + t_variants.get(i).getInjectedDirectory());
-				}
+				//Track original folder
 				try {
-					FileUtils.copyDirectory(dir.toFile(), dirVariantDir.resolve("" + numd).toFile());
+					FileUtils.copyDirectory(dir.toFile(), dirVariantDir.resolve("" + numd).resolve("original").toFile());
 				} catch (IOException e) {
-					System.err.println("Failed to save injected dir record...");
+					System.err.println("Failed to save original dir record...");
 					System.exit(-1);
 				}
+				
+				for(int i = 0; i < t_forks.size(); i++) {
+					if(t_variants.get(i).isNameMutated()) {
+						System.out.println("\t" + t_forks.get(i) + " M " + t_variants.get(i).getInjectedDirectory());
+					} else {
+						System.out.println("\t" + t_forks.get(i) + " O " + t_variants.get(i).getInjectedDirectory());
+					}
+					try {
+						FileUtils.copyDirectory(t_variants.get(i).getInjectedDirectory().toFile(), dirVariantDir.resolve("" + numd).resolve("" + t_forks.get(i)).toFile());
+					} catch (IOException e) {
+						System.err.println("Failed to save injected dir record...");
+						e.printStackTrace();
+						System.exit(-1);
+					}
+				}
+				
 			}
 		}
 		System.out.println("END: DirectoryVariants");

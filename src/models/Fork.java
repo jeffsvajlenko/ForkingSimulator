@@ -201,13 +201,13 @@ public class Fork {
 				return null;
 			} else {
 				injectin = directories.remove(random.nextInt(directories.size()));
-				if(!Files.exists(Paths.get(injectin.toString(), file.getFileName().toString()))) { //check file does not already exist with same name in the location
+				if(!Files.exists(Paths.get(injectin.toString(), newName.getFileName().toString()))) { //check file does not already exist with same name in the location
 					break;
 				}
 			}
 		}
 		
-		return injectFileAt(file, newName, injectin);
+		return injectFileAt(file, newName.getFileName(), injectin);
 	}
 
 	/**
@@ -257,7 +257,7 @@ public class Fork {
 		Objects.requireNonNull(newName);
 		
 		//Check injection will not overwrite anything
-		if(Files.exists(injectin.resolve(file.getFileName()))) {
+		if(Files.exists(injectin.resolve(newName.getFileName()))) {
 			throw new IllegalArgumentException("Can not inject there, already exists file with same name.");
 		}
 		
@@ -321,13 +321,13 @@ public class Fork {
 				return null;
 			} else {
 				injectin = directories.remove(random.nextInt(directories.size()));
-				if(!Files.exists(Paths.get(injectin.toString(), directory.getFileName().toString()))) { //check file does not already exist with same name in the location
+				if(!Files.exists(Paths.get(injectin.toString(), newName.getFileName().toString()))) { //check file does not already exist with same name in the location
 					break;
 				}
 			}
 		}
 		
-		return injectDirectoryAtInjectionLocation(directory, newName, injectin);
+		return injectDirectoryAt(directory, newName.getFileName(), injectin);
 	}
 	
 	/**
@@ -340,7 +340,7 @@ public class Fork {
 	 * @throws NullPointerException If directory or injectin are null.
 	 * @throws IllegalArgumnetException If directory is invalid (does not exist, is not a directory), or if injectin is invalid (does not exist, is not a directory, is not in fork).
 	 */
-	public DirectoryVariant injectDirectoryAtInjectionLocation(Path directory, Path injectin) throws IOException, NullPointerException, IllegalArgumentException {
+	public DirectoryVariant injectDirectoryAt(Path directory, Path injectin) throws IOException, NullPointerException, IllegalArgumentException {
 		//Check input
 		Objects.requireNonNull(directory);
 		if(!Files.exists(directory)) {
@@ -357,7 +357,7 @@ public class Fork {
 			throw new IllegalArgumentException("Inject Directory is not a directory.");
 		}
 		
-		return injectDirectoryAtInjectionLocation(directory, directory.getFileName(), injectin);
+		return injectDirectoryAt(directory, directory.getFileName(), injectin);
 	}
 	
 	/**
@@ -370,7 +370,7 @@ public class Fork {
 	 * @throws NullPointerException If directory or injectin are null.
 	 * @throws IllegalArgumnetException If directory is invalid (does not exist, is not a directory), or if injectin is invalid (does not exist, is not a directory, is not in fork).
 	 */
-	public DirectoryVariant injectDirectoryAtInjectionLocation(Path directory, Path newName, Path injectin) throws IOException, NullPointerException, IllegalArgumentException {
+	public DirectoryVariant injectDirectoryAt(Path directory, Path newName, Path injectin) throws IOException, NullPointerException, IllegalArgumentException {
 		//Check input
 		Objects.requireNonNull(directory);
 		if(!Files.exists(directory)) {
@@ -408,7 +408,7 @@ public class Fork {
 		}
 		
 		//Check injection will not overwrite anything
-		if(Files.exists(injectin.resolve(directory.getFileName()))) {
+		if(Files.exists(injectin.resolve(newName.getFileName()))) {
 			throw new IllegalArgumentException("Can not inject there, already exists file with same name.");
 		}
 		
@@ -416,7 +416,7 @@ public class Fork {
 		FileUtils.copyDirectory(directory.toFile(), Paths.get(injectin.toString(), newName.getFileName().toString()).toFile());
 		
 		//Make a record of this interaction
-		DirectoryVariant v = new DirectoryVariant(directory.toAbsolutePath().normalize(), Paths.get(injectin.toString(), directory.getFileName().toString()).toAbsolutePath().normalize());
+		DirectoryVariant v = new DirectoryVariant(directory.toAbsolutePath().normalize(), Paths.get(injectin.toString(), newName.getFileName().toString()).toAbsolutePath().normalize());
 		variants.add(v);
 		directoryvariants.add(v);
 		

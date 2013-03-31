@@ -120,11 +120,11 @@ public class CheckSimulation {
 				System.out.println("Original file referenced by file variant " + filenum + " is not a regular file.");
 				System.exit(-1);
 			}
-			if (!Files.exists(outputdir.resolve("files/" + filenum))) {
+			if (!Files.exists(outputdir.resolve("files/" + filenum + "/original"))) {
 				System.out.println("Original file for file variant " + filenum + " was not recorded in files/.");
 				System.exit(-1);
 			}
-			if (!filesEqual(originalfile, outputdir.resolve("files/" + filenum))) {
+			if (!filesEqual(originalfile, outputdir.resolve("files/" + filenum + "/original"))) {
 				System.out.println("Original file for file variant " + filenum + " was not recorded properly in files/ (record does not match original).");
 				System.exit(-1);
 			}
@@ -144,10 +144,19 @@ public class CheckSimulation {
 				// get information
 				lin = new Scanner(line);
 				int forknum = lin.nextInt();
+				char cIsMutated = lin.next().charAt(0);
+				boolean isMutated;
+				if(cIsMutated == 'M') {
+					isMutated = true;
+				} else {
+					isMutated = false;
+				}
 				Path injectedfile = Paths.get(lin.next());
 				lin.close();
 
 				Path forkpath = outputdir.resolve("" + forknum).toAbsolutePath().normalize();
+				
+				//Check Uniform
 				if(isUniform) {
 					if(i == 0) {
 						uniformpathstorage = forkpath.relativize(injectedfile.getParent()).normalize();
@@ -178,6 +187,23 @@ public class CheckSimulation {
 				if (!filesEqual(originalfile, injectedfile)) {
 					System.out.println("File injected does not match its original.  File: " + filenum + " Fork: " + forknum + " OFile: " + originalfile + " IFile: " + injectedfile);
 					System.exit(-1);
+				}
+				
+				// check reference
+				if (!filesEqual(injectedfile, outputdir.resolve("files/" + filenum + "/" + forknum))) {
+					System.out.println("Reference file for file " + filenum + " and fork " + forknum + " does not equal the injected.");
+					System.exit(-1);
+				}
+				
+				//Check Mutation
+				if(isMutated) {
+					if(originalfile.getFileName().equals(injectedfile.getFileName())) {
+						System.out.println("File injected was mutated, but its filename is the same as the original. File: " + filenum + " Fork: " + forknum + " OFile: " + originalfile + " IFile: " + injectedfile);
+					}
+				} else {
+					if(!originalfile.getFileName().equals(injectedfile.getFileName())) {
+						System.out.println("File injected was not mutated, but its filename differs form original. File: " + filenum + " Fork: " + forknum + " OFile: " + originalfile + " IFile: " + injectedfile);
+					}
 				}
 			}
 		}
@@ -244,11 +270,11 @@ public class CheckSimulation {
 				System.out.println("Original dir referenced by dir variant " + dirnum + " is not a leaf directory.");
 				System.exit(-1);
 			}
-			if (!Files.exists(outputdir.resolve("dirs/" + dirnum))) {
+			if (!Files.exists(outputdir.resolve("dirs/" + dirnum + "/original/"))) {
 				System.out.println("Original directory for dir variant " + dirnum + " was not recorded in dirs/.");
 				System.exit(-1);
 			}
-			if (!leafDirectoryEqual(originaldir, outputdir.resolve("dirs/" + dirnum))) {
+			if (!leafDirectoryEqual(originaldir, outputdir.resolve("dirs/" + dirnum + "/original/"))) {
 				System.out.println("Original directory for dir variant " + dirnum + " was not recorded properly in dirs/.");
 				return;
 			}
@@ -268,6 +294,13 @@ public class CheckSimulation {
 				// get information
 				lin = new Scanner(line);
 				int forknum = lin.nextInt();
+				char cIsMutated = lin.next().charAt(0);
+				boolean isMutated;
+				if(cIsMutated == 'M') {
+					isMutated = true;
+				} else {
+					isMutated = false;
+				}
 				Path injecteddir = Paths.get(lin.next());
 				lin.close();
 
@@ -306,6 +339,29 @@ public class CheckSimulation {
 				if (!leafDirectoryEqual(originaldir, injecteddir)) {
 					System.out.println("Directory injected does not match its original.  DirNum: " + dirnum + " Fork: " + forknum + " OFile: " + originaldir + " IFile: " + injecteddir);
 					System.exit(-1);
+				}
+				
+				//check reference
+				if (!Files.exists(outputdir.resolve("dirs/" + dirnum + "/" + forknum + "/"))) {
+					System.out.println("Injected directory for dir variant " + dirnum + " and fork " + forknum + " was not recorded in dirs/.");
+					System.exit(-1);
+				}
+				if (!leafDirectoryEqual(injecteddir, outputdir.resolve("dirs/" + dirnum + "/"  + forknum + "/"))) {
+					System.out.println("Injected directory for dir variant " + dirnum + " and fork " + forknum + " was not recorded properly in dirs/.");
+					return;
+				}
+				
+				//Check Mutation
+				if(isMutated) {
+					if(originaldir.getFileName().equals(injecteddir.getFileName())) {
+						System.out.println("Directory injected was mutated, but its name matches original.  DirNum: " + dirnum + " Fork: " + forknum + " OFile: " + originaldir + " IFile: " + injecteddir);
+						System.exit(-1);
+					}
+				} else {
+					if(!originaldir.getFileName().equals(injecteddir.getFileName())) {
+						System.out.println("Directory injected was not mutated, but its name does not matche original.  DirNum: " + dirnum + " Fork: " + forknum + " OFile: " + originaldir + " IFile: " + injecteddir);
+						System.exit(-1);
+					}
 				}
 			}
 		}
