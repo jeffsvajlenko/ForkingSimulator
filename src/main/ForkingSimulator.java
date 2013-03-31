@@ -237,7 +237,7 @@ public class ForkingSimulator {
 						Fork fork = forks.get(forkn);
 						Path thisinjectin = fork.getLocation().toAbsolutePath().normalize().resolve(injectin).toAbsolutePath().normalize();
 						if(!Files.exists(thisinjectin.resolve(file.getFileName()))) { //dont inject if already file there with same name
-							FileVariant fv = fork.injectFile(file, thisinjectin);
+							FileVariant fv = fork.injectFileAt(file, thisinjectin);
 							if(fv != null) {
 								t_forks.add(forkn);
 								t_variants.add(fv);

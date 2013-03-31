@@ -192,9 +192,9 @@ public class Fork {
 			}
 		}
 		
-		return injectFile(file, injectin);
+		return injectFileAt(file, injectin);
 	}
-	
+
 	/**
 	 * Injects a file into the fork into a specified directory of the fork.
 	 * @param file The file to inject.
@@ -204,7 +204,21 @@ public class Fork {
 	 * @throws NullPointerException If file or injectin are null.
 	 * @throws IllegalArgumnetException If file is invalid (does not exist, is not a regular file), or if injectin is invalid (does not exist, is not a directory, is not in fork).
 	 */
-	public FileVariant injectFile(Path file, Path injectin) throws IOException, NullPointerException, IllegalArgumentException {
+	public FileVariant injectFileAt(Path file, Path injectin) throws IOException, NullPointerException, IllegalArgumentException {
+		return injectFileAt(file, file.getFileName(), injectin);
+	}
+	
+	/**
+	 * Injects a file into the fork into a specified directory of the fork.
+	 * @param file The file to inject.
+	 * @param newName The new name for the injected file. If path contains multiple elements, rightmost is used.
+	 * @param injectin The directory to inject into.  Must be in the fork (has fork as root directory).
+	 * @return The file variant.
+	 * @throws IOException If an IO error occurs during file copy.  An IOException occurring may leave the Fork in a bad state!
+	 * @throws NullPointerException If file or injectin are null.
+	 * @throws IllegalArgumnetException If file is invalid (does not exist, is not a regular file), or if injectin is invalid (does not exist, is not a directory, is not in fork).
+	 */
+	public FileVariant injectFileAt(Path file, Path newName, Path injectin) throws IOException, NullPointerException, IllegalArgumentException {
 		//check input
 		Objects.requireNonNull(file);
 		Objects.requireNonNull(injectin);
@@ -225,6 +239,7 @@ public class Fork {
 		if(!injectin.startsWith(this.fork.getLocation())) {
 			throw new IllegalArgumentException("directory is not from the fork.");
 		}
+		Objects.requireNonNull(newName);
 		
 		//Check injection will not overwrite anything
 		if(Files.exists(injectin.resolve(file.getFileName()))) {
@@ -232,7 +247,7 @@ public class Fork {
 		}
 		
 		//Inject the file
-		Path injected = Files.copy(file, Paths.get(injectin.toString(), file.getFileName().toString()));
+		Path injected = Files.copy(file, Paths.get(injectin.toString(), newName.getFileName().toString()));
 				
 		//Make a record of this interaction
 		FileVariant v = new FileVariant(file.toAbsolutePath().normalize(), injected.toAbsolutePath().normalize());
@@ -261,6 +276,27 @@ public class Fork {
 			throw new IllegalArgumentException("Directory is not a directory.");
 		}
 		
+		return injectDirectory(directory, directory.getFileName());
+	}
+	
+	/**
+	 * Injects a directory into this fork.
+	 * @param directory The path to the directory to inject.
+	 * @param newName The new name for the injected directory. If path contains multiple elements, rightmost is used.
+	 * @return A DirectoryVariant describing the injection, or null if a injection site could not be found.
+	 * @throws IOException If an IO exception occurs during injection.  An IOException occurring may leave the Fork in a bad state!
+	 * @throws IllegalArgumentException If the directory path does not point to an existing directory.
+	 */
+	public DirectoryVariant injectDirectory(Path directory, Path newName) throws IOException {
+		//Check input
+		Objects.requireNonNull(directory);
+		if(!Files.exists(directory)) {
+			throw new IllegalArgumentException("Directory does not exist.");
+		}
+		if(!Files.isDirectory(directory)) {
+			throw new IllegalArgumentException("Directory is not a directory.");
+		}
+		
 		//Find a directory to inject this file into
 		Path injectin;
 		List<Path> directories = new LinkedList<Path>(this.fork.getDirectories());
@@ -276,22 +312,68 @@ public class Fork {
 			}
 		}
 		
-		return injectDirectory(directory, injectin);
+		return injectDirectoryAtInjectionLocation(directory, newName, injectin);
 	}
 	
 	/**
-	 * Injects a file into the fork into a specified directory of the fork.
+	 * Injects a directory into the fork into a specified directory of the fork.
 	 * @param directory The directory to inject.
 	 * @param injectin The directory to inject into.  Must be in the fork (has fork as root directory).
+	 * @param newName The new name for the injected directory. If path contains multiple elements, rightmost is used.
 	 * @return The directory variant.
 	 * @throws IOException If an IO error occurs during file copy.  An IOException occurring may leave the Fork in a bad state!
 	 * @throws NullPointerException If directory or injectin are null.
 	 * @throws IllegalArgumnetException If directory is invalid (does not exist, is not a directory), or if injectin is invalid (does not exist, is not a directory, is not in fork).
 	 */
-	public DirectoryVariant injectDirectory(Path directory, Path injectin) throws IOException, NullPointerException, IllegalArgumentException {
+	public DirectoryVariant injectDirectoryAtInjectionLocation(Path directory, Path injectin) throws IOException, NullPointerException, IllegalArgumentException {
 		//Check input
 		Objects.requireNonNull(directory);
+		if(!Files.exists(directory)) {
+			throw new IllegalArgumentException("Directory does not exist.");
+		}
+		if(!Files.isDirectory(directory)) {
+			throw new IllegalArgumentException("Directory is not a directory.");
+		}
 		Objects.requireNonNull(injectin);
+		if(!Files.exists(injectin)) {
+			throw new IllegalArgumentException("Inject Directory does not exist.");
+		}
+		if(!Files.isDirectory(injectin)) {
+			throw new IllegalArgumentException("Inject Directory is not a directory.");
+		}
+		
+		return injectDirectoryAtInjectionLocation(directory, directory.getFileName(), injectin);
+	}
+	
+	/**
+	 * Injects a directory into the fork into a specified directory of the fork.
+	 * @param directory The directory to inject.
+	 * @param injectin The directory to inject into.  Must be in the fork (has fork as root directory).
+	 * @param newName The new name for the injected directory. If path contains multiple elements, rightmost is used.
+	 * @return The directory variant.
+	 * @throws IOException If an IO error occurs during file copy.  An IOException occurring may leave the Fork in a bad state!
+	 * @throws NullPointerException If directory or injectin are null.
+	 * @throws IllegalArgumnetException If directory is invalid (does not exist, is not a directory), or if injectin is invalid (does not exist, is not a directory, is not in fork).
+	 */
+	public DirectoryVariant injectDirectoryAtInjectionLocation(Path directory, Path newName, Path injectin) throws IOException, NullPointerException, IllegalArgumentException {
+		//Check input
+		Objects.requireNonNull(directory);
+		if(!Files.exists(directory)) {
+			throw new IllegalArgumentException("Directory does not exist.");
+		}
+		if(!Files.isDirectory(directory)) {
+			throw new IllegalArgumentException("Directory is not a directory.");
+		}
+		Objects.requireNonNull(injectin);
+		if(!Files.exists(injectin)) {
+			throw new IllegalArgumentException("Inject Directory does not exist.");
+		}
+		if(!Files.isDirectory(injectin)) {
+			throw new IllegalArgumentException("Inject Directory is not a directory.");
+		}
+		Objects.requireNonNull(newName);
+		
+		
 		directory = directory.toAbsolutePath().normalize();
 		injectin = injectin.toAbsolutePath().normalize();
 		if(!Files.exists(directory)) {
@@ -316,7 +398,7 @@ public class Fork {
 		}
 		
 		//Inject the directory
-		FileUtils.copyDirectory(directory.toFile(), Paths.get(injectin.toString(), directory.getFileName().toString()).toFile());
+		FileUtils.copyDirectory(directory.toFile(), Paths.get(injectin.toString(), newName.getFileName().toString()).toFile());
 		
 		//Make a record of this interaction
 		DirectoryVariant v = new DirectoryVariant(directory.toAbsolutePath().normalize(), Paths.get(injectin.toString(), directory.getFileName().toString()).toAbsolutePath().normalize());
