@@ -50,7 +50,7 @@ include "random.mod"
 function main
 	% Probability of mutation is 1/N, that is, 1 in N instances will be mutated
 	export N [number]
-		1501
+	10000
 	export CheckN [number]
 	0
 	% We need an example of a space to insert 
@@ -67,9 +67,10 @@ function main
 	replace [program]
 		P [program]
 	by
-		P [checkMutatable]
-	  [mutate P]
+		P [checkMutatable] [mutate P]
 end function
+
+%[stringlit] [charlit] [number]
 
 % Can we mutate this input?
 function checkMutatable
@@ -88,15 +89,15 @@ function mutate OriginalP [program]
 	deconstruct P
 		OriginalP
 	by
-		P [mutateString] [mutate OriginalP]
+		P [mutateNumber] [mutate OriginalP]
 end function
 
-% Choose some string and change it
-rule mutateString
+% Choose some number and change it
+rule mutateNumber
 	import N [number]
 	import CheckN [number]
-	replace $ [stringlit]
-		String [stringlit]
+	replace $ [number]
+		Id [number]
 	construct Random [number]
 		_ [rand N]
 	deconstruct not CheckN
@@ -104,24 +105,24 @@ rule mutateString
 	export CheckN
 		Random
 	deconstruct Random
-		1
-   	construct _ [stringlit]
-		_ [pragma "-token"] [randstring] [pragma "-char"]
-	import RandString [stringlit]
-	deconstruct not String
-		RandString
+			1
+   	construct _ [id]
+			_ [pragma "-token"] [randint] [pragma "-char"]
+	import RandInt [number]
+	deconstruct not Id
+		RandInt
 	by
-		RandString
+		RandInt
 end rule
 
-function randstring
+function randint
 	construct _ [number]
-		_ [system "echo $RANDOM | md5sum | sed -e 's/  -//' | sed -e 's/$/\"/' | sed -e 's/^/\"/' > _rands_"]
-	construct RandString [stringlit]
-		_ [read "_rands_"]
-	construct _ [stringlit]
-		_ [system "/bin/rm -f _rands_"]
-	export RandString
+	_ [system "bash -c 'echo $RANDOM' > _rand_"]
+	construct RandInt [number]
+	_ [read "_rand_"]
+	construct _ [number]
+		_ [system "/bin/rm -f _rand_"]
+	export RandInt
 	match [any]
 		_ [any]
 end function

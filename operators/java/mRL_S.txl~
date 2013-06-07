@@ -2,7 +2,7 @@
 #pragma -char -comment
 
 % C tokens, so we don't break them up
-include "ctokens.grm"
+include "jtokens.grm"
 
 % Separate sequences of spaces and tabs so they cn be individually added or deleted
 tokens
@@ -50,9 +50,9 @@ include "random.mod"
 function main
 	% Probability of mutation is 1/N, that is, 1 in N instances will be mutated
 	export N [number]
-		1501
+		9999
 	export CheckN [number]
-	0
+		0
 	% We need an example of a space to insert 
 	construct SpaceNewline [opt line]
 		_ [parse " "]
@@ -67,8 +67,7 @@ function main
 	replace [program]
 		P [program]
 	by
-		P [checkMutatable]
-	  [mutate P]
+		P [checkMutatable] [mutate P]
 end function
 
 % Can we mutate this input?

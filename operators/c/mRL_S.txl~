@@ -50,7 +50,7 @@ include "random.mod"
 function main
 	% Probability of mutation is 1/N, that is, 1 in N instances will be mutated
 	export N [number]
-		1501
+		10000
 	export CheckN [number]
 	0
 	% We need an example of a space to insert 
@@ -104,9 +104,9 @@ rule mutateString
 	export CheckN
 		Random
 	deconstruct Random
-		1
+			1
    	construct _ [stringlit]
-		_ [pragma "-token"] [randstring] [pragma "-char"]
+			_ [pragma "-token"] [randstring] [pragma "-char"]
 	import RandString [stringlit]
 	deconstruct not String
 		RandString
@@ -115,10 +115,10 @@ rule mutateString
 end rule
 
 function randstring
-	construct _ [number]
-		_ [system "echo $RANDOM | md5sum | sed -e 's/  -//' | sed -e 's/$/\"/' | sed -e 's/^/\"/' > _rands_"]
+	construct _ [stringlit]
+	_ [system "bash -c 'echo $RANDOM | md5sum | sed -e \"s/ -//\"' > _rands_"]
 	construct RandString [stringlit]
-		_ [read "_rands_"]
+	_ [read "_rands_"]
 	construct _ [stringlit]
 		_ [system "/bin/rm -f _rands_"]
 	export RandString
