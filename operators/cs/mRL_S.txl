@@ -74,9 +74,9 @@ end function
 function checkMutatable
 	match [program]
 		P [program]
-	deconstruct not * [literal] P
+	deconstruct not * [stringlit] P
 		Id [literal]
-	construct Message [number]
+	construct Message [stringlit]
 		_ [message "*** ERROR: mutate_literal cannot mutate this file"] [quit 99]
 end function
 
