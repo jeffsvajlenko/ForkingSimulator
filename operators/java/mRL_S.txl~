@@ -50,7 +50,7 @@ include "random.mod"
 function main
 	% Probability of mutation is 1/N, that is, 1 in N instances will be mutated
 	export N [number]
-		9999
+		1501
 	export CheckN [number]
 		0
 	% We need an example of a space to insert 
@@ -74,8 +74,8 @@ end function
 function checkMutatable
 	match [program]
 		P [program]
-	deconstruct not * [literal] P
-		Id [literal]
+	deconstruct not * [stringlit] P
+		Id [stringlit]
 	construct Message [number]
 		_ [message "*** ERROR: mutate_literal cannot mutate this file"] [quit 99]
 end function
@@ -115,11 +115,15 @@ end rule
 
 function randstring
 	construct _ [number]
-		_ [system "echo $RANDOM | md5sum | sed -e 's/  -//' | sed -e 's/$/\"/' | sed -e 's/^/\"/' > _rands_"]
+		_ [system "bash -c 'echo $RANDOM | md5sum  > _rands_'"]
+	construct _ [number]
+		_ [system "cat _rands_ | sed -e 's/  -//' | sed -e 's/$/\"/' | sed -e 's/^/\"/' | > _rands2_"]
 	construct RandString [stringlit]
-		_ [read "_rands_"]
+		_ [read "_rands2_"]
 	construct _ [stringlit]
 		_ [system "/bin/rm -f _rands_"]
+	construct _ [stringlit]
+		_ [system "/bin/rm -f _rands2_"]
 	export RandString
 	match [any]
 		_ [any]

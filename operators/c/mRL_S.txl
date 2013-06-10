@@ -116,11 +116,15 @@ end rule
 
 function randstring
 	construct _ [number]
-		_ [system "echo $RANDOM | md5sum | sed -e 's/  -//' | sed -e 's/$/\"/' | sed -e 's/^/\"/' > _rands_"]
+		_ [system "bash -c 'echo $RANDOM | md5sum  > _rands_'"]
+	construct _ [number]
+		_ [system "cat _rands_ | sed -e 's/  -//' | sed -e 's/$/\"/' | sed -e 's/^/\"/' > _rands2_"]
 	construct RandString [stringlit]
-		_ [read "_rands_"]
+		_ [read "_rands2_"]
 	construct _ [stringlit]
 		_ [system "/bin/rm -f _rands_"]
+	construct _ [stringlit]
+		_ [system "/bin/rm -f _rands2_"]
 	export RandString
 	match [any]
 		_ [any]
