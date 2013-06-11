@@ -13,18 +13,33 @@ public class FragmentVariant extends Variant {
 	//The operator (if any)
 	private Operator operator;
 	
+	//Number times operator applied
+	int times;
+	
 	/**
 	 * Creates a fragment variant.
 	 * @param original the original fragment.
 	 * @param injected the injected fragment variant.
 	 */
-	public FragmentVariant(Fragment original, Fragment injected, Operator operator) {
+	public FragmentVariant(Fragment original, Fragment injected) {
+		this(original, injected, null, 0);
+	}
+	
+	/**
+	 * Creates a fragment variant with mutation information.
+	 * @param original the original fragment.
+	 * @param injected the injected fragment.
+	 * @param operator The operator used.
+	 * @param times The number of times the operator was applied.
+	 */
+	public FragmentVariant(Fragment original, Fragment injected, Operator operator, int times) {
 		super(Variant.FRAGMENT);
 		Objects.requireNonNull(original, "Original fragment is null.");
 		Objects.requireNonNull(injected, "Inejcted fragment is null.");
 		this.original = original;
 		this.injected = injected;
 		this.operator = operator;
+		this.times = times;
 	}
 	
 	/**
@@ -49,6 +64,10 @@ public class FragmentVariant extends Variant {
 	 */
 	public Operator getOperator() {
 		return operator;
+	}
+	
+	public int getTimes() {
+		return this.times;
 	}
 	
 	public String toString() {

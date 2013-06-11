@@ -6,7 +6,6 @@ import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.Scanner;
 
-
 public class Properties {
 	
 	private Path system;
@@ -18,35 +17,50 @@ public class Properties {
 	private String language;
 	private boolean setlanguage=false;
 	
-	private int numfiles;
-	private boolean setnumfiles=false;
+	private int numFiles;
+	private boolean setnumFiles=false;
 	
-	private int numdirectories;
-	private boolean setnumdirectories=false;
+	private int numDirectories;
+	private boolean setnumDirectories=false;
 	
-	private int numfragments;
-	private boolean setnumfragments=false;
+	private int numFragments;
+	private boolean setnumFragments=false;
 	
-	private int maxinjectnum;
-	private boolean setmaxinjectnum=false;
+	private int maxInjectNum;
+	private boolean setmaxInjectNum=false;
 	
-	private int numforks;
-	private boolean setnumforks=false;
+	private int numForks;
+	private boolean setnumForks=false;
 	
-	private int mutationrate;
-	private boolean setmutationrate=false;
+	private int fragmentMutationRate;
+	private boolean setfragmentMutationRate=false;
 	
-	private int mutationattempts;
-	private boolean setmutationattempts=false;
+	private int fileMutationRate;
+	private boolean setfileMutationRate=false;
 	
-	private int injectionrepetitionrate;
-	private boolean setinjectionrepetitionrate=false;
+	private int dirMutationRate;
+	private boolean setdirMutationRate=false;
 	
-	private int functionfragmentminsize;
-	private boolean setfunctionfragmentminsize=false;
+	private int mutationAttempts;
+	private boolean setmutationAttempts=false;
 	
-	private int functionfragmentmaxsize;
-	private boolean setfunctionfragmentmaxsize=false;
+	private int injectionRepetitionRate;
+	private boolean setinjectionRepetitionRate=false;
+	
+	private int functionFragmentMinSize;
+	private boolean setfunctionFragmentMinSize=false;
+	
+	private int functionFragmentMaxSize;
+	private boolean setfunctionFragmentMaxSize=false;
+	
+	private int maxFileEdit;
+	private boolean setmaxFileEdit=false;
+	
+	private int fileRenameRate;
+	private boolean setfileRenameRate=false;
+	
+	private int dirRenameRate;
+	private boolean setdirRenameRate=false;
 	
 	/**
 	 * Creates a Properties object with the properties specified by the properties file.
@@ -106,171 +120,245 @@ public class Properties {
 							throw new IllegalArgumentException("Propety 'language' is invalid.");
 						}
 						this.setlanguage=true;
-					//numdirectories
-					} else if (line.startsWith("numdirectories=")) {
+					//numDirectories
+					} else if (line.startsWith("numDirectories=")) {
 						line = line.substring(15);
 						try {
-							this.numdirectories = Integer.parseInt(line);
+							this.numDirectories = Integer.parseInt(line);
 						} catch (Exception e) {
 							s.close();
-							throw new IllegalArgumentException("Propety 'numdirectories' is invalid.");
+							throw new IllegalArgumentException("Propety 'numDirectories' is invalid.");
 						}
-						if(this.numdirectories < 0) {
+						if(this.numDirectories < 0) {
 							s.close();
-							throw new IllegalArgumentException("Propety 'numdirectories' is invalid.");
+							throw new IllegalArgumentException("Propety 'numDirectories' is invalid.");
 						}
-						this.setnumdirectories=true;
-					//numfiles
-					} else if (line.startsWith("numfiles=")) {
+						this.setnumDirectories=true;
+					//numFiles
+					} else if (line.startsWith("numFiles=")) {
 						line = line.substring(9);
 						try {
-							this.numfiles = Integer.parseInt(line);
+							this.numFiles = Integer.parseInt(line);
 						} catch (Exception e) {
 							s.close();
-							throw new IllegalArgumentException("Propety 'numfiles' is invalid.");
+							throw new IllegalArgumentException("Propety 'numFiles' is invalid.");
 						}
-						if(numfiles < 0) {
+						if(numFiles < 0) {
 							s.close();
-							throw new IllegalArgumentException("Propety 'numdirectories' is invalid.");
+							throw new IllegalArgumentException("Propety 'numDirectories' is invalid.");
 						}
-						this.setnumfiles=true;
-					//numfragments
-					} else if (line.startsWith("numfragments=")) {
+						this.setnumFiles=true;
+					//numFragments
+					} else if (line.startsWith("numFragments=")) {
 						line = line.substring(13);
 						try {
-							this.numfragments = Integer.parseInt(line);
+							this.numFragments = Integer.parseInt(line);
 						} catch (Exception e) {
 							s.close();
-							throw new IllegalArgumentException("Propety 'numfragments' is invalid.");
+							throw new IllegalArgumentException("Propety 'numFragments' is invalid.");
 						}
-						if(this.numfragments < 0) {
+						if(this.numFragments < 0) {
 							s.close();
-							throw new IllegalArgumentException("Propety 'numfragments' is invalid.");
+							throw new IllegalArgumentException("Propety 'numFragments' is invalid.");
 						}
-						this.setnumfragments=true;
-					//numforks
-					} else if (line.startsWith("numforks=")) {
+						this.setnumFragments=true;
+					//numForks
+					} else if (line.startsWith("numForks=")) {
 						line = line.substring(9);
 						try {
-							this.numforks = Integer.parseInt(line);
+							this.numForks = Integer.parseInt(line);
 						} catch (Exception e){
 							s.close();
-							throw new IllegalArgumentException("Propety 'numforks' is invalid.");
+							throw new IllegalArgumentException("Propety 'numForks' is invalid.");
 						}
-						if(this.numforks <= 0) {
+						if(this.numForks <= 0) {
 							s.close();
-							throw new IllegalArgumentException("Propety 'numforks' is invalid.");
+							throw new IllegalArgumentException("Propety 'numForks' is invalid.");
 						}
-						this.setnumforks=true;
-					//maxinjectnum
-					} else if (line.startsWith("maxinjectnum=")) {
+						this.setnumForks=true;
+					//maxInjectNum
+					} else if (line.startsWith("maxInjectNum=")) {
 						line = line.substring(13);
 						try {
-							this.maxinjectnum = Integer.parseInt(line);
+							this.maxInjectNum = Integer.parseInt(line);
 						} catch (Exception e) {
 							s.close();
-							throw new IllegalArgumentException("Property 'maxinjectnum' is invalid.");
+							throw new IllegalArgumentException("Property 'maxInjectNum' is invalid.");
 						}
-						if(this.maxinjectnum <= 0) {
+						if(this.maxInjectNum <= 0) {
 							s.close();
-							throw new IllegalArgumentException("Property 'maxinjectnum' is invalid.");
+							throw new IllegalArgumentException("Property 'maxInjectNum' is invalid.");
 						}
-						this.setmaxinjectnum=true;
+						this.setmaxInjectNum=true;
 					//mutation rate
-					} else if (line.startsWith("mutationrate=")) {
-						line = line.substring(13);
+					} else if (line.startsWith("fragmentMutationRate=")) {
+						line = line.substring(21);
 						try {
-							this.mutationrate = Integer.parseInt(line);
+							this.fragmentMutationRate = Integer.parseInt(line);
 						} catch (Exception e) {
 							s.close();
 							throw new IllegalArgumentException("Property 'mutationrate' is invalid.");
 						}
-						if(this.mutationrate < 0 || this.mutationrate > 100) {
+						if(this.fragmentMutationRate < 0 || this.fragmentMutationRate > 100) {
 							s.close();
 							throw new IllegalArgumentException("Property 'mutationrate' is invalid.");
 						}
-						this.setmutationrate=true;
-					//mutation attempts
-					} else if (line.startsWith("mutationattempts=")) {
+						this.setfragmentMutationRate=true;
+					} else if (line.startsWith("fileMutationRate=")) {
 						line = line.substring(17);
 						try {
-							this.mutationattempts = Integer.parseInt(line);
+							this.fileMutationRate = Integer.parseInt(line);
 						} catch (Exception e) {
 							s.close();
-							throw new IllegalArgumentException("Property 'mutationattempts' is invalid.");
+							throw new IllegalArgumentException("Property 'mutationrate' is invalid.");
 						}
-						if(this.mutationattempts <= 0) {
+						if(this.fileMutationRate < 0 || this.fileMutationRate > 100) {
 							s.close();
-							throw new IllegalArgumentException("Property 'mutationattempts' is invalid.");
+							throw new IllegalArgumentException("Property 'mutationrate' is invalid.");
 						}
-						this.setmutationattempts=true;
+						this.setfileMutationRate=true;
+					} else if (line.startsWith("dirMutationRate=")) {
+						line = line.substring(16);
+						try {
+							this.dirMutationRate = Integer.parseInt(line);
+						} catch (Exception e) {
+							s.close();
+							throw new IllegalArgumentException("Property 'mutationrate' is invalid.");
+						}
+						if(this.dirMutationRate < 0 || this.dirMutationRate > 100) {
+							s.close();
+							throw new IllegalArgumentException("Property 'mutationrate' is invalid.");
+						}
+						this.setdirMutationRate=true;
+					//mutation attempts
+					} else if (line.startsWith("mutationAttempts=")) {
+						line = line.substring(17);
+						try {
+							this.mutationAttempts = Integer.parseInt(line);
+						} catch (Exception e) {
+							s.close();
+							throw new IllegalArgumentException("Property 'mutationAttempts' is invalid.");
+						}
+						if(this.mutationAttempts <= 0) {
+							s.close();
+							throw new IllegalArgumentException("Property 'mutationAttempts' is invalid.");
+						}
+						this.setmutationAttempts=true;
 					//injectionreptitionrate
-					} else if (line.startsWith("injectionrepetitionrate=")) {
+					} else if (line.startsWith("injectionRepetitionRate=")) {
 						line = line.substring(24);
 						try {
-							this.injectionrepetitionrate = Integer.parseInt(line);
+							this.injectionRepetitionRate = Integer.parseInt(line);
 						} catch (Exception e) {
 							s.close();
-							throw new IllegalArgumentException("Property 'injectionrepetitionrate' is invalid.");
+							throw new IllegalArgumentException("Property 'injectionRepetitionRate' is invalid.");
 						}
-						if(this.injectionrepetitionrate < 0 || this.injectionrepetitionrate > 100) {
+						if(this.injectionRepetitionRate < 0 || this.injectionRepetitionRate > 100) {
 							s.close();
-							throw new IllegalArgumentException("Property 'injectionrepetitionrate' is invalid.");
+							throw new IllegalArgumentException("Property 'injectionRepetitionRate' is invalid.");
 						}
-						this.setinjectionrepetitionrate = true;
-					//functionfragmentminsize
-					} else if (line.startsWith("functionfragmentminsize=")) {
+						this.setinjectionRepetitionRate = true;
+					//functionFragmentMinSize
+					} else if (line.startsWith("functionFragmentMinSize=")) {
 						line = line.substring(24);
 						try {
-							this.functionfragmentminsize = Integer.parseInt(line);
+							this.functionFragmentMinSize = Integer.parseInt(line);
 						} catch(Exception e) {
 							s.close();
-							throw new IllegalArgumentException("Property 'functionfragmentminsize' is invalid.");
+							throw new IllegalArgumentException("Property 'functionFragmentMinSize' is invalid.");
 						}
-						if(this.functionfragmentminsize <= 0) {
+						if(this.functionFragmentMinSize <= 0) {
 							s.close();
-							throw new IllegalArgumentException("Property 'functionfragmentminsize' is invalid.");
+							throw new IllegalArgumentException("Property 'functionFragmentMinSize' is invalid.");
 						}
-						this.setfunctionfragmentminsize=true;
-					//functionfragmentmaxsize
-					} else if (line.startsWith("functionfragmentmaxsize=")) {
+						this.setfunctionFragmentMinSize=true;
+					//functionFragmentMaxSize
+					} else if (line.startsWith("functionFragmentMaxSize=")) {
 						line = line.substring(24);
 						try {
-							this.functionfragmentmaxsize = Integer.parseInt(line);
+							this.functionFragmentMaxSize = Integer.parseInt(line);
 						} catch(Exception e) {
 							s.close();
-							throw new IllegalArgumentException("Property 'functionfragmentmaxsize' is invalid.");
+							throw new IllegalArgumentException("Property 'functionFragmentMaxSize' is invalid.");
 						}
-						if(this.functionfragmentmaxsize <= 0) {
+						if(this.functionFragmentMaxSize <= 0) {
 							s.close();
-							throw new IllegalArgumentException("Property 'functionfragmentmaxsize' is invalid.");
+							throw new IllegalArgumentException("Property 'functionFragmentMaxSize' is invalid.");
 						}
-						this.setfunctionfragmentmaxsize=true;
+						this.setfunctionFragmentMaxSize=true;
+					//maxfiledit
+					} else if (line.startsWith("maxFileEdit=")) {
+						line = line.substring(12);
+						try {
+							this.maxFileEdit = Integer.parseInt(line);
+						} catch (Exception e) {
+							s.close();
+							throw new IllegalArgumentException("Property 'maxFileEdit' is invalid.");
+						}
+						if(this.maxFileEdit <= 0) {
+							s.close();
+							throw new IllegalArgumentException("Property 'maxFileEdit' is invalid.");
+						}
+						this.setmaxFileEdit=true;
+					//renamerate
+					} else if (line.startsWith("fileRenameRate=")) {
+						line = line.substring(15);
+						try {
+							this.fileRenameRate = Integer.parseInt(line);
+						} catch (Exception e) {
+							s.close();
+							throw new IllegalArgumentException("Property 'fileRenameRate' is invalid.");
+						}
+						if(this.fileRenameRate < 0 || this.fileRenameRate > 100) {
+							s.close();
+							throw new IllegalArgumentException("Property 'fileRenameRate' is invalid.");
+						}
+						this.setfileRenameRate = true;
+					} else if (line.startsWith("dirRenameRate=")) {
+						line = line.substring(14);
+						try {
+							this.dirRenameRate = Integer.parseInt(line);
+						} catch (Exception e) {
+							s.close();
+							throw new IllegalArgumentException("Property 'dirRenameRate' is invalid.");
+						}
+						if(this.dirRenameRate < 0 || this.dirRenameRate > 100) {
+							s.close();
+							throw new IllegalArgumentException("Property 'dirRenameRate' is invalid.");
+						}
+						this.setdirRenameRate = true;
 					}
 				}
 			}
 			s.close();
+			
 			//Check properties were set
 			if(!this.setlanguage) {
 				throw new IllegalArgumentException("Property 'language' was not specified.");
 			}
-			if(!this.setmaxinjectnum) {
-				throw new IllegalArgumentException("Property 'maxinjectnum' was not specified.");
+			if(!this.setmaxInjectNum) {
+				throw new IllegalArgumentException("Property 'maxInjectNum' was not specified.");
 			}
-			if(!this.setmutationrate) {
-				throw new IllegalArgumentException("Property 'mutationrate' was not specified.");
+			if(!this.setfragmentMutationRate) {
+				throw new IllegalArgumentException("Property 'fragmentMutationRate' was not specified.");
 			}
-			if(!this.setnumdirectories) {
-				throw new IllegalArgumentException("Property 'numdirectories' was not specified.");
+			if(!this.setfileMutationRate) {
+				throw new IllegalArgumentException("Property 'fileMutationRate' was not specified.");
 			}
-			if(!this.setnumfiles) {
-				throw new IllegalArgumentException("Property 'numfiles' was not specified.");
+			if(!this.setdirMutationRate) {
+				throw new IllegalArgumentException("Property 'dirMutationRate' was not specified.");
 			}
-			if(!this.setnumforks) {
-				throw new IllegalArgumentException("Property 'numforks' was not specified.");
+			if(!this.setnumDirectories) {
+				throw new IllegalArgumentException("Property 'numDirectories' was not specified.");
 			}
-			if(!this.setnumfragments) {
-				throw new IllegalArgumentException("Property 'numfragments' was not specified.");
+			if(!this.setnumFiles) {
+				throw new IllegalArgumentException("Property 'numFiles' was not specified.");
+			}
+			if(!this.setnumForks) {
+				throw new IllegalArgumentException("Property 'numForks' was not specified.");
+			}
+			if(!this.setnumFragments) {
+				throw new IllegalArgumentException("Property 'numFragments' was not specified.");
 			}
 			if(!this.setrepository) {
 				throw new IllegalArgumentException("Property 'repository' was not specified.");
@@ -278,20 +366,29 @@ public class Properties {
 			if(!this.setsystem) {
 				throw new IllegalArgumentException("Property 'system' was not specified.");
 			}
-			if(!this.setmutationattempts) {
-				throw new IllegalArgumentException("Property 'mutationattempts' was not specified.");
+			if(!this.setmutationAttempts) {
+				throw new IllegalArgumentException("Property 'mutationAttempts' was not specified.");
 			}
-			if(!this.setfunctionfragmentminsize) {
-				throw new IllegalArgumentException("Property 'functionfragmentminsize' was not specified.");
+			if(!this.setfunctionFragmentMinSize) {
+				throw new IllegalArgumentException("Property 'functionFragmentMinSize' was not specified.");
 			}
-			if(!this.setfunctionfragmentmaxsize) {
-				throw new IllegalArgumentException("Property 'functionfragmentmaxsize' was not specified.");
+			if(!this.setfunctionFragmentMaxSize) {
+				throw new IllegalArgumentException("Property 'functionFragmentMaxSize' was not specified.");
 			}
-			if(!this.setinjectionrepetitionrate){
-				throw new IllegalArgumentException("Property 'injectionrepetitionrate' was not specified.");
+			if(!this.setinjectionRepetitionRate){
+				throw new IllegalArgumentException("Property 'injectionRepetitionRate' was not specified.");
 			}
-			if(this.functionfragmentminsize > this.functionfragmentmaxsize) {
-				throw new IllegalArgumentException("Property 'functionfragmentminsize' is greater than 'functionfragmentmaxsize'.");
+			if(this.functionFragmentMinSize > this.functionFragmentMaxSize) {
+				throw new IllegalArgumentException("Property 'functionFragmentMinSize' is greater than 'functionFragmentMaxSize'.");
+			}
+			if(!this.setmaxFileEdit){
+				throw new IllegalArgumentException("Property 'maxFileEdit' was not specified.");
+			}
+			if(!this.setfileRenameRate) {
+				throw new IllegalArgumentException("Property 'fileRenameRate' was not specified.");
+			}
+			if(!this.setdirRenameRate) {
+				throw new IllegalArgumentException("Property 'dirRenameRate' was not specified.");
 			}
 		} catch (FileNotFoundException e) {
 			throw new IllegalArgumentException("Propertiesfile must refer to an existing file.");
@@ -323,69 +420,104 @@ public class Properties {
 	 * @return The number of file variants to create.
 	 */
 	public int getNumFiles() {
-		return numfiles;
+		return numFiles;
 	}
 
 	/**
 	 * @return The number of directory variants to create.
 	 */
 	public int getNumDirectories() {
-		return numdirectories;
+		return numDirectories;
 	}
 
 	/**
 	 * @return The number of fragment variants to create.
 	 */
 	public int getNumFragments() {
-		return numfragments;
+		return numFragments;
 	}
 
 	/**
 	 * @return The maximum number of forked systems the variants should be duplicated in.
 	 */
 	public int getMaxinjectnum() {
-		return maxinjectnum;
+		return maxInjectNum;
 	}
 
 	/**
 	 * @return The number of forked systems to create.
 	 */
 	public int getNumForks() {
-		return numforks;
+		return numForks;
 	}
 
 	/**
 	 * @return The chance that a fragment variant is mutated before injection into a fork.
 	 */
-	public int getMutationRate() {
-		return mutationrate;
+	public int getFragmentMutationRate() {
+		return fragmentMutationRate;
+	}
+	
+	/**
+	 * @return The chance that a file variant is mutated before injection into a fork.
+	 */
+	public int getFileMutationRate() {
+		return fileMutationRate;
+	}
+	
+	/**
+	 * @return The chance that a directory variant is mutated before injection into a fork.
+	 */
+	public int getDirectoryMutationRate() {
+		return dirMutationRate;
 	}
 	
 	/**
 	 * @return How many times to attempt a fragment mutation.
 	 */
 	public int getNumMutationAttempts() {
-		return mutationattempts;
+		return mutationAttempts;
 	}
 	
 	/**
 	 * @return The minimum size of function fragments to select.
 	 */
 	public int getFunctionFragmentMinSize() {
-		return this.functionfragmentminsize;
+		return this.functionFragmentMinSize;
 	}
 	
 	/**
 	 * @return The maximum size of function fragments to select.
 	 */
 	public int getFunctionFragmentMaxSize() {
-		return this.functionfragmentmaxsize;
+		return this.functionFragmentMaxSize;
 	}
 	
 	/**
 	 * @return The injection repetition rate.
 	 */
 	public int getInjectionReptitionRate() {
-		return this.injectionrepetitionrate;
+		return this.injectionRepetitionRate;
+	}
+	
+	/**
+	 * @return The maximum number of times to apply an operator on a file.
+	 */
+	public int getMaxFileEdits() {
+		return this.maxFileEdit;
+	}
+	
+	/**
+	 * @return The chance that a file is renamed before injection.
+	 */
+	public int getFileRenameRate() {
+		return this.fileRenameRate;
+	}
+	
+	/**
+	 * @return The chance that a directory is renamed before injection.
+	 */
+	public int getDirRenameRate() {
+		return this.dirRenameRate;
 	}
 }

@@ -1,13 +1,46 @@
-system=experiment/JHotDraw54b1
-repository=experiment/JHotDraw54b1
+##  Basic Settings  ##
+	# Path to the subject system to use as basis of the forks.
+system=resources/JHotDraw54b1_src
+	# Path to a repository of software systems from which to extract code fragments, files and directories.
+repository=resources/JHotDraw54b1_src
+	# The language of the system/repistory, and the forks to generate.
 language=java
-numfiles=10
-numdirectories=10
-numfragments=10
-maxinjectnum=5
-numforks=5
-mutationrate=50
-injectionrepetitionrate=30
-mutationattempts=20
-functionfragmentminsize=10
-functionfragmentmaxsize=100
+	# The number of forks to generate.  Must be >= 0.
+numForks=5
+
+
+##  Code Artifact Settings  ##
+	# The number of source files to inject into the forks.  Must be >= 0.
+numFiles=20
+	# The number of source directories to inject into the forks.  Must be >= 0.
+numDirectories=20
+	# The number of source fragments (functions) to inject into the forks.  Must be >= 0.
+numFragments=20
+
+
+##	Fragment Selection Settings ##
+	# Minimum size of fragments in lines.
+functionFragmentMinSize=10
+	# Maximum size of fragments in lines.
+functionFragmentMaxSize=100
+
+
+##	Injection Settings  ##
+	# Maximum number of forks to inject a particular fragment/file/directory into.  Must be >= 1, but no greater than 'numForks'.
+maxInjectNum=5
+	# The probability that the same injection location is used for all forks a particular fragment/file/directory is injected into.  Specify as a % (0-100).
+injectionRepetitionRate=30
+
+
+##	Mutation Settings  ##
+	# The probability that a fragment/file/directory is mutated before injection into a fork.   Specify as a % (0-100).
+fragmentMutationRate=50
+fileMutationRate=50
+dirMutationRate=50
+	# The probability that a file/directory is renamed before injection into a fork.  Specify as a % (0-100).
+fileRenameRate=50
+dirRenameRate=50
+	# The maximum number of edits a file mutation will perform. Expressed as a ratio of the size of the file to mutate.  Specify as a % (0-100).
+maxFileEdit=5
+	# The number of times to attempt a mutation (when mutation fails) before giving up.  Must be >= 1.  Best to leave at default.
+mutationAttempts=5

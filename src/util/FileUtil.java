@@ -1,6 +1,8 @@
 package util;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.DirectoryStream;
 import java.nio.file.FileVisitOption;
@@ -12,6 +14,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * 
@@ -143,5 +146,29 @@ public class FileUtil {
 			throw e;
 		}
 		return true;
+	}
+	
+	/**
+	 * Returns the number of lines in the specified file.
+	 * @param file The file.
+	 * @return the number of the lines in the specified file.
+	 * @throws FileNotFoundException If the file does not exist.
+	 * @throws IOException If there is an error reading the file.
+	 * @throws IllegalArgumentException If the specified file is not a regular file.
+	 */
+	public static int countLines(Path file) throws FileNotFoundException, IOException, IllegalArgumentException {
+		Objects.requireNonNull(file);
+		if(!Files.exists(file)) {
+			throw new FileNotFoundException("Specified file does not exist.");
+		}
+		if(!Files.isRegularFile(file)) {
+			throw new IllegalArgumentException("Specified file is not a regular file.");
+		}
+		
+		BufferedReader reader = new BufferedReader(new FileReader(file.toFile()));
+		int lines = 0;
+		while(reader.readLine() != null) lines++;
+		reader.close();
+		return lines;
 	}
 }

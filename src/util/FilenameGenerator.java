@@ -26,4 +26,15 @@ public class FilenameGenerator {
 		}
 		return builder.toString();
 	}
+	
+	/**
+	 * Returns a filename consisting of alpha-numeric characters, of a length between minSize (inclusive) and maxSize (inclusive), with the given file extention.
+	 * @param minSize
+	 * @param maxSize
+	 * @param ext
+	 * @return
+	 */
+	public static String getRandomFilenameWithExtention(int minSize, int maxSize, String ext) {
+		return getRandomFilename(minSize, maxSize) + "." + ext;
+	}
 }
