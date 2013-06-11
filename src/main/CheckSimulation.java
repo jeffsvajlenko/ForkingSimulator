@@ -160,7 +160,7 @@ public class CheckSimulation {
 		}
 		int numfragments = Integer.parseInt(line.replace("\tnumfragments=", ""));
 			//Check
-		if(numfragments != properties.getNumDirectories()) {
+		if(numfragments != properties.getNumFragments()) {
 			System.out.println("NumFragments does not match.  Properties: " + properties.getNumFragments() + ", Output: " + numfragments);
 			System.exit(-1);
 		}
