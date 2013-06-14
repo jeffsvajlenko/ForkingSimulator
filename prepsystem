@@ -1,0 +1,54 @@
+#!/bin/bash
+
+#$1 = The path.
+#$2 = The language (java, c, cs).
+
+trap "exit 255" SIGINT SIGTERM
+
+if [ $# -ne 2 ]
+then
+	echo Usage: prepsystem pathToSystem language
+	echo Language: java, c or cs.
+	exit 1
+fi
+
+if [ "$2" = "java"  ]
+then
+	rmfiles="find $1 -type f ! -name \"*.java\" -delete"
+elif [ "$2" = "c" ]
+then
+	rmfiles="find $1 -type f ! -name \"*.c\" -and ! -name \"*.h\" -delete"
+elif [ "$2" = "cs" ]
+then
+	rmfiles="find $1 -type f ! -name \"*.cs\" -delete"
+else
+	echo Invalid language.  Must be one of: java, c or cs
+	exit 1
+fi
+
+echo **Removing all files except *.$2 files.**
+eval "$rmfiles"
+
+echo **Removing empty directories.**
+find $1 -depth -type d -empty -delete
+
+
+echo **Removing files not parsable by txl.**
+for file in `find $1 -type f`
+do
+	txl -o $1/__txl_tmp_file.tmp $file txl/$2/PrettyPrint.txl > /dev/null 2> /dev/null
+	if [ $? -ne 0 ]
+	then
+		echo "    $file was removed \(could not be parsed by txl\)."
+		rm $file
+	#else
+		#echo $file was parsed successfully.
+	fi
+done
+rm $1/__txl_tmp_file.tmp
+
+echo **Applying stylization to files.**
+for file in `find $1 -type f`
+do
+	astyle $file --style=allman --suffix=none > /dev/null
+done

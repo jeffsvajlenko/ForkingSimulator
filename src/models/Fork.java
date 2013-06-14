@@ -1134,7 +1134,7 @@ public class Fork {
 	 * @throws InterruptedException If the mutation process is interrupted.
 	 * @throws MutationFailedException 
 	 */
-	public FragmentVariant injectFunctionFragment(FunctionFragment fragment, Operator op, int numattempts, String language) throws IOException, InterruptedException, MutationFailedException {
+	public FragmentVariant injectFunctionFragment(Fragment fragment, Operator op, int numattempts, String language) throws IOException, InterruptedException, MutationFailedException {
 	//Check Input
 		//Check pointers
 		Objects.requireNonNull(fragment);
@@ -1175,7 +1175,7 @@ public class Fork {
 		
 		//Create fragment representation of mutated function
 		numlines = FragmentUtil.countLines(tmpfile2);
-		FunctionFragment mutatedfragment = new FunctionFragment(tmpfile2, 1, numlines);
+		Fragment mutatedfragment = new Fragment(tmpfile2, 1, numlines);
 		
 		//Perform Injection, collect variant
 		FragmentVariant fv = injectFunctionFragment_helper(mutatedfragment, op);
@@ -1188,7 +1188,7 @@ public class Fork {
 		return fv;
 	}
 	
-	public FragmentVariant injectFunctionFragment(FunctionFragment fragment, FunctionFragment injectafter, Operator op, int numattempts, String language) throws IOException, InterruptedException, MutationFailedException {
+	public FragmentVariant injectFunctionFragment(Fragment fragment, Fragment injectafter, Operator op, int numattempts, String language) throws IOException, InterruptedException, MutationFailedException {
 	//Check Input
 		//Check pointers
 		Objects.requireNonNull(fragment);
@@ -1196,8 +1196,8 @@ public class Fork {
 		Objects.requireNonNull(op);
 		
 		//Normalize input
-		fragment = new FunctionFragment(fragment.getSrcFile().toAbsolutePath().normalize(), fragment.getStartLine(), fragment.getEndLine());
-		injectafter = new FunctionFragment(injectafter.getSrcFile().toAbsolutePath().normalize(), injectafter.getStartLine(), injectafter.getEndLine());
+		fragment = new Fragment(fragment.getSrcFile().toAbsolutePath().normalize(), fragment.getStartLine(), fragment.getEndLine());
+		injectafter = new Fragment(injectafter.getSrcFile().toAbsolutePath().normalize(), injectafter.getStartLine(), injectafter.getEndLine());
 		
 		//Check fragment file
 		if(!Files.exists(fragment.getSrcFile())) { //exists
@@ -1261,7 +1261,7 @@ public class Fork {
 		
 	//Create fragment representation of mutated function
 		numlines = FragmentUtil.countLines(tmpfile2);
-		FunctionFragment mutatedfragment = new FunctionFragment(tmpfile2, 1, numlines);
+		Fragment mutatedfragment = new Fragment(tmpfile2, 1, numlines);
 		
 	//Perform Injection, collect variant
 		FragmentVariant fv = injectFunctionFragment_helper(mutatedfragment, injectafter, op, 1); //TODO change if times changes
@@ -1274,7 +1274,7 @@ public class Fork {
 		return fv;
 	}
 	
-	public FragmentVariant injectFunctionFragment(FunctionFragment fragment, FunctionFragment injectafter) throws FileNotFoundException, IOException {
+	public FragmentVariant injectFunctionFragment(Fragment fragment, Fragment injectafter) throws FileNotFoundException, IOException {
 		return injectFunctionFragment_helper(fragment, injectafter, null, 0);
 	}
 	
@@ -1289,14 +1289,14 @@ public class Fork {
 	 * @throws IOException
 	 * @throws IllegalArgumentException
 	 */
-	private FragmentVariant injectFunctionFragment_helper(FunctionFragment fragment, FunctionFragment injectafter, Operator op, int times) throws FileNotFoundException, IOException, IllegalArgumentException {
+	private FragmentVariant injectFunctionFragment_helper(Fragment fragment, Fragment injectafter, Operator op, int times) throws FileNotFoundException, IOException, IllegalArgumentException {
 		//Check not null
 		Objects.requireNonNull(fragment);
 		Objects.requireNonNull(injectafter);
 		
 		//Normalize input
-		fragment = new FunctionFragment(fragment.getSrcFile().toAbsolutePath().normalize(), fragment.getStartLine(), fragment.getEndLine());
-		injectafter = new FunctionFragment(injectafter.getSrcFile().toAbsolutePath().normalize(), injectafter.getStartLine(), injectafter.getEndLine());
+		fragment = new Fragment(fragment.getSrcFile().toAbsolutePath().normalize(), fragment.getStartLine(), fragment.getEndLine());
+		injectafter = new Fragment(injectafter.getSrcFile().toAbsolutePath().normalize(), injectafter.getStartLine(), injectafter.getEndLine());
 		
 		//Check Fragment
 		if(!Files.exists(fragment.getSrcFile())) { //srcfile exists
@@ -1354,9 +1354,9 @@ public class Fork {
 		//Make record
 		FragmentVariant fv;
 		if(op == null) {
-			fv = new FragmentVariant(fragment, new FunctionFragment(injectafter.getSrcFile(), injectafter.getEndLine()+1, injectafter.getEndLine() + 1 + (fragment.getEndLine()-fragment.getStartLine())));
+			fv = new FragmentVariant(fragment, new Fragment(injectafter.getSrcFile(), injectafter.getEndLine()+1, injectafter.getEndLine() + 1 + (fragment.getEndLine()-fragment.getStartLine())));
 		} else {
-			fv = new FragmentVariant(fragment, new FunctionFragment(injectafter.getSrcFile(), injectafter.getEndLine()+1, injectafter.getEndLine() + 1 + (fragment.getEndLine()-fragment.getStartLine())), op, times);
+			fv = new FragmentVariant(fragment, new Fragment(injectafter.getSrcFile(), injectafter.getEndLine()+1, injectafter.getEndLine() + 1 + (fragment.getEndLine()-fragment.getStartLine())), op, times);
 		}
 		variants.add(fv);
 		functionfragmentvariants.add(fv);
@@ -1374,11 +1374,11 @@ public class Fork {
 	 * @throws NullPointerException If the argument is null.
 	 * @throws IllegalArgumentException If the fragment is invalid: source file is invalid (not readable, not a regular file), or if endline proceeds end of source file.
 	 */
-	public FragmentVariant injectFunctionFragment(FunctionFragment fragment) throws NoSuchFileException, IllegalArgumentException, IOException {
+	public FragmentVariant injectFunctionFragment(Fragment fragment) throws NoSuchFileException, IllegalArgumentException, IOException {
 		return injectFunctionFragment_helper(fragment, null);
 	}
 	
-	private FragmentVariant injectFunctionFragment_helper(FunctionFragment fragment, Operator op) throws NoSuchFileException, IllegalArgumentException, IOException {
+	private FragmentVariant injectFunctionFragment_helper(Fragment fragment, Operator op) throws NoSuchFileException, IllegalArgumentException, IOException {
 	//Check Input
 		//Check pointers
 		Objects.requireNonNull(fragment);
@@ -1404,7 +1404,7 @@ public class Fork {
 		}
 		
 	//Get location to inject at
-		FunctionFragment injectafter;
+		Fragment injectafter;
 		//continue to choose until a suitable location is found, or all exhausted
 		while(true) {
 			//pick a previously unchosen function fragment at random

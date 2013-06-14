@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import models.FunctionFragment;
+import models.Fragment;
 import util.StreamGobbler;
 
 /**
@@ -19,7 +19,7 @@ import util.StreamGobbler;
  */
 public class SelectFunctionFragments {
 	
-	public static List<FunctionFragment> getFragments(File srcloc, String language) {
+	public static List<Fragment> getFunctionFragments(File srcloc, String language) {
 	
 		//Delete leftover extraction data
 		new File(srcloc + "/_functions.xml").delete();
@@ -58,7 +58,7 @@ public class SelectFunctionFragments {
 		}
 		
 		// Extract function information from file into a list structure
-		List<FunctionFragment> functions = new ArrayList<FunctionFragment>();
+		List<Fragment> functions = new ArrayList<Fragment>();
 		File functionsFile = new File(srcloc.getAbsolutePath() + "/_functions.xml");
 		Scanner functionScanner;
 		try {
@@ -73,7 +73,7 @@ public class SelectFunctionFragments {
 					}
 					int startline = Integer.parseInt(parts[2].substring(11,parts[2].length()-1)); // extract start line
 					int endline = Integer.parseInt(parts[3].substring(9,parts[3].length()-2)); // extract end line
-					FunctionFragment f = new FunctionFragment(Paths.get(filename).toAbsolutePath().normalize(), startline, endline);
+					Fragment f = new Fragment(Paths.get(filename).toAbsolutePath().normalize(), startline, endline);
 					functions.add(f);
 				}
 			}

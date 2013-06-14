@@ -16,10 +16,10 @@ import util.FragmentUtil;
 import util.InventoriedSystem;
 
 import models.FileVariant;
+import models.Fragment;
 import models.LeafDirectoryVariant;
 import models.Fork;
 import models.FragmentVariant;
-import models.FunctionFragment;
 import models.MutationFailedException;
 import models.NoInjectionLocationsException;
 import models.Operator;
@@ -780,7 +780,7 @@ System.out.println("BEGIN: FunctionFragmentVariants");
 		
 		while(numff < properties.getNumFragments()) {
 		// Get function fragment to inject
-			FunctionFragment functionfragment = null;
+			Fragment functionfragment = null;
 			int functionfragment_length;
 			do {
 				functionfragment = repository.getRandomFunctionFragmentNoFileRepeats();
@@ -818,13 +818,13 @@ System.out.println("BEGIN: FunctionFragmentVariants");
 			}
 			
 			//Arrange Injection Location if uniform
-			FunctionFragment injectafter = null; 
+			Fragment injectafter = null; 
 			Path srcfilerelative = null;
 			if(isInjectionUniform) {
 				injectafter = originalSystem.getRandomFunctionFragmentNoFileRepeats();
 				if(injectafter != null) {
 					srcfilerelative = originalSystem.getLocation().toAbsolutePath().normalize().relativize(injectafter.getSrcFile().toAbsolutePath().normalize());
-					injectafter = new FunctionFragment(srcfilerelative, injectafter.getStartLine(), injectafter.getEndLine());
+					injectafter = new Fragment(srcfilerelative, injectafter.getStartLine(), injectafter.getEndLine());
 				} else { //used up all the locations already
 					break;
 				}
@@ -835,9 +835,9 @@ functionfragmentinjectloop:
 				try {
 					Fork fork = forks.get(forkn);
 					FragmentVariant ffv = null;
-					FunctionFragment thisInjectAfter = null;
+					Fragment thisInjectAfter = null;
 					if(isInjectionUniform) {
-						thisInjectAfter = new FunctionFragment(fork.getLocation().toAbsolutePath().normalize().resolve(injectafter.getSrcFile()), injectafter.getStartLine(), injectafter.getEndLine());
+						thisInjectAfter = new Fragment(fork.getLocation().toAbsolutePath().normalize().resolve(injectafter.getSrcFile()), injectafter.getStartLine(), injectafter.getEndLine());
 					}
 					
 					//mutate case

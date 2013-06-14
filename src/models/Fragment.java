@@ -2,16 +2,10 @@ package models;
 import java.nio.file.Path;
 
 
-public abstract class Fragment {
+public class Fragment {
 	Path srcfile;
 	int startline;
 	int endline;
-	int type;
-	
-	public static final int TYPE_FUNCTION = 1;
-	public static final int TYPE_BLOCK = 2;
-	public static final int TYPE_CLASS = 3;
-	public static final int TYPE_ARBITRARY = 4;
 	
 	/**
 	 * Constructs a Fragment.
@@ -21,12 +15,9 @@ public abstract class Fragment {
 	 * @param type Type of fragment.  Must be one of the TYPE_... constants from this class.
 	 * @throws IllegalArgumentException if path is null, if startline > endline, or if type if invalid.
 	 */
-	public Fragment(Path srcfile, int startline, int endline, int type) {
+	public Fragment(Path srcfile, int startline, int endline) {
 		if(srcfile == null) {
 			throw new IllegalArgumentException("Srcfile is null.");
-		}
-		if(type != TYPE_FUNCTION && type != TYPE_BLOCK && type != TYPE_CLASS && type != TYPE_ARBITRARY) {
-			throw new IllegalArgumentException("Type is not valid.");
 		}
 		if(startline > endline) {
 			throw new IllegalArgumentException("Startline > endline.");
@@ -35,9 +26,8 @@ public abstract class Fragment {
 		this.srcfile = srcfile;
 		this.startline = startline;
 		this.endline = endline;
-		this.type = type;
 	}
-	
+		
 	/**
 	 * Returns the source file.
 	 * @return the source file.

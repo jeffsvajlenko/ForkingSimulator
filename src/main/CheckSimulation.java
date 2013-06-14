@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
-import models.FunctionFragment;
+import models.Fragment;
 
 import org.apache.commons.io.FileUtils;
 
@@ -337,9 +337,9 @@ public class CheckSimulation {
 			directory_tracker.add(new LinkedList<Path>());
 		}
 		
-		List<List<FunctionFragment>> functionfragment_tracker = new LinkedList<List<FunctionFragment>>(); //Maintain a list of all function fragments in each fork
+		List<List<Fragment>> functionfragment_tracker = new LinkedList<List<Fragment>>(); //Maintain a list of all function fragments in each fork
 		for(int i = 0; i < numforks; i++) {
-			functionfragment_tracker.add(new LinkedList<FunctionFragment>());
+			functionfragment_tracker.add(new LinkedList<Fragment>());
 		}
 				
 // --- File Variants ------------------------------------------------------------------------------
@@ -1351,7 +1351,7 @@ public class CheckSimulation {
 			int endline = lin.nextInt();
 			Path srcfile = Paths.get(lin.nextLine().trim());
 						
-			FunctionFragment originalfragment = new FunctionFragment(srcfile, startline, endline);
+			Fragment originalfragment = new Fragment(srcfile, startline, endline);
 			lin.close();
 
 			// Check file variant #
@@ -1392,7 +1392,7 @@ public class CheckSimulation {
 			}
 
 			// Read and check file variant injections (output and validity)
-			FunctionFragment uniformstorage = null;
+			Fragment uniformstorage = null;
 			for (int i = 0; i < numinject; i++) {
 				line = in.nextLine();
 
@@ -1408,7 +1408,7 @@ public class CheckSimulation {
 				int times;
 				int clonetype;
 				int forknum;
-				FunctionFragment injectedfragment;
+				Fragment injectedfragment;
 				boolean isMutated;
 				
 				try {
@@ -1435,7 +1435,7 @@ public class CheckSimulation {
 					int istartline = lin.nextInt();
 					int iendline = lin.nextInt();
 					Path isrcfile = Paths.get(lin.nextLine().trim());
-					injectedfragment = new FunctionFragment(isrcfile, istartline, iendline);;
+					injectedfragment = new Fragment(isrcfile, istartline, iendline);;
 					lin.close();
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -1447,9 +1447,9 @@ public class CheckSimulation {
 				Path forkpath = outputdir.resolve("" + forknum).toAbsolutePath().normalize();
 				if(isUniform) {
 					if(i == 0) {
-						uniformstorage = new FunctionFragment(forkpath.relativize(injectedfragment.getSrcFile()).normalize(), injectedfragment.getStartLine(), injectedfragment.getEndLine());
+						uniformstorage = new Fragment(forkpath.relativize(injectedfragment.getSrcFile()).normalize(), injectedfragment.getStartLine(), injectedfragment.getEndLine());
 					} else {
-						FunctionFragment normalized = new FunctionFragment(forkpath.relativize(injectedfragment.getSrcFile()).normalize(), injectedfragment.getStartLine(), injectedfragment.getEndLine());
+						Fragment normalized = new Fragment(forkpath.relativize(injectedfragment.getSrcFile()).normalize(), injectedfragment.getStartLine(), injectedfragment.getEndLine());
 						if(!normalized.getSrcFile().equals(uniformstorage.getSrcFile())) {
 							System.out.println("Fragment injection " + fnum + " was supposed to be uniform but wasn't.");
 							System.out.println(uniformstorage + "\n" + normalized);
@@ -1725,7 +1725,7 @@ System.out.println("Checking fork contents.");
 		//Fragments
 			//check unchanged original files are not modified ((changed and non-original were checked previously))
 			List<Path> modifiedfiles = new LinkedList<Path>();
-			for(FunctionFragment fragment : functionfragment_tracker.get(i)) {
+			for(Fragment fragment : functionfragment_tracker.get(i)) {
 				modifiedfiles.add(fragment.getSrcFile().toAbsolutePath().normalize());
 			}
 			for(Path p : files) {
