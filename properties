@@ -1,8 +1,8 @@
 ##  Basic Settings  ##
 	# Path to the subject system to use as basis of the forks.
-system=resources/JHotDraw54b1_src
+system=/home/jeff/git/ForkingSimulator/resources/systems/java/ipscan/
 	# Path to a repository of software systems from which to extract code fragments, files and directories.
-repository=resources/JHotDraw54b1_src
+repository=/home/jeff/git/ForkingSimulator/resources/systems/java/JHotDraw54b1/
 	# The language of the system/repistory, and the forks to generate.
 language=java
 	# The number of forks to generate.  Must be >= 0.
@@ -11,11 +11,11 @@ numForks=5
 
 ##  Code Artifact Settings  ##
 	# The number of source files to inject into the forks.  Must be >= 0.
-numFiles=20
+numFiles=5
 	# The number of source directories to inject into the forks.  Must be >= 0.
-numDirectories=20
+numDirectories=5
 	# The number of source fragments (functions) to inject into the forks.  Must be >= 0.
-numFragments=20
+numFragments=5
 
 
 ##	Fragment Selection Settings ##
@@ -29,7 +29,7 @@ functionFragmentMaxSize=100
 	# Maximum number of forks to inject a particular fragment/file/directory into.  Must be >= 1, but no greater than 'numForks'.
 maxInjectNum=5
 	# The probability that the same injection location is used for all forks a particular fragment/file/directory is injected into.  Specify as a % (0-100).
-injectionRepetitionRate=30
+injectionRepetitionRate=50
 
 
 ##	Mutation Settings  ##
@@ -41,6 +41,6 @@ dirMutationRate=50
 fileRenameRate=50
 dirRenameRate=50
 	# The maximum number of edits a file mutation will perform. Expressed as a ratio of the size of the file to mutate.  Specify as a % (0-100).
-maxFileEdit=5
+maxFileEdit=20
 	# The number of times to attempt a mutation (when mutation fails) before giving up.  Must be >= 1.  Best to leave at default.
-mutationAttempts=5
+mutationAttempts=10

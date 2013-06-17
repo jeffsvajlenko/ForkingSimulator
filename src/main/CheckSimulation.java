@@ -27,13 +27,13 @@ public class CheckSimulation {
 	public static void main(String args[]) throws IOException {
 // Check Inputs
 		if (args.length != 2) {
-			System.out.println("Input Parameters: properties output" + args.length);
+			System.out.println("Input Parameters: properties output");
 			return;
 		}
 
 		Path propertiesf = Paths.get(args[0]);
 		Path output = Paths.get(args[1]);
-		if (!Files.isReadable(output) || !Files.isRegularFile(output)) {
+		if (!Files.isReadable(propertiesf) || !Files.isRegularFile(propertiesf)) {
 			System.out.println("Properties file is invalid.");
 			return;
 		}
@@ -179,7 +179,7 @@ public class CheckSimulation {
 			System.exit(-1);
 		}
 				
-		//Function Fragment Min Size
+		//Function Fragment Max Size
 			//Read
 		line = in.nextLine();
 		if(!line.startsWith("\tfunctionfragmentmaxsize=")) {
@@ -277,7 +277,7 @@ public class CheckSimulation {
 			System.exit(-1);
 		}
 		
-		//File Rename Rate
+		//Directory Rename Rate
 			//Read
 		line = in.nextLine();
 		if(!line.startsWith("\tdirrenamerate=")) {
@@ -568,10 +568,16 @@ public class CheckSimulation {
 					Files.copy(originalfile, ofile_tmp, StandardCopyOption.REPLACE_EXISTING);
 					Files.copy(injectedfile, ifile_tmp, StandardCopyOption.REPLACE_EXISTING);
 				//Check Times
-					if(ctype < 0) {
+					if(times < 0) {
 						System.out.println("FileVariant " + numExpected + " Injection " + (i+1) + " times is invalid, < 0." + " Line: " + line);
 						return;
 					}
+					
+					if(!(times == 1 || times <= (int)((double)FileUtil.countLines(originalfile) * (double) maxfileedits / (double) 100))) {
+						System.out.println("FileVariant " + numExpected + " Injection " + (i+1) + " was mutated more than maximum times." + " Line: " + line);
+						return;
+					}
+					
 				// Check Type 1 Case
 					if(ctype == 1) {
 						//If injected/original are equal, type 1 mutation was not applied
@@ -1097,6 +1103,10 @@ public class CheckSimulation {
 							System.out.println("DirectoryVariant " + numExpected + " Injection " + (i+1) + "File " + (j+1) + " times is invalid, < 0.  Line: " + line);
 							return;
 						}
+						if(!(dvifh_times == 1 || dvifh_times <= (int)((double)FileUtil.countLines(dvifh_originalFile) * (double) maxfileedits / (double) 100))) {
+							System.out.println("FileVariant " + numExpected + " Injection " + (i+1) + " was mutated more than maximum times." + " Line: " + line);
+							return;
+						}
 						
 					//Check Type 1 Case
 						if(dvifh_cloneType == 1) {
@@ -1414,8 +1424,7 @@ public class CheckSimulation {
 				try {
 					lin = new Scanner(line);
 					forknum = lin.nextInt();
-					
-					
+										
 					char cIsMutated = lin.next().charAt(0);
 					if(cIsMutated == 'M') {
 						opname = lin.next();

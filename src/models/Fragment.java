@@ -1,6 +1,8 @@
 package models;
 import java.nio.file.Path;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 
 public class Fragment {
 	Path srcfile;
@@ -50,5 +52,34 @@ public class Fragment {
 	 */
 	public int getEndLine() {
 		return this.endline;
+	}
+	
+	@Override
+	/**
+	 * Returns if this object is equal to the specified object.  To be equal, the other object must be an 'instanceof' Fragment, and have
+	 * the same source file and source coordinates as this fragment.
+	 * @param o The object to compare to.
+	 * @returns
+	 */
+	public boolean equals(Object o) {
+		if(o == null || !(o instanceof Fragment)) {
+			return false;
+		} else {
+			Fragment other = (Fragment)o;
+			if(this.srcfile.equals(other.srcfile) && this.startline == other.startline && this.endline == other.endline) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+	}
+	
+	@Override
+	/**
+	 * Returns a hashcode for this fragment, generated using HashCodeBuilder of Appache Commons Lang.
+	 * @return a hashcode for this fragment.
+	 */
+	public int hashCode() {
+		return new HashCodeBuilder().append(this.srcfile).append(this.startline).append(this.endline).toHashCode();
 	}
 }

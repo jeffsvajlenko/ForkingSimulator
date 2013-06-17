@@ -11,6 +11,7 @@ import java.util.Random;
 
 import org.apache.commons.io.FileUtils;
 
+import util.FileUtil;
 import util.FilenameGenerator;
 import util.FragmentUtil;
 import util.InventoriedSystem;
@@ -289,7 +290,9 @@ System.out.println("BEGIN: FileVariants");
 					Path thisinjectin = fork.getLocation().toAbsolutePath().normalize().resolve(injectin).toAbsolutePath().normalize();
 					Path renamed = Paths.get(FilenameGenerator.getRandomFilenameWithExtention(5, 25, properties.getLanguage()));
 					
-					int times = random.nextInt(properties.getMaxFileEdits()) + 1;
+					int maxedits = (int)((double) FileUtil.countLines(file)* (double) properties.getMaxFileEdits()/ 100.0);
+					if(maxedits == 0) maxedits = 1;
+					int times = random.nextInt(maxedits) + 1;
 					
 					//If Do Mutate
 					if(doMutate) {

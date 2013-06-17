@@ -586,9 +586,9 @@ public class Fork {
 	 * @throws InterruptedException  If the mutation process is interrupted.
 	 * @throws MutationFailedException  If the mutation fails.
 	 */
-	public LeafDirectoryVariant injectLeafDirectoryAndMutate(Path leafDirectory, Operator operator, int times, int attempts) throws FileNotFoundException, IOException, InterruptedException, MutationFailedException, NoInjectionLocationsException {
+	public LeafDirectoryVariant injectLeafDirectoryAndMutate(Path leafDirectory, Operator operator, int maxtimes, int attempts) throws FileNotFoundException, IOException, InterruptedException, MutationFailedException, NoInjectionLocationsException {
 		try {
-			return this.injectLeafDirectory(leafDirectory, false, operator, times, attempts);
+			return this.injectLeafDirectory(leafDirectory, false, operator, maxtimes, attempts);
 		} catch (RenameFailedException e) {
 			e.printStackTrace();
 			System.out.println("Critical bug, rename failed when not supposed to be renaming...");
@@ -865,11 +865,13 @@ public class Fork {
 			Path ifile = ofile; //The file to inject
 			Path tfile = injectDirectory.resolve(ofile.getFileName()); //The target (injected) file
 			Path ttfile = tinjectDirectory.resolve(ofile.getFileName());
-			int times=0;
+			
+			int maxedits = (int)((double) FileUtil.countLines(file.toPath())* (double) maxtimes / 100.0);
+			if(maxedits == 0) maxedits = 1;
+			int times = random.nextInt(maxedits) + 1;
 			
 			//if mutate, change file to inject to mutated version
 			if(operator!=null) {
-				times = random.nextInt(maxtimes)+1;
 				ifile = this.mutate_file_helper(ofile, operator, times, attempts);
 			}
 			
