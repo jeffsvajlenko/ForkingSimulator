@@ -11,11 +11,11 @@ numForks=5
 
 ##  Code Artifact Settings  ##
 	# The number of source files to inject into the forks.  Must be >= 0.
-numFiles=5
+numFiles=25
 	# The number of source directories to inject into the forks.  Must be >= 0.
-numDirectories=5
+numDirectories=10
 	# The number of source fragments (functions) to inject into the forks.  Must be >= 0.
-numFragments=5
+numFragments=25
 
 
 ##	Fragment Selection Settings ##
@@ -40,7 +40,9 @@ dirMutationRate=50
 	# The probability that a file/directory is renamed before injection into a fork.  Specify as a % (0-100).
 fileRenameRate=50
 dirRenameRate=50
-	# The maximum number of edits a file mutation will perform. Expressed as a ratio of the size of the file to mutate.  Specify as a % (0-100).
-maxFileEdit=20
+	# The maximum number of edits a file mutation will perform. Expressed as a ratio of the size of the file to mutate.  Specify as a % (0-100). 0% = 1 mutation
+maxFileEdit=10
+	# The maximum number of edits a function mutation will perform. Expressed as a ratio of the size of the function to mutate.  Specify as a % (0-100). 0% = 1 mutation
+maxFunctionEdit=10
 	# The number of times to attempt a mutation (when mutation fails) before giving up.  Must be >= 1.  Best to leave at default.
 mutationAttempts=10

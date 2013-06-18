@@ -13,6 +13,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import models.Fragment;
+import models.Operator;
 
 import org.apache.commons.io.FileUtils;
 
@@ -42,6 +43,61 @@ public class CheckSimulation {
 			return;
 		}
 		
+		//Setup Method Mutation Operators
+		Operator[] method_mutation_operators = new Operator[15];
+		method_mutation_operators[0] = new Operator("mCC_BT", "Random change in comments.  /* */ style added between two tokens..", 1, Paths.get("operators/mCC_BT"));
+		method_mutation_operators[1] = new Operator("mCC_EOL", "Random change in comments.  // style added at the end of a line.", 1, Paths.get("operators/mCC_EOL"));
+		method_mutation_operators[2] = new Operator("mCF_A", "Random change in formatting.  A newline is randomly added.", 1, Paths.get("operators/mCF_A"));
+		method_mutation_operators[3] = new Operator("mCF_R", "Random change in formatting.  A newline is removed.", 1, Paths.get("operators/mCF_R"));
+		method_mutation_operators[4] = new Operator("mCW_A", "Random change in whitespace.  A space is added.", 1, Paths.get("operators/mCW_A"));
+		method_mutation_operators[5] = new Operator("mCW_R", "Random change in whitesapce.  A space is removed.", 1, Paths.get("operators/mCW_R"));
+		method_mutation_operators[6] = new Operator("mRL_N", "Random change in literal.  A number is changed.", 2, Paths.get("operators/mRL_N"));
+		method_mutation_operators[7] = new Operator("mRL_S", "Random change in literal.  A string is changed.", 2, Paths.get("operators/mRL_S"));
+		method_mutation_operators[8] = new Operator("mSRI", "Random renaming of a all instances of a single identifier.", 2, Paths.get("operators/mSRI"));
+		method_mutation_operators[9] = new Operator("mARI", "Random renaming of a single identifier instance.", 2, Paths.get("operators/mARI"));
+		method_mutation_operators[10] = new Operator("mDL", "Random deletion of a line of source code (simple lines only).", 3, Paths.get("operators/mDL"));
+		method_mutation_operators[11] = new Operator("mIL", "Random insertion of a line of source code (simple line)", 3, Paths.get("operators/mIL"));
+		method_mutation_operators[12] = new Operator("mML", "Random modification of a line of source code (entire line).", 3, Paths.get("operators/mML"));
+		method_mutation_operators[13] = new Operator("mSDL", "Random small deletion within a line.", 3, Paths.get("operators/mSDL"));
+		method_mutation_operators[14] = new Operator("mSIL", "Random small insertion within a line.", 3, Paths.get("operators/mSIL"));
+	
+	//Setup File Mutation Operators
+		Operator[] file_mutation_operators = new Operator[15];
+		file_mutation_operators[0] = new Operator("mCC_BT", "Random change in comments.  /* */ style added between two tokens..", 1, Paths.get("operators/mCC_BT"));
+		file_mutation_operators[1] = new Operator("mCC_EOL", "Random change in comments.  // style added at the end of a line.", 1, Paths.get("operators/mCC_EOL"));
+		file_mutation_operators[2] = new Operator("mCF_A", "Random change in formatting.  A newline is randomly added.", 1, Paths.get("operators/mCF_A"));
+		file_mutation_operators[3] = new Operator("mCF_R", "Random change in formatting.  A newline is removed.", 1, Paths.get("operators/mCF_R"));
+		file_mutation_operators[4] = new Operator("mCW_A", "Random change in whitespace.  A space is added.", 1, Paths.get("operators/mCW_A"));
+		file_mutation_operators[5] = new Operator("mCW_R", "Random change in whitesapce.  A space is removed.", 1, Paths.get("operators/mCW_R"));
+		file_mutation_operators[6] = new Operator("mRL_N", "Random change in literal.  A number is changed.", 2, Paths.get("operators/mRL_N"));
+		file_mutation_operators[7] = new Operator("mRL_S", "Random change in literal.  A string is changed.", 2, Paths.get("operators/mRL_S"));
+		file_mutation_operators[8] = new Operator("mSRI", "Random renaming of a all instances of a single identifier.", 2, Paths.get("operators/mSRI"));
+		file_mutation_operators[9] = new Operator("mARI", "Random renaming of a single identifier instance.", 2, Paths.get("operators/mARI"));
+		file_mutation_operators[10] = new Operator("mDL", "Random deletion of a line of source code (simple lines only).", 3, Paths.get("operators/mDL"));
+		file_mutation_operators[11] = new Operator("mIL", "Random insertion of a line of source code (simple line)", 3, Paths.get("operators/mIL"));
+		file_mutation_operators[12] = new Operator("mML", "Random modification of a line of source code (entire line).", 3, Paths.get("operators/mML"));
+		file_mutation_operators[13] = new Operator("mSDL", "Random small deletion within a line.", 3, Paths.get("operators/mSDL"));
+		file_mutation_operators[14] = new Operator("mSIL", "Random small insertion within a line.", 3, Paths.get("operators/mSIL"));
+		
+	//Setup Directory Mutation Operator
+		Operator[] dir_mutation_operators = new Operator[15];
+		dir_mutation_operators[0] = new Operator("mCC_BT", "Random change in comments.  /* */ style added between two tokens..", 1, Paths.get("operators/mCC_BT"));
+		dir_mutation_operators[1] = new Operator("mCC_EOL", "Random change in comments.  // style added at the end of a line.", 1, Paths.get("operators/mCC_EOL"));
+		dir_mutation_operators[2] = new Operator("mCF_A", "Random change in formatting.  A newline is randomly added.", 1, Paths.get("operators/mCF_A"));
+		dir_mutation_operators[3] = new Operator("mCF_R", "Random change in formatting.  A newline is removed.", 1, Paths.get("operators/mCF_R"));
+		dir_mutation_operators[4] = new Operator("mCW_A", "Random change in whitespace.  A space is added.", 1, Paths.get("operators/mCW_A"));
+		dir_mutation_operators[5] = new Operator("mCW_R", "Random change in whitesapce.  A space is removed.", 1, Paths.get("operators/mCW_R"));
+		dir_mutation_operators[6] = new Operator("mRL_N", "Random change in literal.  A number is changed.", 2, Paths.get("operators/mRL_N"));
+		dir_mutation_operators[7] = new Operator("mRL_S", "Random change in literal.  A string is changed.", 2, Paths.get("operators/mRL_S"));
+		dir_mutation_operators[8] = new Operator("mSRI", "Random renaming of a all instances of a single identifier.", 2, Paths.get("operators/mSRI"));
+		dir_mutation_operators[9] = new Operator("mARI", "Random renaming of a single identifier instance.", 2, Paths.get("operators/mARI"));
+		dir_mutation_operators[10] = new Operator("mDL", "Random deletion of a line of source code (simple lines only).", 3, Paths.get("operators/mDL"));
+		dir_mutation_operators[11] = new Operator("mIL", "Random insertion of a line of source code (simple line)", 3, Paths.get("operators/mIL"));
+		dir_mutation_operators[12] = new Operator("mML", "Random modification of a line of source code (entire line).", 3, Paths.get("operators/mML"));
+		dir_mutation_operators[13] = new Operator("mSDL", "Random small deletion within a line.", 3, Paths.get("operators/mSDL"));
+		dir_mutation_operators[14] = new Operator("mSIL", "Random small insertion within a line.", 3, Paths.get("operators/mSIL"));
+		
+		
 // Open Log
 		Scanner in = new Scanner(output.toFile());
 		String line;	
@@ -49,7 +105,7 @@ public class CheckSimulation {
 // --- CHECK PROPERTIES ---------------------------------------------------------------------------
 		System.out.println("Checking properties.");
 		
-		Properties properties = new Properties(propertiesf);
+		Properties properties = new Properties(propertiesf, method_mutation_operators, file_mutation_operators, dir_mutation_operators);
 		
 	//Header
 		line = in.nextLine();
@@ -302,6 +358,20 @@ public class CheckSimulation {
 			//Check
 		if(maxfileedits != properties.getMaxFileEdits()) {
 			System.out.println("Max file edits does not match.  Properties: " + properties.getMaxFileEdits() + ", Output: " + maxfileedits);
+			System.exit(-1);
+		}
+		
+		//Max File Edit
+			//Read
+		line = in.nextLine();
+		if(!line.startsWith("\tmaxfunctionedits=")) {
+			System.out.println("Expected '\tmaxfunctionedits=' but saw: " + line);
+			System.exit(-1);
+		}
+		int maxfunctionedits = Integer.parseInt(line.replace("\tmaxfunctionedits=", ""));
+			//Check
+		if(maxfunctionedits != properties.getMaxFunctionEdits()) {
+			System.out.println("Max function edits does not match.  Properties: " + properties.getMaxFileEdits() + ", Output: " + maxfileedits);
 			System.exit(-1);
 		}
 				
@@ -993,7 +1063,7 @@ public class CheckSimulation {
 						dvifh_cIsRenamed = lin.next().charAt(0);
 						if(dvifh_cIsRenamed == 'R') {
 							dvifh_isRenamed = true;
-						} else if (cIsRenamed == 'O') {
+						} else if (dvifh_cIsRenamed == 'O') {
 							dvifh_isRenamed = false;
 						} else {
 							System.out.println("DirectoryVariant " + numExpected + " Injection " + (i+1) + "File " + (j+1) + " has invalid 'renamed' indicator.  Line: " + line);

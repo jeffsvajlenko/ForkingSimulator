@@ -6,6 +6,8 @@ import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.Scanner;
 
+import models.Operator;
+
 public class Properties {
 	
 	private Path system;
@@ -53,6 +55,9 @@ public class Properties {
 	private int functionFragmentMaxSize;
 	private boolean setfunctionFragmentMaxSize=false;
 	
+	private int maxFunctionEdit;
+	private boolean setMaxFunctionEdit=false;
+	
 	private int maxFileEdit;
 	private boolean setmaxFileEdit=false;
 	
@@ -68,14 +73,33 @@ public class Properties {
 	 * @throws FileNotFoundException If the properties file is not found.
 	 * @throws IllegalArgumentException If the properties file is invalid (does not exist / is a directory), or if an entry in the properties is invalid/malformed.
 	 */
-	public Properties(Path propertiesfile) {
+	public Properties(Path propertiesfile, Operator functionOperators[], Operator fileOperators[], Operator dirOperators[]) {
 		Objects.requireNonNull(propertiesfile);
+		Objects.requireNonNull(functionOperators);
+		Objects.requireNonNull(fileOperators);
+		Objects.requireNonNull(dirOperators);
 		if(!Files.exists(propertiesfile)) {
 			throw new IllegalArgumentException("Propertiesfile must refer to an existing file.");
 		}
 		if(!Files.isRegularFile(propertiesfile)) {
 			throw new IllegalArgumentException("Propertiesfile must refer to a regular file.");
 		}
+		if(functionOperators.length == 0) {
+			throw new IllegalArgumentException("Must specify at least one function operator.");
+		}
+		if(fileOperators.length == 0) {
+			throw new IllegalArgumentException("Must specify at least one file operator.");
+		}
+		if(dirOperators.length == 0) {
+			throw new IllegalArgumentException("Must specify at least one directory operator.");
+		}
+		
+		this.functionMutationOperators = functionOperators;
+		this.fileMutationOperators = fileOperators;
+		this.directoryMutationOperators = dirOperators;
+		this.functionCurrentOperator = 0;
+		this.fileCurrentOperator = 0;
+		this.directoryCurrentOperator = 0;
 		
 		Scanner s = null;
 		try {	
@@ -300,6 +324,20 @@ public class Properties {
 							throw new IllegalArgumentException("Property 'maxFileEdit' is invalid.");
 						}
 						this.setmaxFileEdit=true;
+					//maxfunctionedit
+					} else if (line.startsWith("maxFunctionEdit=")) {
+						line = line.substring(16);
+						try {
+							this.maxFunctionEdit = Integer.parseInt(line);
+						} catch (Exception e) {
+							s.close();
+							throw new IllegalArgumentException("Property 'maxFunctionEdit' is invalid.");
+						}
+						if(this.maxFunctionEdit <= 0) {
+							s.close();
+							throw new IllegalArgumentException("Property 'maxFunctionEdit' is invalid.");
+						}
+						this.setMaxFunctionEdit=true;
 					//renamerate
 					} else if (line.startsWith("fileRenameRate=")) {
 						line = line.substring(15);
@@ -383,6 +421,9 @@ public class Properties {
 			}
 			if(!this.setmaxFileEdit){
 				throw new IllegalArgumentException("Property 'maxFileEdit' was not specified.");
+			}
+			if(!this.setMaxFunctionEdit){
+				throw new IllegalArgumentException("Property 'maxFunctionEdit' was not specified.");
 			}
 			if(!this.setfileRenameRate) {
 				throw new IllegalArgumentException("Property 'fileRenameRate' was not specified.");
@@ -507,6 +548,10 @@ public class Properties {
 		return this.maxFileEdit;
 	}
 	
+	public int getMaxFunctionEdits() {
+		return this.maxFunctionEdit;
+	}
+	
 	/**
 	 * @return The chance that a file is renamed before injection.
 	 */
@@ -519,5 +564,55 @@ public class Properties {
 	 */
 	public int getDirRenameRate() {
 		return this.dirRenameRate;
+	}
+	
+	private Operator functionMutationOperators[];
+	private Operator fileMutationOperators[];
+	private Operator directoryMutationOperators[];
+	
+	int functionCurrentOperator = 0;
+	int fileCurrentOperator = 0;
+	int directoryCurrentOperator = 0;
+	
+	public OperatorChooser getFunctionMutationOperatorChooser() {
+		return new OperatorChooser(functionMutationOperators, functionCurrentOperator);
+	}
+	
+	public OperatorChooser getFileMutationOperatorChooser() {
+		return new OperatorChooser(fileMutationOperators, fileCurrentOperator);
+	}
+	
+	public OperatorChooser getDirectoryMutationOperatorChooser() {
+		return new OperatorChooser(directoryMutationOperators, directoryCurrentOperator);
+	}
+	
+	public void incrementCurrentFunctionOperator() {
+		this.functionCurrentOperator = nextRollingNumber(functionCurrentOperator, functionMutationOperators.length - 1);
+	}
+	
+	public void incrementCurrentFileOperator() {
+		this.fileCurrentOperator = nextRollingNumber(this.fileCurrentOperator, fileMutationOperators.length - 1);
+	}
+	
+	public void incrementCurrentDirectoryOperator() {
+		this.directoryCurrentOperator = nextRollingNumber(this.directoryCurrentOperator, directoryMutationOperators.length - 1);
+	}
+	
+	/**
+	 * Increments an integer from 0 to maximum (inclusive), with roll around.
+	 * @param current The current value.
+	 * @param maximum The maximum value.
+	 * @return the next value.
+	 * @throws IllegalArgumentException if current is greater than maximum or less than 0.
+	 */
+	private static int nextRollingNumber(int current, int maximum) {
+		if(current > maximum || current < 0) {
+			throw new IllegalArgumentException();
+		}
+		int next = current+1;
+		if(next > maximum) {
+			next = 0;
+		}
+		return next;
 	}
 }

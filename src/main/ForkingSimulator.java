@@ -53,7 +53,7 @@ public class ForkingSimulator {
 		method_mutation_operators[14] = new Operator("mSIL", "Random small insertion within a line.", 3, Paths.get("operators/mSIL"));
 	
 	//Setup File Mutation Operators
-		Operator[] file_mutation_operators = new Operator[10];
+		Operator[] file_mutation_operators = new Operator[15];
 		file_mutation_operators[0] = new Operator("mCC_BT", "Random change in comments.  /* */ style added between two tokens..", 1, Paths.get("operators/mCC_BT"));
 		file_mutation_operators[1] = new Operator("mCC_EOL", "Random change in comments.  // style added at the end of a line.", 1, Paths.get("operators/mCC_EOL"));
 		file_mutation_operators[2] = new Operator("mCF_A", "Random change in formatting.  A newline is randomly added.", 1, Paths.get("operators/mCF_A"));
@@ -64,9 +64,14 @@ public class ForkingSimulator {
 		file_mutation_operators[7] = new Operator("mRL_S", "Random change in literal.  A string is changed.", 2, Paths.get("operators/mRL_S"));
 		file_mutation_operators[8] = new Operator("mSRI", "Random renaming of a all instances of a single identifier.", 2, Paths.get("operators/mSRI"));
 		file_mutation_operators[9] = new Operator("mARI", "Random renaming of a single identifier instance.", 2, Paths.get("operators/mARI"));
+		file_mutation_operators[10] = new Operator("mDL", "Random deletion of a line of source code (simple lines only).", 3, Paths.get("operators/mDL"));
+		file_mutation_operators[11] = new Operator("mIL", "Random insertion of a line of source code (simple line)", 3, Paths.get("operators/mIL"));
+		file_mutation_operators[12] = new Operator("mML", "Random modification of a line of source code (entire line).", 3, Paths.get("operators/mML"));
+		file_mutation_operators[13] = new Operator("mSDL", "Random small deletion within a line.", 3, Paths.get("operators/mSDL"));
+		file_mutation_operators[14] = new Operator("mSIL", "Random small insertion within a line.", 3, Paths.get("operators/mSIL"));
 		
 	//Setup Directory Mutation Operator
-		Operator[] dir_mutation_operators = new Operator[10];
+		Operator[] dir_mutation_operators = new Operator[15];
 		dir_mutation_operators[0] = new Operator("mCC_BT", "Random change in comments.  /* */ style added between two tokens..", 1, Paths.get("operators/mCC_BT"));
 		dir_mutation_operators[1] = new Operator("mCC_EOL", "Random change in comments.  // style added at the end of a line.", 1, Paths.get("operators/mCC_EOL"));
 		dir_mutation_operators[2] = new Operator("mCF_A", "Random change in formatting.  A newline is randomly added.", 1, Paths.get("operators/mCF_A"));
@@ -77,6 +82,11 @@ public class ForkingSimulator {
 		dir_mutation_operators[7] = new Operator("mRL_S", "Random change in literal.  A string is changed.", 2, Paths.get("operators/mRL_S"));
 		dir_mutation_operators[8] = new Operator("mSRI", "Random renaming of a all instances of a single identifier.", 2, Paths.get("operators/mSRI"));
 		dir_mutation_operators[9] = new Operator("mARI", "Random renaming of a single identifier instance.", 2, Paths.get("operators/mARI"));
+		dir_mutation_operators[10] = new Operator("mDL", "Random deletion of a line of source code (simple lines only).", 3, Paths.get("operators/mDL"));
+		dir_mutation_operators[11] = new Operator("mIL", "Random insertion of a line of source code (simple line)", 3, Paths.get("operators/mIL"));
+		dir_mutation_operators[12] = new Operator("mML", "Random modification of a line of source code (entire line).", 3, Paths.get("operators/mML"));
+		dir_mutation_operators[13] = new Operator("mSDL", "Random small deletion within a line.", 3, Paths.get("operators/mSDL"));
+		dir_mutation_operators[14] = new Operator("mSIL", "Random small insertion within a line.", 3, Paths.get("operators/mSIL"));
 		
 	//Handle Input Parameters
 		if(args.length != 1 && args.length != 2) {
@@ -95,7 +105,7 @@ public class ForkingSimulator {
 	//Get Properties
 		Properties properties;
 		try {
-			properties = new Properties(propertiesfile);
+			properties = new Properties(propertiesfile, method_mutation_operators, file_mutation_operators, dir_mutation_operators);
 		} catch (Exception e) {
 			System.out.println("Error in properties file: " + e.getMessage());
 			e.printStackTrace();
@@ -163,6 +173,7 @@ public class ForkingSimulator {
 		System.out.println("\t" + "filerenamerate=" + properties.getFileRenameRate());
 		System.out.println("\t" + "dirrenamerate=" + properties.getDirRenameRate());
 		System.out.println("\t" + "maxfileedits=" + properties.getMaxFileEdits());
+		System.out.println("\t" + "maxfunctionedits=" + properties.getMaxFunctionEdits());
 		System.out.println("\t" + "mutationattempts=" + properties.getNumMutationAttempts());
 		System.out.println("END: Properties");
 		
@@ -196,7 +207,7 @@ public class ForkingSimulator {
 		List<Fork> forks = new ArrayList<Fork>(properties.getNumForks());
 		for(int i = 0; i < properties.getNumForks(); i++) {
 			try {
-				forks.add(new Fork(properties.getSystem(), outputdir.resolve(Paths.get("" + i + "")), properties.getLanguage()));
+				forks.add(new Fork(properties.getSystem(), outputdir.resolve(Paths.get("" + i + "")), properties.getLanguage(), properties));
 			} catch (IOException e) {
 				System.out.println("Failed to create and/or inventory a fork.  Could be a permission error?");
 				return;
@@ -254,143 +265,32 @@ System.out.println("BEGIN: FileVariants");
 			} else {
 				doUniform = false;
 			}
-			/*
-			if(random.nextInt(100)+1 <= properties.getInjectionReptitionRate()) {
-				doUniform = true;
-				
-			} else {
-				doUniform = false;
-			}
-			*/
 						
 			//Inject
 			fileInjectLoop:
 			for(int forkn : injects) {
-				
-			//Choose if mutate
-				boolean doMutate;
-				if(random.nextInt(100)+1 <= properties.getFileMutationRate()) {
-					doMutate = true;
-				} else {
-					doMutate = false;
-				}
-				
-			//Choose if rename
-				boolean doRename;
-				if(random.nextInt(100)+1 <= properties.getFileRenameRate()) {
-					doRename = true;
-				} else {
-					doRename = false;
-				}
 				
 			//Inject
 				try {
 					Fork fork = forks.get(forkn);
 					FileVariant fv = null;
 					Path thisinjectin = fork.getLocation().toAbsolutePath().normalize().resolve(injectin).toAbsolutePath().normalize();
-					Path renamed = Paths.get(FilenameGenerator.getRandomFilenameWithExtention(5, 25, properties.getLanguage()));
 					
-					int maxedits = (int)((double) FileUtil.countLines(file)* (double) properties.getMaxFileEdits()/ 100.0);
-					if(maxedits == 0) maxedits = 1;
-					int times = random.nextInt(maxedits) + 1;
-					
-					//If Do Mutate
-					if(doMutate) {
-						//Create Alternative Operator List
-						List<Integer> opids = new LinkedList<Integer>();
-						for(int i = 0; i < file_mutation_operators.length; i++) {
-							if(i != cur_opnum) {
-								opids.add(i);
-							}
+					if(doUniform) {
+						try {
+							fv = fork.injectFileAt(file, thisinjectin);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							System.out.println("Error: A mutation was interrupted.  Did you kill the mutation process?");
+							System.exit(-1);
 						}
-						int opnum = cur_opnum;
-						
-						fileMutateLoop:
-						while(true) {
-							Operator operator = file_mutation_operators[opnum];
-							boolean mutationFailed = false;
-							try {
-								if(doRename) {
-									//Do Mutate, Do Rename, Do Uniform
-									if(doUniform) {
-										if(!Files.exists(thisinjectin.resolve(renamed.getFileName()))) { //Inject only if won't override
-											fv = fork.injectFileAt(file, renamed, thisinjectin, operator, times, properties.getNumMutationAttempts(), properties.getLanguage());
-										}
-									//Do Mutate, Do Rename, Don't Uniform
-									} else {
-										fv = fork.injectFile(file, renamed, operator, times, properties.getNumMutationAttempts(), properties.getLanguage());
-										if(fv == null) {continue fileInjectLoop;} //if no injection place found, skip
-									}
-								} else {
-									//Do Mutate, Don't Rename, Do Uniform
-									if(doUniform) {
-										if(!Files.exists(thisinjectin.resolve(file.getFileName()))) {
-											fv = fork.injectFileAt(file, thisinjectin, operator, times, properties.getNumMutationAttempts(), properties.getLanguage());
-										}
-									//Do Mutate, Don't Rename, Don't Uniform
-									} else {
-										fv = fork.injectFile(file, operator, times, properties.getNumMutationAttempts(), properties.getLanguage());
-										if(fv == null) {continue fileInjectLoop;} //if no injection place found, skip
-									}
-								}
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-								System.out.println("Error: Mutation process was interrupted.");
-								System.exit(-1);
-								return;
-							} catch (MutationFailedException e) {
-								mutationFailed = true;
-							}
-							
-							//If Mutation succeeded, break out of mutate loop
-							if(!mutationFailed) {
-								if(opnum == cur_opnum) {
-									cur_opnum = ForkingSimulator.nextRollingNumber(cur_opnum, file_mutation_operators.length-1);
-								}
-								break fileMutateLoop;
-							
-							//If mutation failed
-							} else {
-								//if operators left to try
-								if(opids.size() != 0) {
-									opnum = opids.remove(random.nextInt(opids.size()));
-									continue fileMutateLoop;
-								//if tried all
-								} else {
-									doMutate = false; // do the no mutate case instead
-									break fileMutateLoop;
-								}
-							}
-						} //end of mutate loop
-					} // end of mutate case
-					
-					// If don't mutate
-					if(!doMutate) {
-						if(doRename) {
-							//Don't Mutate, Do Rename, Do Uniform
-							if(doUniform) {
-								if(!Files.exists(thisinjectin.resolve(renamed.getFileName()))) { //Inject only if won't override
-									fv = fork.injectFileAt(file, renamed, thisinjectin);
-								}
-							
-							//Don't Mutate, Do Rename, Don't Uniform
-							} else {
-								fv = fork.injectFile(file, renamed);
-								if(fv == null) {continue fileInjectLoop;} //if no injection place found, skip
-							}
-						} else {
-							//Don't Mutate, Don't Rename, Do Uniform
-							if(doUniform) {
-								//Inject only if won't override
-								if(!Files.exists(thisinjectin.resolve(file.getFileName()))) {  //Inject only if won't override
-									fv = fork.injectFileAt(file, thisinjectin);
-								}
-						
-							//Don't Mutate, Don't Rename, Don't Uniform
-							} else {
-								fv = fork.injectFile(file);
-								if(fv == null) {continue fileInjectLoop;} //if no injection place found, skip
-							}
+					} else {
+						try {
+							fv = fork.injectFile(file);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							System.out.println("Error: A mutation was interrupted.  Did you kill the mutation process?");
+							System.exit(-1);
 						}
 					}
 					
@@ -478,7 +378,7 @@ System.out.println("BEGIN: LeafDirectoryVariants");
 			System.exit(-1);
 		}
 		
-	//Create Leaf Directoreis and Inject (and mutate?)
+	//Create Leaf Directories and Inject (and mutate?)
 		leafDirectoryLoop:
 		while (numd < properties.getNumDirectories()) {
 			//System.out.println("DEBUG:Start LeafDirectoryLoop");
@@ -519,39 +419,9 @@ System.out.println("BEGIN: LeafDirectoryVariants");
 				doUniform = false;
 			}
 			
-			/*
-			if(random.nextInt(100)+1 <= properties.getInjectionReptitionRate()) {
-				//System.out.println("DEBUG:\tDo Uniform");
-				doUniform = true;
-			} else {
-				//System.out.println("DEBUG:\tDon't Uniform");
-				doUniform = false;
-			}
-			*/
-			
 			//inject
 			leafDirectoryInjectLoop:
 			for(int forkn : injects) {
-				//System.out.println("DEBUG:\tStart LeafDirectoryInjectionLoop: " + forkn);
-			//Choose if mutate
-				boolean doMutate;
-				if(random.nextInt(100)+1 <= properties.getDirectoryMutationRate()) {
-					//System.out.println("DEBUG:\t\tDo Mutate");
-					doMutate = true;
-				} else {
-					//System.out.println("DEBUG:\t\tDon't Mutate");
-					doMutate = false;
-				}
-				
-			//Choose if rename
-				boolean doRename;
-				if(random.nextInt(100)+1 <= properties.getDirRenameRate()) {
-					//System.out.println("DEBUG:\t\tDo Rename");
-					doRename = true;
-				} else {
-					//System.out.println("DEBUG:\t\tDon't Rename");
-					doRename = false;
-				}
 				
 			//Inject
 				try {
@@ -559,130 +429,21 @@ System.out.println("BEGIN: LeafDirectoryVariants");
 					LeafDirectoryVariant ldv = null;
 					Path thisinjectin = fork.getLocation().toAbsolutePath().normalize().resolve(injectin).toAbsolutePath().normalize();
 										
-					if(doMutate) {
-						//Create Alternative Operator List
-						List<Integer> opids = new LinkedList<Integer>();
-						for(int i = 0; i < dir_mutation_operators.length; i++) {
-							if(i != cur_opnum) {
-								opids.add(i);
-							}
+					if(doUniform) {
+						try {
+							ldv = fork.injectLeafDirectoryAt(leafDirectory, thisinjectin);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							System.out.println("Error: A mutation was interrupted.  Did you kill the mutation process?");
+							System.exit(-1);
 						}
-						int opnum = cur_opnum;
-						
-						dirMutateLoop:
-						while(true) {
-							//System.out.println("DEBUG:\t\tStart DirMutateLoop");
-							Operator operator = dir_mutation_operators[opnum];
-							boolean mutationFailed = false;
-							try {
-								if(doRename) {
-								//Do Mutate, Do Rename, Do Uniform
-									if(doUniform) {
-										try {
-											ldv = fork.injectLeafDirectoryAtAndRenameAndMutate(leafDirectory, thisinjectin, operator, properties.getMaxFileEdits(), properties.getNumMutationAttempts());
-										} catch (RenameFailedException e) { //if can't rename, give up
-											//System.out.println("DEBUG:\t\t\tDoMutate,DoRename,DoUniform: RenameFailedException");
-											continue leafDirectoryInjectLoop;
-										}						
-								//Do Mutate, Do Rename, Don't Uniform
-									} else {
-										try {
-											ldv = fork.injectLeafDirectoryAndRenameAndMutate(leafDirectory, operator, properties.getMaxFileEdits(), properties.getNumMutationAttempts());
-										} catch (RenameFailedException e) { //if can't rename, give up
-											//System.out.println("DEBUG:\t\t\tDoMutate,DoRename,DontUniform: RenameFailedException");
-											continue leafDirectoryInjectLoop;
-										} catch (NoInjectionLocationsException e) { //if can't find injection location, give up
-											//System.out.println("DEBUG:\t\t\tDoMutate,DoRename,DontUniform: NoInjectionLocationsException");
-											continue leafDirectoryInjectLoop;
-										}
-									}
-								} else {
-								// Do Mutate, Don't Rename, Do Uniform
-									if(doUniform) {
-										if(!Files.exists(thisinjectin.resolve(leafDirectory.getFileName()))) { //inject only if won't override
-											ldv = fork.injectLeafDirectoryAtAndMutate(leafDirectory, thisinjectin, operator, properties.getMaxFileEdits(), properties.getNumMutationAttempts());
-										}
-								// Do Mutate, Don't Rename, Don't Uniform
-									} else {
-										try {
-											ldv = fork.injectLeafDirectoryAndMutate(leafDirectory, operator, properties.getMaxFileEdits(), properties.getNumMutationAttempts());
-										} catch (NoInjectionLocationsException e) { //if can't find injection location, give up
-											//System.out.println("DEBUG:\t\t\tDoMutate,DontRename,DontUniform: NoInjectionLocationsException");
-											continue leafDirectoryInjectLoop;
-										}
-									}
-								}
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-								System.out.println("Error: Mutation process was interrupted.");
-								System.exit(-1);
-								return;
-							} catch (MutationFailedException e) {
-								mutationFailed = true;
-							}
-							
-							//If mutation succeeded, break out of mutate loop
-							if(!mutationFailed) {
-								if(opnum == cur_opnum) { //if operator was the next in line, progress
-									cur_opnum = ForkingSimulator.nextRollingNumber(cur_opnum, file_mutation_operators.length-1);
-								}
-								//System.out.println("DEBUG:\t\t\tMutation Successful");
-								break dirMutateLoop;
-								
-							//If Mutation failed
-							} else {
-								//if operators left to try
-								if(opids.size() != 0) {
-									//System.out.println("DEBUG:\t\t\tMutation failed, trying another: " + dir_mutation_operators[opnum].getId() + ".");
-									opnum = opids.remove(random.nextInt(opids.size()));
-									continue dirMutateLoop;
-								//if tried all
-								} else {
-									//System.out.println("DEBUG:\t\t\tAll mutations failed, injecting plain instead.");
-									doMutate = false; //do the no mutate case instead
-									break dirMutateLoop;
-								}
-							}
-						} //end of mutate loop
-					} //end of mutate of case
-					
-					if(!doMutate) {
-						//Don't Mutate, Do Rename, Do Uniform
-						if(doRename) {
-							if(doUniform) {
-								try {
-									ldv = fork.injectLeafDirectoryAtAndRename(leafDirectory, thisinjectin);
-								} catch (RenameFailedException e) { //if can't rename, skip
-									//System.out.println("DEBUG:\t\t\tDontMutate,DoRename,DoUniform: RenameFailedException");
-									continue leafDirectoryInjectLoop;
-								}
-						//Don't Mutate, Do Rename, Don't Uniform
-							} else {
-								try {
-									ldv = fork.injectLeafDirectoryAndRename(leafDirectory);
-								} catch (RenameFailedException e) { //if can't rename, skip
-									//System.out.println("DEBUG:\t\t\tDontMutate,DoRename,DontUniform: RenameFailedException");
-									continue leafDirectoryInjectLoop;
-								} catch (NoInjectionLocationsException e) { //if can't inject, skip
-									//System.out.println("DEBUG:\t\t\tDontMutate,DoRename,DontUniform: NoInjectionLocationsException");
-									continue leafDirectoryInjectLoop;
-								}
-							}
-						} else {
-						//Don't Mutate, Don't Rename, Do Uniform//Check Not Mutation & Content
-							if(doUniform) {
-								if(!Files.exists(thisinjectin.resolve(leafDirectory.getFileName()))) { //inject only if won't override
-									ldv = fork.injectLeafDirectoryAt(leafDirectory, thisinjectin);
-								}
-						//Don't Mutate, Don't Rename, Don't Uniform
-							} else {
-								try {
-									ldv = fork.injectLeafDirectory(leafDirectory);
-								} catch (NoInjectionLocationsException e) { //if can't inject, skip
-									//System.out.println("DEBUG:\t\t\tDontMutate,DontRename,DontUniform: NoInjectionLocationsException");
-									continue leafDirectoryInjectLoop;
-								}
-							}
+					} else {
+						try {
+							ldv = fork.injectLeafDirectory(leafDirectory);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							System.out.println("Error: A mutation was interrupted.  Did you kill the mutation process?");
+							System.exit(-1);
 						}
 					}
 					
@@ -843,69 +604,21 @@ functionfragmentinjectloop:
 						thisInjectAfter = new Fragment(fork.getLocation().toAbsolutePath().normalize().resolve(injectafter.getSrcFile()), injectafter.getStartLine(), injectafter.getEndLine());
 					}
 					
-					//mutate case
-					if(random.nextInt(100)+1 <= properties.getFragmentMutationRate()) {
-						
-						boolean success = false;//keep track if works
-						
-						//prep alternative operator list
-						List<Integer> opids = new LinkedList<Integer>();
-						for(int i = 0; i < method_mutation_operators.length; i++) {
-							if(i != cur_opnum) {
-								opids.add(i);
-							}
+					if(isInjectionUniform) {
+						try {
+							ffv = fork.injectFunctionAt(functionfragment, thisInjectAfter);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							System.out.println("Error: A mutation was interrupted.  Did you kill the mutation process?");
+							System.exit(-1);
 						}
-						int opnum = cur_opnum;
-						
-						//First attempt queued op, then if fail try the others randomly, if all fails don't mutate
-						do {
-							boolean mutationfailed = false;
-							try {
-								if(isInjectionUniform) {
-									ffv = forks.get(forkn).injectFunctionFragment(functionfragment, thisInjectAfter, method_mutation_operators[opnum], properties.getNumMutationAttempts(), properties.getLanguage());
-								} else {
-									ffv = forks.get(forkn).injectFunctionFragment(functionfragment, method_mutation_operators[opnum], properties.getNumMutationAttempts(), properties.getLanguage());
-								}
-							} catch (InterruptedException e) {
-								e.printStackTrace();
-								System.exit(-1);
-							} catch (MutationFailedException e) {
-								mutationfailed = true;
-							}
-							if(ffv == null) { //could not find place to inject at
-								continue functionfragmentinjectloop;
-							} else if(mutationfailed == false) {
-								success = true;
-								if(opnum == cur_opnum) {
-									//System.out.println(opnum);
-									cur_opnum = ForkingSimulator.nextRollingNumber(cur_opnum, method_mutation_operators.length-1);
-								} else {
-									//System.out.println("--");
-								}
-								break;
-							}
-							if(opids.size() != 0) {
-								opnum = opids.remove(random.nextInt(opids.size()));
-							}
-						} while(opids.size() != 0);
-						
-						//if all mutation attempt fail, just inject as is
-						if(!success) {
-							if(isInjectionUniform) {
-								ffv = forks.get(forkn).injectFunctionFragment(functionfragment, thisInjectAfter);
-							}
-							else {
-								ffv = forks.get(forkn).injectFunctionFragment(functionfragment);
-							}
-						}
-						
-					//no mutate case
 					} else {
-						if(isInjectionUniform) {
-							ffv = forks.get(forkn).injectFunctionFragment(functionfragment, thisInjectAfter);
-						}
-						else {
-							ffv = forks.get(forkn).injectFunctionFragment(functionfragment);
+						try {
+							ffv = fork.injectFunction(functionfragment);
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+							System.out.println("Error: A mutation was interrupted.  Did you kill the mutation process?");
+							System.exit(-1);
 						}
 					}
 					
@@ -997,7 +710,7 @@ System.out.println("END: FunctionFragmentVariants");
 	}
 	
 	/**
-	 * Increments an integer from 0 to maximum, with roll around.
+	 * Increments an integer from 0 to maximum (inclusive), with roll around.
 	 * @param current The current value.
 	 * @param maximum The maximum value.
 	 * @return the next value.
