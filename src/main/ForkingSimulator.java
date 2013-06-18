@@ -1,5 +1,10 @@
 package main;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,28 +14,26 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import org.apache.commons.io.FileUtils;
+import models.FileVariant;
+import models.Fork;
+import models.Fragment;
+import models.FragmentVariant;
+import models.LeafDirectoryVariant;
+import models.Operator;
 
-import util.FileUtil;
-import util.FilenameGenerator;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.output.TeeOutputStream;
+
 import util.FragmentUtil;
 import util.InventoriedSystem;
-
-import models.FileVariant;
-import models.Fragment;
-import models.LeafDirectoryVariant;
-import models.Fork;
-import models.FragmentVariant;
-import models.MutationFailedException;
-import models.NoInjectionLocationsException;
-import models.Operator;
-import models.RenameFailedException;
+import util.StreamGobbler;
+import util.SystemUtil;
 
 
 public class ForkingSimulator {
 	public static Path installdir;
 	
-	public static void main(String args[]) {
+	public static void main(String args[]) throws IOException {
 	//Get installation directory
 		installdir = Paths.get(ForkingSimulator.class.getProtectionDomain().getCodeSource().getLocation().getPath());
 	
@@ -153,31 +156,49 @@ public class ForkingSimulator {
 			}
 		}
 		
-	// Output Properties
-		System.out.println("BEGIN: Properties");
-		System.out.println("\t" + "output_directory=" + outputdir.toAbsolutePath().normalize().toString());
-		System.out.println("\t" + "system_directory=" + properties.getSystem().toAbsolutePath().normalize());
-		System.out.println("\t" + "repository_directory=" + properties.getRepository().toAbsolutePath().normalize());
-		System.out.println("\t" + "language=" + properties.getLanguage());
-		System.out.println("\t" + "numforks=" + properties.getNumForks());
-		System.out.println("\t" + "numfiles=" + properties.getNumFiles());
-		System.out.println("\t" + "numdirs=" + properties.getNumDirectories());
-		System.out.println("\t" + "numfragments=" + properties.getNumFragments());
-		System.out.println("\t" + "functionfragmentminsize=" + properties.getFunctionFragmentMinSize());
-		System.out.println("\t" + "functionfragmentmaxsize=" + properties.getFunctionFragmentMaxSize());
-		System.out.println("\t" + "maxinjectnum=" + properties.getMaxinjectnum());
-		System.out.println("\t" + "injectionrepititionrate=" + properties.getInjectionReptitionRate());
-		System.out.println("\t" + "fragmentmutationrate=" + properties.getFragmentMutationRate());
-		System.out.println("\t" + "filemutationrate=" + properties.getFileMutationRate());
-		System.out.println("\t" + "dirmutationrate=" + properties.getDirectoryMutationRate());
-		System.out.println("\t" + "filerenamerate=" + properties.getFileRenameRate());
-		System.out.println("\t" + "dirrenamerate=" + properties.getDirRenameRate());
-		System.out.println("\t" + "maxfileedits=" + properties.getMaxFileEdits());
-		System.out.println("\t" + "maxfunctionedits=" + properties.getMaxFunctionEdits());
-		System.out.println("\t" + "mutationattempts=" + properties.getNumMutationAttempts());
-		System.out.println("END: Properties");
+	//Initialize tmp dir
+		try {
+			Path newtmpdir = Files.createDirectories(outputdir.resolve("tmp"));
+			SystemUtil.setTemporaryDirectory(newtmpdir);
+		} catch (IOException e) {
+			System.out.println("Could not initialize temporary directory.");
+			e.printStackTrace();
+			return;
+		}
+		
+	//Initialize logging
+		TeeOutputStream logs;
+		try {
+			logs = new TeeOutputStream(System.out, new FileOutputStream(Files.createFile(outputdir.resolve("log")).toFile()));
+		} catch (FileNotFoundException e3) {
+			System.out.println("Failed to create log file.");
+			e3.printStackTrace();
+			return;
+		} catch (IOException e3) {
+			System.out.println("Failed to create log file.");
+			e3.printStackTrace();
+			return;
+		}
+		PrintWriter log = new PrintWriter(logs);
 		
 	//Set up repository
+		try {
+			FileUtils.copyDirectory(properties.getRepository().toFile(), outputdir.resolve("sourceRepository").toFile());
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.out.println("Failed to copy source repository into output directory.  Did you modify the files?");
+			return;
+		}
+		properties.setRepository(outputdir.resolve("sourceRepository").toAbsolutePath().normalize());
+		System.err.println("Importing and normalizing the source repository:");
+		try {
+			ForkingSimulator.normalizeSystem(properties.getRepository(), properties.getLanguage());
+		} catch (IOException | InterruptedException e2) {
+			System.out.println("Failed to normalize source repository.");
+			e2.printStackTrace();
+			return;
+		}
+		System.out.println("Inventorying source repository.");
 		InventoriedSystem repository;
 		try {
 			repository = new InventoriedSystem(properties.getRepository(), properties.getLanguage());
@@ -194,14 +215,48 @@ public class ForkingSimulator {
 			System.out.println("Failed to copy original system into output directory.  Did you modify the files?");
 			return;
 		}
+		properties.setSystem(outputdir.resolve("originalSystem").toAbsolutePath().normalize());
+		System.err.println("Importing and normalizing the subject system:");
+		try {
+			ForkingSimulator.normalizeSystem(properties.getSystem(), properties.getLanguage());
+		} catch (IOException | InterruptedException e2) {
+			System.out.println("Failed to normalize subject system.");
+			e2.printStackTrace();
+			return;
+		}
+		System.out.println("Inventorying subject system.");
 		InventoriedSystem originalSystem;
 		try {
-			originalSystem = new InventoriedSystem(outputdir.resolve("originalSystem"), properties.getLanguage());
+			originalSystem = new InventoriedSystem(properties.getSystem(), properties.getLanguage());
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Failed to inventory the original system.  Did you modify the files?");
 			return;
 		}
+		
+	// Output Properties
+		log.println("BEGIN: Properties");
+		log.println("\t" + "output_directory=" + outputdir.toAbsolutePath().normalize().toString());
+		log.println("\t" + "system_directory=" + properties.getSystem().toAbsolutePath().normalize());
+		log.println("\t" + "repository_directory=" + properties.getRepository().toAbsolutePath().normalize());
+		log.println("\t" + "language=" + properties.getLanguage());
+		log.println("\t" + "numforks=" + properties.getNumForks());
+		log.println("\t" + "numfiles=" + properties.getNumFiles());
+		log.println("\t" + "numdirs=" + properties.getNumDirectories());
+		log.println("\t" + "numfragments=" + properties.getNumFragments());
+		log.println("\t" + "functionfragmentminsize=" + properties.getFunctionFragmentMinSize());
+		log.println("\t" + "functionfragmentmaxsize=" + properties.getFunctionFragmentMaxSize());
+		log.println("\t" + "maxinjectnum=" + properties.getMaxinjectnum());
+		log.println("\t" + "injectionrepititionrate=" + properties.getInjectionReptitionRate());
+		log.println("\t" + "fragmentmutationrate=" + properties.getFragmentMutationRate());
+		log.println("\t" + "filemutationrate=" + properties.getFileMutationRate());
+		log.println("\t" + "dirmutationrate=" + properties.getDirectoryMutationRate());
+		log.println("\t" + "filerenamerate=" + properties.getFileRenameRate());
+		log.println("\t" + "dirrenamerate=" + properties.getDirRenameRate());
+		log.println("\t" + "maxfileedits=" + properties.getMaxFileEdits());
+		log.println("\t" + "maxfunctionedits=" + properties.getMaxFunctionEdits());
+		log.println("\t" + "mutationattempts=" + properties.getNumMutationAttempts());
+		log.println("END: Properties");
 		
 	//Create the forks
 		List<Fork> forks = new ArrayList<Fork>(properties.getNumForks());
@@ -218,7 +273,7 @@ public class ForkingSimulator {
 		Random random = new Random();
 		
 // Create File Variants --------------------------------------------------------------------------------------------------------------------------------
-System.out.println("BEGIN: FileVariants");
+log.println("BEGIN: FileVariants");
 		
 	//Prep Operator Scrolling
 		int cur_opnum = 0;
@@ -320,9 +375,9 @@ System.out.println("BEGIN: FileVariants");
 				
 			//File Injection Header and Refereced Data
 				if(doUniform) {
-					System.out.println(numf + " U " + t_variants.size() + " " + file.toAbsolutePath().normalize().toString());
+					log.println(numf + " U " + t_variants.size() + " " + file.toAbsolutePath().normalize().toString());
 				} else {
-					System.out.println(numf + " V " + t_variants.size() + " " + file.toAbsolutePath().normalize().toString());
+					log.println(numf + " V " + t_variants.size() + " " + file.toAbsolutePath().normalize().toString());
 				}
 				//Save Original Copy
 				try {
@@ -334,18 +389,18 @@ System.out.println("BEGIN: FileVariants");
 				
 			//Per Injection Information and Referenced Data
 				for(int i = 0; i < t_forks.size(); i++) {
-					System.out.print("\t" + t_forks.get(i));
+					log.print("\t" + t_forks.get(i));
 					if(t_variants.get(i).isNameMutated()) {
-						System.out.print(" R");
+						log.print(" R");
 					} else {
-						System.out.print(" O");
+						log.print(" O");
 					}
 					if(t_variants.get(i).isSourceMutated()) {
-						System.out.print(" M " + t_variants.get(i).getMutationOperator().getId() + " " + t_variants.get(i).getMutationTimes() + " " + t_variants.get(i).getMutationOperator().getTargetCloneType());
+						log.print(" M " + t_variants.get(i).getMutationOperator().getId() + " " + t_variants.get(i).getMutationTimes() + " " + t_variants.get(i).getMutationOperator().getTargetCloneType());
 					} else {
-						System.out.print(" O");
+						log.print(" O");
 					}
-					System.out.println(" " + t_variants.get(i).getInjectedFile());
+					log.println(" " + t_variants.get(i).getInjectedFile());
 					
 					//Save copy of possibly mutated
 					try {
@@ -357,13 +412,13 @@ System.out.println("BEGIN: FileVariants");
 					}
 				}
 				
-				System.out.flush();
+				log.flush();
 			}
 		}
-System.out.println("END: FileVariants");
+log.println("END: FileVariants");
 		
 // Create Leaf Directory Variants ------------------------------------------------------------------------------------------------------------------------------------------
-System.out.println("BEGIN: LeafDirectoryVariants");
+log.println("BEGIN: LeafDirectoryVariants");
 		
 	// Prep Operator Scrolling
 		cur_opnum = 0;
@@ -475,9 +530,9 @@ System.out.println("BEGIN: LeafDirectoryVariants");
 				
 			//Dir Injection Header and Referenced Data
 				if(doUniform) {
-					System.out.println(numd + " U " + t_forks.size() + " " + leafDirectory.toAbsolutePath().normalize().toString());
+					log.println(numd + " U " + t_forks.size() + " " + leafDirectory.toAbsolutePath().normalize().toString());
 				} else {
-					System.out.println(numd + " V " + t_forks.size() + " " + leafDirectory.toAbsolutePath().normalize().toString());
+					log.println(numd + " V " + t_forks.size() + " " + leafDirectory.toAbsolutePath().normalize().toString());
 				}
 				
 				//Track original folder
@@ -491,27 +546,27 @@ System.out.println("BEGIN: LeafDirectoryVariants");
 				//Per Injection Information and Referenced Data
 				for(int i = 0; i < t_forks.size(); i++) {
 					//document
-					System.out.print("\t" + t_forks.get(i));
+					log.print("\t" + t_forks.get(i));
 					if(t_variants.get(i).isRenamed()) {
-						System.out.print(" R ");
+						log.print(" R ");
 					} else {
-						System.out.print(" O ");
+						log.print(" O ");
 					}
-					System.out.println(t_variants.get(i).getFileVariants().size() + " " + t_variants.get(i).getInjectedDirectory());
+					log.println(t_variants.get(i).getFileVariants().size() + " " + t_variants.get(i).getInjectedDirectory());
 					
 					for(FileVariant fv : t_variants.get(i).getFileVariants()) {
-						System.out.print("\t\t\t");
+						log.print("\t\t\t");
 						if(fv.isNameMutated()) {
-							System.out.print(" R");
+							log.print(" R");
 						} else {
-							System.out.print(" O");
+							log.print(" O");
 						}
 						if(fv.isSourceMutated()) {
-							System.out.print(" M " + fv.getMutationOperator().getId() + " " + fv.getMutationTimes() + " " + fv.getMutationOperator().getTargetCloneType());
+							log.print(" M " + fv.getMutationOperator().getId() + " " + fv.getMutationTimes() + " " + fv.getMutationOperator().getTargetCloneType());
 						} else {
-							System.out.print(" O");
+							log.print(" O");
 						}
-						System.out.println(" " + fv.getOriginalFile() + ";" + fv.getInjectedFile());
+						log.println(" " + fv.getOriginalFile() + ";" + fv.getInjectedFile());
 					}
 					
 					//make copy
@@ -523,13 +578,13 @@ System.out.println("BEGIN: LeafDirectoryVariants");
 						System.exit(-1);
 					}
 				}
-				System.out.flush();
+				log.flush();
 			}
 		}
-System.out.println("END: LeafDirectoryVariants");
+log.println("END: LeafDirectoryVariants");
 	
 // Create Fragment Variants ------------------------------------------------------------------------------------------------------------------------------------------------
-System.out.println("BEGIN: FunctionFragmentVariants");
+log.println("BEGIN: FunctionFragmentVariants");
 		cur_opnum = 0;
 		
 		//prep
@@ -639,15 +694,15 @@ functionfragmentinjectloop:
 			if(t_variants.size() > 0) {
 				numff++;
 				if(isInjectionUniform) {
-					System.out.println(numff + " U " +  t_forks.size() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine() + " " + functionfragment.getSrcFile());
+					log.println(numff + " U " +  t_forks.size() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine() + " " + functionfragment.getSrcFile());
 				} else {
-					System.out.println(numff + " V " +  t_forks.size() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine() + " " + functionfragment.getSrcFile());
+					log.println(numff + " V " +  t_forks.size() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine() + " " + functionfragment.getSrcFile());
 				}
 				for(int i = 0; i < t_forks.size(); i++) {
 					if(t_variants.get(i).getOperator() == null) {
-						System.out.println("\t" + t_forks.get(i) + " O " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine() + " " + t_variants.get(i).getInjectedFragment().getSrcFile());
+						log.println("\t" + t_forks.get(i) + " O " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine() + " " + t_variants.get(i).getInjectedFragment().getSrcFile());
 					} else {
-						System.out.println("\t" + t_forks.get(i) + " M " + t_variants.get(i).getOperator().getId() + " " + t_variants.get(i).getTimes() + " " +t_variants.get(i).getOperator().getTargetCloneType() + " " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine()  + " " + t_variants.get(i).getInjectedFragment().getSrcFile());
+						log.println("\t" + t_forks.get(i) + " M " + t_variants.get(i).getOperator().getId() + " " + t_variants.get(i).getTimes() + " " +t_variants.get(i).getOperator().getTargetCloneType() + " " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine()  + " " + t_variants.get(i).getInjectedFragment().getSrcFile());
 					}
 				}
 				try {
@@ -663,8 +718,19 @@ functionfragmentinjectloop:
 				}
 			}
 		}
-System.out.println("END: FunctionFragmentVariants");
+log.println("END: FunctionFragmentVariants");
 		
+
+		
+	//Check simulation
+		//CheckSimulation.main(new String[]{propertiesfile.toAbsolutePath().normalize().toString(), outputdir.resolve("log").toAbsolutePath().normalize().toString()});
+		
+	//Remove tmp
+		FileUtils.deleteDirectory(outputdir.resolve("tmp").toFile());
+		
+		//Flush Log
+		log.flush();
+		log.close();
 	}
 	
 	public static void printUsage() {
@@ -725,5 +791,21 @@ System.out.println("END: FunctionFragmentVariants");
 			next = 0;
 		}
 		return next;
+	}
+	
+	protected static int normalizeSystem(Path path, String language) throws IOException, InterruptedException {
+		Runtime rt = Runtime.getRuntime();
+		Process process = rt.exec("./prepsystem " + path.toAbsolutePath().normalize() + " " + language);
+		new StreamGobbler(process.getErrorStream()).start();
+		int retval = process.waitFor();
+		BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream()));
+		String line;
+		line = br.readLine();
+		while(line != null) {
+			System.out.println("\t" + line);
+			line = br.readLine();
+		}
+		try {process.getErrorStream().close();} catch (IOException e) {}
+		return retval;
 	}
 }

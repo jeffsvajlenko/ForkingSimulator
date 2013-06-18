@@ -424,7 +424,7 @@ public class FragmentUtil {
 		//Check similarity
 		double leftUnique=0.0;
 		double rightUnique=0.0;
-		Process p = Runtime.getRuntime().exec("diff -Bbi " + file1.toAbsolutePath().normalize().toString() + " " + file2.toAbsolutePath().normalize().toString());
+		Process p = Runtime.getRuntime().exec("diff " + file1.toAbsolutePath().normalize().toString() + " " + file2.toAbsolutePath().normalize().toString());
 		int leftDistinct=0; 
 		int rightDistinct=0;
 		

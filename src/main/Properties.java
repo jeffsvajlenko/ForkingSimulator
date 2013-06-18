@@ -443,6 +443,10 @@ public class Properties {
 		return system;
 	}
 
+	public void setSystem(Path system) {
+		this.system = system;
+	}
+	
 	/**
 	 * @return The path to the repository where variants are mined form.
 	 */
@@ -450,6 +454,10 @@ public class Properties {
 		return repository;
 	}
 
+	public void setRepository(Path repository) {
+		this.repository = repository;
+	}
+	
 	/**
 	 * @return The source language of the system and repository.
 	 */

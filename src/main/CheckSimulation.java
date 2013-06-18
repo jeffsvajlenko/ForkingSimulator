@@ -24,9 +24,12 @@ import util.SystemUtil;
 
 public class CheckSimulation {
 	
-	@SuppressWarnings("resource")
 	public static void main(String args[]) throws IOException {
-// Check Inputs
+		check(args);
+	}
+	
+	public static void check(String args[]) throws IOException {
+		// Check Inputs
 		if (args.length != 2) {
 			System.out.println("Input Parameters: properties output");
 			return;
@@ -133,8 +136,8 @@ public class CheckSimulation {
 		}
 		Path systemdir = Paths.get(line.replaceFirst("\tsystem_directory=", ""));
 			//Check
-		if(!systemdir.toAbsolutePath().normalize().equals(properties.getSystem().toAbsolutePath().normalize())) {
-			System.out.println("System directory does not match. Properties: " + properties.getSystem() + ", Output: " + systemdir);
+		if(!systemdir.toAbsolutePath().normalize().equals(outputdir.resolve("originalSystem").toAbsolutePath().normalize())) {
+			System.out.println("System directory is not correct: " + systemdir + " but should be " + outputdir.resolve("originalSystem").toAbsolutePath().normalize());
 			System.exit(-1);
 		}
 				
@@ -146,8 +149,8 @@ public class CheckSimulation {
 		}
 		Path repositorydir = Paths.get(line.replaceFirst("\trepository_directory=", ""));
 			//Check
-		if(!repositorydir.toAbsolutePath().normalize().equals(properties.getRepository().toAbsolutePath().normalize())) {
-			System.out.println("Repository directory does not match. Properties: " + properties.getRepository() + ", Output: " + repositorydir);
+		if(!repositorydir.toAbsolutePath().normalize().equals(outputdir.resolve("sourceRepository").toAbsolutePath().normalize())) {
+			System.out.println("Repository directory is not correct: " + repositorydir + " but should be " + outputdir.resolve("sourceRepository").toAbsolutePath().normalize());
 			System.exit(-1);
 		}
 		
@@ -1820,7 +1823,6 @@ System.out.println("Checking fork contents.");
 		}
 		in.close();
 		System.out.println("Exit with success!");
-
 	}
 
 //	private static boolean fragEqual(Fragment f1, Fragment f2) throws IOException {

@@ -25,12 +25,18 @@ public class SystemUtil {
 		return getInstallRoot().resolve("scripts").toAbsolutePath().normalize();
 	}
 	
+	private static Path tmpdir = getInstallRoot().resolve("tmp").toAbsolutePath().normalize();
+	
 	/**
 	 * 
 	 * @return
 	 */
 	public static Path getTemporaryDirectory() {
-		return getInstallRoot().resolve("tmp").toAbsolutePath().normalize();
+		return tmpdir;
+	}
+	
+	public static void setTemporaryDirectory(Path newtmpdir) {
+		tmpdir = newtmpdir;
 	}
 	
 	/**

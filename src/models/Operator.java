@@ -136,6 +136,19 @@ public class Operator {
 				continue;
 			}
 			
+			//Check mutation did not damage the fragment
+			// Create pretty-printed versions of the fragment
+			txl_retval = SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("PrettyPrintFragment.txl"), infile, tmpfile1);
+			if(txl_retval != 0) { // parsing failed, original file is defective, fail
+				break;
+			}
+			
+			// Create pretty-printed version of the mutant
+			txl_retval = SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("PrettyPrintFragment.txl"), outfile, tmpfile2);
+			if(txl_retval != 0) { // parsing failed, something went wrong during mutation, try again
+				continue;
+			}
+			
 			// Check if mutation produced valid output
 			if(getTargetCloneType() == 1) { //type1 check
 				// Create pretty-printed versions of the fragment
@@ -160,7 +173,7 @@ public class Operator {
 					continue;
 				}
 			} else if (getTargetCloneType() == 2) { //type2 check
-				// Create pretty-printed, blind-renamed versions of the fragment and mutant
+				// blind-renamed versions of the fragment and mutant
 				txl_retval = SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("BlindRenameFragment.txl"), infile, tmpfile1);
 				if(txl_retval != 0) { // parsing failed on original fragment, fail now
 					break;
