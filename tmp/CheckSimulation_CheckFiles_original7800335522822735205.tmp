@@ -1,0 +1,36 @@
+/*
+ * %W% %E% %U%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X.X.X;
+
+public interface X
+{
+    // bmp versions
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+
+    // Color space types
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+
+    // Compression Types
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+
+    static final X[] X =
+    {0, 0, 0, 0, 0, 0};
+}

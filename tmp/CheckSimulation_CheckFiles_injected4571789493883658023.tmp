@@ -1,0 +1,14 @@
+package X.X.X.X;
+
+public final class X extends X.X.X.X {
+
+    public X () {
+        X ();
+    }
+
+    public X () {
+        X (X);
+    }
+
+}
+

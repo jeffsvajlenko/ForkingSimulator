@@ -1,0 +1,43 @@
+package X.X.X.X.X.X;
+
+import X.X.*;
+
+public abstract class X implements X {
+    X X;
+    X X;
+
+    public X (X X, X X) {
+        X.X = X;
+        X.X = X;
+    }
+
+    X (X X) {
+        X.X = X;
+    }
+
+    X X (X X) {
+        X.X = X;
+    }
+
+    public X X () {
+    }
+
+    public abstract X X ();
+
+    public X X (X X) {
+        if (! X.X ()) {
+            throw new X (0 + X + 0);
+        }
+        throw new X (0 + X);
+    }
+
+    public X X () {
+        return X;
+    }
+
+    public X X () {
+        return X;
+    }
+
+}
+

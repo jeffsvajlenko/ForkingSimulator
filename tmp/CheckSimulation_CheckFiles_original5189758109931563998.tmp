@@ -1,0 +1,384 @@
+/*
+ * Copyright 2001-2004 The Apache Software Foundation.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+
+/**
+ * This is the "standard" parser configuration. It extends the DTD
+ * configuration with the standard set of parser components.
+ * The standard set of parser components include those needed
+ * to parse and validate with DTD's, and those needed for XML
+ * Schema.</p>
+ * <p>
+ * In addition to the features and properties recognized by the base
+ * parser configuration, this class recognizes these additional
+ * features and properties:
+ * <ul>
+ * <li>Features
+ *  <ul>
+ *  <li>http://apache.org/xml/features/validation/schema</li>
+ *  <li>http://apache.org/xml/features/validation/schema-full-checking</li>
+ *  <li>http://apache.org/xml/features/validation/schema/normalized-value</li>
+ *  <li>http://apache.org/xml/features/validation/schema/element-default</li>
+ *  </ul>
+ * <li>Properties
+ *  <ul>
+ *   <li>http://apache.org/xml/properties/internal/error-reporter</li>
+ *   <li>http://apache.org/xml/properties/internal/entity-manager</li>
+ *   <li>http://apache.org/xml/properties/internal/document-scanner</li>
+ *   <li>http://apache.org/xml/properties/internal/dtd-scanner</li>
+ *   <li>http://apache.org/xml/properties/internal/grammar-pool</li>
+ *   <li>http://apache.org/xml/properties/internal/validator/dtd</li>
+ *   <li>http://apache.org/xml/properties/internal/datatype-validator-factory</li>
+ *  </ul>
+ * </ul>
+ *
+ * @author Arnaud  Le Hors, IBM
+ * @author Andy Clark, IBM
+ *
+ * @version $Id: StandardParserConfiguration.java,v 1.4 2007/07/19 04:38:54 ofung Exp $
+ */
+public class X
+    extends X
+{
+
+    //
+    // Constants
+    //
+
+    // feature identifiers
+
+    /** Feature identifier: expose schema normalized value */
+    protected static final X X =
+        X.X + X.X;
+
+
+    /** Feature identifier: send element default value via characters() */
+    protected static final X X =
+        X.X + X.X;
+
+
+    /** Feature identifier: augment PSVI */
+    protected static final X X =
+        X.X + X.X;
+
+
+    /** feature identifier: XML Schema validation */
+    protected static final X X =
+        X.X + X.X;
+
+    /** feature identifier: XML Schema validation -- full checking */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Feature: generate synthetic annotations */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Feature identifier: validate annotations */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Feature identifier: honour all schemaLocations */
+    protected static final X X =
+        X.X + X.X;
+
+    // property identifiers
+
+    /** Property identifier: XML Schema validator. */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Property identifier: schema location. */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Property identifier: no namespace schema location. */
+    protected static final X X =
+        X.X + X.X;
+
+    //
+    // Data
+    //
+
+    // components (non-configurable)
+
+    /** XML Schema Validator. */
+    protected X X;
+
+    //
+    // Constructors
+    //
+
+    /** Default constructor. */
+    public X()
+    {
+        X(0, 0, 0);
+    } // <init>()
+
+    /**
+     * Constructs a parser configuration using the specified symbol table.
+     *
+     * @param symbolTable The symbol table to use.
+     */
+    public X(X X)
+    {
+        X(X, 0, 0);
+    } // <init>(SymbolTable)
+
+    /**
+     * Constructs a parser configuration using the specified symbol table and
+     * grammar pool.
+     * <p>
+     * <strong>REVISIT:</strong>
+     * Grammar pool will be updated when the new validation engine is
+     * implemented.
+     *
+     * @param symbolTable The symbol table to use.
+     * @param grammarPool The grammar pool to use.
+     */
+    public X(X X,
+                                       X X)
+    {
+        X(X, X, 0);
+    } // <init>(SymbolTable,XMLGrammarPool)
+
+    /**
+     * Constructs a parser configuration using the specified symbol table,
+     * grammar pool, and parent settings.
+     * <p>
+     * <strong>REVISIT:</strong>
+     * Grammar pool will be updated when the new validation engine is
+     * implemented.
+     *
+     * @param symbolTable    The symbol table to use.
+     * @param grammarPool    The grammar pool to use.
+     * @param parentSettings The parent settings.
+     */
+    public X(X X,
+                                       X X,
+                                       X X)
+    {
+        X(X, X, X);
+
+        // add default recognized features
+        final X[] X =
+        {
+            X,
+            X,
+            X,
+            X,
+            X,
+            X,
+            // NOTE: These shouldn't really be here but since the XML Schema
+            //       validator is constructed dynamically, its recognized
+            //       features might not have been set and it would cause a
+            //       not-recognized exception to be thrown. -Ac
+            X,
+            X,
+        };
+        X(X);
+
+        // set state for default features
+        X(X, 0);
+        X(X, 0);
+        X(X, 0);
+        X(X, 0);
+        X(X, 0);
+        X(X, 0);
+
+        // add default recognized properties
+
+        final X[] X =
+        {
+            // NOTE: These shouldn't really be here but since the XML Schema
+            //       validator is constructed dynamically, its recognized
+            //       properties might not have been set and it would cause a
+            //       not-recognized exception to be thrown. -Ac
+            X,
+            X,
+        };
+
+        X(X);
+
+    } // <init>(SymbolTable,XMLGrammarPool)
+
+    //
+    // Public methods
+    //
+
+    /** Configures the pipeline. */
+    protected X X()
+    {
+        X.X();
+        if ( X(X ))
+        {
+            // If schema validator was not in the pipeline insert it.
+            if (X == 0)
+            {
+                X = new X();
+
+                // add schema component
+                X.X(X, X);
+                X(X);
+                // add schema message formatter
+                if (X.X(X.X) == 0)
+                {
+                    X X = new X();
+                    X.X(X.X, X);
+                }
+
+            }
+            X = X;
+            X.X(X);
+
+            X.X(X);
+            X.X(X);
+        }
+
+
+    } // configurePipeline()
+
+    // features and properties
+
+    /**
+     * Check a feature. If feature is know and supported, this method simply
+     * returns. Otherwise, the appropriate exception is thrown.
+     *
+     * @param featureId The unique identifier (URI) of the feature.
+     *
+     * @throws XMLConfigurationException Thrown for configuration error.
+     *                                   In general, components should
+     *                                   only throw this exception if
+     *                                   it is <strong>really</strong>
+     *                                   a critical error.
+     */
+    protected X X(X X)
+    throws X
+    {
+
+        //
+        // Xerces Features
+        //
+
+        if (X.X(X.X))
+        {
+            final X X = X.X() - X.X.X();
+
+            //
+            // http://apache.org/xml/features/validation/schema
+            //   Lets the user turn Schema validation support on/off.
+            //
+            if (X == X.X.X() &&
+                    X.X(X.X))
+            {
+                return;
+            }
+            // activate full schema checking
+            if (X == X.X.X() &&
+                    X.X(X.X))
+            {
+                return;
+            }
+            // Feature identifier: expose schema normalized value
+            //  http://apache.org/xml/features/validation/schema/normalized-value
+            if (X == X.X.X() &&
+                    X.X(X.X))
+            {
+                return;
+            }
+            // Feature identifier: send element default value via characters()
+            // http://apache.org/xml/features/validation/schema/element-default
+            if (X == X.X.X() &&
+                    X.X(X.X))
+            {
+                return;
+            }
+        }
+
+        //
+        // Not recognized
+        //
+
+        X.X(X);
+
+    } // checkFeature(String)
+
+    /**
+     * Check a property. If the property is know and supported, this method
+     * simply returns. Otherwise, the appropriate exception is thrown.
+     *
+     * @param propertyId The unique identifier (URI) of the property
+     *                   being set.
+     *
+     * @throws XMLConfigurationException Thrown for configuration error.
+     *                                   In general, components should
+     *                                   only throw this exception if
+     *                                   it is <strong>really</strong>
+     *                                   a critical error.
+     */
+    protected X X(X X)
+    throws X
+    {
+
+        //
+        // Xerces Properties
+        //
+
+        if (X.X(X.X))
+        {
+            final X X = X.X() - X.X.X();
+
+            if (X == X.X.X() &&
+                    X.X(X.X))
+            {
+                return;
+            }
+            if (X == X.X.X() &&
+                    X.X(X.X))
+            {
+                return;
+            }
+        }
+
+        if (X.X(X.X))
+        {
+            final X X = X.X() - X.X.X();
+
+            if (X == X.X.X() &&
+                    X.X(X.X))
+            {
+                return;
+            }
+        }
+
+        //
+        // Not recognized
+        //
+
+        X.X(X);
+
+    } // checkProperty(String)
+
+} // class StandardParserConfiguration

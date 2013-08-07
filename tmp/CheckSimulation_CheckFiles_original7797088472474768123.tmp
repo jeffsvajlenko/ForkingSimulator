@@ -1,0 +1,265 @@
+package X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+public final class X {
+    public static final X X = 0;
+    public static final X X = 0;
+    public static final X X = 0;
+    public static final X X = 0;
+    private static X X;
+    private static X X;
+    private static X X;
+    private static X X;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0 | X;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+
+    public static X X (X X) {
+        return X (X, X);
+    }
+
+    public static X X (X X) {
+        return X (X, X);
+    }
+
+    public static X X (X X) {
+        return X (X, X);
+    }
+
+    public static X X (X X) {
+        return X (X, X);
+    }
+
+    public static X X (X X) {
+        return X (X, X);
+    }
+
+    public static X X (X X, X X) {
+        if (X.X (0)) return ! X (X, X);
+
+        if (X.X (0)) return X (X, X);
+
+        if (X.X (0) || X.X (0)) return X (X, X);
+
+        if (X.X (0) || X.X (0)) return X (X, X);
+
+        if (X.X (0) || X.X (0) || X.X (0) || X.X (0) || X.X (0)) return X (X, X);
+
+        if (X.X (0) || X.X (0)) return X (X, X);
+
+        return 0;
+    }
+
+    public static X X (X X, X X) {
+        return (X.X (0) || X.X (0));
+    }
+
+    public static X X (X X, X X) {
+        X [] X;
+        X = (X []) X.X (X.X (X.X));
+        if (X == 0) return 0;
+
+        for (X X = 0;
+        X < X.X; ++ X) if (X [X].X (X)) return 0;
+
+        return 0;
+    }
+
+    public static X X (X X) {
+        X X;
+        X ();
+        X = X.X (X);
+        if (X != 0 && X instanceof X) return ((X) X).X ();
+        else return - 0;
+
+    }
+
+    public static X X (X X) {
+        if (X > 0) return 0;
+
+        X X;
+        X ();
+        X = (X) X.X (new X (X));
+        return X;
+    }
+
+    private static X X () {
+        X X = 0;
+        X X = 0;
+        X X;
+        X X;
+        X X;
+        X X;
+        X X;
+        if (X != 0) return;
+
+        try {
+            X = new X ();
+            X = new X ();
+            X = X.class.X (X);
+            if (X == 0) {
+                throw new X (X.X (X.X, 0, new X [] {X}));
+            }
+            X = new X (new X (X, 0));
+            X = X.X ();
+            while (X != 0) {
+                if (X.X () == 0 || X.X (0) == 0) {
+                    X = X.X ();
+                    continue;
+                }
+                X = X.X (0);
+                if (X > 0) {
+                    X = X.X (0, X);
+                    ++ X;
+                    if (X < X.X ()) {
+                        X = X.X (X);
+                        X = X.X (0);
+                        if (X > 0) X = X.X (0, X);
+
+                        X = X.X (X);
+                        X (X, (X) X);
+                    }
+                }
+                X = X.X ();
+            }
+            X.X ();
+        } catch (X X) {
+            throw new X (X.X (X.X, 0, new X [] {X, X.X ()}));
+        } finally {
+            if (X != 0) {
+                try {
+                    X.X ();
+                } catch (X X) {
+                }
+            }
+        }
+    }
+
+    private static X X (X X, X X) {
+        if (X.X (X) == 0) {
+            X.X (X, new X (X));
+            X.X (new X (X), X);
+        }
+    }
+
+    private static X X (X X, X X) {
+        X.X (X, new X (X));
+    }
+
+    private static X X (X X, X X) {
+        X (X, new X [] {X});
+    }
+
+    private static X X (X X, X [] X) {
+        X.X (X, X);
+    }
+
+    private static X X (X X, X X) {
+        X X;
+        X = (X) X.X (X.X (X.X));
+        if (X == 0) return 0;
+        else return ((X.X () & X) == X);
+
+    }
+
+    static {
+        X = new X ();
+        X (0, X);
+        X (0, X);
+        X (0, X | X);
+        X (0, X);
+        X (0, X);
+        X (0, X);
+        X (0, X);
+        X (0, X);
+        X (0, X | X | X);
+        X (0, X | X | X);
+        X (0, X);
+        X (0, X | X);
+        X (0, X | X | X);
+        X (0, X);
+        X (0, X);
+        X (0, X | X);
+        X (0, X);
+        X (0, X);
+        X (0, X);
+        X (0, X);
+        X (0, X);
+        X (0, X);
+        X (0, X | X);
+        X (0, X | X);
+        X (0, X | X);
+        X (0, X);
+        X (0, X);
+        X (0, X | X);
+        X (0, X | X | X);
+        X (0, X | X);
+        X (0, X);
+        X (0, X | X);
+        X (0, X | X);
+        X (0, X);
+        X (0, X | X | X);
+        X (0, X | X | X);
+        X (0, X);
+        X (0, X | X);
+        X (0, X | X);
+        X (0, X | X);
+        X (0, X);
+        X (0, X | X);
+        X (0, X | X);
+        X (0, X | X | X);
+        X (0, X | X);
+        X (0, X);
+        X (0, X | X | X);
+        X (0, X | X);
+        X (0, X | X | X);
+        X (0, X);
+        X (0, X | X | X);
+        X (0, X | X);
+        X = new X ();
+        X (0, 0);
+        X (0, 0);
+        X (0, 0);
+        X (0, 0);
+        X (0, 0);
+        X (0, 0);
+        X (0, 0);
+        X (0, new X [] {0, 0, 0, 0});
+        X (0, 0);
+        X (0, 0);
+        X (0, 0);
+        X (0, 0);
+        X (0, 0);
+        X (0, new X [] {0, 0, 0});
+        X (0, 0);
+        X (0, new X [] {0, 0});
+        X (0, 0);
+        X (0, 0);
+        X (0, 0);
+        X (0, new X [] {0, 0});
+        X (0, 0);
+        X ();
+    }
+
+}
+

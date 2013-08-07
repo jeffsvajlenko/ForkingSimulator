@@ -1,0 +1,36 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+
+package X.X.X.X;
+
+/**
+ * Invalid is thrown by dynamic any operations when a bad
+ * <code>DynAny</code> or <code>Any</code> is passed as a parameter.
+ */
+public final class X
+    extends X.X.X.X
+{
+
+    /**
+     * Constructs an <code>Invalid</code> object.
+     */
+    public X()
+    {
+        X();
+    }
+
+    /**
+     * Constructs an <code>Invalid</code> object.
+     * @param reason a <code>String</code> giving more information
+     * regarding the bad parameter passed to a dynamic any operation.
+     */
+    public X(X X)
+    {
+        X(X);
+    }
+}

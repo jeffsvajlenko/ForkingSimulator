@@ -1,0 +1,14 @@
+package X.X.X.X;
+
+import X.X.X.X;
+
+public interface X extends X {
+
+    public X X ();
+
+    public X X () throws X;
+
+    public X X ();
+
+}
+

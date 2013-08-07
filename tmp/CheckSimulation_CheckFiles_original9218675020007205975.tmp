@@ -1,0 +1,66 @@
+package X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X.X;
+
+import X.X.X;
+
+class X implements X {
+    private X X = 0;
+
+    public X () {
+    }
+
+    private X X (final X X) {
+        X X = (X) X.X (new X () {
+
+            public X.X.X X () {
+                return X.X (X);
+            }
+
+        }
+
+        );
+        return X;
+    }
+
+    private X X (X X, X X) {
+        try {
+            X X = new X (X);
+            if (! X.X ()) return;
+
+            X X = new X (X);
+            try {
+                X.X (X);
+            } finally {
+                X.X ();
+            }
+        } catch (X X) {
+            if (X) X.X.X (0 + X + 0 + X);
+
+        }
+    }
+
+    public X X () {
+        X X = new X ();
+        X X = X (0);
+        X X = X + X.X + 0 + X.X + 0;
+        X (X, X);
+        X X = new X (X);
+        X X = X (0);
+        X = X + X.X + 0;
+        X (X, X);
+        return X;
+    }
+
+}
+

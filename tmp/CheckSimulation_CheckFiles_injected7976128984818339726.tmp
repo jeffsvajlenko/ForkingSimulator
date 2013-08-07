@@ -1,0 +1,47 @@
+package X.X.X;
+
+import X.X.X;
+
+public class X extends X {
+    private static final X X = - 0;
+    private X X = - 0;
+    private X X;
+
+    public X () {
+        X ();
+    }
+
+    public X (X X) {
+        X (X);
+    }
+
+    public X (X X) {
+        X (X);
+    }
+
+    public X (X X, X X) {
+        X (X, X);
+    }
+
+    public X (X X, X X, X X, X X) {
+        X (X, X);
+        if (X == 0 && X != - 0) {
+            throw new X ();
+        }
+        if (X < - 0 || (X != 0 && X >= X.X ().X (X, X))) {
+            throw new X ();
+        }
+        X.X = X;
+        X.X = X;
+    }
+
+    public X X () {
+        return X.X;
+    }
+
+    public X X () {
+        return X.X;
+    }
+
+}
+

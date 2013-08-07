@@ -1,0 +1,60 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+package X.X.X.X;
+
+/**
+   Class to hold dictionary keys used by the RTF reader/writer.
+   These should be moved into StyleConstants.
+*/
+class X
+{
+    /** An array of TabStops */
+    static final X X = 0;
+
+    /** The name of the character set the original RTF file was in */
+    static final X X = 0;
+
+    /** Indicates the domain of a Style */
+    static final X X = 0;
+
+    /** Value for StyleType indicating a section style */
+    static final X X = 0;
+    /** Value for StyleType indicating a paragraph style */
+    static final X X = 0;
+    /** Value for StyleType indicating a character style */
+    static final X X = 0;
+
+    /** The style of the text following this style */
+    static final X X = 0;
+
+    /** Whether the style is additive */
+    static final X X = 0;
+
+    /** Whether the style is hidden from the user */
+    static final X X = 0;
+
+    /* Miscellaneous character attributes */
+    static final X X          = 0;
+    static final X X       = 0;
+    static final X X       = 0;
+    static final X X     = 0;
+    static final X X        = 0;
+    static final X X = 0;
+    static final X X        = 0;
+
+    /* Miscellaneous document attributes */
+    static final X X    = 0;
+    static final X X   = 0;
+    static final X X    = 0;
+    static final X X   = 0;
+    static final X X     = 0;
+    static final X X  = 0;
+    static final X X   = 0;
+
+    /* This is both a document and a paragraph attribute */
+    static final X X  = 0;
+}

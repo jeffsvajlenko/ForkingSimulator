@@ -1,0 +1,2940 @@
+/*
+ * Copyright 2001-2005 The Apache Software Foundation.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package X.X.X.X.X.X.X;
+
+import X.X.X;
+import X.X.X;
+
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X;
+
+/**
+ * This is the base class of all DOM parsers. It implements the XNI
+ * callback methods to create the DOM tree. After a successful parse of
+ * an XML document, the DOM Document object can be queried using the
+ * <code>getDocument</code> method. The actual pipeline is defined in
+ * parser configuration.
+ *
+ * @author Arnaud Le Hors, IBM
+ * @author Andy Clark, IBM
+ * @author Elena Litani, IBM
+ *
+ * @version $Id: AbstractDOMParser.java,v 1.4 2007/07/19 04:38:54 ofung Exp $
+ */
+public class X extends X
+{
+
+    //
+    // Constants
+    //
+
+    // feature ids
+
+    /** Feature id: namespace. */
+    protected static final X X =
+        X.X+X.X;
+
+    /** Feature id: create entity ref nodes. */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Feature id: include comments. */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Feature id: create cdata nodes. */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Feature id: include ignorable whitespace. */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Feature id: defer node expansion. */
+    protected static final X X =
+        X.X + X.X;
+
+
+    /** Recognized features. */
+    private static final X[] X =
+    {
+        X,
+        X,
+        X,
+        X,
+        X,
+        X
+    };
+
+    // property ids
+
+    /** Property id: document class name. */
+    protected static final X X =
+        X.X + X.X;
+
+    protected static final X  X=
+        X.X + X.X;
+
+    // protected static final String GRAMMAR_POOL =
+    // Constants.XERCES_PROPERTY_PREFIX + Constants.XMLGRAMMAR_POOL_PROPERTY;
+
+    /** Recognized properties. */
+    private static final X[] X =
+    {
+        X,
+        X,
+    };
+
+    // other
+
+    /** Default document class name. */
+    protected static final X X =
+        0;
+
+    protected static final X X =
+        0;
+
+    protected static final X X =
+        0;
+
+    /**
+     * If the user stops the process, this exception will be thrown.
+     */
+    public static final X X = new X();
+
+    // debugging
+
+    private static final X X = 0;
+    private static final X X = 0;
+
+    //
+    // Data
+    //
+
+    /** DOM L3 error handler */
+    protected X X = 0;
+
+    /** True if inside DTD. */
+    protected X X;
+
+    // features
+
+    /** Create entity reference nodes. */
+    protected X X;
+
+    /** Include ignorable whitespace. */
+    protected X X;
+
+    /** Include Comments. */
+    protected X X;
+
+    /** Create cdata nodes. */
+    protected X X;
+
+    // dom information
+
+    /** The document. */
+    protected X X;
+
+    /** The default Xerces document implementation, if used. */
+    protected X X;
+
+    /** Whether to store PSVI information in DOM tree. */
+    protected X X;
+
+    /** The document class name to use. */
+    protected X  X;
+
+    /** The document type node. */
+    protected X X;
+
+    /** Current node. */
+    protected X X;
+    protected X X;
+    protected X X;
+    protected X X;
+
+    /** Character buffer */
+    protected final X X = new X (0);
+
+    // internal subset
+
+    /** Internal subset buffer. */
+    protected X X;
+
+    // deferred expansion data
+
+    protected X              X;
+    protected X              X;
+    protected X X;
+    protected X                  X;
+    protected X                  X;
+    protected X                  X;
+    protected X                  X;
+
+    // state
+
+    /** True if inside DTD external subset. */
+    protected X X;
+
+    /** Root element name */
+    protected X X = new X();
+
+    /** True if inside CDATA section. */
+    protected X X;
+
+    /** True if saw the first chunk of characters*/
+    protected X X = 0;
+
+
+    /** LSParserFilter: specifies that element with given QNAME and all its children
+     * must be rejected */
+    protected X X = 0;
+
+    // data
+
+    /** Base uri stack*/
+    protected X X = new X ();
+
+
+    /** LSParserFilter: the QNAME of rejected element*/
+    protected final X X = new X ();
+
+    /** LSParserFilter: store qnames of skipped elements*/
+    protected X X = 0;
+
+    /** LSParserFilter: true if inside entity reference */
+    protected X X = 0;
+
+    /** Attribute QName. */
+    private X X = new X ();
+
+    // handlers
+
+    protected X X = 0;
+
+    //
+    // Constructors
+    //
+
+    /** Default constructor. */
+    protected X (X X)
+    {
+
+        X (X);
+
+
+        // add recognized features
+        X.X (X);
+
+        // set default values
+        X.X (X, 0);
+        X.X (X, 0);
+        X.X (X, 0);
+        X.X (X, 0);
+        X.X (X, 0);
+
+        // add recognized properties
+        X.X (X);
+
+        // set default values
+        X.X (X,
+                                    X);
+
+    } // <init>(XMLParserConfiguration)
+
+    /**
+     * This method retreives the name of current document class.
+     */
+    protected X X ()
+    {
+        return X;
+    }
+
+    /**
+     * This method allows the programmer to decide which document
+     * factory to use when constructing the DOM tree. However, doing
+     * so will lose the functionality of the default factory. Also,
+     * a document class other than the default will lose the ability
+     * to defer node expansion on the DOM tree produced.
+     *
+     * @param documentClassName The fully qualified class name of the
+     *                      document factory to use when constructing
+     *                      the DOM tree.
+     *
+     * @see #getDocumentClassName
+     * @see #DEFAULT_DOCUMENT_CLASS_NAME
+     */
+    protected X X (X X)
+    {
+
+        // normalize class name
+        if (X == 0)
+        {
+            X = X;
+        }
+
+        if (!X.X(X) &&
+                !X.X(X))
+        {
+            // verify that this class exists and is of the right type
+            try
+            {
+                X X = X.X (X, 0);
+                //if (!_class.isAssignableFrom(Document.class)) {
+                if (!X.class.X (X))
+                {
+                    throw new X (
+                        X.X(
+                            X.X,
+                            0, new X [] {X}));
+                }
+            }
+            catch (X X)
+            {
+                throw new X (
+                    X.X(
+                        X.X,
+                        0, new X [] {X}));
+            }
+        }
+
+        // set document class name
+        X = X;
+        if (!X.X (X))
+        {
+            X = 0;
+        }
+
+    } // setDocumentClassName(String)
+
+    //
+    // Public methods
+    //
+
+    /** Returns the DOM document object. */
+    public X X ()
+    {
+        return X;
+    } // getDocument():Document
+
+    //
+    // XMLDocumentParser methods
+    //
+
+    /**
+     * Resets the parser state.
+     *
+     * @throws SAXException Thrown on initialization error.
+     */
+    public X X () throws X
+    {
+        X.X ();
+
+
+        // get feature state
+        X =
+            X.X (X);
+
+        X =
+            X.X (X);
+
+        X =
+            X.X (X);
+
+        X = X.X (X);
+
+        X = X.X (X);
+
+        X = X.X (X);
+
+        // get property
+        X ((X)
+                              X.X (X));
+
+        // reset dom information
+        X = 0;
+        X = 0;
+        X = 0;
+        X = 0;
+        X = -0;
+        X = 0;
+        X = 0;
+
+        // reset string buffer
+        X.X (0);
+
+        // reset state information
+        X.X();
+        X = 0;
+        X = 0;
+        X = 0;
+        X = 0;
+        X = 0;
+        X = -0;
+
+        X.X ();
+
+
+    } // reset()
+
+    /**
+     * Set the locale to use for messages.
+     *
+     * @param locale The locale object to use for localization of messages.
+     *
+     */
+    public X X (X X)
+    {
+        X.X (X);
+
+    } // setLocale(Locale)
+
+    //
+    // XMLDocumentHandler methods
+    //
+
+    /**
+     * This method notifies the start of a general entity.
+     * <p>
+     * <strong>Note:</strong> This method is not called for entity references
+     * appearing as part of attribute values.
+     *
+     * @param name     The name of the general entity.
+     * @param identifier The resource identifier.
+     * @param encoding The auto-detected IANA encoding name of the entity
+     *                 stream. This value will be null in those situations
+     *                 where the entity encoding is not auto-detected (e.g.
+     *                 internal entities or a document entity that is
+     *                 parsed from a java.io.Reader).
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @exception XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X,
+                                    X X,
+                                    X X, X X)
+    throws X
+    {
+        if (X)
+        {
+            X.X.X (0+X+0);
+            if (X)
+            {
+                X.X.X (0+X.X ());
+                X.X.X (0+ X.X ());
+            }
+        }
+
+        // Always create entity reference nodes to be able to recreate
+        // entity as a part of doctype
+        if (!X)
+        {
+            if (X)
+            {
+                return;
+            }
+            X (0);
+            X X = X.X (X);
+            if (X != 0)
+            {
+                // REVISIT: baseURI/actualEncoding
+                //         remove dependency on our implementation when DOM L3 is REC
+                //
+
+                X X =(X)X;
+
+                // set base uri
+                X.X (X.X ());
+                if (X != 0)
+                {
+                    // set actual encoding
+                    X X = X.X ();
+                    X = (X) X.X (X);
+                    if (X != 0)
+                    {
+                        X.X (X);
+                    }
+
+                }
+                // we don't need synchronization now, because entity ref will be
+                // expanded anyway. Synch only needed when user creates entityRef node
+                X.X (0);
+            }
+            X = 0;
+            X.X (X);
+            X = X;
+        }
+        else
+        {
+
+            X X =
+                X.X (X, X.X ());
+            if (X != -0)
+            {
+                // find corresponding Entity decl
+                X X = X.X (X, 0);
+                while (X != -0)
+                {
+                    X X = X.X (X, 0);
+                    if (X == X.X)
+                    {
+                        X X =
+                            X.X (X, 0);
+                        if (X.X (X))
+                        {
+                            X = X;
+                            X.X (X, X);
+                            break;
+                        }
+                    }
+                    X = X.X (X, 0);
+                }
+            }
+            X.X (X, X);
+            X = X;
+        }
+
+    } // startGeneralEntity(String,XMLResourceIdentifier, Augmentations)
+
+    /**
+     * Notifies of the presence of a TextDecl line in an entity. If present,
+     * this method will be called immediately following the startEntity call.
+     * <p>
+     * <strong>Note:</strong> This method will never be called for the
+     * document entity; it is only called for external general entities
+     * referenced in document content.
+     * <p>
+     * <strong>Note:</strong> This method is not called for entity references
+     * appearing as part of attribute values.
+     *
+     * @param version  The XML version, or null if not specified.
+     * @param encoding The IANA encoding name of the entity.
+     * @param augs       Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X, X X) throws X
+    {
+        if (X)
+        {
+            return;
+        }
+        if (!X)
+        {
+            if (X != 0 && !X)
+            {
+                X.X (X);
+                if (X != 0)
+                    X.X (X);
+            }
+        }
+        else
+        {
+            if (X !=-0)
+            {
+                X.X (X, X, X);
+            }
+        }
+    } // textDecl(String,String)
+
+    /**
+     * A comment.
+     *
+     * @param text The text in the comment.
+     * @param augs       Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by application to signal an error.
+     */
+    public X X (X X, X X) throws X
+    {
+        if (X)
+        {
+            if (X != 0 && !X)
+            {
+                X.X (0);
+                X.X (X.X ());
+                X.X (0);
+            }
+            return;
+        }
+        if (!X || X)
+        {
+            return;
+        }
+        if (!X)
+        {
+            X X = X.X (X.X ());
+
+            X (0);
+            X.X (X);
+            if (X !=0 && !X &&
+                    (X.X () & X.X)!= 0)
+            {
+                X X = X.X (X);
+                switch (X)
+                {
+                case X.X:
+                {
+                    throw X;
+                }
+                case X.X:
+                {
+                    // REVISIT: the constant FILTER_REJECT should be changed when new
+                    // DOM LS specs gets published
+
+                    // fall through to SKIP since comment has no children.
+                }
+                case X.X:
+                {
+                    // REVISIT: the constant FILTER_SKIP should be changed when new
+                    // DOM LS specs gets published
+                    X.X (X);
+                    // make sure we don't loose chars if next event is characters()
+                    X = 0;
+                    return;
+                }
+
+                default:
+                {
+                    // accept node
+                }
+                }
+            }
+
+        }
+        else
+        {
+            X X =
+                X.X (X.X ());
+            X.X (X, X);
+        }
+
+    } // comment(XMLString)
+
+    /**
+     * A processing instruction. Processing instructions consist of a
+     * target name and, optionally, text data. The data is only meaningful
+     * to the application.
+     * <p>
+     * Typically, a processing instruction's data will contain a series
+     * of pseudo-attributes. These pseudo-attributes follow the form of
+     * element attributes but are <strong>not</strong> parsed or presented
+     * to the application as anything other than text. The application is
+     * responsible for parsing the data.
+     *
+     * @param target The target.
+     * @param data   The data or null if none specified.
+     * @param augs       Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X, X X)
+    throws X
+    {
+
+        if (X)
+        {
+            if (X != 0 && !X)
+            {
+                X.X (0);
+                X.X (X);
+                X.X (0);
+                X.X (X.X ());
+                X.X (0);
+
+            }
+            return;
+        }
+
+        if (X)
+        {
+            X.X.X (0+X+0);
+        }
+        if (!X)
+        {
+            if (X)
+            {
+                return;
+            }
+            X X =
+                X.X (X, X.X ());
+
+
+            X (0);
+            X.X (X);
+            if (X !=0 && !X &&
+                    (X.X () & X.X)!= 0)
+            {
+                X X = X.X (X);
+                switch (X)
+                {
+                case X.X:
+                {
+                    throw X;
+                }
+                case X.X:
+                {
+                    // fall through to SKIP since PI has no children.
+                }
+                case X.X:
+                {
+                    X.X (X);
+                    // fFirstChunk must be set to true so that data
+                    // won't be lost in the case where the child before PI is
+                    // a text node and the next event is characters.
+                    X = 0;
+                    return;
+                }
+                default:
+                {
+                }
+                }
+            }
+        }
+        else
+        {
+            X X = X.
+                     X (X, X.X ());
+            X.X (X, X);
+        }
+
+    } // processingInstruction(String,XMLString)
+
+    /**
+     * The start of the document.
+     *
+     * @param locator The system identifier of the entity if the entity
+     *                 is external, null otherwise.
+     * @param encoding The auto-detected IANA encoding name of the entity
+     *                 stream. This value will be null in those situations
+     *                 where the entity encoding is not auto-detected (e.g.
+     *                 internal entities or a document entity that is
+     *                 parsed from a java.io.Reader).
+     * @param namespaceContext
+     *                 The namespace context in effect at the
+     *                 start of this document.
+     *                 This object represents the current context.
+     *                 Implementors of this class are responsible
+     *                 for copying the namespace bindings from the
+     *                 the current context (and its parent contexts)
+     *                 if that information is important.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X,
+                               X X, X X)
+    throws X
+    {
+
+        if (!X)
+        {
+            if (X.X (X))
+            {
+                X = new X ();
+                X = (X)X;
+                // REVISIT: when DOM Level 3 is REC rely on Document.support
+                //          instead of specific class
+                // set DOM error checking off
+                X.X (0);
+                // set actual encoding
+                X.X (X);
+                // set documentURI
+                X.X (X.X ());
+            }
+            else if (X.X (X))
+            {
+                X = new X();
+                X = (X)X;
+                X = 0;
+                // REVISIT: when DOM Level 3 is REC rely on Document.support
+                //          instead of specific class
+                // set DOM error checking off
+                X.X (0);
+                // set actual encoding
+                X.X (X);
+                // set documentURI
+                X.X (X.X ());
+            }
+            else
+            {
+                // use specified document class
+                try
+                {
+                    X X = X.X();
+                    X X = X.X (X, 0);
+                    X = (X)X.X ();
+
+                    // if subclass of our own class that's cool too
+                    X X =
+                        X.X (X, 0);
+                    if (X.X (X))
+                    {
+                        X = (X)X;
+
+                        X X = X.X (X, 0);
+                        if (X.X (X))
+                        {
+                            X = 0;
+                        }
+
+                        // REVISIT: when DOM Level 3 is REC rely on
+                        //          Document.support instead of specific class
+                        // set DOM error checking off
+                        X.X (0);
+                        // set actual encoding
+                        X.X (X);
+                        // set documentURI
+                        if (X != 0)
+                        {
+                            X.X (X.X ());
+                        }
+                    }
+                }
+                catch (X X)
+                {
+                    // won't happen we already checked that earlier
+                }
+                catch (X X)
+                {
+                    throw new X (
+                        X.X(
+                            X.X,
+                            0,
+                            new X [] {X}));
+                }
+            }
+            X = X;
+        }
+        else
+        {
+            X = new X (X);
+            X = X;
+            X = X.X ();
+            // REVISIT: strict error checking is not implemented in deferred dom.
+            //          Document.support instead of specific class
+
+            // set actual encoding
+            X.X (X);
+            // set documentURI
+            X.X (X.X ());
+            X = X;
+
+        }
+
+    } // startDocument(String,String)
+
+    /**
+     * Notifies of the presence of an XMLDecl line in the document. If
+     * present, this method will be called immediately following the
+     * startDocument call.
+     *
+     * @param version    The XML version.
+     * @param encoding   The IANA encoding name of the document, or null if
+     *                   not specified.
+     * @param standalone The standalone value, or null if not specified.
+     * @param augs       Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X, X X,
+                         X X)
+    throws X
+    {
+        if (!X)
+        {
+            // REVISIT: when DOM Level 3 is REC rely on Document.support
+            //          instead of specific class
+            if (X != 0)
+            {
+                if (X != 0)
+                    X.X (X);
+                X.X (X);
+                X.X (0.X (X));
+            }
+        }
+        else
+        {
+            if (X != 0)
+                X.X (X);
+            X.X (X);
+            X.X (0.X (X));
+        }
+    } // xmlDecl(String,String,String)
+
+    /**
+     * Notifies of the presence of the DOCTYPE line in the document.
+     *
+     * @param rootElement The name of the root element.
+     * @param publicId    The public identifier if an external DTD or null
+     *                    if the external DTD is specified using SYSTEM.
+     * @param systemId    The system identifier if an external DTD, null
+     *                    otherwise.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X,
+                             X X, X X, X X)
+    throws X
+    {
+
+        if (!X)
+        {
+            if (X != 0)
+            {
+                X = X.X (
+                                    X, X, X);
+                X.X (X);
+            }
+        }
+        else
+        {
+            X = X.
+                                 X (X, X, X);
+            X.X (X, X);
+        }
+
+    } // doctypeDecl(String,String,String)
+
+    /**
+     * The start of an element. If the document specifies the start element
+     * by using an empty tag, then the startElement method will immediately
+     * be followed by the endElement method, with no intervening methods.
+     *
+     * @param element    The name of the element.
+     * @param attributes The element attributes.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X, X X)
+    throws X
+    {
+        if (X)
+        {
+            X.X.X (0+X.X+0);
+        }
+        if (!X)
+        {
+            if (X)
+            {
+                return;
+            }
+            X X = X (X);
+            X X = X.X ();
+            for (X X = 0; X < X; X++)
+            {
+                X.X (X, X);
+                X X = X (X);
+
+                X X = X.X (X);
+
+                X X =(X) X.X (X).X (X.X);
+                if (X && X != 0)
+                {
+                    ((X) X).X (X);
+                }
+
+
+                X.X (X);
+                X.X (X);
+                // NOTE: The specified value MUST be set after you set
+                //       the node value because that turns the "specified"
+                //       flag to "true" which may overwrite a "false"
+                //       value from the attribute list. -Ac
+                if (X != 0)
+                {
+                    X X = (X) X;
+                    X X = 0;
+                    X X = 0;
+
+                    // REVISIT: currently it is possible that someone turns off
+                    // namespaces and turns on xml schema validation
+                    // To avoid classcast exception in AttrImpl check for namespaces
+                    // however the correct solution should probably disallow setting
+                    // namespaces to false when schema processing is turned on.
+                    if (X != 0 && X)
+                    {
+                        // XML Schema
+                        X = X.X ();
+                        if (X == 0)
+                        {
+                            X = X.X ();
+                            if (X != 0)
+                            {
+                                X = ((X) X).X ();
+                                X.X (X);
+                            }
+                        }
+                        else
+                        {
+                            X = ((X) X).X ();
+                            X.X (X);
+                        }
+                    }
+                    else
+                    {
+                        // DTD
+                        X X = X.X.X (X.X (X).X (X.X));
+                        // For DOM Level 3 TypeInfo, the type name must
+                        // be null if this attribute has not been declared
+                        // in the DTD.
+                        if (X)
+                        {
+                            X = X.X (X);
+                            X = 0.X (X);
+                        }
+                        X.X (X);
+                    }
+
+                    if (X)
+                    {
+                        ((X) X).X (X, 0);
+                    }
+
+                    X.X (X.X (X));
+                    // REVISIT: Handle entities in attribute value.
+                }
+            }
+            X (0);
+
+            if (X != 0)
+            {
+                X X = (X)X.X (X.X);
+                if (X != 0 && X)
+                {
+                    X X = X.X ();
+                    if (X == 0)
+                    {
+                        X = X.X ();
+                    }
+                    ((X)X).X (X);
+                }
+            }
+
+
+            // filter nodes
+            if (X != 0 && !X)
+            {
+                if (X.X == 0)
+                {
+                    // fill value of the root element
+                    X.X(X);
+                }
+                else
+                {
+                    X X = X.X(X);
+                    switch (X)
+                    {
+                    case X.X :
+                    {
+                        throw X;
+                    }
+                    case X.X :
+                    {
+                        X = 0;
+                        X.X(X);
+                        return;
+                    }
+                    case X.X :
+                    {
+                        X.X(X.X());
+                        return;
+                    }
+                    default :
+                    {}
+                    }
+                }
+            }
+            X.X (X);
+            X = X;
+        }
+        else
+        {
+            X X = 0;
+            if (X != 0)
+            {
+                X X = (X)X.X (X.X);
+                if (X != 0)
+                {
+                    X = X.X ();
+                    if (X == 0)
+                    {
+                        X = X.X ();
+                    }
+                }
+            }
+
+            X X =
+                X.X (X ?
+                        X.X : 0,
+                        X.X,
+                        X);
+            X X = X.X ();
+            for (X X = 0; X < X; X++)
+            {
+                // set type information
+                X X = (X)X.X (X).X (X.X);
+                X X = 0;
+
+                // REVISIT: currently it is possible that someone turns off
+                // namespaces and turns on xml schema validation
+                // To avoid classcast exception in AttrImpl check for namespaces
+                // however the correct solution should probably disallow setting
+                // namespaces to false when schema processing is turned on.
+                if (X != 0 && X)
+                {
+                    // XML Schema
+                    X = X.X ();
+                    if (X == 0)
+                    {
+                        X = X.X ();
+                        if (X != 0)
+                        {
+                            X = ((X) X).X ();
+                        }
+                    }
+                    else
+                    {
+                        X = ((X) X).X ();
+                    }
+                }
+                else
+                {
+                    // DTD
+                    X X = X.X.X (X.X (X).X (X.X));
+                    // For DOM Level 3 TypeInfo, the type name must
+                    // be null if this attribute has not been declared
+                    // in the DTD.
+                    if (X)
+                    {
+                        X = X.X (X);
+                        X = 0.X (X);
+                    }
+                }
+
+                // create attribute
+                X.X (
+                    X,
+                    X.X (X),
+                    X.X (X),
+                    X.X (X),
+                    X.X (X),
+                    X,
+                    X);
+            }
+
+            X.X (X, X);
+            X = X;
+        }
+    } // startElement(QName,XMLAttributes)
+
+
+    /**
+     * An empty element.
+     *
+     * @param element    The name of the element.
+     * @param attributes The element attributes.
+     * @param augs   Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X, X X)
+    throws X
+    {
+
+        X (X, X, X);
+        X (X, X);
+
+    } // emptyElement(QName,XMLAttributes)
+
+    /**
+     * Character content.
+     *
+     * @param text The content.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X) throws X
+    {
+
+        if (X)
+        {
+            X.X.X (0+X.X ());
+        }
+
+        if (!X)
+        {
+
+            if (X)
+            {
+                return;
+            }
+            if (X && X)
+            {
+                if (X == 0)
+                {
+                    X =
+                        X.X (X.X ());
+                    X.X (X);
+                    X = X;
+                }
+                else
+                {
+                    X.X (X.X ());
+                }
+            }
+            else if (!X)
+            {
+                // if type is union (XML Schema) it is possible that we receive
+                // character call with empty data
+                if (X.X == 0)
+                {
+                    return;
+                }
+
+                X X = X.X ();
+                X X = X.X ();
+                if (X != 0 && X.X () == X.X)
+                {
+                    // collect all the data into the string buffer.
+                    if (X)
+                    {
+                        if (X != 0)
+                        {
+                            X.X (((X)X).X ());
+                        }
+                        else
+                        {
+                            X.X (((X)X).X ());
+                            ((X)X).X (0);
+                        }
+                        X = 0;
+                    }
+                    X.X (X);
+                }
+                else
+                {
+                    X = 0;
+                    X X = X.X (X);
+                    X.X (X);
+                }
+
+            }
+        }
+        else
+        {
+            // The Text and CDATASection normalization is taken care of within
+            // the DOM in the deferred case.
+            if (X && X)
+            {
+                if (X == -0)
+                {
+                    X X = X.
+                             X (X.X ());
+
+                    X.X (X, X);
+                    X = X;
+                    X = X;
+                }
+                else
+                {
+                    X X = X.
+                              X (X.X (), 0);
+                    X.X (X, X);
+                }
+            }
+            else if (!X)
+            {
+                // if type is union (XML Schema) it is possible that we receive
+                // character call with empty data
+                if (X.X == 0)
+                {
+                    return;
+                }
+
+                X X = X.X ();
+                X X = X.
+                          X (X, 0);
+                X.X (X, X);
+
+            }
+        }
+    } // characters(XMLString)
+
+    /**
+     * Ignorable whitespace. For this method to be called, the document
+     * source must have some way of determining that the text containing
+     * only whitespace characters should be considered ignorable. For
+     * example, the validator can determine if a length of whitespace
+     * characters in the document are ignorable based on the element
+     * content model.
+     *
+     * @param text The ignorable whitespace.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X) throws X
+    {
+
+        if (!X || X)
+        {
+            return;
+        }
+        if (!X)
+        {
+            X X = X.X ();
+            if (X != 0 && X.X () == X.X)
+            {
+                X X = (X)X;
+                X.X (X.X ());
+            }
+            else
+            {
+                X X = X.X (X.X ());
+                if (X != 0)
+                {
+                    X X = (X)X;
+                    X.X (0);
+                }
+                X.X (X);
+            }
+        }
+        else
+        {
+            // The Text normalization is taken care of within the DOM in the
+            // deferred case.
+            X X = X.
+                      X (X.X (), 0);
+            X.X (X, X);
+        }
+
+    } // ignorableWhitespace(XMLString)
+
+    /**
+     * The end of an element.
+     *
+     * @param element The name of the element.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X) throws X
+    {
+        if (X)
+        {
+            X.X.X (0+X.X+0);
+        }
+        if (!X)
+        {
+
+            // REVISIT: Should this happen after we call the filter?
+            if (X != 0 && X != 0 && (X || X))
+            {
+                X X = (X) X.X(X.X);
+                if (X != 0)
+                {
+                    // Updating TypeInfo. If the declared type is a union the
+                    // [member type definition] will only be available at the
+                    // end of an element.
+                    if (X)
+                    {
+                        X X = X.X();
+                        if (X == 0)
+                        {
+                            X = X.X();
+                        }
+                        ((X)X).X(X);
+                    }
+                    if (X)
+                    {
+                        ((X)X).X (X);
+                    }
+                }
+            }
+
+            if (X != 0)
+            {
+                if (X)
+                {
+                    if (X.X (X))
+                    {
+                        X = 0;
+                    }
+                    return;
+                }
+                if (!X.X ())
+                {
+                    if (X.X ().X (X))
+                    {
+                        X.X ();
+                        return;
+                    }
+                }
+                X (0);
+                if (!X.X(X) && !X && (X.X () & X.X)!=0)
+                {
+                    X X = X.X (X);
+                    switch (X)
+                    {
+                    case X.X:
+                    {
+                        throw X;
+                    }
+                    case X.X:
+                    {
+                        X X = X.X ();
+                        X.X (X);
+                        X = X;
+                        return;
+                    }
+                    case X.X:
+                    {
+                        // make sure that if any char data is available
+                        // the fFirstChunk is true, so that if the next event
+                        // is characters(), and the last node is text, we will copy
+                        // the value already in the text node to fStringBuffer
+                        // (not to loose it).
+                        X = 0;
+
+                        // replace children
+                        X X = X.X ();
+                        X X = X.X ();
+                        X X = X.X ();
+
+                        for (X X=0; X<X; X++)
+                        {
+                            X.X (X.X (0));
+                        }
+                        X.X (X);
+                        X = X;
+
+                        return;
+                    }
+
+                    default:
+                    { }
+                    }
+                }
+                X = X.X ();
+
+            } // end-if DOMFilter
+            else
+            {
+                X (0);
+                X = X.X ();
+            }
+
+        }
+        else
+        {
+            X =
+                X.X (X, 0);
+        }
+
+
+    } // endElement(QName)
+
+
+    /**
+     * The start of a CDATA section.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X) throws X
+    {
+
+        X = 0;
+        if (!X)
+        {
+            if (X)
+            {
+                return;
+            }
+            if (X)
+            {
+                X (0);
+            }
+        }
+    } // startCDATA()
+
+    /**
+     * The end of a CDATA section.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X) throws X
+    {
+
+        X = 0;
+        if (!X)
+        {
+
+            if (X)
+            {
+                return;
+            }
+
+            if (X !=0)
+            {
+
+                if (X !=0 && !X &&
+                        (X.X () & X.X)!= 0)
+                {
+                    X X = X.X (X);
+                    switch (X)
+                    {
+                    case X.X:
+                    {
+                        throw X;
+                    }
+                    case X.X:
+                    {
+                        // fall through to SKIP since CDATA section has no children.
+                    }
+                    case X.X:
+                    {
+                        X X = X.X ();
+                        X.X (X);
+                        X = X;
+                        return;
+                    }
+
+                    default:
+                    {
+                        // accept node
+                    }
+                    }
+                }
+
+                X = X.X ();
+                X = 0;
+            }
+        }
+        else
+        {
+            if (X !=-0)
+            {
+                X =
+                    X.X (X, 0);
+                X = -0;
+            }
+        }
+
+    } // endCDATA()
+
+    /**
+     * The end of the document.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X) throws X
+    {
+
+        if (!X)
+        {
+            // REVISIT: when DOM Level 3 is REC rely on Document.support
+            //          instead of specific class
+            // set DOM error checking back on
+            if (X != 0)
+            {
+                X.X (0);
+            }
+            X = 0;
+        }
+        else
+        {
+            X = -0;
+        }
+
+    } // endDocument()
+
+    /**
+     * This method notifies the end of a general entity.
+     * <p>
+     * <strong>Note:</strong> This method is not called for entity references
+     * appearing as part of attribute values.
+     *
+     * @param name   The name of the entity.
+     * @param augs   Additional information that may include infoset augmentations
+     *
+     * @exception XNIException
+     *                   Thrown by handler to signal an error.
+     */
+    public X X (X X, X X) throws X
+    {
+        if (X)
+        {
+            X.X.X (0+X+0);
+        }
+        if (!X)
+        {
+
+            if (X)
+            {
+                return;
+            }
+            X (0);
+
+            if (X != 0)
+            {
+                // get current entity declaration
+                X X = X.X ();
+                X = (X) X.X (X);
+                if (X != 0)
+                {
+                    if (X != 0 && X.X () == 0)
+                    {
+                        X.X (0, 0);
+                        X X = X.X ();
+                        while (X != 0)
+                        {
+                            X X = X.X (0);
+                            X.X (X);
+                            X = X.X ();
+                        }
+                        X.X (0, 0);
+
+                        //entities.setNamedItem(fCurrentEntityDecl);
+                    }
+                    X = 0;
+                }
+
+            }
+            X = 0;
+            X X = 0;
+            if (X)
+            {
+                if (X != 0)
+                {
+                    // Make entity ref node read only
+                    ((X)X).X (0, 0);
+                }
+
+                if (X !=0 &&
+                        (X.X () & X.X)!= 0)
+                {
+                    X X = X.X (X);
+                    switch (X)
+                    {
+                    case X.X:
+                    {
+                        throw X;
+                    }
+                    case X.X:
+                    {
+                        X X = X.X ();
+                        X.X (X);
+                        X = X;
+                        return;
+
+                    }
+                    case X.X:
+                    {
+                        // make sure we don't loose chars if next event is characters()
+                        X = 0;
+                        X = 0;
+                        break;
+                    }
+
+                    default:
+                    {
+                        X = X.X ();
+                    }
+                    }
+                }
+                else
+                {
+                    X = X.X ();
+                }
+            }
+
+            if (!X || X)
+            {
+                // move entity reference children to the list of
+                // siblings of its parent and remove entity reference
+                X X = X.X ();
+                X X = X.X ();
+                X X = X.X ();
+                if (X > 0)
+                {
+
+                    // get previous sibling of the entity reference
+                    X X = X.X ();
+                    // normalize text nodes
+                    X X = X.X (0);
+                    if (X != 0 && X.X () == X.X &&
+                            X.X () == X.X)
+                    {
+                        ((X)X).X (X.X ());
+                        X.X (X);
+
+                    }
+                    else
+                    {
+                        X = X.X (X, X);
+                        X (X);
+                    }
+
+                    for (X X=0; X <X; X++)
+                    {
+                        X = X.X (X.X (0), X);
+                        X (X);
+                    }
+                } // length > 0
+                X.X (X);
+                X = X;
+            }
+        }
+        else
+        {
+
+            if (X != -0)
+            {
+                // find corresponding Entity decl
+                X X = X.X (X, 0);
+                while (X != -0)
+                {
+                    X X = X.X (X, 0);
+                    if (X == X.X)
+                    {
+                        X X =
+                            X.X (X, 0);
+                        if (X.X (X))
+                        {
+                            X = X;
+                            break;
+                        }
+                    }
+                    X = X.X (X, 0);
+                }
+            }
+
+            if (X != -0 &&
+                    X.X (X, 0) == -0)
+            {
+                // entity definition exists and it does not have any children
+                X X = -0;
+                X X = X.X (X, 0);
+                while (X != -0)
+                {
+                    X X = X.X (X, 0);
+                    X.X (X, X, X);
+                    X = X;
+                    X = X.X (X, 0);
+                }
+            }
+            if (X)
+            {
+                X =
+                    X.X (X,
+                            0);
+            }
+            else     //!fCreateEntityRefNodes
+            {
+                // move children of entity ref before the entity ref.
+                // remove entity ref.
+
+                // holds a child of entity ref
+                X X = X.X (X, 0);
+                X X =
+                    X.X (X,
+                            0);
+
+                X X = X;
+                X X = X;
+                X X = -0;
+                while (X != -0)
+                {
+                    X (X);
+                    X = X.X (X, 0);
+                    X.X (X, X, X);
+                    X = X;
+                    X = X;
+                }
+                if(X != -0)
+                    X.X (X, X);
+                else
+                {
+                    X = X.X (X, 0);
+                    X.X (X, X);
+                }
+                X = X;
+            }
+            X = -0;
+        }
+
+
+    } // endGeneralEntity(String, Augmentations)
+
+
+    /**
+     * Record baseURI information for the Element (by adding xml:base attribute)
+     * or for the ProcessingInstruction (by setting a baseURI field)
+     * Non deferred DOM.
+     *
+     * @param node
+     */
+    protected final X X (X X)
+    {
+        if (X != 0)
+        {
+            // REVISIT: remove dependency on our implementation when
+            //          DOM L3 becomes REC
+
+            X X = 0;
+            X X = X.X ();
+
+            if (X == X.X)
+            {
+                // if an element already has xml:base attribute
+                // do nothing
+                if (X)
+                {
+                    if (((X)X).X (0,0)!=0)
+                    {
+                        return;
+                    }
+                }
+                else if (((X)X).X (0) != 0)
+                {
+                    return;
+                }
+                // retrive the baseURI from the entity reference
+                X = ((X)X).X ();
+                if (X !=0 && !X.X (X.X ()))
+                {
+                    if (X)
+                    {
+                        ((X)X).X (0,0, X);
+                    }
+                    else
+                    {
+                        ((X)X).X (0, X);
+                    }
+                }
+            }
+            else if (X == X.X)
+            {
+
+                X = ((X)X).X ();
+                if (X !=0 && X != 0)
+                {
+                    X X = new X ();
+                    X.X = 0;
+                    X.X = X;
+                    X.X = X.X;
+                    X.X ().X (X);
+                }
+            }
+        }
+    }
+
+    /**
+     *
+     * Record baseURI information for the Element (by adding xml:base attribute)
+     * or for the ProcessingInstruction (by setting a baseURI field)
+     * Deferred DOM.
+     *
+     * @param node
+     */
+    protected final X X (X X)
+    {
+        X X = X.X (X, 0);
+
+        if (X == X.X)
+        {
+            X X = X.X (X, 0);
+            if (X == 0)
+            {
+                X = X.X (X);
+            }
+            if (X !=0 && !X.X (X.X ()))
+            {
+                X.X (X,
+                        0,
+                        0,
+                        X,
+                        0);
+            }
+        }
+        else if (X == X.X)
+        {
+
+
+            // retrieve baseURI from the entity reference
+            X X = X.X (X, 0);
+
+            if (X == 0)
+            {
+                // try baseURI of the entity declaration
+                X = X.X (X);
+            }
+
+            if (X != 0 && X != 0)
+            {
+                X X = new X ();
+                X.X = 0;
+                X.X = X;
+                X.X = X.X;
+                X.X ().X (X);
+            }
+        }
+    }
+
+
+    //
+    // XMLDTDHandler methods
+    //
+
+    /**
+     * The start of the DTD.
+     *
+     * @param locator  The document locator, or null if the document
+     *                 location cannot be reported during the parsing of
+     *                 the document DTD. However, it is <em>strongly</em>
+     *                 recommended that a locator be supplied that can
+     *                 at least report the base system identifier of the
+     *                 DTD.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X) throws X
+    {
+        if (X)
+        {
+            X.X.X (0);
+            if (X)
+            {
+                X.X.X (0+X.X ());
+                X.X.X (0+ X.X ());
+            }
+        }
+
+        X = 0;
+        if (X != 0)
+        {
+            X.X (X.X ());
+        }
+        if (X || X != 0)
+        {
+            X = new X (0);
+        }
+    } // startDTD(XMLLocator)
+
+
+    /**
+     * The end of the DTD.
+     *
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X) throws X
+    {
+        if (X)
+        {
+            X.X.X (0);
+        }
+        X = 0;
+        if (!X.X ())
+        {
+            X.X ();
+        }
+        X X = X != 0 && X.X () > 0
+                                ? X.X () : 0;
+        if (X)
+        {
+            if (X != 0)
+            {
+                X.X (X, X);
+            }
+        }
+        else if (X != 0)
+        {
+            if (X != 0)
+            {
+                ((X)X).X (X);
+            }
+        }
+    } // endDTD()
+
+    /**
+     * The start of a conditional section.
+     *
+     * @param type The type of the conditional section. This value will
+     *             either be CONDITIONAL_INCLUDE or CONDITIONAL_IGNORE.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     *
+     * @see #CONDITIONAL_INCLUDE
+     * @see #CONDITIONAL_IGNORE
+     */
+    public X X (X X, X X) throws X
+    {
+    } // startConditional(short)
+
+    /**
+     * The end of a conditional section.
+     *
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X) throws X
+    {
+    } // endConditional()
+
+
+    /**
+     * The start of the DTD external subset.
+     *
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X,
+                                     X X) throws X
+    {
+        if (X)
+        {
+            X.X.X (0);
+            if (X)
+            {
+                X.X.X (0+X.X ());
+                X.X.X (0+ X.X ());
+            }
+        }
+        X.X (X.X ());
+        X = 0;
+    } // startExternalSubset(Augmentations)
+
+    /**
+     * The end of the DTD external subset.
+     *
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X) throws X
+    {
+        X = 0;
+        X.X ();
+    } // endExternalSubset(Augmentations)
+
+    /**
+     * An internal entity declaration.
+     *
+     * @param name The name of the entity. Parameter entity names start with
+     *             '%', whereas the name of a general entity is just the
+     *             entity name.
+     * @param text The value of the entity.
+     * @param nonNormalizedText The non-normalized value of the entity. This
+     *             value contains the same sequence of characters that was in
+     *             the internal entity declaration, without any entity
+     *             references expanded.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X,
+                                    X X,
+                                    X X) throws X
+    {
+
+        if (X)
+        {
+            X.X.X (0+X);
+            if (X)
+            {
+                X.X.X (0+ (X)X.X ());
+            }
+        }
+        // internal subset string
+        if (X != 0 && !X)
+        {
+            X.X (0);
+            if (X.X (0))
+            {
+                X.X (0);
+                X.X (X.X (0));
+            }
+            else
+            {
+                X.X (X);
+            }
+            X.X (0);
+            X X = X.X ();
+            X X = X.X (0) == -0;
+            X.X (X ? 0 : 0);
+            X.X (X);
+            X.X (X ? 0 : 0);
+            X.X (0);
+        }
+
+        // NOTE: We only know how to create these nodes for the Xerces
+        //       DOM implementation because DOM Level 2 does not specify
+        //       that functionality. -Ac
+
+        // create full node
+        // don't add parameter entities!
+        if(X.X (0))
+            return;
+        if (X != 0)
+        {
+            X X = X.X ();
+            X X = (X)X.X (X);
+            if (X == 0)
+            {
+                X = (X)X.X (X);
+                X.X ((X)X.X ());
+                X.X (X);
+            }
+        }
+
+        // create deferred node
+        if (X != -0)
+        {
+            X X = 0;
+            X X = X.X (X, 0);
+            while (X != -0)
+            {
+                X X = X.X (X, 0);
+                if (X == X.X)
+                {
+                    X X = X.X (X, 0);
+                    if (X.X (X))
+                    {
+                        X = 0;
+                        break;
+                    }
+                }
+                X = X.X (X, 0);
+            }
+            if (!X)
+            {
+                X X =
+                    X.X (X, 0, 0, 0, (X)X.X ());
+                X.X (X, X);
+            }
+        }
+
+    } // internalEntityDecl(String,XMLString,XMLString)
+
+    /**
+     * An external entity declaration.
+     *
+     * @param name     The name of the entity. Parameter entity names start
+     *                 with '%', whereas the name of a general entity is just
+     *                 the entity name.
+     * @param identifier    An object containing all location information
+     *                      pertinent to this notation.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X,
+                                    X X) throws X
+    {
+
+
+        if (X)
+        {
+            X.X.X (0+X);
+            if (X)
+            {
+                X.X.X (0+ X.X ());
+                X.X.X (0+ X.X ());
+            }
+        }
+        // internal subset string
+        X X = X.X ();
+        X X = X.X ();
+        if (X != 0 && !X)
+        {
+            X.X (0);
+            if (X.X (0))
+            {
+                X.X (0);
+                X.X (X.X (0));
+            }
+            else
+            {
+                X.X (X);
+            }
+            X.X (0);
+            if (X != 0)
+            {
+                X.X (0);
+                X.X (X);
+                X.X (0);
+            }
+            else
+            {
+                X.X (0);
+            }
+            X.X (X);
+            X.X (0);
+        }
+
+        // NOTE: We only know how to create these nodes for the Xerces
+        //       DOM implementation because DOM Level 2 does not specify
+        //       that functionality. -Ac
+
+        // create full node
+        // don't add parameter entities!
+        if(X.X (0))
+            return;
+        if (X != 0)
+        {
+            X X = X.X ();
+            X X = (X)X.X (X);
+            if (X == 0)
+            {
+                X = (X)X.X (X);
+                X.X (X);
+                X.X (X);
+                X.X (X.X ());
+                X.X (X);
+            }
+        }
+
+        // create deferred node
+        if (X != -0)
+        {
+            X X = 0;
+            X X = X.X (X, 0);
+            while (X != -0)
+            {
+                X X = X.X (X, 0);
+                if (X == X.X)
+                {
+                    X X = X.X (X, 0);
+                    if (X.X (X))
+                    {
+                        X = 0;
+                        break;
+                    }
+                }
+                X = X.X (X, 0);
+            }
+            if (!X)
+            {
+                X X = X.X (
+                                      X, X, X, 0, X.X ());
+                X.X (X, X);
+            }
+        }
+
+    } // externalEntityDecl(String,XMLResourceIdentifier, Augmentations)
+
+
+    /**
+     * This method notifies of the start of a parameter entity. The parameter
+     * entity name start with a '%' character.
+     *
+     * @param name     The name of the parameter entity.
+     * @param identifier The resource identifier.
+     * @param encoding The auto-detected IANA encoding name of the entity
+     *                 stream. This value will be null in those situations
+     *                 where the entity encoding is not auto-detected (e.g.
+     *                 internal parameter entities).
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X,
+                                      X X,
+                                      X X,
+                                      X X) throws X
+    {
+        if (X)
+        {
+            X.X.X (0+X);
+            if (X)
+            {
+                X.X.X (0+X.X ());
+                X.X.X (0+ X.X ());
+            }
+        }
+        X.X (X.X ());
+    }
+
+
+    /**
+     * This method notifies the end of a parameter entity. Parameter entity
+     * names begin with a '%' character.
+     *
+     * @param name The name of the parameter entity.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X) throws X
+    {
+
+        if (X)
+        {
+            X.X.X (0+X);
+        }
+        X.X ();
+    }
+
+    /**
+     * An unparsed entity declaration.
+     *
+     * @param name     The name of the entity.
+     * @param identifier    An object containing all location information
+     *                      pertinent to this entity.
+     * @param notation The name of the notation.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X,
+                                    X X, X X)
+    throws X
+    {
+
+        if (X)
+        {
+            X.X.X (0+X);
+            if (X)
+            {
+                X.X.X (0+ X.X ());
+                X.X.X (0+ X.X ());
+            }
+        }
+        // internal subset string
+        X X = X.X ();
+        X X = X.X ();
+        if (X != 0 && !X)
+        {
+            X.X (0);
+            X.X (X);
+            X.X (0);
+            if (X != 0)
+            {
+                X.X (0);
+                X.X (X);
+                if (X != 0)
+                {
+                    X.X (0);
+                    X.X (X);
+                }
+            }
+            else
+            {
+                X.X (0);
+                X.X (X);
+            }
+            X.X (0);
+            X.X (X);
+            X.X (0);
+        }
+
+        // NOTE: We only know how to create these nodes for the Xerces
+        //       DOM implementation because DOM Level 2 does not specify
+        //       that functionality. -Ac
+
+        // create full node
+        if (X != 0)
+        {
+            X X = X.X ();
+            X X = (X)X.X (X);
+            if (X == 0)
+            {
+                X = (X)X.X (X);
+                X.X (X);
+                X.X (X);
+                X.X (X);
+                X.X (X.X ());
+                X.X (X);
+            }
+        }
+
+        // create deferred node
+        if (X != -0)
+        {
+            X X = 0;
+            X X = X.X (X, 0);
+            while (X != -0)
+            {
+                X X = X.X (X, 0);
+                if (X == X.X)
+                {
+                    X X = X.X (X, 0);
+                    if (X.X (X))
+                    {
+                        X = 0;
+                        break;
+                    }
+                }
+                X = X.X (X, 0);
+            }
+            if (!X)
+            {
+                X X = X.X (
+                                      X, X, X, X, X.X ());
+                X.X (X, X);
+            }
+        }
+
+    } // unparsedEntityDecl(String,XMLResourceIdentifier, String, Augmentations)
+
+    /**
+     * A notation declaration
+     *
+     * @param name     The name of the notation.
+     * @param identifier    An object containing all location information
+     *                      pertinent to this notation.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X,
+                              X X) throws X
+    {
+
+        // internal subset string
+        X X = X.X ();
+        X X = X.X ();
+        if (X != 0 && !X)
+        {
+            X.X (0);
+            X.X (X);
+            if (X != 0)
+            {
+                X.X (0);
+                X.X (X);
+                if (X != 0)
+                {
+                    X.X (0);
+                    X.X (X);
+                }
+            }
+            else
+            {
+                X.X (0);
+                X.X (X);
+            }
+            X.X (0);
+        }
+
+        // NOTE: We only know how to create these nodes for the Xerces
+        //       DOM implementation because DOM Level 2 does not specify
+        //       that functionality. -Ac
+
+        // create full node
+        if (X !=0 && X != 0)
+        {
+            X X = X.X ();
+            if (X.X (X) == 0)
+            {
+                X X = (X)X.X (X);
+                X.X (X);
+                X.X (X);
+                X.X (X.X ());
+                X.X (X);
+            }
+        }
+
+        // create deferred node
+        if (X != -0)
+        {
+            X X = 0;
+            X X = X.X (X, 0);
+            while (X != -0)
+            {
+                X X = X.X (X, 0);
+                if (X == X.X)
+                {
+                    X X = X.X (X, 0);
+                    if (X.X (X))
+                    {
+                        X = 0;
+                        break;
+                    }
+                }
+                X = X.X (X, 0);
+            }
+            if (!X)
+            {
+                X X = X.X (
+                                        X, X, X, X.X ());
+                X.X (X, X);
+            }
+        }
+
+    } // notationDecl(String,XMLResourceIdentifier, Augmentations)
+
+    /**
+     * Characters within an IGNORE conditional section.
+     *
+     * @param text The ignored text.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X) throws X
+    {
+    } // ignoredCharacters(XMLString, Augmentations)
+
+
+    /**
+     * An element declaration.
+     *
+     * @param name         The name of the element.
+     * @param contentModel The element content model.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X, X X)
+    throws X
+    {
+
+        // internal subset string
+        if (X != 0 && !X)
+        {
+            X.X (0);
+            X.X (X);
+            X.X (0);
+            X.X (X);
+            X.X (0);
+        }
+
+    } // elementDecl(String,String)
+
+    /**
+     * An attribute declaration.
+     *
+     * @param elementName   The name of the element that this attribute
+     *                      is associated with.
+     * @param attributeName The name of the attribute.
+     * @param type          The attribute type. This value will be one of
+     *                      the following: "CDATA", "ENTITY", "ENTITIES",
+     *                      "ENUMERATION", "ID", "IDREF", "IDREFS",
+     *                      "NMTOKEN", "NMTOKENS", or "NOTATION".
+     * @param enumeration   If the type has the value "ENUMERATION" or
+     *                      "NOTATION", this array holds the allowed attribute
+     *                      values; otherwise, this array is null.
+     * @param defaultType   The attribute default type. This value will be
+     *                      one of the following: "#FIXED", "#IMPLIED",
+     *                      "#REQUIRED", or null.
+     * @param defaultValue  The attribute default value, or null if no
+     *                      default value is specified.
+     * @param nonNormalizedDefaultValue  The attribute default value with no normalization
+     *                      performed, or null if no default value is specified.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X,
+                               X X, X[] X,
+                               X X, X X,
+                               X X, X X) throws X
+    {
+
+        // internal subset string
+        if (X != 0 && !X)
+        {
+            X.X (0);
+            X.X (X);
+            X.X (0);
+            X.X (X);
+            X.X (0);
+            if (X.X (0))
+            {
+                X.X (0);
+                for (X X = 0; X < X.X; X++)
+                {
+                    if (X > 0)
+                    {
+                        X.X (0);
+                    }
+                    X.X (X[X]);
+                }
+                X.X (0);
+            }
+            else
+            {
+                X.X (X);
+            }
+            if (X != 0)
+            {
+                X.X (0);
+                X.X (X);
+            }
+            if (X != 0)
+            {
+                X.X (0);
+                for (X X = 0; X < X.X; X++)
+                {
+                    X X = X.X[X.X + X];
+                    if (X == 0)
+                    {
+                        X.X (0);
+                    }
+                    else
+                    {
+                        X.X (X);
+                    }
+                }
+                X.X (0);
+            }
+            X.X (0);
+        }
+        // REVISIT: This code applies to the support of domx/grammar-access
+        // feature in Xerces 1
+
+        // deferred expansion
+        if (X != 0)
+        {
+
+            // get the default value
+            if (X != 0)
+            {
+
+                // get element definition
+                X X  = X.X (X);
+
+                // create element definition if not already there
+                if (X == -0)
+                {
+                    X = X.X (X);
+                    X.X (X, X);
+                }
+                // add default attribute
+                X X = X.X (
+                                    X, X.X (), 0);
+                if (0.X (X))
+                {
+                    X.X (X);
+                }
+                // REVISIT: set ID type correctly
+                X.X (X, X);
+            }
+
+        } // if deferred
+
+        // full expansion
+        else if (X != 0)
+        {
+
+            // get the default value
+            if (X != 0)
+            {
+
+                // get element definition node
+                X X = ((X)X).X ();
+                X X = (X)X.X (X);
+                if (X == 0)
+                {
+                    X = X.X (X);
+                    ((X)X).X ().X (X);
+                }
+
+                // REVISIT: Check for uniqueness of element name? -Ac
+
+                // create attribute and set properties
+                X X = X;
+                X X;
+                if (X)
+                {
+                    X X = 0;
+                    // DOM Level 2 wants all namespace declaration attributes
+                    // to be bound to "http://www.w3.org/2000/xmlns/"
+                    // So as long as the XML parser doesn't do it, it needs to
+                    // done here.
+                    if (X.X (0) ||
+                            X.X (0))
+                    {
+                        X = X.X;
+                    }
+                    X = (X)X.X (X,
+                            X);
+                }
+                else
+                {
+                    X = (X)X.X (X);
+                }
+                X.X (X.X ());
+                X.X (0);
+                X.X (0.X (X));
+
+                // add default attribute to element definition
+                if (X)
+                {
+                    X.X ().X (X);
+                }
+                else
+                {
+                    X.X ().X (X);
+                }
+            }
+
+        } // if NOT defer-node-expansion
+
+    } // attributeDecl(String,String,String,String[],String,XMLString, XMLString, Augmentations)
+
+
+    /**
+     * The start of an attribute list.
+     *
+     * @param elementName The name of the element that this attribute
+     *                    list is associated with.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X) throws X
+    {
+    } // startAttlist(String)
+
+
+    /**
+     * The end of an attribute list.
+     *
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X) throws X
+    {
+    } // endAttlist()
+
+
+    // method to create an element node.
+    // subclasses can override this method to create element nodes in other ways.
+    protected X X (X X)
+    {
+        X X = 0;
+
+        if (X)
+        {
+            // if we are using xerces DOM implementation, call our
+            // own constructor to reuse the strings we have here.
+            if (X != 0)
+            {
+                X = X.X (X.X, X.X,
+                                                    X.X);
+            }
+            else
+            {
+                X = X.X (X.X, X.X);
+            }
+        }
+        else
+        {
+            X = X.X (X.X);
+        }
+
+        return X;
+    }
+
+    // method to create an attribute node.
+    // subclasses can override this method to create attribute nodes in other ways.
+    protected X X (X X)
+    {
+        X X = 0;
+
+        if (X)
+        {
+            if (X != 0)
+            {
+                // if we are using xerces DOM implementation, call our
+                // own constructor to reuse the strings we have here.
+                X = X.X (X.X,
+                                                        X.X,
+                                                        X.X);
+            }
+            else
+            {
+                X = X.X (X.X,
+                                                    X.X);
+            }
+        }
+        else
+        {
+            X = X.X (X.X);
+        }
+
+        return X;
+    }
+
+    /*
+     * When the first characters() call is received, the data is stored in
+     * a new Text node. If right after the first characters() we receive another chunk of data,
+     * the data from the Text node, following the new characters are appended
+     * to the fStringBuffer and the text node data is set to empty.
+     *
+     * This function is called when the state is changed and the
+     * data must be appended to the current node.
+     *
+     * Note: if DOMFilter is set, you must make sure that if Node is skipped,
+     * or removed fFistChunk must be set to true, otherwise some data can be lost.
+     *
+     */
+    protected X  X (X X)
+    {
+
+        // handle character data
+        X = X;
+
+
+        // if we have data in the buffer we must have created
+        // a text node already.
+
+        X X = X.X ();
+        if (X != 0)
+        {
+            if (X.X () > 0)
+            {
+                // REVISIT: should this check be performed?
+                if (X.X () == X.X)
+                {
+                    if (X != 0)
+                    {
+                        ((X)X).X (X.X ());
+                    }
+                    else
+                    {
+                        ((X)X).X (X.X ());
+                    }
+                }
+                // reset string buffer
+                X.X (0);
+            }
+
+            if (X !=0 && !X)
+            {
+                if ( (X.X () == X.X ) &&
+                        ((X.X () & X.X)!= 0) )
+                {
+                    X X = X.X (X);
+                    switch (X)
+                    {
+                    case X.X:
+                    {
+                        throw X;
+                    }
+                    case X.X:
+                    {
+                        // fall through to SKIP since Comment has no children.
+                    }
+                    case X.X:
+                    {
+                        X.X (X);
+                        return;
+                    }
+                    default:
+                    {
+                        // accept node -- do nothing
+                    }
+                    }
+                }
+            }   // end-if fDOMFilter !=null
+
+        } // end-if child !=null
+    }
+
+
+    /**
+     * @see org.w3c.dom.ls.LSParser#abort()
+     */
+    public X X ()
+    {
+        throw X;
+    }
+
+
+} // class AbstractDOMParser

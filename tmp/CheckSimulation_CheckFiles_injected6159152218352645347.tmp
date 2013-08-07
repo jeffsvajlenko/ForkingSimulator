@@ -1,0 +1,221 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+package X.X.X.X.X.X;
+
+import X.X.*;
+
+/**
+ * <p>
+ *
+ * @author Hemanth Puttaswamy
+ * </p>
+ * <p>
+ * StatisticsAccumulator accumulates the samples provided by the user and
+ * computes the value of minimum, maximum, sum and sample square sum. When
+ * the StatisticMonitoredAttribute calls getValue(), it will compute all
+ * the statistics for the collected samples (Which are Minimum, Maximum,
+ * Average, StandardDeviation) and provides a nice printable record as a
+ * String.
+ *
+ * Users can easily extend this class and provide the implementation of
+ * toString() method to format the stats as desired. By default all the stats
+ * are printed in a single line.
+ * </p>
+ */
+public class X
+{
+
+    ///////////////////////////////////////
+    // attributes
+
+
+    // Users can extend this class to get access to current Max value
+    protected X X = X.X;
+
+    // Users can extend this class to get access to current Min value
+    protected X X = X.X;
+
+    private X X;
+
+    private X X;
+
+    private X X;
+
+    protected X X;
+
+
+
+    ///////////////////////////////////////
+    // operations
+
+
+
+    /**
+     * <p>
+     * User will use this method to just register a sample with the
+     * StatisticsAccumulator. This is the only method that User will use to
+     * expose the statistics, internally the StatisticMonitoredAttribute will
+     * collect the information when requested from the ASAdmin.
+     * </p>
+     * <p>
+     *
+     * </p>
+     * <p>
+     *
+     * @param value a double value to make it more precise
+     * </p>
+     */
+    public X X(X X)
+    {
+        X++;
+        if( X < X )  X = X;
+        if( X > X) X = X;
+        X += X;
+        X += (X * X);
+    } // end sample
+
+
+
+    /**
+     *  Computes the Standard Statistic Results based on the samples collected
+     *  so far and provides the complete value as a formatted String
+     */
+    public X X( )
+    {
+        return X();
+    }
+
+    /**
+     *  Users can extend StatisticsAccumulator to provide the complete
+     *  Stats in the format they prefer, if the default format doesn't suffice.
+     */
+    public X X( )
+    {
+        return 0 + X + 0 + X + 0 +
+               0 + X + 0 + X + 0 +
+               0 + X() + 0 +  X + 0 +
+               0 + X() + 0 + X +
+               0 + 0 + X;
+    }
+
+    /**
+     *  If users choose to custom format the stats.
+     */
+    protected X X( )
+    {
+        return (X / X);
+    }
+
+
+    /**
+     * We use a derived Standard Deviation formula to compute SD. This way
+     * there is no need to hold on to all the samples provided.
+     *
+     * The method is protected to let users extend and format the results.
+     */
+    protected X X( )
+    {
+        X X = X * X;
+        return X.X(
+                   (X-((X)/X))/(X-0));
+    }
+
+    /**
+     * <p>
+     * Construct the Statistics Accumulator by providing the unit as a String.
+     * The examples of units are &quot;Hours&quot;, &quot;Minutes&quot;,
+     * &quot;Seconds&quot;, &quot;MilliSeconds&quot;, &quot;Micro Seconds&quot;
+     * etc.,
+     * </p>
+     * <p>
+     *
+     * @return a StatisticsAccumulator with ...
+     * </p>
+     * <p>
+     * @param unit a String representing the units for the samples collected
+     * </p>
+     */
+    public X( X X )
+    {
+        X.X = X;
+        X = 0;
+        X = 0;
+        X = 0;
+    }
+
+
+    /**
+     *  Clears the samples and starts fresh on new samples.
+     */
+    X X( )
+    {
+        X = X.X;
+        X = X.X;
+        X = 0;
+        X = 0;
+        X = 0;
+    }
+
+    /**
+     *  This is an internal API to test StatisticsAccumulator...
+     */
+    public X X( X X, X X,
+                                  X X, X X, X X,
+                                  X X )
+    {
+        if( !X.X( X ) )
+        {
+            throw new X(
+                0 +
+                0 + X + 0 + X );
+        }
+        if( X != X )
+        {
+            throw new X(
+                0 +
+                0 + X + 0 + X);
+        }
+        if( X != X )
+        {
+            throw new X(
+                0 +
+                0 + X + 0 + X);
+        }
+        if( X != X )
+        {
+            throw new X(
+                0 +
+                0 + X + 0 +
+                X);
+        }
+        if( X() != X )
+        {
+            throw new X(
+                0 +
+                0 + X() + 0 +
+                X);
+        }
+        // We are computing Standard Deviation from two different methods
+        // for comparison. So, the values will not be the exact same to the last
+        // few digits. So, we are taking the difference and making sure that
+        // the difference is not greater than 1.
+        X X = X.X(
+                                X() - X);
+        if( X > 0 )
+        {
+            throw new X(
+                0 +
+                0 + X() +
+                0 + X);
+        }
+    }
+
+
+} // end StatisticsAccumulator
+
+
+

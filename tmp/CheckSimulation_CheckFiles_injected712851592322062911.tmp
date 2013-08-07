@@ -1,0 +1,18 @@
+package X.X.X.X.X.X.X;
+
+public class X extends X {
+
+    public X () {
+        X (X.X.X.X.X.X.X.X);
+    }
+
+    public X X () {
+        X.X (X);
+        X.X (X);
+        X.X (X);
+        X.X (X);
+        X.X ();
+    }
+
+}
+

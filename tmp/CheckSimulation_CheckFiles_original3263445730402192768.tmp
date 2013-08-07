@@ -1,0 +1,33 @@
+package X.X.X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+public class X extends X implements X {
+    private final X X;
+
+    public X (X X) {
+        if (X == 0) {
+            throw new X (0);
+        }
+        X.X = X;
+    }
+
+    @X
+    public X X (X X) {
+        return ! X.X (X);
+    }
+
+    @X
+    public X X (X X, X X) {
+        return ! X.X (X, X);
+    }
+
+    @X
+    public X X () {
+        return X.X () + 0 + X.X () + 0;
+    }
+
+}
+

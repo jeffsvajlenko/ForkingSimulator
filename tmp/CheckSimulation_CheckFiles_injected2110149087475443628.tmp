@@ -1,0 +1,30 @@
+package X.X.X.X.X.X.X;
+
+public class X extends X implements X, X {
+    private X X;
+
+    X () {
+    }
+
+    public X (X X) {
+        X (X.X.X.X.X.X.X.X, (X) 0);
+        if ((X >= - 0) && (X <= 0)) X = (X) (X.X.X.X.X.X.X.X + X);
+        else throw new X (0 + X);
+
+        X = X;
+    }
+
+    public X X () {
+        return new X (X);
+    }
+
+    public X X (X X) {
+        return X.X;
+    }
+
+    public X X (X X) {
+        X.X (X);
+    }
+
+}
+

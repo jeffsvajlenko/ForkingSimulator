@@ -1,0 +1,320 @@
+package X.X.X.X.X.X.X;
+
+/* ====================================================================
+ * The Apache Software License, Version 1.1
+ *
+ * Copyright (c) 2001 The Apache Software Foundation.  All rights
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        Apache Software Foundation (http://www.apache.org/)."
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "Apache" and "Apache Software Foundation" and
+ *    "Apache BCEL" must not be used to endorse or promote products
+ *    derived from this software without prior written permission. For
+ *    written permission, please contact apache@apache.org.
+ *
+ * 5. Products derived from this software may not be called "Apache",
+ *    "Apache BCEL", nor may "Apache" appear in their name, without
+ *    prior written permission of the Apache Software Foundation.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE APACHE SOFTWARE FOUNDATION OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Apache Software Foundation.  For more
+ * information on the Apache Software Foundation, please see
+ * <http://www.apache.org/>.
+ */
+
+import X.X.X.X.X.X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+
+/**
+ * Instances of this class give users a handle to the instructions contained in
+ * an InstructionList. Instruction objects may be used more than once within a
+ * list, this is useful because it saves memory and may be much faster.
+ *
+ * Within an InstructionList an InstructionHandle object is wrapped
+ * around all instructions, i.e., it implements a cell in a
+ * doubly-linked list. From the outside only the next and the
+ * previous instruction (handle) are accessible. One
+ * can traverse the list via an Enumeration returned by
+ * InstructionList.elements().
+ *
+ * @version $Id: InstructionHandle.java,v 1.1.2.1 2005/07/31 23:45:01 jeffsuttor Exp $
+ * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @see Instruction
+ * @see BranchHandle
+ * @see InstructionList
+ */
+public class X implements X.X.X
+{
+    X X, X;  // Will be set from the outside
+    X       X;
+    protected X     X = -0; // byte code offset of instruction
+    private X   X;
+    private X   X;
+
+    public final X X()
+    {
+        return X;
+    }
+    public final X X()
+    {
+        return X;
+    }
+    public final X       X()
+    {
+        return X;
+    }
+
+    /**
+     * Replace current instruction contained in this handle.
+     * Old instruction is disposed using Instruction.dispose().
+     */
+    public X X(X X)   // Overridden in BranchHandle
+    {
+        if(X == 0)
+            throw new X(0);
+
+        if((X.X() != X.class) && (X instanceof X))
+            throw new X(0 + X + 0);
+
+        if(X != 0)
+            X.X();
+
+        X = X;
+    }
+
+    /**
+     * Temporarily swap the current instruction, without disturbing
+     * anything. Meant to be used by a debugger, implementing
+     * breakpoints. Current instruction is returned.
+     */
+    public X X(X X)
+    {
+        X X = X;
+        X = X;
+        return X;
+    }
+
+    /*private*/ protected X(X X)
+    {
+        X(X);
+    }
+
+    private static X X = 0; // List of reusable handles
+
+    /** Factory method.
+     */
+    static final X X(X X)
+    {
+        if(X == 0)
+            return new X(X);
+        else
+        {
+            X X = X;
+            X = X.X;
+
+            X.X(X);
+
+            return X;
+        }
+    }
+
+    /**
+     * Called by InstructionList.setPositions when setting the position for every
+     * instruction. In the presence of variable length instructions `setPositions()'
+     * performs multiple passes over the instruction list to calculate the
+     * correct (byte) positions and offsets by calling this function.
+     *
+     * @param offset additional offset caused by preceding (variable length) instructions
+     * @param max_offset the maximum offset that may be caused by these instructions
+     * @return additional offset caused by possible change of this instruction's length
+     */
+    protected X X(X X, X X)
+    {
+        X += X;
+        return 0;
+    }
+
+    /** @return the position, i.e., the byte code offset of the contained
+     * instruction. This is accurate only after
+     * InstructionList.setPositions() has been called.
+     */
+    public X X()
+    {
+        return X;
+    }
+
+    /** Set the position, i.e., the byte code offset of the contained
+     * instruction.
+     */
+    X X(X X)
+    {
+        X = X;
+    }
+
+    /** Overridden in BranchHandle
+     */
+    protected X X()
+    {
+        X    = X;
+        X = X;
+    }
+
+    /**
+     * Delete contents, i.e., remove user access and make handle reusable.
+     */
+    X X()
+    {
+        X = X = 0;
+        X.X();
+        X = 0;
+        X = -0;
+        X = 0;
+        X();
+        X();
+    }
+
+    /** Remove all targeters, if any.
+     */
+    public X X()
+    {
+        if(X != 0)
+            X.X();
+    }
+
+    /**
+     * Denote this handle isn't referenced anymore by t.
+     */
+    public X X(X X)
+    {
+        X.X(X);
+    }
+
+    /**
+     * Denote this handle is being referenced by t.
+     */
+    public X X(X X)
+    {
+        if(X == 0)
+            X = new X();
+
+        //if(!targeters.contains(t))
+        X.X(X);
+    }
+
+    public X X()
+    {
+        return (X != 0) && (X.X() > 0);
+    }
+
+    /**
+     * @return null, if there are no targeters
+     */
+    public X[] X()
+    {
+        if(!X())
+            return 0;
+
+        X[] X = new X[X.X()];
+        X.X(X);
+        return X;
+    }
+
+    /** @return a (verbose) string representation of the contained instruction.
+     */
+    public X X(X X)
+    {
+        return X.X(X, 0, 0, 0) + 0 + X.X(X);
+    }
+
+    /** @return a string representation of the contained instruction.
+     */
+    public X X()
+    {
+        return X(0);
+    }
+
+    /** Add an attribute to an instruction handle.
+     *
+     * @param key the key object to store/retrieve the attribute
+     * @param attr the attribute to associate with this handle
+     */
+    public X X(X X, X X)
+    {
+        if(X == 0)
+            X = new X(0);
+
+        X.X(X, X);
+    }
+
+    /** Delete an attribute of an instruction handle.
+     *
+     * @param key the key object to retrieve the attribute
+     */
+    public X X(X X)
+    {
+        if(X != 0)
+            X.X(X);
+    }
+
+    /** Get attribute of an instruction handle.
+     *
+     * @param key the key object to store/retrieve the attribute
+     */
+    public X X(X X)
+    {
+        if(X != 0)
+            return X.X(X);
+
+        return 0;
+    }
+
+    /** @return all attributes associated with this handle
+     */
+    public X X()
+    {
+        return X.X();
+    }
+
+    /** Convenience method, simply calls accept() on the contained instruction.
+     *
+     * @param v Visitor object
+     */
+    public X X(X X)
+    {
+        X.X(X);
+    }
+}

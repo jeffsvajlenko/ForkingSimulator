@@ -1,0 +1,74 @@
+package X.X.X.X.X.X.X;
+
+public class X implements X {
+    protected X X = 0;
+
+    public X X () throws X {
+        if (X.X ()) throw new X ();
+
+        synchronized (X) {
+            try {
+                while (X) X ();
+
+                X = 0;
+            } catch (X X) {
+                X ();
+                X ();
+                X ();
+                X ();
+                X ();
+                X ();
+                X ();
+                X ();
+                X ();
+                X ();
+                X ();
+                throw X;
+            }
+        }
+    }
+
+    public synchronized X X () {
+        X = 0;
+        X ();
+        X ();
+        X ();
+        X (X);
+        X (X);
+        X ();
+    }
+
+    public X X (X X) throws X {
+        if (X.X ()) throw new X ();
+
+        synchronized (X) {
+            if (! X) {
+                X = 0;
+                return 0;
+            } else if (X <= 0) return 0;
+            else {
+                X X = X;
+                X X = X.X ();
+                try {
+                    for (;;) {
+                        X (X);
+                        if (! X) {
+                            X = 0;
+                            return 0;
+                        } else {
+                            X = X - (X.X () - X);
+                            if (X <= 0) return 0;
+
+                        }
+                    }
+                } catch (X X) {
+                    X ();
+                    throw X;
+                }
+            }
+
+        }
+    }
+
+}
+

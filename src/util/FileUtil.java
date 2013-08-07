@@ -9,6 +9,7 @@ import java.nio.file.FileVisitOption;
 import java.nio.file.FileVisitResult;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
@@ -170,5 +171,39 @@ public class FileUtil {
 		while(reader.readLine() != null) lines++;
 		reader.close();
 		return lines;
+	}
+	
+	public static int countPrettyLines(Path file, String language) throws IOException {
+		Objects.requireNonNull(file);
+		if(!Files.exists(file)) {
+			throw new FileNotFoundException("Specified file does not exist.");
+		}
+		if(!Files.isRegularFile(file)) {
+			throw new IllegalArgumentException("Specified file is not a regular file.");
+		}
+		Path pfile = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "countPrettyLines", "");
+		SystemUtil.runTxl(SystemUtil.getTxlDirectory(language).resolve("PrettyPrintFragment.txl"), file, pfile);
+		
+		BufferedReader reader = new BufferedReader(new FileReader(pfile.toFile()));
+		int lines = 0;
+		String line;
+		line = reader.readLine();
+		while(line != null) {
+			if(!line.trim().equals("")) { //only count if not empty (discluding whitespace)
+				lines++;
+			}
+			line = reader.readLine();
+		}
+		reader.close();
+		
+		
+		Files.delete(pfile);
+		return lines;
+	}
+	
+	public static void main(String args[]) throws IOException {
+		Path p = Paths.get("Geom.java");
+		System.out.println(FileUtil.countPrettyLines(p, "java"));
+		
 	}
 }

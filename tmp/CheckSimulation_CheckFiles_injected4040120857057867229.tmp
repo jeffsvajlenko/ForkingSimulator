@@ -1,0 +1,717 @@
+package X.X.X.X;
+
+import X.X.*;
+
+import X.X.*;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X.*;
+
+class X extends X {
+    X X;
+    X X;
+    X X;
+    X X;
+    X X;
+    X X;
+    X X;
+    X X;
+    X X;
+    X X;
+    private X X;
+    X [] X;
+    static public final X X = X.X;
+    static public final X X = 0;
+    static public final X X = 0;
+    static protected X X, X;
+    static protected X X;
+    static protected X X;
+    static private X X;
+    static class X {
+        public X X;
+        public X X;
+    };
+
+    static protected X [] X;
+
+    static {
+        X = new X (0, X);
+        X = new X (0);
+        X = X.X (X, 0);
+        X = new X ();
+        X = new X (0, X);
+        X X = X.X;
+        X X = X.X ();
+        X X = new X ();
+        while (X.X (X)) {
+            X X = new X ();
+            X.X = (X) X.X ();
+            X.X = ((X) X.X (X.X)).X (0);
+            X.X (X);
+        }
+        X = new X [X.X ()];
+        X.X (X);
+    }
+
+    static final X [] X = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+    static public X X (X X, X X) throws X {
+        X X = new X (X);
+        X X = X.X (X);
+        X.X (X, X);
+        X.X ();
+        X.X (X, X);
+        X X = X.X ();
+        for (X X = 0;
+        X < X; X ++) X.X (X.X (X));
+
+        X.X ();
+    }
+
+    public X (X X) {
+        X = new X ();
+        X.X (X, new X (0));
+        X = 0;
+        X = new X ();
+        X = 0;
+        X = new X ();
+        X = 0;
+        X = new X (X);
+        X = X;
+        X = 0;
+    }
+
+    public X X (X X) {
+        X X = X.X ();
+        X X;
+        X X, X;
+        X (X);
+        if (X != 0) {
+            X = X.X (X);
+            if (X != 0 && X.X (X, X) == 0) {
+                X.X (X, X, new X (X, X));
+                X ++;
+            }
+            X = X.X (X.X);
+            if (X != 0 && X.X (X) == 0) {
+                X.X (X, new X (X));
+                X ++;
+            }
+            X = X.X (X);
+            if (X == 0) X = X;
+
+            if (X != 0 && X.X (X, X) == 0) {
+                X.X (X, new X (X));
+                X ++;
+            }
+        }
+        X X = X.X ();
+        for (X X = 0;
+        X < X; X ++) {
+            X (X, X.X (X));
+        }
+    }
+
+    private X X (X X) {
+        while (X != 0) {
+            if (X instanceof X) {
+                X X = (X) X.X (X);
+                if (X == 0) {
+                    X = X + 0;
+                    X = new X (X);
+                    X.X (X, X, X, X);
+                }
+            }
+            X = X.X ();
+        }
+    }
+
+    private X X (X X) {
+        while (X != 0) {
+            if (X instanceof X) {
+                X X = X.X (X);
+                if (X != 0) return (X) X;
+
+            }
+            X = X.X (X);
+        }
+        return 0;
+    }
+
+    private X X (X X, X X) {
+        while (X != 0) {
+            if (X instanceof X) {
+                X X = (X) X.X (X);
+                if (X != 0) {
+                    if (X == 0 || X.X (X.X (X.X))) return X;
+
+                }
+            }
+            X = X.X ();
+        }
+        return 0;
+    }
+
+    static private X X (X X, X X, X X, X X) {
+        X X, X;
+        X = X.X (X);
+        X = X.X (X);
+        if (X == X) return 0;
+
+        if (X == 0) {
+            X.X (X, X);
+            if (X != 0 && ! X.X (X)) return X;
+            else return 0;
+
+        }
+        if (X == 0 || ! X (X, X)) {
+            X.X (X, X, X);
+            return X;
+        }
+        return 0;
+    }
+
+    static private X X (X X, X X) {
+        X [] X, X;
+        if (X == X) return 0;
+
+        if (X == 0 || X == 0) return 0;
+
+        if (X.X (X)) return 0;
+
+        if (! (X.X (X).X (X, X) && X.X ().X (X))) return 0;
+
+        X = (X []) X;
+        X = (X []) X;
+        if (X.X != X.X) return 0;
+
+        X X;
+        X X = X.X;
+        for (X = 0; X < X; X ++) {
+            if (! X (X, X [X], X, X [X])) return 0;
+
+        }
+        return 0;
+    }
+
+    public X X () throws X {
+        X (0);
+        X = 0;
+    }
+
+    public X X () throws X {
+        X X;
+        X ();
+        X (0, 0);
+        X (0);
+        X = X (0);
+        X ();
+        X [] X = new X [X];
+        X X = X.X ();
+        X X;
+        while (X.X ()) {
+            X = (X) X.X ();
+            X X = (X) (X.X (X));
+            X [X.X ()] = X;
+        }
+        X ();
+        X (0, X, X);
+        for (X = 0; X < X; X ++) {
+            X (0, X, X);
+            X (0);
+            X (X [X]);
+            X (X, 0);
+        }
+        X ();
+        X ();
+        if (X > 0) {
+            X [] X = new X [X];
+            X X = X.X ();
+            X X;
+            while (X.X ()) {
+                X = (X) X.X ();
+                X X = (X) (X, X.X (X));
+                X [X.X ()] = X;
+            }
+            X ();
+            X (X, 0);
+            for (X = 0; X < X; X ++) {
+                X = X [X];
+                if (X != 0) {
+                    X (X, 0, X.X ());
+                    X (0, X.X ());
+                    X (0, X.X ());
+                }
+                X (0, X);
+            }
+            X ();
+            X ();
+        }
+        if (X > 0) {
+            X ();
+            X (0);
+            X X = X.X ();
+            while (X.X ()) {
+                X X = (X) X.X ();
+                X X = ((X) X.X (X)).X ();
+                X ();
+                X X = (X) X.X (X.X);
+                if (X == 0) X = X.X;
+
+                if (X.X (X.X, X)) {
+                    X (0);
+                    X (0, X);
+                } else if (X.X (X.X)) {
+                    X (0);
+                    X (0, X);
+                } else {
+                    X (0, X);
+                }
+
+                X X = X.X ();
+                X X;
+                if (X == 0) {
+                    X = new X ();
+                } else {
+                    X = new X (X);
+                }
+                X (X, X, 0);
+                X (X, X, X, 0);
+                X (X, X, 0);
+                X = X.X ();
+                if (X != 0 && X instanceof X) {
+                    X X = (X) X.X (X);
+                    if (X != 0) {
+                        X (0, X.X (), X);
+                    }
+                }
+                X X = (X) X.X (X, X, X.X);
+                if (X != 0) {
+                    X X = (X) X.X (X);
+                    if (X != 0) {
+                        X (0, X.X ());
+                    }
+                }
+                X X = (X) X.X (X.X);
+                if (X != 0 && X.X ()) X (X, 0);
+
+                X X = (X) X.X (X, X.X);
+                if (X != 0 && X.X (X)) X (0);
+
+                X (X.X ());
+                X (0);
+                X ();
+            }
+            X ();
+            X ();
+        }
+        X = new X ();
+    }
+
+    X X (X X) throws X {
+        X X;
+        X X = 0;
+        for (X = 0; X < X.X.X; X ++) {
+            X X = X.X [X];
+            if (X.X () != X.X) continue;
+
+            X X = X.X (X.X ());
+            X X = X.X (X, X, 0);
+            if (X) X = 0;
+
+        }
+        if (X) X ();
+
+    }
+
+    public X X () throws X {
+        X ();
+        X (X, X);
+    }
+
+    protected X X (X X, X X, X X, X X, X X, X X) throws X {
+        X X;
+        if ((X = X (X, X, X, X)) != 0) {
+            X X;
+            if (X == X) X = X;
+            else X = ((X) X).X ();
+
+            X (X, X.X (X * X));
+        }
+    }
+
+    protected X X (X X, X X, X X) throws X {
+        X X;
+        if ((X = X (X, X, X.X (), X)) != 0) {
+            if (X == X) X = 0;
+
+            X.X (X, X, X, 0);
+        }
+    }
+
+    protected X X (X X, X X, X X [], X X) throws X {
+        X X;
+        X X = X.X;
+        for (X = 0; X < X; X ++) {
+            X X = X [X];
+            if (X.X () == X) X (X, X, X, X);
+
+        }
+    }
+
+    X X (X X, X X, X X) throws X {
+        if (X) {
+            X X = X.X (0);
+            X X = X (X, X, X, X, X.X);
+            if (X != X) {
+                if (X != 0) {
+                    X (X);
+                }
+                if (X != 0) {
+                    X (0, X, ((X) X).X (), X);
+                    X.X (0, X);
+                } else {
+                    X.X (0);
+                }
+            }
+        }
+        X (X, X, X.X, X.X);
+    }
+
+    protected X X (X X) throws X {
+        X (0);
+        X X;
+        X X = X.X.X;
+        for (X = 0; X < X; X ++) {
+            X X = X.X [X];
+            if (X.X () == X.X) X.X (X, X);
+
+        }
+        X.X (X, 0);
+    }
+
+    X X (X X, X X, X X) throws X {
+        X X;
+        X X, X;
+        if (X) {
+            X = X.X (0);
+            X = X (X, X.X);
+            if (X != X) {
+                if (X != 0) {
+                    X (X);
+                    X = 0;
+                }
+            }
+        } else {
+            X = 0;
+            X = 0;
+        }
+        X X = X.X (X.X);
+        X X = X.X (X.X);
+        if (X != X) {
+            if (X != 0) {
+                X (X);
+                X = 0;
+                X = 0;
+            }
+        }
+        if (X != X && X != 0) {
+            X (0, X, X, ((X) X).X ());
+            X.X (0, X, X);
+        }
+        X (X, X, X.X, X.X);
+        if (X != X && X != 0) {
+            X X [] = (X []) X;
+            X X;
+            for (X = 0; X < X.X; X ++) {
+                X X = X [X];
+                switch (X.X ()) {
+                    case X.X :
+                    case X.X :
+                        break;
+                    case X.X :
+                        X (0);
+                        break;
+                    case X.X :
+                        X (0, X);
+                        break;
+                    case X.X :
+                        X (0);
+                        break;
+                }
+                switch (X.X (X, X)) {
+                    case X.X :
+                        break;
+                    case X.X :
+                        X (0);
+                        break;
+                    case X.X :
+                        X (X, 0);
+                        break;
+                    case X.X :
+                        X (X, 0);
+                        break;
+                    case X.X :
+                        X (0);
+                        break;
+                    case X.X :
+                        X (0);
+                        break;
+                }
+                X X = X.X (0 * X.X (), X);
+                if (X.X () == X.X) {
+                    X (0, X, X);
+                } else {
+                    X (0, X);
+                }
+            }
+            X.X (X.X, X);
+        }
+    }
+
+    public X X (X X) throws X {
+        X (X, X.X (), 0, X);
+        X X = X.X ();
+        for (X X = 0;
+        X < X; X ++) {
+            X (X.X (X, X, X, X), X);
+        }
+        X (X, 0);
+        X ();
+    }
+
+    protected X X (X X) throws X {
+        X (0);
+        X.X (X.X, X);
+        X X;
+        X X = X.X.X;
+        for (X = 0; X < X; X ++) {
+            X X = X.X [X];
+            if (X.X () == X.X) X.X (X);
+
+        }
+        X.X (0, X);
+        X.X (X.X);
+    }
+
+    X X (X X, X X, X X) throws X {
+        X X;
+        if (X) {
+            X X = X.X (0);
+            X X = X (X, X.X);
+            if (X != X) {
+                if (X != 0) {
+                    X (X);
+                }
+                if (X != 0) {
+                    X (0, ((X) X).X ());
+                    X.X (0, X, X);
+                } else {
+                    X.X (0);
+                }
+            }
+        }
+        if ((X = X (X, X, X.X, 0)) != 0) {
+            X X = (X) X.X (X);
+            X (0, X, X.X ());
+        }
+        X (X, X, X.X, 0, X, 0);
+        X (X, X, X.X, X.X);
+        X (X, X, X.X, 0, 0, 0);
+        if ((X = X (X, X, X.X, X)) != 0) {
+            X X;
+            if (X == X) X = 0;
+            else X = ((X) X.X (X)).X (X);
+
+            X (0, X);
+        }
+        if ((X = X (X, X, X.X, 0)) != 0) {
+            X X;
+            if (X == X) X = 0;
+            else X = ((X) X.X (X)).X ();
+
+            X (0, X);
+        }
+    }
+
+    protected X X (X X) throws X {
+        X (0);
+        X X;
+        X X = X.X.X;
+        for (X = 0; X < X; X ++) {
+            X X = X.X [X];
+            if (X.X (X, X) == X.X) X.X (X);
+
+        }
+        X.X (X, X, X);
+        X.X (X.X);
+        X.X (X.X);
+        X.X (X.X);
+        X.X (X.X);
+        X.X (0);
+    }
+
+    public X X (X X) throws X {
+        X (X, X, X, X.X (), 0, X);
+        if (X.X ()) {
+            try {
+                X.X ().X (X.X (), X.X () - X.X (), X.X);
+            } catch (X X) {
+                X.X (X);
+                throw new X (X.X ());
+            }
+            X (X.X);
+        } else {
+            X X = X.X ();
+            for (X X = 0;
+            X < X; X ++) X (X, X.X (X));
+
+        }
+    }
+
+    public X X (X X) throws X {
+        X X, X;
+        X [] X;
+        X = X.X;
+        X = X + X.X;
+        X = X.X;
+        for (; X < X; X ++) X (X [X]);
+
+    }
+
+    public X X (X X) throws X {
+        X X, X;
+        X = 0;
+        X = X.X ();
+        for (; X < X; X ++) X (X.X (X));
+
+    }
+
+    public X X (X X) throws X {
+        X X = X.X ();
+        for (X X = 0;
+        X < X; X ++) X.X ((X) X.X (X));
+
+    }
+
+    public X X (X X) throws X {
+        X.X (0);
+        X (X, X);
+        X = 0;
+    }
+
+    public X X (X X, X X) throws X {
+        X.X (0);
+        X (X);
+        X (X.X (X, X));
+        X = 0;
+    }
+
+    public X X () throws X {
+        X.X (0);
+        X = 0;
+    }
+
+    public X X () throws X {
+        X.X (0);
+        X = 0;
+    }
+
+    public X X (X X) throws X {
+        if (X == 0) {
+            X.X (0);
+            X.X (0);
+            X = 0;
+            return;
+        }
+        if (X == 0) {
+            X (0);
+            return;
+        }
+        if (X == 0 || X == 0) {
+            return;
+        }
+        X X = X (X, X);
+        if (X == 0) {
+            X X;
+            for (X = 0; X < X.X; X ++) {
+                if (X [X].X == X) {
+                    X (X [X].X);
+                    return;
+                }
+            }
+            X X = X (X);
+            if (X.X () != X) {
+                X = X.X (X);
+                X (0, X);
+            }
+            X (X, 0, (X) X);
+            X (0, X);
+            X (X);
+            X = 0;
+            return;
+        }
+        if (X > 0) {
+            X X;
+            X.X (X, 0);
+            X.X (0);
+            X = (X & 0)>>> 0;
+            X.X (X, X [X]);
+            X = (X & 0);
+            X.X (X [X]);
+            X = 0;
+            return;
+        }
+        switch (X) {
+            case 0 :
+            case 0 :
+            case 0 :
+                X.X (0);
+                X = 0;
+            default :
+                if (X) {
+                    X.X (X, X, 0);
+                    X = 0;
+                }
+                X.X (X);
+                break;
+        }
+    }
+
+    X X (X X) {
+        return 0;
+    }
+
+    static X [] X (X [] X) {
+        X [] X = new X [0 * X.X];
+        X X;
+        for (X = 0; X < X.X; X ++) {
+            X [X * 0] = X [X];
+            X [(X * 0) + 0] = X;
+        }
+        return X;
+    }
+
+    static X [] X (X X) throws X {
+        X [] X = (X []) X.X (X, X);
+        return X (X);
+    }
+
+    static protected X X (X [] X, X X) {
+        X X;
+        for (X = 0; X < X.X; X += 0) {
+            if (X [X] == X) return X [X + 0];
+
+        }
+        return 0;
+    }
+
+}
+

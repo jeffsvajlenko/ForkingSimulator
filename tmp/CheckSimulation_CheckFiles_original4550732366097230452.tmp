@@ -1,0 +1,75 @@
+package X.X.X.X.X.X;
+
+abstract public class X {
+    private static X X = 0;
+
+    public static X X (X.X.X.X X, X.X.X.X.X.X.X X) {
+        X.X.X.X.X X = X.X ();
+        X.X (X ());
+        X (X, X);
+        X.X (X.X (), X ());
+    }
+
+    public static X.X.X.X.X.X.X X (X.X.X.X X) {
+        return X (X.X ());
+    }
+
+    private static X.X.X.X X = 0;
+    private static X X = 0;
+
+    synchronized public static X.X.X.X X () {
+        if (X == 0) {
+            synchronized (X.X.X.X.class) {
+                if (X == 0) {
+                    if (X) {
+                        return X.X.X.X.X ().X (X);
+                    }
+                    X = 0;
+                    X.X.X.X [] X = new X.X.X.X [0];
+                    X.X.X.X X = 0;
+                    X = X.X.X.X.X ().X (0);
+                    X [0] = new X.X.X.X (0, X, 0);
+                    X = X.X.X.X.X ().X (0);
+                    X [0] = new X.X.X.X (0, X, 0);
+                    X = X.X.X.X.X ().X (0);
+                    X [0] = new X.X.X.X (0, X, 0);
+                    X = X.X.X.X.X ().X (0);
+                    X [0] = new X.X.X.X (0, X, 0);
+                    X = X.X.X.X.X ().X (0);
+                    X [0] = new X.X.X.X (0, X, 0);
+                    X = X.X.X.X.X ().X (X.X.X.X.X);
+                    X [0] = new X.X.X.X (0, X, 0);
+                    X = X.X.X.X.X ().X (X.X.X.X.X.X.X.X (), 0, X);
+                    X = 0;
+                }
+            }
+        }
+        return X;
+    }
+
+    public static X X () {
+        return X;
+    }
+
+    public static X.X.X.X.X.X.X X (X.X.X.X.X X) {
+        X.X.X.X.X.X.X X = new X.X.X.X.X.X.X ();
+        X.X = X.X ();
+        X.X = X.X ();
+        X.X = X.X ();
+        X.X = X.X ();
+        X.X = X.X ();
+        X.X = X.X ();
+        return X;
+    }
+
+    public static X X (X.X.X.X.X X, X.X.X.X.X.X.X X) {
+        X.X (X.X);
+        X.X (X.X);
+        X.X (X.X);
+        X.X (X.X);
+        X.X (X.X);
+        X.X (X.X);
+    }
+
+}
+

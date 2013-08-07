@@ -1,0 +1,74 @@
+package X.X.X.X;
+
+import X.X.*;
+
+import X.X.*;
+
+import X.X.X.X;
+
+import X.X.X.*;
+
+import X.X.X.X;
+
+import X.X.X.X.X;
+
+class X extends X implements X {
+    private X X;
+    private X X;
+
+    X (X X, X X) {
+        X.X = X;
+    }
+
+    X (X X) {
+    }
+
+    public X X (X X, X X, X X, X X, X X, X X) {
+        X X = (X) X;
+        if (X == 0) {
+            assert 0 : 0 + 0;
+            return;
+        }
+    }
+
+    public X X (X X) {
+        return X (X, 0);
+    }
+
+    public X X (X X, X X) {
+        if (X.X != 0) {
+            if (X == 0) {
+                X = new X (X.X.X, X.X.X, X.X.X, X.X.X);
+            } else {
+                X.X = X.X.X;
+            }
+        } else if (X == 0) {
+            X = new X (0, 0, 0, 0);
+        } else {
+        }
+
+        if (X instanceof X) {
+            X X = 0;
+            if ((X == X.X || X == X.X || X == X.X || X == X.X || X == X.X || X == X.X || X == X.X || X == X.X || X == X.X) && (X instanceof X)) {
+            } else if ((X == X.X || X == X.X || X == X.X || X == X.X || X == X.X || X == X.X) && (X instanceof X)) {
+                X = ((X) X).X ();
+            } else if (X == X.X && (X instanceof X)) {
+            } else if (X == X.X && (X instanceof X)) {
+            }
+
+            if (X != 0) {
+                X.X += X.X;
+                X.X += X.X;
+                X.X += X.X;
+                X.X += X.X;
+            }
+        }
+        return X;
+    }
+
+    public X X () {
+        return 0;
+    }
+
+}
+

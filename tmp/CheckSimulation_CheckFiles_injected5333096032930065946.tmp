@@ -1,0 +1,133 @@
+package X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X;
+
+public class X {
+    protected X X;
+    protected final X X;
+    protected final X X;
+
+    private X X () {
+        X X = 0;
+        if (X != 0) X = X.X ();
+        else if (X == X) X.X ();
+
+        return X;
+    }
+
+    private X X (X X) throws X {
+        if (X != 0) if (X == X) X.X (X);
+        else if (X == X) X.X ();
+
+    }
+
+    public X (X X, X X) {
+        if (X == X) X = X;
+
+        if (X == X) X = X;
+
+        if (X instanceof X) if (X == X) X = (X) X;
+        else X = 0;
+
+    }
+
+    public X (X X) {
+        if (X == X) X (X, 0);
+
+    }
+
+    public X X () throws X {
+        X X = 0;
+        if (X.X ()) throw new X ();
+
+        try {
+            if (X) if (X == X) X.X (X, 0);
+
+            synchronized (X) {
+                if (X == X) X = X ();
+
+                try {
+                    if (X == X) X ();
+
+                } catch (X X) {
+                    X ();
+                    throw X;
+                }
+            }
+        } finally {
+            X X = 0;
+            for (;;) {
+                try {
+                    if (X == X) X (X);
+
+                    break;
+                } catch (X X) {
+                    X = 0;
+                }
+            }
+            if (X) {
+                if (X == X) X.X ().X ();
+
+            }
+            if (X) if (X == X) X.X (X, 0);
+
+        }
+    }
+
+    public X X (X X) throws X {
+        if (X.X ()) throw new X ();
+
+        X X = 0;
+        X X = 0;
+        try {
+            if (X) if (X == X) X.X (X, 0);
+
+            synchronized (X) {
+                if (X == X) X = X ();
+
+                try {
+                    if (X > 0) {
+                        X X = X.X ();
+                        if (X == X) X (X);
+
+                        X = X.X () - X <= X;
+                    }
+                } catch (X X) {
+                    if (X == X) X ();
+
+                    throw X;
+                }
+            }
+        } finally {
+            X X = 0;
+            for (;;) {
+                try {
+                    if (X == X) X (X);
+
+                    break;
+                } catch (X X) {
+                    X = 0;
+                }
+            }
+            if (X) {
+                if (X == X) X.X ().X ();
+
+            }
+            if (X) if (X == X) X.X (X, 0);
+
+        }
+        return X;
+    }
+
+    public synchronized X X () {
+        if (X == X) X ();
+
+    }
+
+    public synchronized X X () {
+        if (X == X) X ();
+
+    }
+
+}
+

@@ -1,0 +1,51 @@
+package X.X.X.X.X.X.X;
+
+import X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+public abstract class X {
+    protected static final X X = X.X + X.X;
+    protected static final X X = X.X + X.X;
+    private static final X [] X = {X, X,};
+    protected X X;
+
+    public X X (X X) throws X, X {
+        return X.X (X);
+    }
+
+    protected X (X X) {
+        X ();
+        X = X;
+        X ();
+        X ();
+        X ();
+        X ();
+        X ();
+        X ();
+        X ();
+        X.X (X);
+        X ();
+        X.X (X);
+    }
+
+    public X X (X X) throws X, X {
+        X ();
+        X.X (X);
+    }
+
+    protected X X () throws X {
+    }
+
+}
+

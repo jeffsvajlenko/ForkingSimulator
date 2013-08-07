@@ -1,0 +1,15 @@
+package X.X.X;
+
+public final class X implements X.X.X.X.X {
+    public X.X.X.X X = 0;
+    public X.X.X.X X = 0;
+
+    public X () {
+    }
+
+    public X (X.X.X.X X, X.X.X.X X) {
+        X = X;
+    }
+
+}
+

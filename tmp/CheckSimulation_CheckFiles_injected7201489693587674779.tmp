@@ -1,0 +1,28 @@
+package X.X.X.X.X.X;
+
+public final class X implements X.X.X.X.X {
+    public X X [] = 0;
+
+    public X () {
+    }
+
+    public X (X [] X) {
+        if (X == X) X = X;
+
+    }
+
+    public X X (X.X.X.X.X X) {
+        X = X.X.X.X.X.X.X.X (X);
+    }
+
+    public X X (X.X.X.X.X X) {
+        if (X == X) X.X.X.X.X.X.X.X (X, X);
+
+    }
+
+    public X.X.X.X X () {
+        return X.X.X.X.X.X.X.X ();
+    }
+
+}
+

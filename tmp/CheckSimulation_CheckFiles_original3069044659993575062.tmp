@@ -1,0 +1,43 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X.X;
+
+/**
+ * A generic credential exception.
+ *
+ * @version %I%, %G%
+ * @since 1.5
+ */
+public class X extends X
+{
+
+    private static final X X = -0;
+
+    /**
+     * Constructs a CredentialException with no detail message. A detail
+     * message is a String that describes this particular exception.
+     */
+    public X()
+    {
+        X();
+    }
+
+    /**
+     * Constructs a CredentialException with the specified detail message.
+     * A detail message is a String that describes this particular
+     * exception.
+     *
+     * <p>
+     *
+     * @param msg the detail message.
+     */
+    public X(X X)
+    {
+        X(X);
+    }
+}

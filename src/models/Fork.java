@@ -38,7 +38,7 @@ public class Fork {
 	private List<Variant> variants;
 	private List<FileVariant> filevariants;
 	private List<LeafDirectoryVariant> directoryvariants;
-	private List<FragmentVariant> functionfragmentvariants;
+	private List<FunctionVariant> functionfragmentvariants;
 	
 	//track files modified (in order to prevent modifying the same file twice, which is more difficult to track since line numbers change)
 	private Set<Path> changedFiles;
@@ -117,7 +117,7 @@ public class Fork {
 	 * Returns the fragment variants in an unmodifiable list.  Variants are in the order they were injected.
 	 * @return the fragment variants in an unmodifiable list.  Variants are in the order they were injected.
 	 */
-	public List<FragmentVariant> getFunctionFragmentVariants() {
+	public List<FunctionVariant> getFunctionFragmentVariants() {
 		return Collections.unmodifiableList(functionfragmentvariants);
 	}
 	
@@ -164,7 +164,7 @@ public class Fork {
 		variants = new LinkedList<Variant>();
 		filevariants = new LinkedList<FileVariant>();
 		directoryvariants = new LinkedList<LeafDirectoryVariant>();
-		functionfragmentvariants = new LinkedList<FragmentVariant>();
+		functionfragmentvariants = new LinkedList<FunctionVariant>();
 		
 		//initialize file modification tracker
 		changedFiles = new TreeSet<Path>();
@@ -335,7 +335,7 @@ public class Fork {
 		int times = 0;
 		if(mutate) {
 			//pick times to edit
-			int maxedits = (int)((double) FileUtil.countLines(file)* (double) properties.getMaxFileEdits() / 100.0);
+			int maxedits = (int)((double) FileUtil.countPrettyLines(file, properties.getLanguage())* (double) properties.getMaxFileEdits() / 100.0);
 			if(maxedits == 0) maxedits = 1;
 			times = random.nextInt(maxedits) + 1;
 			
@@ -537,7 +537,7 @@ public class Fork {
 			if(fileMutate) {
 				
 				//pick times to edit
-				int maxedits = (int)((double) FileUtil.countLines(file.toPath())* (double) properties.getMaxFileEdits() / 100.0);
+				int maxedits = (int)((double) FileUtil.countPrettyLines(file.toPath(), properties.getLanguage())* (double) properties.getMaxFileEdits() / 100.0);
 				if(maxedits == 0) maxedits = 1;
 				times = random.nextInt(maxedits) + 1;
 				
@@ -611,7 +611,7 @@ public class Fork {
 		return v;
 	}
 	
-	public FragmentVariant injectFunction(Fragment function) throws FileNotFoundException, IOException, InterruptedException {
+	public FunctionVariant injectFunction(Fragment function) throws FileNotFoundException, IOException, InterruptedException {
 		Objects.requireNonNull(function, "function can not be null.");
 		if(!Files.exists(function.getSrcFile())) {
 			new NoSuchFileException("File containing function does not exist.");
@@ -656,7 +656,7 @@ public class Fork {
 		return injectFunctionAt(function, injectafter);
 	}
 	
-	public FragmentVariant injectFunctionAt(Fragment function, Fragment injectafter) throws FileNotFoundException, IOException, InterruptedException {
+	public FunctionVariant injectFunctionAt(Fragment function, Fragment injectafter) throws FileNotFoundException, IOException, InterruptedException {
 			//check objects
 		Objects.requireNonNull(function, "Function is null.");
 		Objects.requireNonNull(injectafter, "injectafter is null.");
@@ -716,9 +716,15 @@ public class Fork {
 		} else {
 			mutate = false;
 		}
-		int maxedits = (int)((double) (function.getEndLine() - function.getStartLine() + 1) * (double) properties.getMaxFunctionEdits() / 100.0);
+		
+		Path extracted = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "extracted", "");
+		FragmentUtil.extractFragment(function, extracted);
+		
+		int maxedits = (int)((double) (FileUtil.countPrettyLines(extracted, properties.getLanguage())) * (double) properties.getMaxFunctionEdits() / 100.0);
 		if(maxedits == 0) maxedits = 1;
 		times = random.nextInt(maxedits) + 1;
+		
+		Files.delete(extracted);
 		
 		//If mutate
 		if(mutate) {
@@ -761,11 +767,11 @@ public class Fork {
 		}
 		
 		//Make record
-		FragmentVariant fv;
+		FunctionVariant fv;
 		if(operator == null) {
-			fv = new FragmentVariant(function, new Fragment(injectafter.getSrcFile(), injectafter.getEndLine()+1, injectafter.getEndLine() + 1 + (toInject.getEndLine()-toInject.getStartLine())));
+			fv = new FunctionVariant(function, new Fragment(injectafter.getSrcFile(), injectafter.getEndLine()+1, injectafter.getEndLine() + 1 + (toInject.getEndLine()-toInject.getStartLine())));
 		} else {
-			fv = new FragmentVariant(function, new Fragment(injectafter.getSrcFile(), injectafter.getEndLine()+1, injectafter.getEndLine() + 1 + (toInject.getEndLine()-toInject.getStartLine())), operator, times);
+			fv = new FunctionVariant(function, new Fragment(injectafter.getSrcFile(), injectafter.getEndLine()+1, injectafter.getEndLine() + 1 + (toInject.getEndLine()-toInject.getStartLine())), operator, times);
 		}
 		variants.add(fv);
 		functionfragmentvariants.add(fv);

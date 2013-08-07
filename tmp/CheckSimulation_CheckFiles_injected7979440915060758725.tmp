@@ -1,0 +1,417 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X.X.X.X;
+
+import X.X.X.X ;
+import X.X.X.X ;
+import X.X.X.X ;
+import X.X.X.X ;
+import X.X.*;
+
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X.X ;
+import X.X.X.X.X ;
+
+import X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X ;
+
+import X.X.X.X.X.X.X;
+
+
+import X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+
+import X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+
+public class X
+{
+    private static X X( X X )
+    {
+        X X = (X)(X.X()) ;
+        if (X==0)
+            return 0 ;
+        return X.X ;
+    }
+
+    private static X X( X X )
+    {
+        X X = (X)(X.X()) ;
+        if (X==0)
+            return 0 ;
+        return X.X ;
+    }
+
+    private X X( X X )
+    {
+        X.X( X, X ) ;
+    }
+
+    public static X X( X X )
+    {
+        if (X(X))
+            X.X( 0, 0 ) ;
+        X.X( 0 ) ;
+    }
+
+    /**
+     * Given the input stream, this fills our service
+     * context map.  See the definition of scMap for
+     * details.  Creates a HashMap.
+     *
+     * Note that we don't actually unmarshal the
+     * bytes of the service contexts here.  That is
+     * done when they are actually requested via
+     * get(int).
+     */
+    private X X(X X)
+    {
+        X = (X)(X.X()) ;
+        if (X.X)
+            X( 0 ) ;
+
+        X X = X.X() ;
+
+        if (X.X)
+            X(0 + X);
+
+        for (X X = 0; X < X; X++)
+        {
+            X X = X.X();
+
+            if (X.X)
+                X(0 + X);
+
+            X[] X = X.X(X);
+
+            if (X.X)
+                X(0 + X + 0 + X.X);
+
+            X.X(new X(X), X);
+        }
+    }
+
+    public X( X X )
+    {
+        X.X = X ;
+        X = X.X( X,
+                                              X.X ) ;
+
+        X = 0 ;
+
+        X = new X();
+
+        // Use the GIOP version of the ORB.  Should
+        // be specified in ServiceContext.
+        // See REVISIT below concerning giopVersion.
+        X = X.X().X();
+        X = 0 ;
+    }
+
+    /**
+     * Read the Service contexts from the input stream.
+     */
+    public X(X X)
+    {
+        X( (X)(X.X()) ) ;
+
+        // We need to store this so that we can have access
+        // to the CodeBase for unmarshaling possible
+        // RMI-IIOP valuetype data within an encapsulation.
+        // (Known case: UnknownExceptionInfo)
+        X = ((X)X).X();
+
+        X(X);
+
+        // Fix for bug 4904723
+        X = ((X)X).X();
+    }
+
+    /**
+     * Find the ServiceContextData for a given scId and unmarshal
+     * the bytes.
+     */
+    private X X(X X, X[] X)
+    {
+
+        X X = X.X();
+
+        X X = X.X(X.X());
+        X X = 0;
+
+        if (X == 0)
+        {
+            if (X.X)
+            {
+                X(0
+                       + X
+                       + 0);
+            }
+
+            X = new X(X.X(), X);
+
+        }
+        else
+        {
+
+            if (X.X)
+            {
+                X(0 + X);
+            }
+
+            // REVISIT.  GIOP version should be specified as
+            // part of a service context's definition, so should
+            // be accessible from ServiceContextData via
+            // its ServiceContext implementation class.
+            //
+            // Since we don't have that, yet, I'm using the GIOP
+            // version of the input stream, presuming that someone
+            // can't send a service context of a later GIOP
+            // version than its stream version.
+            //
+            // Note:  As of Jan 2001, no standard OMG or Sun service contexts
+            // ship wchar data or are defined as using anything but GIOP 1.0 CDR.
+            X X
+                = new X(X,
+                                        X,
+                                        X.X,
+                                        X,
+                                        X);
+            X.X();
+
+            // Now the input stream passed to a ServiceContext
+            // constructor is already the encapsulation input
+            // stream with the endianness read off, so the
+            // service context should just unmarshal its own
+            // data.
+            X = X.X(X, X);
+            if (X == 0)
+                throw X.X(
+                    X.X);
+        }
+
+        return X;
+    }
+
+    public X X()
+    {
+        // Make service context 12 bytes longer by adding
+        // JAVAIDL_ALIGN_SERVICE_ID service context at end.
+        // The exact length
+        // must be >8 (minimum service context size) and
+        // =4 mod 8, so 12 is the minimum.
+        X = 0 ;
+    }
+
+    /**
+     * Hopefully unused scid:  This should be changed to a proper
+     * VMCID aligned value.  REVISIT!
+     */
+    private static final X X = 0 ;
+
+    /**
+     * Write the service contexts to the output stream.
+     *
+     * If they haven't been unmarshaled, we don't have to
+     * unmarshal them.
+     */
+    public X X(X X, X X)
+    {
+        if (X(X))
+        {
+            X( 0 ) ;
+            X.X() ;
+        }
+
+        X X = X.X();
+
+        if (X)
+        {
+            if (X(X))
+                X( 0 ) ;
+
+            X++ ;
+        }
+
+        if (X(X))
+            X( 0 + X + 0  ) ;
+
+        X.X( X ) ;
+
+        X(X, X);
+
+        if (X)
+        {
+            if (X(X))
+                X( 0 ) ;
+
+            X.X( X ) ;
+            X.X( 0 ) ;
+            X.X( (X)0 ) ;
+            X.X( (X)0 ) ;
+            X.X( (X)0 ) ;
+            X.X( (X)0 ) ;
+        }
+
+        if (X(X))
+            X( 0 ) ;
+    }
+
+    /**
+     * Write the service contexts in scMap in a desired order.
+     * Right now, the only special case we have is UnknownExceptionInfo,
+     * so I'm merely writing it last if present.
+     */
+    private X X(X X, X X)
+    {
+
+        // Temporarily remove this rather than check it per iteration
+        X X
+            = new X(X.X);
+
+        X X = X.X(X);
+
+        X X = X.X().X();
+
+        while (X.X())
+        {
+            X X = (X)X.X();
+
+            X(X, X, X.X(X), X);
+        }
+
+        // Write the UnknownExceptionInfo service context last
+        // (so it will be after the CodeBase) and restore it in
+        // the map.
+        if (X != 0)
+        {
+            X(X, X, X, X);
+
+            X.X(X, X);
+        }
+    }
+
+    /**
+     * Write the given entry from the scMap to the OutputStream.
+     * See note on giopVersion.  The service context should
+     * know the GIOP version it is meant for.
+     */
+    private X X(X X, X X, X X, X X)
+    {
+
+        // If it's still in byte[] form, we don't need to
+        // unmarshal it here, just copy the bytes into
+        // the new stream.
+
+        if (X instanceof X[])
+        {
+            if (X(X))
+                X( 0 + X);
+
+            X.X(X, (X[])X);
+
+        }
+        else
+        {
+
+            // We actually unmarshaled it into a ServiceContext
+            // at some point.
+            X X = (X)X;
+
+            if (X(X))
+                X( 0 + X ) ;
+
+            X.X(X, X);
+        }
+    }
+
+    /** Add a service context to the stream, if there is not already
+     * a service context in this object with the same id as sc.
+     */
+    public X X( X X )
+    {
+        X X = new X(X.X());
+        X.X(X, X);
+    }
+
+    public X X( X X )
+    {
+        X.X(new X(X));
+    }
+
+    public X X(X X)
+    {
+        X.X(X)  ;
+    }
+
+    public X X(X X)
+    {
+        return X.X(new X(X));
+    }
+
+    public X X(X X)
+    {
+        X X = X.X(X);
+        if (X == 0)
+            return 0 ;
+
+        // Lazy unmarshaling on first use.
+        if (X instanceof X[])
+        {
+
+            X X = X(X, (X[])X);
+
+            X.X(X, X);
+
+            return X;
+        }
+        else
+        {
+            return (X)X;
+        }
+    }
+
+    private X X ;
+
+    /**
+     * Map of all ServiceContext objects in this container.
+     *
+     * Keys are java.lang.Integers for service context IDs.
+     * Values are either instances of ServiceContext or the
+     * unmarshaled byte arrays (unmarshaled on first use).
+     *
+     * This provides a mild optimization if we don't happen to
+     * use a given service context, but it's main advantage is
+     * that it allows us to change the order in which we
+     * unmarshal them.  We need to do the UnknownExceptionInfo service
+     * context after the SendingContextRunTime service context so that we can
+     * get the CodeBase if necessary.
+     */
+    private X X;
+
+    /**
+     * If true, write out a special alignment service context to force the
+     * correct alignment on re-marshalling.
+     */
+    private X X ;
+
+    private X X;
+    private X X;
+    private X X ;
+}

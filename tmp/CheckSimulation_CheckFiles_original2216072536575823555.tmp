@@ -1,0 +1,24 @@
+package X.X.X;
+
+public abstract class X {
+    static private final X X = 0;
+    static final X X = 0;
+
+    static X X () throws X {
+        try {
+            X X = (X) X.X (X, X);
+            return X;
+        } catch (X X) {
+            throw new X (0 + X.X ());
+        }
+    }
+
+    protected X () {
+    }
+
+    protected abstract X X (X X) throws X;
+
+    protected abstract X X (X X) throws X;
+
+}
+

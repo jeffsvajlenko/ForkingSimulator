@@ -1,0 +1,15 @@
+package X.X.X.X;
+
+public class X extends X {
+    private static final X X = 0;
+
+    public X () {
+        X ();
+    }
+
+    public X (X X) {
+        X (X);
+    }
+
+}
+

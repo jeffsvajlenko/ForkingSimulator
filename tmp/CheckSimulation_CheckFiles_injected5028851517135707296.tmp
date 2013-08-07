@@ -1,0 +1,34 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+package X.X.X.X;
+
+import X.X.X;
+import X.X.X;
+import X.X.X.X;
+import X.X.X.X.X;
+
+/**
+ * SynthDefaultLookup redirects all lookup calls to the SynthContext.
+ *
+ * @version %I% %G%
+ * @author Scott Violet
+ */
+class X extends X
+{
+    public X X(X X, X X, X X)
+    {
+        if (!(X instanceof X))
+        {
+            X X = X.X(X, X, X);
+            return X;
+        }
+        X X = ((X)X).X(X);
+        X X = X.X().X(X, X);
+        X.X();
+        return X;
+    }
+}

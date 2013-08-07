@@ -394,7 +394,7 @@ public class FragmentUtil {
 	 * @throws IllegalArgumentExcpetion If either of file1 or file 2 are not regular files or are not readable.
 	 * @throws IOException If an IO exception occurs during the reading of these files.
 	 */
-	public static double getSimilarity(Path file1, Path file2) throws FileNotFoundException, IOException {
+	public static double getSimilarity(Path file1, Path file2, Boolean loose) throws FileNotFoundException, IOException {
 		//Check input
 		Objects.requireNonNull(file1);
 		Objects.requireNonNull(file2);
@@ -424,7 +424,11 @@ public class FragmentUtil {
 		//Check similarity
 		double leftUnique=0.0;
 		double rightUnique=0.0;
-		Process p = Runtime.getRuntime().exec("diff " + file1.toAbsolutePath().normalize().toString() + " " + file2.toAbsolutePath().normalize().toString());
+		String flags = "";
+		if(loose) {
+			flags = "Bbi";
+		}
+		Process p = Runtime.getRuntime().exec("diff " + flags + " " + file1.toAbsolutePath().normalize().toString() + " " + file2.toAbsolutePath().normalize().toString());
 		int leftDistinct=0; 
 		int rightDistinct=0;
 		

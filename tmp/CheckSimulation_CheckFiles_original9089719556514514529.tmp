@@ -1,0 +1,118 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X.X.X.X.X ;
+
+import X.X.X ;
+
+import X.X.X.X ;
+import X.X.X.X ;
+import X.X.X.X ;
+import X.X.X.X.X ;
+import X.X.X.X.X ;
+import X.X.X.X.X ;
+import X.X.X.X.X ;
+import X.X.X.X.X ;
+import X.X.X.X.X ;
+
+import X.X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+
+/** Implementation of POAPolicyMediator that provides policy specific
+ * operations on the POA.
+ */
+public class X extends X
+{
+    private X X ;
+
+    X( X X, X X )
+    {
+        X( X, X ) ;
+
+        // assert !policies.retainServants() && policies.useDefaultServant()
+        if (X.X())
+            throw X.X().X() ;
+
+        if (!X.X())
+            throw X.X().X() ;
+
+        X = 0 ;
+    }
+
+    protected X.X.X X( X[] X,
+            X X ) throws X
+    {
+        if (X == 0)
+            throw X.X().X() ;
+
+        return X;
+    }
+
+    public X X()
+    {
+        // NO-OP
+    }
+
+    public X X()
+    {
+        // NO-OP
+    }
+
+    public X X()
+    {
+        // NO-OP
+    }
+
+    public X X() throws X
+    {
+        throw new X();
+    }
+
+    public X X( X X ) throws X
+    {
+        throw new X();
+    }
+
+    public X X() throws X, X
+    {
+        if (X == 0)
+            throw new X();
+        return X;
+    }
+
+    public X X( X X ) throws X
+    {
+        X.X = X;
+        X(X, 0.X());
+    }
+
+    public final X X(X[] X, X X)
+    throws X, X, X
+    {
+        throw new X();
+    }
+
+    public X X( X[] X ) throws X, X
+    {
+        throw new X();
+    }
+
+    public X[] X( X X ) throws X, X
+    {
+        throw new X();
+    }
+
+    public X X( X[] X )
+    throws X, X
+    {
+        if (X != 0)
+            return X;
+
+        throw new X() ;
+    }
+}

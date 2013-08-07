@@ -1,0 +1,45 @@
+package X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X.X;
+
+public class X extends X {
+    protected static final X X = X.X + X.X;
+    protected static final X X = X.X + X.X;
+    private static final X [] X = {X, X};
+    protected static final X X = X.X + X.X;
+    protected static final X X = X.X + X.X;
+    private static final X [] X = {X, X,};
+
+    public X (X X) {
+        X (X);
+    }
+
+    public X () {
+        X (0, 0);
+    }
+
+    public X (X X) {
+        X (X, 0);
+    }
+
+    public X (X X, X X) {
+        X (new X ());
+        X.X (X);
+        X.X (X, 0);
+        X.X (X);
+        if (X != 0) {
+            X.X (X, X);
+        }
+        if (X != 0) {
+            X.X (X, X);
+        }
+    }
+
+}
+

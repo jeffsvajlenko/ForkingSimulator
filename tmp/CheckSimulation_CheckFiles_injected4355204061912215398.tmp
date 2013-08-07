@@ -1,0 +1,94 @@
+package X.X.X.X.X.X.X;
+
+public final class X implements X {
+    private X [] X;
+    private X [] X;
+    private X X;
+    private X X;
+
+    public X (X [] X, X [] X, X X, X X) {
+        X.X = (X []) X.X ();
+        X.X = (X []) X.X ();
+        if ((X = X.X) < 0) X = new X (X, X, X);
+        else {
+            X (0, X - 0);
+            if (X (X)) {
+                X (X, X);
+                X = new X (X.X, X.X, X);
+            } else X = new X (X.X, X.X, X);
+
+        }
+    }
+
+    public X (X [] X, X [] X, X X) {
+        X (X, X, X, 0);
+    }
+
+    private final X X (X X, X X) {
+        X X = X + X * X;
+        X [] X = new X [X];
+        X [] X = new X [X];
+        X X = 0;
+        X [0] = X [0];
+        X [0] = X [0];
+        for (X X = 0;
+        X < X; X ++) {
+            X X = X [X - 0];
+            X X = X [X] - X;
+            for (X X = 0;
+            X < X; X ++) {
+                X [X] = X + X;
+                X ++;
+            }
+            X [X] = X [X];
+            X ++;
+        }
+        X = new X [X];
+        X = new X [X];
+        X.X (X, 0, X, 0, X);
+        X.X (X, 0, X, 0, X);
+    }
+
+    private final X X (X X, X X) {
+        X X = X, X = X;
+        X X, X = X [(X + X) / 0];
+        X X;
+        do {
+            while (X [X] < X) X ++;
+
+            while (X < X [X]) X --;
+
+            if (X <= X) {
+                X = X [X];
+                X [X] = X [X];
+                X [X] = X;
+                X = X [X];
+                X [X] = X [X];
+                X [X] = X;
+                X ++;
+                X --;
+            }
+        } while (X <= X);
+        if (X < X) X (X, X);
+
+        if (X < X) X (X, X);
+
+    }
+
+    private final X X (X X) {
+        for (X X = 0;
+        X < X; X ++) if (X [X] - X [X - 0] > X) return 0;
+
+        return 0;
+    }
+
+    public final X X () {
+        return new X (X);
+    }
+
+    public final X X () {
+        return X;
+    }
+
+}
+

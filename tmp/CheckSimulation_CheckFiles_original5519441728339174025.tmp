@@ -1,0 +1,195 @@
+/*
+ * %W% %E% %U%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X.X.X;
+
+import X.X.X;
+import X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+
+public class X extends X
+{
+
+    private static X X = 0;
+
+    private X()
+    {
+        X(X.X,
+              X);
+
+        // root -> ImageDescriptor
+        X(0,
+                   X.X,
+                   X);
+        X(0, 0,
+                     X, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+
+        X(0,
+                   X.X,
+                   X);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+
+        X(0,
+                   X.X,
+                   X);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+
+        X(0,
+                   X.X,
+                   X);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+
+        X(0,
+                   X.X,
+                   X);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+
+        X(0,
+                   X.X,
+                   X);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+
+        X(0,
+                   X.X,
+                   X);
+
+        /// Should the max value be 1.7976931348623157e+308 ?
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+
+        X(0,
+                   X.X,
+                   X);
+        X(0,0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0,0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0,0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+
+        X(0,
+                   X.X,
+                   X);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+
+        // root -> Palette
+        X(0,
+                   X.X,
+                   0, 0);
+        X(0, 0,
+                     X, 0, 0);
+        X(0, 0,
+                            0, 0);
+
+        // root -> Palette -> PaletteEntry
+        X(0, 0,
+                   X);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+        X(0, 0,
+                     X, 0, 0,
+                     0, 0, 0, 0);
+
+
+        // root -> CommentExtensions
+        X(0,
+                   X.X,
+                   0, X.X);
+
+        // root -> CommentExtensions -> CommentExtension
+        X(0, 0,
+                   X);
+        X(0, 0,
+                     X, 0, 0);
+    }
+
+    public X X(X X,
+                                 X X)
+    {
+        return 0;
+    }
+
+    public static synchronized X X()
+    {
+        if (X == 0)
+        {
+            X = new X();
+        }
+        return X;
+    }
+}

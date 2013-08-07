@@ -1,8 +1,8 @@
 ##  Basic Settings  ##
 	# Path to the subject system to use as basis of the forks.
-system=/home/jeff/git/ForkingSimulator/resources/systems/java/ipscan/
+system=/home/jeff/git/ForkingSimulator/resources/systems/java/JHotDraw54b1/
 	# Path to a repository of software systems from which to extract code fragments, files and directories.
-repository=/home/jeff/git/ForkingSimulator/resources/systems/java/JHotDraw54b1/
+repository=/home/jeff/git/ForkingSimulator/resources/repository/java/
 	# The language of the system/repistory, and the forks to generate.
 language=java
 	# The number of forks to generate.  Must be >= 0.
@@ -11,16 +11,16 @@ numForks=5
 
 ##  Code Artifact Settings  ##
 	# The number of source files to inject into the forks.  Must be >= 0.
-numFiles=25
+numFiles=4
 	# The number of source directories to inject into the forks.  Must be >= 0.
-numDirectories=10
+numDirectories=4
 	# The number of source fragments (functions) to inject into the forks.  Must be >= 0.
-numFragments=25
+numFragments=4
 
 
 ##	Fragment Selection Settings ##
 	# Minimum size of fragments in lines.
-functionFragmentMinSize=10
+functionFragmentMinSize=20
 	# Maximum size of fragments in lines.
 functionFragmentMaxSize=100
 

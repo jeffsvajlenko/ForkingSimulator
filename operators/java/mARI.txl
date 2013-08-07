@@ -44,9 +44,9 @@ include "random.mod"
 function main
     % Probability of mutation is 1/N, that is, 1 in N instances will be mutated
     export N [number]
-        10000
-	export CheckN [number]
-		0
+        5000
+    export CheckN [number]
+ 	0
     % We need an example of a space to insert 
     construct SpaceNewline [opt line]
         _ [parse " "]

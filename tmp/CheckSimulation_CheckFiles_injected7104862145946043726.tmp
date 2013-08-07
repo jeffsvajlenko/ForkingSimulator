@@ -1,0 +1,88 @@
+package X.X.X.X.X.X.X;
+
+import X.X.*;
+
+import X.X.X.X.X.X.X.X;
+
+public class X extends X {
+    private X X;
+    private X X;
+
+    X () {
+    }
+
+    public X (X X, X X) {
+        X ();
+        X.X = X.X.X.X.X.X.X.X;
+        X.X = (X) 0;
+        X (X);
+        X (X);
+    }
+
+    public X X (X X) throws X {
+        if (X) if (X == X) X.X (X.X.X.X.X.X.X.X);
+
+        X.X (X);
+        if (X) {
+            X.X (X);
+            X.X (X);
+        } else {
+            X.X (X);
+            X.X (X);
+        }
+    }
+
+    private final X X () {
+        if (X = ((X > X.X.X.X.X.X.X.X) || (X.X (X) > X.X))) X = 0;
+        else if (X == X) X = 0;
+
+    }
+
+    protected X X (X X, X X) throws X {
+        if (X == X) X.X = X;
+
+        if (X) {
+            X = 0;
+            X = X.X ();
+            X = X.X ();
+        } else {
+            X = 0;
+            if (X == X) X = X.X ();
+
+            X = X.X ();
+        }
+    }
+
+    public X X (X X) {
+        return X.X (X) + 0 + X;
+    }
+
+    public final X X (X X) {
+        if (X < 0) throw new X (0 + X);
+
+        if (X == X) X.X = X;
+
+        if (X == X) X ();
+
+    }
+
+    public final X X () {
+        return X;
+    }
+
+    public final X X (X X) {
+        X.X = X;
+        X ();
+    }
+
+    public X X (X X) {
+        return X.X;
+    }
+
+    public X X (X X) {
+        X.X (X);
+        X.X (X);
+    }
+
+}
+

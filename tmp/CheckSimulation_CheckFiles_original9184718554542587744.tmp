@@ -1,0 +1,135 @@
+package X.X.X;
+
+import X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+public class X extends X implements X {
+    private static final X X = 0;
+    private static final X X = new X ();
+
+    public X (X X) {
+        X (X);
+        if (X == 0) {
+            throw new X ();
+        }
+    }
+
+    public X X (X X, X X, X [] X) throws X {
+        if (X.X () == X.class) {
+            return X (X, X, X);
+        } else {
+            return X (X, X, X);
+        }
+    }
+
+    private X X (X X, X X, X [] X) {
+        X X = X.X ();
+        if (X.X (0)) {
+            return X ();
+        } else if (X.X (0)) {
+            X X = X [0];
+            return X == X || (X != 0 && X.X (X.X ()) && X (X.X (X)));
+        } else if (X.X (0)) {
+            return X (X);
+        } else {
+            throw new X (0 + X);
+        }
+
+    }
+
+    private X X (X X, X X, X [] X) throws X {
+        try {
+            if (! (X instanceof X)) {
+                throw new X (0);
+            }
+            return X.X ((X) X, X, X, X (X));
+        } catch (X X) {
+            if (! (X instanceof X)) {
+                X < ? > X = X.X ();
+                try {
+                    X = X.X (X.X (), X.X ());
+                } catch (X X) {
+                    throw (X) new X ().X (X);
+                }
+                X < ? > X = X.X ();
+                for (X < ? > X : X.X ()) {
+                    if (X.X (X)) {
+                        throw X;
+                    }
+                }
+                X = new X (0, X);
+            }
+            throw X;
+        }
+    }
+
+    private X X (X X) {
+        X < ? > [] X = X.X ().X ();
+        if (X.X == 0) {
+            return 0 + X + 0;
+        }
+        X X = X [0].X ();
+        if (X.X (0) && X.X > 0) {
+            X = X [0].X ();
+        }
+        X X = X.X (0);
+        if (X >= 0) {
+            X = X.X (X + 0);
+        }
+        return 0 + X + 0 + X + 0;
+    }
+
+    private X X () throws X {
+        throw new X (0 + X.X ().X ());
+    }
+
+    private static X X (X X) {
+        return X.X (X.X ()).X (X);
+    }
+
+    private static class X extends X < X < X, X > > {
+
+        X () {
+        }
+
+        protected X < X, X > X (X < ? > X) {
+            return new X < X, X > () {
+
+                public synchronized X X (X X) {
+                    X X = X.X (X);
+                    if (X == 0) {
+                        X X = (X) X;
+                        X = X.X (X);
+                        X (X, X);
+                    }
+                    return X;
+                }
+
+            }
+
+            ;
+        }
+
+    }
+
+}
+

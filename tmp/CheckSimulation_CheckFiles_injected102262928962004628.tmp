@@ -1,0 +1,69 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+/*
+ * Licensed Materials - Property of IBM
+ * RMI-IIOP v1.0
+ * Copyright IBM Corp. 1998 1999  All Rights Reserved
+ *
+ * US Government Users Restricted Rights - Use, duplication or
+ * disclosure restricted by GSA ADP Schedule Contract with IBM Corp.
+ */
+
+package X.X.X;
+
+import X.X.X;
+import X.X.X;
+import X.X.X;
+
+/**
+ * Supports delegation for method implementations in {@link javax.rmi.PortableRemoteObject}.
+ * The delegate is a singleton instance of a class that implements this
+ * interface and provides a replacement implementation for all the
+ * methods of <code>javax.rmi.PortableRemoteObject</code>.
+ *
+ * Delegates are enabled by providing the delegate's class name as the
+ * value of the
+ * <code>javax.rmi.CORBA.PortableRemoteObjectClass</code>
+ * system property.
+ *
+ * @see javax.rmi.PortableRemoteObject
+ */
+public interface X
+{
+
+    /**
+     * Delegation call for {@link javax.rmi.PortableRemoteObject#exportObject}.
+     */
+    X X(X X)
+    throws X;
+
+    /**
+     * Delegation call for {@link javax.rmi.PortableRemoteObject#toStub}.
+     */
+    X X (X X)
+    throws X;
+
+    /**
+     * Delegation call for {@link javax.rmi.PortableRemoteObject#unexportObject}.
+     */
+    X X(X X)
+    throws X;
+
+    /**
+     * Delegation call for {@link javax.rmi.PortableRemoteObject#narrow}.
+     */
+    X.X.X X (X.X.X X,
+                             X.X.X X)
+    throws X;
+
+    /**
+     * Delegation call for {@link javax.rmi.PortableRemoteObject#connect}.
+     */
+    X X (X X, X X)
+    throws X;
+
+}

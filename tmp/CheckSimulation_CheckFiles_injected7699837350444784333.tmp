@@ -1,0 +1,36 @@
+package X.X.X.X.X.X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X.X.X.X.X.X.X;
+
+final class X {
+    X X;
+    X X;
+    X X;
+    X X;
+    X X;
+
+    X (X X, X X, X X) {
+        X = X;
+        X = X;
+        X = X;
+        X = X;
+    }
+
+    X (X X, X X) {
+        X = X;
+        if (X instanceof X) {
+            final X X = (X) X;
+            X = X.X ();
+            X = X.X ();
+            X = X.X ();
+        } else {
+            X = - 0;
+            X = - 0;
+            X = - 0;
+        }
+    }
+
+}
+

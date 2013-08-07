@@ -1,0 +1,23 @@
+package X.X.X;
+
+@X
+public class X {
+    private X X;
+
+    @X
+    public X () {
+        X = X;
+    }
+
+    @X
+    public X X () {
+        return X;
+    }
+
+    @X
+    public X X () {
+        return X;
+    }
+
+}
+

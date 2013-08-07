@@ -1,0 +1,19 @@
+package javax.swing.plaf.synth;
+
+import java.awt.*;
+
+import java.util.*;
+
+import javax.swing.plaf.*;
+
+import javax.swing.*;
+
+public abstract class SynthStyleFactory {
+
+    public SynthStyleFactory () {
+    }
+
+    public abstract SynthStyle getStyle (JComponent c, Region id);
+
+}
+

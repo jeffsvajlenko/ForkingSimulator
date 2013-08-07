@@ -1,0 +1,929 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+package X.X.X.X;
+
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X.X;
+
+/**
+ * Skinnable TreeUI.
+ *
+ * @version %I%, %G%
+ * @author Scott Violet
+ */
+class X extends X implements X,
+    X
+{
+    private X X;
+    private X X;
+
+    private X X;
+
+    private X X;
+    private X X;
+
+    private X X;
+
+    private X X;
+
+    private X X;
+
+    private X X;
+
+    private X X;
+
+    public static X X(X X)
+    {
+        return new X();
+    }
+
+    X()
+    {
+        X = new X();
+    }
+
+    @X
+    public X X()
+    {
+        return X;
+    }
+
+    @X
+    protected X X()
+    {
+        X(X);
+    }
+
+    private X X(X X)
+    {
+        X X = X(X, X);
+        X X = X;
+
+        X = X.X(X, X);
+        if (X != X)
+        {
+            X X;
+
+            X(X.X(X, 0));
+            X(X.X(X, 0));
+
+            X(X.X(X, 0,
+                                            0));
+            X(X.X(X, 0,
+                                             0));
+
+            X = X.X(
+                                      X, 0,0);
+            X = X.X(
+                                    X, 0, 0);
+            X = X.X(X, 0);
+
+            X = X.X(X, 0);
+            if (X != 0)
+            {
+                X.X(X, 0, X);
+            }
+
+            X = X.X(X, 0);
+            X.X(X, 0,
+                                        X != 0? X : X.X);
+
+            X = X.X(X, 0, 0);
+
+            X = (X.X() && X.X() > 0);
+
+            X = X.X(X,
+                                             0, 0);
+
+            X X = X.X(
+                                           X, 0, X.X);
+            X.X(
+                X, X.X, X);
+
+            if (X != 0)
+            {
+                X();
+                X();
+            }
+        }
+        X.X();
+
+        X = X(X, X.X, X);
+        X = X.X(X, X);
+        X.X();
+    }
+
+    @X
+    protected X X()
+    {
+        X.X();
+        X.X(X);
+    }
+
+    @X
+    public X X(X X)
+    {
+        return X(X, X(X));
+    }
+
+    private X X(X X, X X)
+    {
+        return X.X(X.class, X,
+                                       X.X(X), X, X);
+    }
+
+    private X X(X X)
+    {
+        return X.X(X);
+    }
+
+    private X X(X X)
+    {
+        return X.X(X);
+    }
+
+    private X X(X X, X X)
+    {
+        return X(X, X, X(X, X));
+    }
+
+    private X X(X X, X X, X X)
+    {
+        return X.X(X.class, X,
+                                       X, X, X);
+    }
+
+    private X X(X X, X X)
+    {
+        // Always treat the cell as selected, will be adjusted appropriately
+        // when painted.
+        return X | X;
+    }
+
+    @X
+    protected X X()
+    {
+        X X = X.X();
+        X X;
+
+        if(X != 0 && (X instanceof X))
+        {
+            X = new X(X, (X)
+                                             X);
+        }
+        else
+        {
+            X = new X(X, 0);
+        }
+        return X;
+    }
+
+    @X
+    protected X X()
+    {
+        return new X();
+    }
+
+    @X
+    protected X X()
+    {
+        X X = X(X, X);
+
+        X.X(X);
+        X.X();
+        X = 0;
+
+        X = X(X, X.X, X);
+        X.X(X);
+        X.X();
+        X = 0;
+
+
+        if (X.X() instanceof X)
+        {
+            X.X(0);
+        }
+    }
+
+    @X
+    protected X X()
+    {
+        X.X();
+        X.X(X);
+    }
+
+    @X
+    public X X(X X, X X)
+    {
+        X X = X(X);
+
+        X.X(X, X);
+        X.X().X(X,
+                X, 0, 0, X.X(), X.X());
+        X(X, X);
+        X.X();
+    }
+
+    public X X(X X, X X, X X,
+                            X X, X X, X X)
+    {
+        X.X().X(X, X, X, X, X, X);
+    }
+
+    @X
+    public X X(X X, X X)
+    {
+        X X = X(X);
+
+        X(X, X);
+        X.X();
+    }
+
+    private X X()
+    {
+        X = X(X, X.X());
+    }
+
+    protected X X(X X, X X)
+    {
+        X = X;
+
+        X();
+
+        X X = X.X();
+        X X = X.X();
+        X X = X(X, 0,
+                               X.X);
+        X X = X.X
+                                         (X);
+        X X = X.X(X);
+        X X = X.X + X.X;
+        X X = X.X();
+        X X = X(X, X.X);
+
+        X.X();
+
+        X(X.X().X(X,
+                     X.X));
+
+        if (X != 0)
+        {
+            // First pass, draw the rows
+
+            X X = 0;
+            X X;
+            X X;
+            X X;
+            X X = new X();
+            X X = new X(0, 0, X.X(),0);
+            X X;
+            X X;
+            X X = X.X();
+            X X = (X instanceof
+                                            X) ? (X)
+                                           X : 0;
+
+            X(X);
+            while (!X && X.X())
+            {
+                X = (X)X.X();
+                if (X != 0)
+                {
+                    X = X.X(X.X());
+                    if (X)
+                    {
+                        X = X = 0;
+                    }
+                    else
+                    {
+                        X = X.X(X);
+                        X = X.X(X);
+                    }
+                    X = X(X, X);
+                    X.X = X.X;
+                    X.X = X.X;
+                    X(X, X, X, X, X,
+                             X, X, X, X, X,
+                             X, X, X, X);
+                    if ((X.X + X.X) >= X)
+                    {
+                        X = 0;
+                    }
+                }
+                else
+                {
+                    X = 0;
+                }
+                X++;
+            }
+
+            // Draw the connecting lines and controls.
+            // Find each parent and have them draw a line to their last child
+            X X = X.X();
+            X X = X;
+            X = X.X();
+            while (X != 0)
+            {
+                X(X, X, X, X);
+                X.X(X, X.X);
+                X = X.X();
+            }
+            X = 0;
+            X = X.X(X);
+            while (!X && X.X())
+            {
+                X = (X)X.X();
+                if (X != 0)
+                {
+                    X = X.X(X.X());
+                    if (X)
+                    {
+                        X = X = 0;
+                    }
+                    else
+                    {
+                        X = X.X(X);
+                        X = X.X(X);
+                    }
+                    X = X(X, X);
+                    // See if the vertical line to the parent has been drawn.
+                    X = X.X();
+                    if (X != 0)
+                    {
+                        if (X.X(X) == 0)
+                        {
+                            X(X, X, X,
+                                                   X);
+                            X.X(X, X.X);
+                        }
+                        X(X,
+                                                 X, X, X,
+                                                 X, X, X,
+                                                 X, X);
+                    }
+                    else if (X && X == 0)
+                    {
+                        X(X,
+                                                 X, X, X,
+                                                 X, X, X,
+                                                 X, X);
+                    }
+                    if (X(X, X, X,
+                                                 X, X))
+                    {
+                        X(X, X,
+                                           X, X, X, X,
+                                           X, X,X);
+                    }
+                    if ((X.X + X.X) >= X)
+                    {
+                        X = 0;
+                    }
+                }
+                else
+                {
+                    X = 0;
+                }
+                X++;
+            }
+        }
+        X.X();
+
+        X(X);
+
+        // Empty out the renderer pane, allowing renderers to be gc'ed.
+        X.X();
+    }
+
+    private X X(X.X X)
+    {
+        return X != 0 && X.X() != 0 && X.X() != -0;
+    }
+
+    private X X(X X)
+    {
+        X.X X = X.X();
+        if (!X(X))
+        {
+            return;
+        }
+
+        X X = (X)X.X(X, 0);
+        if (X != 0)
+        {
+            X.X(X);
+            X X = X(X);
+            X.X(X.X, X.X, X.X, X.X);
+        }
+    }
+
+    private X X(X.X X)
+    {
+        X X = 0;
+        X X = X.X();
+        X X = X.X();
+        X X = X.X().X();
+
+        X X = X.X();
+
+        if (X.X() == 0)
+        {
+            X = new X(X.X,
+                                 X.X,
+                                 X.X() - X.X - X.X,
+                                 0);
+        }
+        else
+        {
+            X X = X.X(X);
+            X X = X();
+            X X = X.X();
+
+            if (X.X() == X
+                    && X >= X.X(X))
+            {
+
+                X = X.X(X.X() - 0);
+                X.X = X.X + X.X;
+                X X;
+
+                if (!X.X())
+                {
+                    X = X.X(0);
+                }
+                else if (X.X(X) == 0)
+                {
+                    X = X.X(0);
+                    X.X += X;
+                    X.X -= X + X;
+                }
+                else
+                {
+                    X X = X.X(
+                                                 X.X(X, X.X(X) - 0));
+                    X = X.X(X);
+                }
+
+                X.X = X.X;
+                X.X = X.X;
+            }
+            else
+            {
+                X = X.X(X.X(
+                                              X.X(X.X(), X)));
+            }
+        }
+
+        if (X.X != 0)
+        {
+            X.X--;
+        }
+
+        if (!X)
+        {
+            X.X = X.X + X.X - 0;
+        }
+
+        X.X = 0;
+        X.X = 0;
+
+        return X;
+    }
+
+    private X X(X X)
+    {
+        X X = X.X();
+
+        if (X instanceof X)
+        {
+            X X = (X)X;
+            X X = X.X();
+
+            X.X(X | X);
+            X X = X.X();
+            if (X == 0 || (X instanceof X))
+            {
+                X.X(X.X(
+                                            X, X.X));
+            }
+            X = X.X();
+            if (X == 0 || (X instanceof X))
+            {
+                X.X(X.X(
+                                                  X, X.X));
+            }
+
+            X.X(X);
+            X = X.X();
+            if (X == 0 || X instanceof X)
+            {
+                X.X(X.X(
+                                               X, X.X));
+            }
+            X = X.X();
+            if (X == 0 || X instanceof X)
+            {
+                X.X(X.X(
+                                                     X, X.X));
+            }
+        }
+    }
+
+    @X
+    protected X X(X X, X X,
+                                            X X, X X,
+                                            X X, X X,
+                                            X X,
+                                            X X, X
+                                            X)
+    {
+        if (X)
+        {
+            X.X(X, X, X, X,
+                                           X, X, X,
+                                           X, X);
+        }
+    }
+
+    @X
+    protected X X(X X, X X, X X,
+                                       X X, X X)
+    {
+        X.X().X(X).X(
+            X, 0, X, X, X, X, X, X);
+    }
+
+    @X
+    protected X X(X X,
+                                          X X, X X,
+                                          X X)
+    {
+        if (X)
+        {
+            X.X(X, X, X, X);
+        }
+    }
+
+    @X
+    protected X X(X X, X X, X X, X X,
+                                     X X)
+    {
+        X.X().X(X).X(
+            X, 0, X, X, X, X, X, X);
+    }
+
+    protected X X(X X,
+                            X X, X X,
+                            X X, X X, X X,
+                            X X, X X, X X,
+                            X X, X X, X X,
+                            X X, X X)
+    {
+        // Don't paint the renderer if editing this row.
+        X X = X.X(X);
+
+        X.X X = (X.X)X.X();
+        X X = X != 0
+                         && X.X() == -0
+                         && X == X.X();
+
+        X X = X;
+        if (X || X)
+        {
+            X |= X;
+        }
+
+        if (X.X() && X == X)
+        {
+            X |= X;
+        }
+
+        X.X(X);
+
+        if (X != 0 && (X.X() instanceof
+                             X))
+        {
+            X.X(X.X(
+                                             X, X.X));
+        }
+        X.X(X, X, X);
+        X.X().X(X, X,
+                X.X, X.X, X.X,
+                X.X);
+        X.X().X(X, X,
+                X.X, X.X, X.X,
+                X.X);
+        if (X != 0 && X == X)
+        {
+            return;
+        }
+
+        X X;
+
+        if (X.X())
+        {
+            X = X;
+        }
+        else
+        {
+            X = -0;
+        }
+
+        X X = X.X(
+                                  X, X.X(),
+                                  X, X, X, X,
+                                  (X == X));
+
+        X.X(X, X, X, X.X, X.X,
+                                    X.X, X.X, 0);
+    }
+
+    private X X(X X, X X)
+    {
+        return X.X().X()
+               ? X - (X)X.X(X / 0)
+               : X - (X)X.X(X / 0);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    @X
+    protected X X(X X,
+                                      X X, X X,
+                                      X X, X X,
+                                      X X, X X,
+                                      X X,
+                                      X X)
+    {
+        //modify the paintContext's state to match the state for the row
+        //this is a hack in that it requires knowledge of the subsequent
+        //method calls. The point is, the context used in drawCentered
+        //should reflect the state of the row, not of the tree.
+        X X = X.X().X(X);
+        X X = X.X();
+        if (X)
+        {
+            X.X(X | X.X);
+        }
+        X.X(X, X, X, X, X, X,
+                                 X, X, X);
+        X.X(X);
+    }
+
+    @X
+    protected X X(X X, X X, X X,
+                                X X, X X)
+    {
+        X X = X.X(X, X);
+        X X = X.X(X, X);
+
+        X.X(X, X, X,
+                            X(X, X),
+                            X - X/0, X, X);
+    }
+
+    public X X(X X)
+    {
+        if (X.X(X))
+        {
+            X((X)X.X());
+        }
+
+        if (0 == X.X())
+        {
+            X.X X = (X.X)X.X();
+            X(X);
+            X(X.X());
+        }
+    }
+
+    private X X(X.X X)
+    {
+        if (X == 0)
+        {
+            return;
+        }
+
+        X X;
+
+        if (X(X))
+        {
+            X = X(X);
+        }
+        else
+        {
+            X = X.X(X.X());
+            if (X != 0)
+            {
+                X.X = 0;
+                X.X = X.X();
+            }
+        }
+
+        if (X != 0)
+        {
+            X.X(X);
+        }
+    }
+
+    @X
+    protected X X(X X, X X)
+    {
+        return X.X(X, X) + X;
+    }
+
+
+    private class X extends X
+        implements X
+    {
+        X()
+        {
+        }
+
+        @X
+        public X X()
+        {
+            return 0;
+        }
+
+        @X
+        public X X(X X, X X,
+                X X,
+                X X,
+                X X, X X,
+                X X)
+        {
+            if (!X && (X || X))
+            {
+                X.X((X)X.
+                                               X(X(), X.class),
+                                               X, X, X.X(), 0);
+            }
+            else
+            {
+                X.X();
+            }
+            return X.X(X, X, X,
+                    X, X, X, X);
+        }
+
+        @X
+        public X X(X X)
+        {
+            X(X);
+            if (X)
+            {
+                X X = X(X, X.X);
+
+                if (X.X() == 0)
+                {
+                    assert 0: 0 +
+                    0;
+                    return;
+                }
+                X X = 0;
+                X X = X();
+
+                if(X != 0 && X() != 0)
+                {
+                    X = X.X() +
+                                  X.X(0, X() - 0);
+                }
+                if (X)
+                {
+                    X.X(X | X);
+                }
+                else
+                {
+                    X.X(X);
+                }
+                if(X().X())
+                {
+                    X.X().X(X, X,
+                                                            X, 0, X() - X,
+                                                            X());
+                }
+                else
+                {
+                    X.X().X(X, X,
+                                                            0, 0, X() - X, X());
+                }
+                X.X();
+            }
+            X.X();
+        }
+    }
+
+
+    private static class X extends X
+    {
+        public X(X X,
+                                   X X)
+        {
+            X(X, X);
+            X(0);
+        }
+
+        @X
+        protected X X()
+        {
+            X X = new X()
+            {
+                @X
+                public X X()
+                {
+                    return 0;
+                }
+            };
+            X X = new X(X);
+
+            // One click to edit.
+            X.X(0);
+            return X;
+        }
+    }
+
+    //
+    // BasicTreeUI directly uses expandIcon outside of the Synth methods.
+    // To get the correct context we return an instance of this that fetches
+    // the SynthContext as needed.
+    //
+    private class X extends X
+    {
+        public X X(X X, X X, X X,
+                              X X, X X, X X)
+        {
+            if (X == 0)
+            {
+                X = X(X);
+                X.X(X, X, X, X, X, X, X);
+                X.X();
+            }
+            else
+            {
+                X.X(X, X, X, X, X, X, X);
+            }
+        }
+
+        public X X(X X)
+        {
+            X X;
+            if (X == 0)
+            {
+                X = X(X);
+                X = X.X(X, X);
+                X.X();
+            }
+            else
+            {
+                X = X.X(X, X);
+            }
+            return X;
+        }
+
+        public X X(X X)
+        {
+            X X;
+            if (X == 0)
+            {
+                X = X(X);
+                X = X.X(X, X);
+                X.X();
+            }
+            else
+            {
+                X = X.X(X, X);
+            }
+            return X;
+        }
+    }
+}

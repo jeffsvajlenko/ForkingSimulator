@@ -82,4 +82,11 @@ public class Fragment {
 	public int hashCode() {
 		return new HashCodeBuilder().append(this.srcfile).append(this.startline).append(this.endline).toHashCode();
 	}
+
+	@Override
+	public String toString() {
+		return "Fragment [srcfile=" + srcfile + ", startline=" + startline
+				+ ", endline=" + endline + "]";
+	}
+	
 }

@@ -1,0 +1,140 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X.X;
+
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X.X;
+
+/**
+ * This class provide means to properly close hanging
+ * image input/output streams on VM shutdown.
+ * This might be useful for proper cleanup such as removal
+ * of temporary files.
+ *
+ * Addition of stream do not prevent it from being garbage collected
+ * if no other references to it exists. Stream can be closed
+ * explicitly without removal from StreamCloser queue.
+ * Explicit removal from the queue only helps to save some memory.
+ */
+public class X
+{
+
+    private static X<X, X> X;
+    private static X X;
+
+    public static X X(X X)
+    {
+        synchronized (X.class)
+        {
+            if (X == 0)
+            {
+                X =
+                    new X<X, X>();
+            }
+
+            X.X(X, 0);
+
+            if (X == 0)
+            {
+                final X X = new X()
+                {
+                    public X X()
+                    {
+                        if (X != 0)
+                        {
+                            synchronized (X.class)
+                            {
+                                X<X> X =
+                                    X.X();
+                                // Make a copy of the set in order to avoid
+                                // concurrent modification (the is.close()
+                                // will in turn call removeFromQueue())
+                                X[] X =
+                                    new X[X.X()];
+                                X = X.X(X);
+                                for (X X : X)
+                                {
+                                    if (X != 0)
+                                    {
+                                        try
+                                        {
+                                            X.X();
+                                        }
+                                        catch (X X)
+                                        {
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                };
+
+                X.X.X.X(
+                    new X.X.X()
+                {
+                    public X X()
+                    {
+                        /* The thread must be a member of a thread group
+                         * which will not get GCed before VM exit.
+                         * Make its parent the top-level thread group.
+                         */
+                        X X =
+                            X.X().X();
+                        for (X X = X;
+                                X != 0;
+                                X = X, X = X.X());
+                        X = new X(X, X);
+                        /* Set context class loader to null in order to avoid
+                         * keeping a strong reference to an application classloader.
+                         */
+                        X.X(0);
+                        X.X().X(X);
+                        return 0;
+                    }
+                });
+            }
+        }
+    }
+
+    public static X X(X X)
+    {
+        synchronized (X.class)
+        {
+            if (X != 0)
+            {
+                X.X(X);
+            }
+        }
+    }
+
+    public static X X(X X)
+    {
+        return new X(X);
+    }
+
+    public static final class X
+    {
+        private X X;
+
+        private X(X X)
+        {
+            X.X = X;
+        }
+
+        public X X() throws X
+        {
+            if (X != 0)
+            {
+                X.X();
+            }
+        }
+    }
+}

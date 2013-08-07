@@ -1,0 +1,33 @@
+package X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+public abstract class X extends X implements X, X, X {
+    private static final X X = - 0;
+
+    protected X (X X) {
+        X (X);
+    }
+
+    public X X (X X) {
+        return (X != 0 && X instanceof X && X.X () == X.X () && ((X) X).X () == X.X (X));
+    }
+
+    public final X < ? extends X > X () {
+        return X.class;
+    }
+
+    public final X X () {
+        return 0;
+    }
+
+}
+

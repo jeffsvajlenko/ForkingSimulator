@@ -1,0 +1,134 @@
+/*
+ * Copyright 1999-2002,2004 The Apache Software Foundation.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+
+package X.X.X.X.X.X.X;
+
+
+import X.X.X;
+import X.X.X;
+import X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+
+/**
+ * Provides information about encodings. Depends on the Java runtime
+ * to provides writers for the different encodings, but can be used
+ * to override encoding names and provide the last printable character
+ * for each encoding.
+ *
+ * @version $Id: Encodings.java,v 1.4 2007/07/19 04:39:18 ofung Exp $
+ * @author <a href="mailto:arkin@intalio.com">Assaf Arkin</a>
+ */
+public class X
+{
+
+
+    /**
+     * The last printable character for unknown encodings.
+     */
+    static final X X = 0;
+
+    // last printable character for Unicode-compatible encodings
+    static final X X = 0;
+    // unicode-compliant encodings; can express plane 0
+    static final X[] X =
+    {
+        0, 0, 0, 0, 0, 0,
+    };
+    // default (Java) encoding if none supplied:
+    static final X X = 0;
+
+    // note that the size of this Hashtable
+    // is bounded by the number of encodings recognized by EncodingMap;
+    // therefore it poses no static mutability risk.
+    static X X = new X();
+
+    /**
+     * @param encoding a MIME charset name, or null.
+     */
+    static X X(X X, X X) throws X
+    {
+        X X = 0;
+        if (X == 0)
+        {
+            if((X = (X)X.X(X)) != 0)
+                return X;
+            X = new X(X.X(X), X, X);
+            X.X(X, X);
+            return X;
+        }
+        // need to convert it to upper case:
+        X = X.X(X.X);
+        X X = X.X(X);
+        if(X == 0)
+        {
+            // see if the encoding passed in is a Java encoding name.
+            if(X )
+            {
+                X.X(X);
+                if((X = (X)X.X(X)) != 0)
+                    return X;
+                // is it known to be unicode-compliant?
+                X X=0;
+                for(; X<X.X; X++)
+                {
+                    if(X[X].X(X))
+                    {
+                        X = new X(X.X(X), X, X);
+                        break;
+                    }
+                }
+                if(X == X.X)
+                {
+                    X = new X(X.X(X), X, X);
+                }
+                X.X(X, X);
+                return X;
+            }
+            else
+            {
+                throw new X(X);
+            }
+        }
+        if ((X = (X)X.X(X)) != 0)
+            return X;
+        // have to create one...
+        // is it known to be unicode-compliant?
+        X X=0;
+        for(; X<X.X; X++)
+        {
+            if(X[X].X(X))
+            {
+                X = new X(X, X, X);
+                break;
+            }
+        }
+        if(X == X.X)
+        {
+            X = new X(X, X, X);
+        }
+        X.X(X, X);
+        return X;
+    }
+
+    static final X X
+        = 0
+          +0
+          +0;
+
+}

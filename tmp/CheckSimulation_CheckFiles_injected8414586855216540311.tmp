@@ -1,0 +1,85 @@
+/*
+ * %W% %E% %U%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X.X.X;
+
+import X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+
+public class X extends X
+{
+
+    private static X [] X =
+    {0};
+    private static X[] X = {0, 0};
+    private static X[] X = {0};
+    private static X[] X = {0};
+
+    private X X = 0;
+
+    public X()
+    {
+        X(0,
+              0,
+              X,
+              X,
+              X,
+              0,
+              new X[] { X.class },
+              X,
+              0,
+              0, 0, 0, 0,
+              0,
+              X.X,
+              0,
+              0, 0);
+    }
+
+    public X X(X X,
+                               X<?> X)
+    {
+        if (X)
+        {
+            return;
+        }
+        X = 0;
+    }
+
+    public X X(X X)
+    {
+        return 0;
+    }
+
+    public X X(X X) throws X
+    {
+        if (!(X instanceof X))
+        {
+            return 0;
+        }
+
+        X X = (X)X;
+        X[] X = new X[0];
+        X.X();
+        X.X(X);
+        X.X();
+
+        return (X[0] == 0) && (X[0] == 0);
+    }
+
+    public X X(X X)
+    throws X
+    {
+        return new X(X);
+    }
+}
+

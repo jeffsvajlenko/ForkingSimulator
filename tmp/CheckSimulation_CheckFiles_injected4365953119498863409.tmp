@@ -1,0 +1,30 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X;
+
+import X.X.X;
+
+/**
+ * The interface to an RSA public key.
+ *
+ * @author Jan Luehe
+ *
+ * @version %I% %E%
+ */
+
+public interface X extends X.X.X, X
+{
+    static final X X = -0;
+
+    /**
+     * Returns the public exponent.
+     *
+     * @return the public exponent
+     */
+    public X X();
+}

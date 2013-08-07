@@ -1,0 +1,28 @@
+package X.X.X.X;
+
+import X.X.X.X;
+
+public interface X {
+
+    public X X ();
+
+    public X X () throws X;
+
+    public X X (X X);
+
+    public X X (X X);
+
+    public X X () throws X;
+
+    public X X (X X);
+
+    public X X (X X, X X, X X) throws X;
+
+    public X X ();
+
+    public X X (X X);
+
+    public X X ();
+
+}
+

@@ -164,7 +164,7 @@ public class Operator {
 				}
 				
 				// Is this a proper type1 clone? (is 100% similar?)
-				sim_retval = FragmentUtil.getSimilarity(tmpfile1, tmpfile2);
+				sim_retval = FragmentUtil.getSimilarity(tmpfile1, tmpfile2, false);
 				if(Math.abs(sim_retval-1) < 0.00000001) {
 					Files.deleteIfExists(tmpfile1);
 					Files.deleteIfExists(tmpfile2);
@@ -184,7 +184,7 @@ public class Operator {
 				}
 				
 				// Is this a proper type2 clone?
-				sim_retval = FragmentUtil.getSimilarity(tmpfile1,tmpfile2);
+				sim_retval = FragmentUtil.getSimilarity(tmpfile1,tmpfile2, false);
 				if(Math.abs(sim_retval-1) < 0.00000001) {
 					Files.deleteIfExists(tmpfile1);
 					Files.deleteIfExists(tmpfile2);
@@ -204,7 +204,7 @@ public class Operator {
 				}
 				
 				// Is this an acceptable type3 clone (using original files)
-				sim_retval = FragmentUtil.getSimilarity(tmpfile1, tmpfile2);
+				sim_retval = FragmentUtil.getSimilarity(tmpfile1, tmpfile2, false);
 				if(sim_retval < 1.0) {
 					Files.deleteIfExists(tmpfile1);
 					Files.deleteIfExists(tmpfile2);

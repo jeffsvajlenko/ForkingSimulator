@@ -1,0 +1,1500 @@
+/*
+ * Copyright 2000-2005 The Apache Software Foundation.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package X.X.X.X.X.X.X;
+
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X;
+
+
+/**
+ * This is Xerces DOM Builder class. It uses the abstract DOM
+ * parser with a document scanner, a dtd scanner, and a validator, as
+ * well as a grammar pool.
+ *
+ * @author Pavani Mukthipudi, Sun Microsystems Inc.
+ * @author Elena Litani, IBM
+ * @author Rahul Srivastava, Sun Microsystems Inc.
+ * @version $Id: DOMParserImpl.java,v 1.4 2007/07/19 04:38:54 ofung Exp $
+ */
+
+
+public class X
+    extends X implements X, X
+{
+
+
+
+    // SAX & Xerces feature ids
+
+    /** Feature identifier: namespaces. */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Feature id: validation. */
+    protected static final X X =
+        X.X+X.X;
+
+    /** XML Schema validation */
+    protected static final X X =
+        X.X + X.X;
+
+    /** XML Schema full checking */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Dynamic validation */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Feature identifier: expose schema normalized value */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Feature identifier: disallow docType Decls. */
+    protected static final X X =
+        X.X + X.X;
+
+    // internal properties
+    protected static final X X =
+        X.X + X.X;
+
+    protected static final X X =
+        X.X +X.X;
+
+
+    //
+    // Data
+    //
+
+    /** Include namespace declaration attributes in the document. **/
+    protected X X = 0;
+
+    // REVISIT: this value should be null by default and should be set during creation of
+    //          LSParser
+    protected X X = 0;
+
+    protected X X = 0;
+
+    private X X = 0;
+
+    private X X;
+
+    protected final static X X = 0;
+
+    private X X = new X ();
+    private X X = 0;
+    private X X;
+
+    private X X = new X();
+
+    //
+    // Constructors
+    //
+
+    /**
+     * Constructs a DOM Builder using the standard parser configuration.
+     */
+    public X (X X, X X)
+    {
+        X (X);
+        if (X != 0)
+        {
+            if (X.X (X.X))
+            {
+                //Schema validation is false by default and hence there is no
+                //need to set it to false here.  Also, schema validation is
+                //not a recognized feature for DTDConfiguration's and so
+                //setting this feature here would result in a Configuration
+                //Exception.
+                X.X (
+                    X.X + X.X,
+                    X.X);
+                X = X.X;
+            }
+            else if (X.X (X.X))
+            {
+                // XML Schem validation
+                X.X (
+                    X.X + X.X,
+                    X.X);
+            }
+        }
+
+    }
+
+    /**
+     * Constructs a DOM Builder using the specified parser configuration.
+     */
+    public X (X X)
+    {
+        X (X);
+
+        // add recognized features
+        final X[] X =
+        {
+            X.X,
+            X.X,
+            X.X,
+            X.X,
+            X.X,
+            X.X,
+            X.X,
+            X.X,
+            X.X,
+            X.X,
+        };
+
+        X.X (X);
+
+        // turn off deferred DOM
+        X.X (X, 0);
+
+        // Set values so that the value of the
+        // infoset parameter is true (its default value).
+        //
+        // true: namespace-declarations, well-formed,
+        // element-content-whitespace, comments, namespaces
+        //
+        // false: validate-if-schema, entities,
+        // datatype-normalization, cdata-sections
+
+        X.X(X.X, 0);
+        X.X(X.X, 0);
+        X.X(X, 0);
+        X.X(X, 0);
+        X.X(X, 0);
+
+        X.X(X, 0);
+        X.X(X, 0);
+        X.X(X, 0);
+
+        // set other default values
+        X.X (X.X, 0);
+        X.X (X.X, 0);
+        X.X (X.X, 0);
+        X.X (X.X, 0);
+        X.X (X.X, 0);
+
+        // REVISIT: by default Xerces assumes that input is certified.
+        //          default is different from the one specified in the DOM spec
+        X.X (X.X, 0);
+
+        // Xerces datatype-normalization feature is on by default
+        // This is a recognized feature only for XML Schemas. If the
+        // configuration doesn't support this feature, ignore it.
+        try
+        {
+            X.X ( X, 0 );
+        }
+        catch (X X) {}
+
+    } // <init>(XMLParserConfiguration)
+
+    /**
+     * Constructs a DOM Builder using the specified symbol table.
+     */
+    public X (X X)
+    {
+        X (new X());
+        X.X (
+            X.X + X.X,
+            X);
+    } // <init>(SymbolTable)
+
+
+    /**
+     * Constructs a DOM Builder using the specified symbol table and
+     * grammar pool.
+     */
+    public X (X X, X X)
+    {
+        X (new X());
+        X.X (
+            X.X + X.X,
+            X);
+        X.X (
+            X.X
+            + X.X,
+            X);
+    }
+
+    /**
+     * Resets the parser state.
+     *
+     * @throws SAXException Thrown on initialization error.
+     */
+    public X X ()
+    {
+        X.X ();
+
+        // get state of namespace-declarations parameter.
+        X =
+            X.X(X.X);
+
+        // DOM Filter
+        if (X!=0)
+        {
+            X.X ();
+        }
+        X.X ();
+        X.X ();
+        X = 0;
+        X = 0;
+
+    } // reset()
+
+    //
+    // DOMParser methods
+    //
+
+    public X X ()
+    {
+        return X;
+    }
+
+
+    /**
+     *  When the application provides a filter, the parser will call out to
+     * the filter at the completion of the construction of each
+     * <code>Element</code> node. The filter implementation can choose to
+     * remove the element from the document being constructed (unless the
+     * element is the document element) or to terminate the parse early. If
+     * the document is being validated when it's loaded the validation
+     * happens before the filter is called.
+     */
+    public X X ()
+    {
+        return X;
+    }
+
+    /**
+     *  When the application provides a filter, the parser will call out to
+     * the filter at the completion of the construction of each
+     * <code>Element</code> node. The filter implementation can choose to
+     * remove the element from the document being constructed (unless the
+     * element is the document element) or to terminate the parse early. If
+     * the document is being validated when it's loaded the validation
+     * happens before the filter is called.
+     */
+    public X X (X X)
+    {
+        X = X;
+        if (X == 0)
+        {
+            X = new X ();
+        }
+    }
+
+    /**
+     * Set parameters and properties
+     */
+    public X X (X X, X X) throws X
+    {
+        // set features
+
+        if(X instanceof X)
+        {
+            X X = ((X)X).X ();
+            try
+            {
+                if (X.X (X.X))
+                {
+                    X.X (X, X);
+                }
+                else if (X.X (X.X))
+                {
+                    X.X (X, X);
+                }
+                else if (X.X (X.X))
+                {
+                    X.X (X, X);
+                }
+                else if (X.X (X.X))
+                {
+                    X.X (X, X);
+                }
+                else if (X.X (X.X)
+                         || X.X(X.X)
+                         || X.X (X.X)
+                         || X.X (X.X))
+                {
+                    if (X)   // true is not supported
+                    {
+                        X X =
+                            X.X (
+                                X.X,
+                                0,
+                                new X[] { X });
+                        throw new X (X.X, X);
+                    }
+                    // setting those features to false is no-op
+                }
+                else if (X.X (X.X))
+                {
+                    X.X (X, X);
+                }
+                else if (X.X (X.X))
+                {
+                    // Setting false has no effect.
+                    if (X)
+                    {
+                        // true: namespaces, namespace-declarations,
+                        // comments, element-content-whitespace
+                        X.X(X, 0);
+                        X.X(X.X, 0);
+                        X.X(X, 0);
+                        X.X(X, 0);
+
+                        // false: validate-if-schema, entities,
+                        // datatype-normalization, cdata-sections
+                        X.X(X, 0);
+                        X.X(X, 0);
+                        X.X(X, 0);
+                        X.X(X, 0);
+                    }
+                }
+                else if (X.X(X.X))
+                {
+                    X.X(X, X);
+                }
+                else if (X.X (X.X))
+                {
+                    X.X(X.X, X);
+                }
+                else if (X.X (X.X)
+                         || X.X (X.X))
+                {
+                    if (!X)   // false is not supported
+                    {
+                        X X =
+                            X.X (
+                                X.X,
+                                0,
+                                new X[] { X });
+                        throw new X (X.X, X);
+                    }
+                    // setting these features to true is no-op
+                    // REVISIT: implement "namespace-declaration" feature
+                }
+                else if (X.X (X.X))
+                {
+                    X.X (X, X);
+                    if (X != X.X)
+                    {
+                        X.X (X, X);
+                        X.X (X, X);
+                    }
+                    if (X)
+                    {
+                        X.X (X, 0);
+                    }
+                }
+                else if (X.X (X.X))
+                {
+                    X.X (X, X);
+                    // Note: validation and dynamic validation are mutually exclusive
+                    if (X)
+                    {
+                        X.X (X, 0);
+                    }
+                }
+                else if (X.X (X.X))
+                {
+                    X.X (X, X);
+                }
+                else if (X.X (X.X))
+                {
+                    //XSModel - turn on PSVI augmentation
+                    X.X (X, 0);
+                    X.X (X,
+                                                0);
+                }
+                else
+                {
+                    // Constants.DOM_CHARSET_OVERRIDES_XML_ENCODING feature,
+                    // Constants.DOM_SPLIT_CDATA feature,
+                    // or any Xerces feature
+                    X.X (X.X(X.X), X);
+                }
+
+            }
+            catch (X X)
+            {
+                X X =
+                    X.X (
+                        X.X,
+                        0,
+                        new X[] { X });
+                throw new X (X.X, X);
+            }
+        }
+        else   // set properties
+        {
+            if (X.X (X.X))
+            {
+                if (X instanceof X || X == 0)
+                {
+                    try
+                    {
+                        X = new X ((X) X);
+                        X.X (X, X);
+                    }
+                    catch (X X) {}
+                }
+                else
+                {
+                    // REVISIT: type mismatch
+                    X X =
+                        X.X (
+                            X.X,
+                            0,
+                            new X[] { X });
+                    throw new X (X.X, X);
+                }
+
+            }
+            else if (X.X (X.X))
+            {
+                if (X instanceof X || X == 0)
+                {
+                    try
+                    {
+                        X.X (X, new X ((X) X));
+                    }
+                    catch (X X) {}
+                }
+                else
+                {
+                    // REVISIT: type mismatch
+                    X X =
+                        X.X (
+                            X.X,
+                            0,
+                            new X[] { X });
+                    throw new X (X.X, X);
+                }
+
+            }
+            else if (X.X (X.X))
+            {
+                if (X instanceof X || X == 0)
+                {
+                    try
+                    {
+                        if (X == 0)
+                        {
+                            X = 0;
+                            X.X (
+                                X.X + X.X,
+                                0);
+                        }
+                        else
+                        {
+                            X = (X)X;
+                            // map DOM schema-location to JAXP schemaSource property
+                            // tokenize location string
+                            X X = new X (X, 0);
+                            if (X.X ())
+                            {
+                                X.X ();
+                                X.X (X.X ());
+                                while (X.X ())
+                                {
+                                    X.X (X.X ());
+                                }
+                                X.X (
+                                    X.X + X.X,
+                                    X.X ());
+                            }
+                            else
+                            {
+                                X.X (
+                                    X.X + X.X,
+                                    X);
+                            }
+                        }
+                    }
+                    catch (X X) {}
+                }
+                else
+                {
+                    // REVISIT: type mismatch
+                    X X =
+                        X.X (
+                            X.X,
+                            0,
+                            new X[] { X });
+                    throw new X (X.X, X);
+                }
+
+            }
+            else if (X.X (X.X))
+            {
+                if (X instanceof X || X == 0)
+                {
+                    try
+                    {
+                        if (X == 0)
+                        {
+                            // turn off schema features
+                            X.X (X, 0);
+                            X.X (X, 0);
+                            // map to JAXP schemaLanguage
+                            X.X ( X.X
+                                                         + X.X,
+                                                         0);
+                            X = 0;
+                        }
+                        else if (X.X (X.X))
+                        {
+                            // turn on schema features
+                            X.X (X, 0);
+                            X.X (X, 0);
+                            // map to JAXP schemaLanguage
+                            X.X ( X.X
+                                                         + X.X,
+                                                         X.X);
+                            X = X.X;
+                        }
+                        else if (X.X (X.X))
+                        {
+                            // turn off schema features
+                            X.X (X, 0);
+                            X.X (X, 0);
+                            // map to JAXP schemaLanguage
+                            X.X ( X.X
+                                                         + X.X,
+                                                         X.X);
+                            X = X.X;
+                        }
+                    }
+                    catch (X X) {}
+                }
+                else
+                {
+                    X X =
+                        X.X (
+                            X.X,
+                            0,
+                            new X[] { X });
+                    throw new X (X.X, X);
+                }
+
+            }
+            else if (X.X (X))
+            {
+                X.X (X, X);
+            }
+            else
+            {
+                // REVISIT: check if this is a boolean parameter -- type mismatch should be thrown.
+                //parameter is not recognized
+                X X =
+                    X.X (
+                        X.X,
+                        0,
+                        new X[] { X });
+                throw new X (X.X, X);
+            }
+        }
+    }
+
+    /**
+     * Look up the value of a feature or a property.
+     */
+    public X X (X X) throws X
+    {
+        if (X.X (X.X))
+        {
+            return (X.X (X))
+                   ? X.X
+                   : X.X;
+        }
+        else if (X.X (X.X))
+        {
+            return (X.X (X))
+                   ? X.X
+                   : X.X;
+        }
+        else if (X.X (X.X))
+        {
+            return (X.X (X))
+                   ? X.X
+                   : X.X;
+        }
+        else if (X.X (X.X))
+        {
+            return (X.X (X))
+                   ? X.X
+                   : X.X;
+        }
+        else if (X.X (X.X))
+        {
+            return (X.X (X))
+                   ? X.X
+                   : X.X;
+        }
+        else if (X.X (X.X))
+        {
+            return (X.X (X))
+                   ? X.X
+                   : X.X;
+        }
+        else if (X.X (X.X))
+        {
+            return (X.X (X))
+                   ? X.X
+                   : X.X;
+        }
+        else if (X.X (X.X))
+        {
+            return (X.X (X))
+                   ? X.X
+                   : X.X;
+        }
+        else if (X.X (X.X))
+        {
+            // REVISIT: This is somewhat expensive to compute
+            // but it's possible that the user has a reference
+            // to the configuration and is changing the values
+            // of these features directly on it.
+            X X = X.X(X) &&
+                              X.X(X.X) &&
+                              X.X(X) &&
+                              X.X(X) &&
+                              !X.X(X) &&
+                              !X.X(X) &&
+                              !X.X(X) &&
+                              !X.X(X);
+            return (X) ? X.X : X.X;
+        }
+        else if (X.X(X.X))
+        {
+            return (X.X(X))
+                   ? X.X : X.X;
+        }
+        else if (X.X(X.X ) ||
+                 X.X(X.X))
+        {
+            return X.X;
+        }
+        else if (X.X(X.X)
+                 || X.X (X.X)
+                 || X.X (X.X)
+                 || X.X (X.X)
+                 || X.X (X.X)
+                 || X.X (X.X)
+                 || X.X (X.X))
+        {
+            return (X.X (X.X(X.X)))
+                   ? X.X
+                   : X.X;
+        }
+        else if (X.X (X.X))
+        {
+            if (X != 0)
+            {
+                return X.X ();
+            }
+            return 0;
+        }
+        else if (X.X (X.X))
+        {
+            try
+            {
+                X X =
+                    (X) X.X (X);
+                if (X != 0
+                        && X instanceof X)
+                {
+                    return ((X) X).X ();
+                }
+                return 0;
+            }
+            catch (X X) {}
+        }
+        else if (X.X (X.X))
+        {
+            return X.X (
+                       X.X + X.X);
+        }
+        else if (X.X (X.X))
+        {
+            return X;
+        }
+        else if (X.X (X))
+        {
+            return X.X (X);
+        }
+        else if (X.X (X))
+        {
+            return X.X (X);
+        }
+        else
+        {
+            X X =
+                X.X (
+                    X.X,
+                    0,
+                    new X[] { X });
+            throw new X (X.X, X);
+        }
+        return 0;
+    }
+
+    public X X (X X, X X)
+    {
+        if (X == 0)
+        {
+            return 0;
+        }
+
+        if(X instanceof X)
+        {
+            X X = ((X)X).X ();
+            if ( X.X (X.X)
+                    || X.X(X.X)
+                    || X.X(X.X )
+                    || X.X (X.X) )
+            {
+                // true is not supported
+                return (X) ? 0 : 0;
+            }
+            else if (X.X (X.X)
+                     || X.X (X.X))
+            {
+                // false is not supported
+                return (X) ? 0 : 0;
+            }
+            else if (X.X (X.X)
+                     || X.X (X.X)
+                     || X.X (X.X)
+                     || X.X (X.X)
+                     || X.X (X.X)
+                     || X.X (X.X)
+                     || X.X (X.X)
+                     || X.X (X.X)
+                     || X.X (X.X)
+                     || X.X (X.X)
+                     || X.X (X.X)
+                     || X.X (X.X)
+                     || X.X (X.X))
+            {
+                return 0;
+            }
+
+            // Recognize Xerces features.
+            try
+            {
+                X.X(X.X(X.X));
+                return 0;
+            }
+            catch (X X)
+            {
+                return 0;
+            }
+        }
+        else   // check properties
+        {
+            if (X.X (X.X))
+            {
+                if (X instanceof X || X == 0)
+                {
+                    return 0;
+                }
+                return 0;
+            }
+            else if (X.X (X.X))
+            {
+                if (X instanceof X || X == 0)
+                {
+                    return 0;
+                }
+                return 0;
+            }
+            else if (X.X (X.X))
+            {
+                if ((X instanceof X
+                        && (X.X (X.X)
+                            || X.X (X.X))) || X == 0)
+                {
+                    return 0;
+                }
+                return 0;
+            }
+            else if (X.X (X.X))
+            {
+                if (X instanceof X || X == 0)
+                    return 0;
+                return 0;
+            }
+            else if (X.X (X))
+            {
+                return 0;
+            }
+            return 0;
+        }
+    }
+
+    /**
+     *  DOM Level 3 CR - Experimental.
+     *
+     *  The list of the parameters supported by this
+     * <code>DOMConfiguration</code> object and for which at least one value
+     * can be set by the application. Note that this list can also contain
+     * parameter names defined outside this specification.
+     */
+    public X X ()
+    {
+        if (X == 0)
+        {
+            X X = new X();
+
+            // REVISIT: add Xerces recognized properties/features
+            X.X(X.X);
+            X.X(X.X);
+            X.X(X.X);
+            X.X(X.X);
+            X.X(X.X);
+
+            X.X(X.X);
+            X.X(X.X);
+            X.X(X.X);
+            X.X(X.X);
+
+            X.X(X.X);
+            X.X(X.X);
+            X.X(X.X);
+            X.X(X.X);
+
+            X.X(X.X);
+            X.X(X.X);
+            X.X(X.X);
+            X.X(X.X);
+            X.X(X.X);
+            X.X(X.X);
+
+            X.X(X.X);
+            X.X(X.X);
+            X.X(X.X);
+            X.X(X.X);
+
+            X = new X(X);
+
+        }
+
+        return X;
+    }
+
+    /**
+     * Parse an XML document from a location identified by an URI reference.
+     * If the URI contains a fragment identifier (see section 4.1 in ), the
+     * behavior is not defined by this specification.
+     *
+     */
+    public X X (X X) throws X
+    {
+
+        //If DOMParser insstance is already busy parsing another document when this
+        // method is called, then raise INVALID_STATE_ERR according to DOM L3 LS spec
+        if ( X )
+        {
+            X X = X.X (
+                             X.X,
+                             0,0);
+            throw new X ( X.X,X);
+        }
+
+        X X = new X (0, X, 0);
+        try
+        {
+            X = X.X();
+            X = 0;
+            X (X);
+            X = 0;
+            if (X && X.X())
+            {
+                //reset interrupt state
+                X = 0;
+                X.X();
+            }
+        }
+        catch (X X)
+        {
+            X = 0;
+            if (X && X.X())
+            {
+                X.X();
+            }
+            if (X)
+            {
+                X = 0;
+                X();
+                return 0;
+            }
+            // Consume this exception if the user
+            // issued an interrupt or an abort.
+            if (X != X)
+            {
+                if (!(X instanceof X) && X != 0)
+                {
+                    X X = new X ();
+                    X.X = X;
+                    X.X = X.X ();
+                    X.X = X.X;
+                    X.X ().X (X);
+                }
+                if (X)
+                {
+                    X.X ();
+                }
+                throw new X(X.X, X.X());
+            }
+        }
+        return X ();
+    }
+
+    /**
+     * Parse an XML document from a resource identified by an
+     * <code>LSInput</code>.
+     *
+     */
+    public X X (X X) throws X
+    {
+
+        // need to wrap the LSInput with an XMLInputSource
+        X X = X (X);
+        if ( X )
+        {
+            X X = X.X (
+                             X.X,
+                             0,0);
+            throw new X ( X.X,X);
+        }
+
+        try
+        {
+            X = X.X();
+            X = 0;
+            X (X);
+            X = 0;
+            if (X && X.X())
+            {
+                //reset interrupt state
+                X = 0;
+                X.X();
+            }
+        }
+        catch (X X)
+        {
+            X = 0;
+            if (X && X.X())
+            {
+                X.X();
+            }
+            if (X)
+            {
+                X = 0;
+                X();
+                return 0;
+            }
+            // Consume this exception if the user
+            // issued an interrupt or an abort.
+            if (X != X)
+            {
+                if (!(X instanceof X) && X != 0)
+                {
+                    X X = new X ();
+                    X.X = X;
+                    X.X = X.X ();
+                    X.X = X.X;
+                    X.X().X (X);
+                }
+                if (X)
+                {
+                    X.X ();
+                }
+                throw new X(X.X, X.X());
+            }
+        }
+        return X ();
+    }
+
+
+    private X X()
+    {
+        X.X(X);
+        X.X(X);
+        X.X(X);
+    }
+
+    /**
+     *  Parse an XML document or fragment from a resource identified by an
+     * <code>LSInput</code> and insert the content into an existing
+     * document at the position epcified with the <code>contextNode</code>
+     * and <code>action</code> arguments. When parsing the input stream the
+     * context node is used for resolving unbound namespace prefixes.
+     *
+     * @param is  The <code>LSInput</code> from which the source
+     *   document is to be read.
+     * @param cnode  The <code>Node</code> that is used as the context for
+     *   the data that is being parsed.
+     * @param action This parameter describes which action should be taken
+     *   between the new set of node being inserted and the existing
+     *   children of the context node. The set of possible actions is
+     *   defined above.
+     * @exception DOMException
+     *   HIERARCHY_REQUEST_ERR: Thrown if this action results in an invalid
+     *   hierarchy (i.e. a Document with more than one document element).
+     */
+    public X X (X X, X X,
+                                  X X) throws X, X
+    {
+        // REVISIT: need to implement.
+        throw new X (X.X, 0);
+    }
+
+
+    /**
+     * NON-DOM: convert LSInput to XNIInputSource
+     *
+     * @param is
+     * @return
+     */
+    X X (X X)
+    {
+        // need to wrap the LSInput with an XMLInputSource
+        X X = 0;
+        // check whether there is a Reader
+        // according to DOM, we need to treat such reader as "UTF-16".
+        if (X.X () != 0)
+        {
+            X = new X (X.X (), X.X (),
+                                      X.X (), X.X (),
+                                      0);
+        }
+        // check whether there is an InputStream
+        else if (X.X () != 0)
+        {
+            X = new X (X.X (), X.X (),
+                                      X.X (), X.X (),
+                                      X.X ());
+        }
+        // if there is a string data, use a StringReader
+        // according to DOM, we need to treat such data as "UTF-16".
+        else if (X.X () != 0 && X.X().X() > 0)
+        {
+            X = new X (X.X (), X.X (),
+                                      X.X (), new X (X.X ()),
+                                      0);
+        }
+        // otherwise, just use the public/system/base Ids
+        else if ((X.X() != 0 && X.X().X() > 0) ||
+                 (X.X() != 0 && X.X().X() > 0))
+        {
+            X = new X (X.X (), X.X (),
+                                      X.X ());
+        }
+        else
+        {
+            // all inputs are null
+            if (X != 0)
+            {
+                X X = new X();
+                X.X = 0;
+                X.X = 0;
+                X.X = X.X;
+                X.X().X(X);
+            }
+            throw new X(X.X, 0);
+        }
+        return X;
+    }
+
+    /**
+     * @see org.w3c.dom.ls.LSParser#getAsync()
+     */
+    public X X ()
+    {
+        return 0;
+    }
+
+    /**
+     * @see org.w3c.dom.ls.LSParser#getBusy()
+     */
+    public X X ()
+    {
+        return X;
+    }
+
+    /**
+     * @see org.w3c.dom.ls.DOMParser#abort()
+     */
+    public X X ()
+    {
+        // If parse operation is in progress then reset it
+        if ( X )
+        {
+            X = 0;
+            if(X != 0)
+            {
+                X = 0;
+
+                X.X(X);
+                X.X(X);
+                X.X(X);
+
+                if(X == X.X())
+                    throw X;
+
+                X.X();
+            }
+        }
+        return; // If not busy then this is noop
+    }
+
+    /**
+     * The start of an element. If the document specifies the start element
+     * by using an empty tag, then the startElement method will immediately
+     * be followed by the endElement method, with no intervening methods.
+     * Overriding the parent to handle DOM_NAMESPACE_DECLARATIONS=false.
+     *
+     * @param element    The name of the element.
+     * @param attributes The element attributes.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X (X X, X X, X X)
+    {
+        // namespace declarations parameter has no effect if namespaces is false.
+        if (!X && X)
+        {
+            X X = X.X();
+            for (X X = X - 0; X >= 0; --X)
+            {
+                if (X.X == X.X(X) ||
+                        X.X == X.X(X))
+                {
+                    X.X(X);
+                }
+            }
+        }
+        X.X(X, X, X);
+    }
+
+    private class X implements X, X, X
+    {
+
+        private X X;
+        private X X;
+        private X X;
+
+        public X X(X X, X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X)
+        {
+            X = X;
+        }
+
+        public X X()
+        {
+            return X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X, X[] X, X X, X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X)
+        {
+            X = X;
+        }
+
+        public X X()
+        {
+            return X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X, X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X) throws X
+        {
+            throw X;
+        }
+
+        public X X(X X)
+        {
+            X = X;
+        }
+
+        public X X()
+        {
+            return X;
+        }
+
+    }
+
+} // class DOMParserImpl

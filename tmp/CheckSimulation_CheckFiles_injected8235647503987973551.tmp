@@ -1,0 +1,2709 @@
+/*
+ * Copyright 2001-2005 The Apache Software Foundation.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package X.X.X.X.X.X.X;
+
+import X.X.X;
+import X.X.X;
+
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X.X;
+import X.X.X.X.X;
+
+/**
+ * This is the base class of all SAX parsers. It implements both the
+ * SAX1 and SAX2 parser functionality, while the actual pipeline is
+ * defined in the parser configuration.
+ *
+ * @author Arnaud Le Hors, IBM
+ * @author Andy Clark, IBM
+ *
+ * @version $Id: AbstractSAXParser.java,v 1.4 2007/07/19 04:38:54 ofung Exp $
+ */
+public abstract class X
+    extends X
+    implements X, // PSVI
+    X, X // SAX1, SAX2
+{
+
+    //
+    // Constants
+    //
+
+    // features
+
+    /** Feature identifier: namespaces. */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Feature identifier: namespace prefixes. */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Feature id: string interning. */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Feature identifier: allow notation and unparsed entity events to be sent out of order. */
+    // this is not meant to be a recognized feature, but we need it here to use
+    // if it is already a recognized feature for the pipeline
+    protected static final X X =
+        X.X + X.X;
+
+    /** Recognized features. */
+    private static final X[] X =
+    {
+        X,
+        X,
+        X,
+    };
+
+    // properties
+
+    /** Property id: lexical handler. */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Property id: declaration handler. */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Property id: DOM node. */
+    protected static final X X =
+        X.X + X.X;
+
+    /** Recognized properties. */
+    private static final X[] X =
+    {
+        X,
+        X,
+        X,
+    };
+
+    //
+    // Data
+    //
+
+    // features
+
+    /** Namespaces. */
+    protected X X;
+
+    /** Namespace prefixes. */
+    protected X X = 0;
+
+    /** Lexical handler parameter entities. */
+    protected X X = 0;
+
+    /** Standalone document declaration. */
+    protected X X;
+
+    /** Resolve DTD URIs. */
+    protected X X = 0;
+
+    /** Use EntityResolver2. */
+    protected X X = 0;
+
+    /**
+     * XMLNS URIs: Namespace declarations in the
+     * http://www.w3.org/2000/xmlns/ namespace.
+     */
+    protected X X = 0;
+
+    // parser handlers
+
+    /** Content handler. */
+    protected X X;
+
+    /** Document handler. */
+    protected X X;
+
+    /** Namespace context */
+    protected X X;
+
+    /** DTD handler. */
+    protected X.X.X.X X;
+
+    /** Decl handler. */
+    protected X X;
+
+    /** Lexical handler. */
+    protected X X;
+
+    protected X X = new X();
+
+    // state
+
+    /**
+     * True if a parse is in progress. This state is needed because
+     * some features/properties cannot be set while parsing (e.g.
+     * validation and namespaces).
+     */
+    protected X X = 0;
+
+    // track the version of the document being parsed
+    protected X X;
+
+    // temp vars
+    private final X X = new X();
+    private X X = 0;
+
+
+    // temporary buffer for sending normalized values
+    // REVISIT: what should be the size of the buffer?
+    private static final X X = 0;
+    private X[] X =  new X[X];
+
+    // allows us to keep track of whether an attribute has
+    // been declared twice, so that we can avoid exposing the
+    // second declaration to any registered DeclHandler
+    protected X X = 0;
+
+    //
+    // Constructors
+    //
+
+    /** Default constructor. */
+    protected X(X X)
+    {
+        X(X);
+
+        X.X(X);
+        X.X(X);
+
+        try
+        {
+            X.X(X, 0);
+        }
+        catch (X X)
+        {
+            // it wasn't a recognized feature, so we don't worry about it
+        }
+    } // <init>(XMLParserConfiguration)
+
+    //
+    // XMLDocumentHandler methods
+    //
+
+    /**
+     * The start of the document.
+     *
+     * @param locator The document locator, or null if the document
+     *                 location cannot be reported during the parsing
+     *                 of this document. However, it is <em>strongly</em>
+     *                 recommended that a locator be supplied that can
+     *                 at least report the system identifier of the
+     *                 document.
+     * @param encoding The auto-detected IANA encoding name of the entity
+     *                 stream. This value will be null in those situations
+     *                 where the entity encoding is not auto-detected (e.g.
+     *                 internal entities or a document entity that is
+     *                 parsed from a java.io.Reader).
+     * @param namespaceContext
+     *                 The namespace context in effect at the
+     *                 start of this document.
+     *                 This object represents the current context.
+     *                 Implementors of this class are responsible
+     *                 for copying the namespace bindings from the
+     *                 the current context (and its parent contexts)
+     *                 if that information is important.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X,
+                              X X, X X)
+    throws X
+    {
+
+        X = X;
+
+        try
+        {
+            // SAX1
+            if (X != 0)
+            {
+                if (X != 0)
+                {
+                    X.X(new X(X));
+                }
+                X.X();
+            }
+
+            // SAX2
+            if (X != 0)
+            {
+                if (X != 0)
+                {
+                    X.X(new X(X));
+                }
+                X.X();
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // startDocument(locator,encoding,augs)
+
+    /**
+     * Notifies of the presence of an XMLDecl line in the document. If
+     * present, this method will be called immediately following the
+     * startDocument call.
+     *
+     * @param version    The XML version.
+     * @param encoding   The IANA encoding name of the document, or null if
+     *                   not specified.
+     * @param standalone The standalone value, or null if not specified.
+     * @param augs   Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X, X X, X X)
+    throws X
+    {
+        // the version need only be set once; if
+        // document's XML 1.0|1.1, that's how it'll stay
+        X = X;
+        X = 0.X(X);
+    } // xmlDecl(String,String,String)
+
+    /**
+     * Notifies of the presence of the DOCTYPE line in the document.
+     *
+     * @param rootElement The name of the root element.
+     * @param publicId    The public identifier if an external DTD or null
+     *                    if the external DTD is specified using SYSTEM.
+     * @param systemId    The system identifier if an external DTD, null
+     *                    otherwise.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X,
+                            X X, X X, X X)
+    throws X
+    {
+        X = 0;
+
+        try
+        {
+            // SAX2 extension
+            if (X != 0)
+            {
+                X.X(X, X, X);
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+        // is there a DeclHandler?
+        if(X != 0)
+        {
+            X = new X();
+        }
+
+    } // doctypeDecl(String,String,String)
+
+    /**
+    * This method notifies of the start of an entity. The DTD has the
+    * pseudo-name of "[dtd]" parameter entity names start with '%'; and
+    * general entity names are just the entity name.
+    * <p>
+    * <strong>Note:</strong> Since the document is an entity, the handler
+    * will be notified of the start of the document entity by calling the
+    * startEntity method with the entity name "[xml]" <em>before</em> calling
+    * the startDocument method. When exposing entity boundaries through the
+    * SAX API, the document entity is never reported, however.
+    * <p>
+    * <strong>Note:</strong> This method is not called for entity references
+    * appearing as part of attribute values.
+    *
+    * @param name     The name of the entity.
+    * @param identifier The resource identifier.
+    * @param encoding The auto-detected IANA encoding name of the entity
+    *                 stream. This value will be null in those situations
+    *                 where the entity encoding is not auto-detected (e.g.
+    *                 internal parameter entities).
+    * @param augs     Additional information that may include infoset augmentations
+    *
+    * @throws XNIException Thrown by handler to signal an error.
+    */
+    public X X(X X, X X,
+                                   X X, X X)
+    throws X
+    {
+
+        try
+        {
+            // Only report startEntity if this entity was actually read.
+            if (X != 0 && X.X.X(X.X(X.X)))
+            {
+                // report skipped entity to content handler
+                if (X != 0)
+                {
+                    X.X(X);
+                }
+            }
+            else
+            {
+                // SAX2 extension
+                if (X != 0)
+                {
+                    X.X(X);
+                }
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // startGeneralEntity(String,String,String,String,String)
+
+    /**
+     * This method notifies the end of an entity. The DTD has the pseudo-name
+     * of "[dtd]" parameter entity names start with '%'; and general entity
+     * names are just the entity name.
+     * <p>
+     * <strong>Note:</strong> Since the document is an entity, the handler
+     * will be notified of the end of the document entity by calling the
+     * endEntity method with the entity name "[xml]" <em>after</em> calling
+     * the endDocument method. When exposing entity boundaries through the
+     * SAX API, the document entity is never reported, however.
+     * <p>
+     * <strong>Note:</strong> This method is not called for entity references
+     * appearing as part of attribute values.
+     *
+     * @param name The name of the entity.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X) throws X
+    {
+
+        try
+        {
+            // Only report endEntity if this entity was actually read.
+            if (X == 0 || !X.X.X(X.X(X.X)))
+            {
+                // SAX2 extension
+                if (X != 0)
+                {
+                    X.X(X);
+                }
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // endEntity(String)
+
+    /**
+    * The start of an element. If the document specifies the start element
+    * by using an empty tag, then the startElement method will immediately
+    * be followed by the endElement method, with no intervening methods.
+    *
+    * @param element    The name of the element.
+    * @param attributes The element attributes.
+    * @param augs     Additional information that may include infoset augmentations
+    *
+    * @throws XNIException Thrown by handler to signal an error.
+    */
+    public X X(X X, X X, X X)
+    throws X
+    {
+
+        try
+        {
+            // SAX1
+            if (X != 0)
+            {
+                // REVISIT: should we support schema-normalized-value for SAX1 events
+                //
+                X.X(X);
+                X.X(X.X, X);
+            }
+
+            // SAX2
+            if (X != 0)
+            {
+
+                if (X)
+                {
+                    // send prefix mapping events
+                    X();
+
+                    // REVISIT: It should not be necessary to iterate over the attribute
+                    // list when the set of [namespace attributes] is empty for this
+                    // element. This should be computable from the NamespaceContext, but
+                    // since we currently don't report the mappings for the xml prefix
+                    // we cannot use the declared prefix count for the current context
+                    // to skip this section. -- mrglavas
+                    X X = X.X();
+                    if (!X)
+                    {
+                        for (X X = X - 0; X >= 0; --X)
+                        {
+                            X.X(X, X);
+                            if ((X.X == X.X) ||
+                                    (X.X == X.X))
+                            {
+                                // remove namespace declaration attributes
+                                X.X(X);
+                            }
+                        }
+                    }
+                    else if (!X)
+                    {
+                        for (X X = X - 0; X >= 0; --X)
+                        {
+                            X.X(X, X);
+                            if ((X.X == X.X) ||
+                                    (X.X == X.X))
+                            {
+                                // localpart should be empty string as per SAX documentation:
+                                // http://www.saxproject.org/?selected=namespaces
+                                X.X = 0;
+                                X.X = 0;
+                                X.X = 0;
+                                X.X(X, X);
+                            }
+                        }
+                    }
+                }
+
+                X = X;
+
+                X X = X.X != 0 ? X.X : 0;
+                X X = X ? X.X : 0;
+                X.X(X);
+                X.X(X, X, X.X,
+                                             X);
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // startElement(QName,XMLAttributes)
+
+    /**
+     * Character content.
+     *
+     * @param text The content.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X) throws X
+    {
+
+        // if type is union (XML Schema) it is possible that we receive
+        // character call with empty data
+        if (X.X == 0)
+        {
+            return;
+        }
+
+
+        try
+        {
+            // SAX1
+            if (X != 0)
+            {
+                // REVISIT: should we support schema-normalized-value for SAX1 events
+                //
+                X.X(X.X, X.X, X.X);
+            }
+
+            // SAX2
+            if (X != 0)
+            {
+                X.X(X.X, X.X, X.X);
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // characters(XMLString)
+
+    /**
+     * Ignorable whitespace. For this method to be called, the document
+     * source must have some way of determining that the text containing
+     * only whitespace characters should be considered ignorable. For
+     * example, the validator can determine if a length of whitespace
+     * characters in the document are ignorable based on the element
+     * content model.
+     *
+     * @param text The ignorable whitespace.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X) throws X
+    {
+
+        try
+        {
+            // SAX1
+            if (X != 0)
+            {
+                X.X(X.X, X.X, X.X);
+            }
+
+            // SAX2
+            if (X != 0)
+            {
+                X.X(X.X, X.X, X.X);
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // ignorableWhitespace(XMLString)
+
+    /**
+     * The end of an element.
+     *
+     * @param element The name of the element.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X) throws X
+    {
+
+
+        try
+        {
+            // SAX1
+            if (X != 0)
+            {
+                X.X(X.X);
+            }
+
+            // SAX2
+            if (X != 0)
+            {
+                X = X;
+                X X = X.X != 0 ? X.X : 0;
+                X X = X ? X.X : 0;
+                X.X(X, X,
+                                           X.X);
+                if (X)
+                {
+                    X();
+                }
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // endElement(QName)
+
+    /**
+    * The start of a CDATA section.
+    * @param augs     Additional information that may include infoset augmentations
+    *
+    * @throws XNIException Thrown by handler to signal an error.
+    */
+    public X X(X X) throws X
+    {
+
+        try
+        {
+            // SAX2 extension
+            if (X != 0)
+            {
+                X.X();
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // startCDATA()
+
+    /**
+     * The end of a CDATA section.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X) throws X
+    {
+
+        try
+        {
+            // SAX2 extension
+            if (X != 0)
+            {
+                X.X();
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // endCDATA()
+
+    /**
+     * A comment.
+     *
+     * @param text The text in the comment.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by application to signal an error.
+     */
+    public X X(X X, X X) throws X
+    {
+
+        try
+        {
+            // SAX2 extension
+            if (X != 0)
+            {
+                X.X(X.X, 0, X.X);
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // comment(XMLString)
+
+    /**
+     * A processing instruction. Processing instructions consist of a
+     * target name and, optionally, text data. The data is only meaningful
+     * to the application.
+     * <p>
+     * Typically, a processing instruction's data will contain a series
+     * of pseudo-attributes. These pseudo-attributes follow the form of
+     * element attributes but are <strong>not</strong> parsed or presented
+     * to the application as anything other than text. The application is
+     * responsible for parsing the data.
+     *
+     * @param target The target.
+     * @param data   The data or null if none specified.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X, X X)
+    throws X
+    {
+
+        //
+        // REVISIT - I keep running into SAX apps that expect
+        //   null data to be an empty string, which is contrary
+        //   to the comment for this method in the SAX API.
+        //
+
+        try
+        {
+            // SAX1
+            if (X != 0)
+            {
+                X.X(X,
+                                                       X.X());
+            }
+
+            // SAX2
+            if (X != 0)
+            {
+                X.X(X, X.X());
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // processingInstruction(String,XMLString)
+
+
+    /**
+     * The end of the document.
+     * @param augs     Additional information that may include infoset augmentations
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X) throws X
+    {
+
+        try
+        {
+            // SAX1
+            if (X != 0)
+            {
+                X.X();
+            }
+
+            // SAX2
+            if (X != 0)
+            {
+                X.X();
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // endDocument()
+
+    //
+    // XMLDTDHandler methods
+    //
+
+    /**
+     * The start of the DTD external subset.
+     *
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X,
+                                    X X) throws X
+    {
+        X(0, 0, 0, X);
+    }
+
+    /**
+     * The end of the DTD external subset.
+     *
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X) throws X
+    {
+        X(0, X);
+    }
+
+    /**
+     * This method notifies of the start of parameter entity. The DTD has the
+     * pseudo-name of "[dtd]" parameter entity names start with '%'; and
+     * general entity names are just the entity name.
+     * <p>
+     * <strong>Note:</strong> Since the document is an entity, the handler
+     * will be notified of the start of the document entity by calling the
+     * startEntity method with the entity name "[xml]" <em>before</em> calling
+     * the startDocument method. When exposing entity boundaries through the
+     * SAX API, the document entity is never reported, however.
+     * <p>
+     * <strong>Note:</strong> This method is not called for entity references
+     * appearing as part of attribute values.
+     *
+     * @param name     The name of the parameter entity.
+     * @param identifier The resource identifier.
+     * @param encoding The auto-detected IANA encoding name of the entity
+     *                 stream. This value will be null in those situations
+     *                 where the entity encoding is not auto-detected (e.g.
+     *                 internal parameter entities).
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X,
+                                     X X,
+                                     X X, X X)
+    throws X
+    {
+
+        try
+        {
+            // Only report startEntity if this entity was actually read.
+            if (X != 0 && X.X.X(X.X(X.X)))
+            {
+                // report skipped entity to content handler
+                if (X != 0)
+                {
+                    X.X(X);
+                }
+            }
+            else
+            {
+                // SAX2 extension
+                if (X != 0 && X)
+                {
+                    X.X(X);
+                }
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // startParameterEntity(String,identifier,String,Augmentation)
+
+    /**
+     * This method notifies the end of an entity. The DTD has the pseudo-name
+     * of "[dtd]" parameter entity names start with '%'; and general entity
+     * names are just the entity name.
+     * <p>
+     * <strong>Note:</strong> Since the document is an entity, the handler
+     * will be notified of the end of the document entity by calling the
+     * endEntity method with the entity name "[xml]" <em>after</em> calling
+     * the endDocument method. When exposing entity boundaries through the
+     * SAX API, the document entity is never reported, however.
+     * <p>
+     * <strong>Note:</strong> This method is not called for entity references
+     * appearing as part of attribute values.
+     *
+     * @param name The name of the parameter entity.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X) throws X
+    {
+
+        try
+        {
+            // Only report endEntity if this entity was actually read.
+            if (X == 0 || !X.X.X(X.X(X.X)))
+            {
+                // SAX2 extension
+                if (X != 0 && X)
+                {
+                    X.X(X);
+                }
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // endEntity(String)
+
+    /**
+     * An element declaration.
+     *
+     * @param name         The name of the element.
+     * @param contentModel The element content model.
+     *
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X, X X)
+    throws X
+    {
+
+        try
+        {
+            // SAX2 extension
+            if (X != 0)
+            {
+                X.X(X, X);
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // elementDecl(String,String, Augmentations)
+
+    /**
+     * An attribute declaration.
+     *
+     * @param elementName   The name of the element that this attribute
+     *                      is associated with.
+     * @param attributeName The name of the attribute.
+     * @param type          The attribute type. This value will be one of
+     *                      the following: "CDATA", "ENTITY", "ENTITIES",
+     *                      "ENUMERATION", "ID", "IDREF", "IDREFS",
+     *                      "NMTOKEN", "NMTOKENS", or "NOTATION".
+     * @param enumeration   If the type has the value "ENUMERATION" or
+     *                      "NOTATION", this array holds the allowed attribute
+     *                      values; otherwise, this array is null.
+     * @param defaultType   The attribute default type. This value will be
+     *                      one of the following: "#FIXED", "#IMPLIED",
+     *                      "#REQUIRED", or null.
+     * @param defaultValue  The attribute default value, or null if no
+     *                      default value is specified.
+     *
+     * @param nonNormalizedDefaultValue  The attribute default value with no normalization
+     *                      performed, or null if no default value is specified.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X,
+                              X X, X[] X,
+                              X X, X X,
+                              X X, X X) throws X
+    {
+
+        try
+        {
+            // SAX2 extension
+            if (X != 0)
+            {
+                // used as a key to detect duplicate attribute definitions.
+                X X = new X(X).X(0).X(X).X();
+                if(X.X(X) != 0)
+                {
+                    // we aren't permitted to return duplicate attribute definitions
+                    return;
+                }
+                X.X(X, X.X);
+                if (X.X(0) ||
+                        X.X(0))
+                {
+
+                    X X = new X();
+                    if (X.X(0))
+                    {
+                        X.X(X);
+                        X.X(0);
+                    }
+                    else
+                    {
+                        X.X(0);
+                    }
+                    for (X X = 0; X < X.X; X++)
+                    {
+                        X.X(X[X]);
+                        if (X < X.X - 0)
+                        {
+                            X.X(0);
+                        }
+                    }
+                    X.X(0);
+                    X = X.X();
+                }
+                X X = (X==0) ? 0 : X.X();
+                X.X(X, X,
+                                           X, X, X);
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // attributeDecl(String,String,String,String[],String,XMLString, XMLString, Augmentations)
+
+    /**
+     * An internal entity declaration.
+     *
+     * @param name The name of the entity. Parameter entity names start with
+     *             '%', whereas the name of a general entity is just the
+     *             entity name.
+     * @param text The value of the entity.
+     * @param nonNormalizedText The non-normalized value of the entity. This
+     *             value contains the same sequence of characters that was in
+     *             the internal entity declaration, without any entity
+     *             references expanded.
+     *
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X,
+                                   X X,
+                                   X X) throws X
+    {
+
+        try
+        {
+            // SAX2 extensions
+            if (X != 0)
+            {
+                X.X(X, X.X());
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // internalEntityDecl(String,XMLString,XMLString)
+
+    /**
+     * An external entity declaration.
+     *
+     * @param name     The name of the entity. Parameter entity names start
+     *                 with '%', whereas the name of a general entity is just
+     *                 the entity name.
+     * @param identifier    An object containing all location information
+     *                      pertinent to this entity.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X,
+                                   X X) throws X
+    {
+        try
+        {
+            // SAX2 extension
+            if (X != 0)
+            {
+                X X = X.X();
+                X X = X ?
+                                  X.X() : X.X();
+                X.X(X, X, X);
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // externalEntityDecl(String,,XMLResourceIdentifier, Augmentations)
+
+    /**
+     * An unparsed entity declaration.
+     *
+     * @param name     The name of the entity.
+     * @param identifier    An object containing all location information
+     *                      pertinent to this entity.
+     * @param notation The name of the notation.
+     *
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X,
+                                   X X,
+                                   X X) throws X
+    {
+        try
+        {
+            // SAX2 extension
+            if (X != 0)
+            {
+                X X = X.X();
+                X X = X ?
+                                  X.X() : X.X();
+                X.X(X, X, X, X);
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // unparsedEntityDecl(String,XMLResourceIdentifier, String, Augmentations)
+
+    /**
+     * A notation declaration
+     *
+     * @param name     The name of the notation.
+     * @param identifier    An object containing all location information
+     *                      pertinent to this notation.
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X, X X,
+                             X X) throws X
+    {
+        try
+        {
+            // SAX1 and SAX2
+            if (X != 0)
+            {
+                X X = X.X();
+                X X = X ?
+                                  X.X() : X.X();
+                X.X(X, X, X);
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+
+    } // notationDecl(String,XMLResourceIdentifier, Augmentations)
+
+    /**
+     * The end of the DTD.
+     *
+     * @param augs Additional information that may include infoset
+     *                      augmentations.
+     *
+     * @throws XNIException Thrown by handler to signal an error.
+     */
+    public X X(X X) throws X
+    {
+        X = 0;
+
+        try
+        {
+            // SAX2 extension
+            if (X != 0)
+            {
+                X.X();
+            }
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+        if(X != 0)
+        {
+            // help out the GC
+            X.X();
+        }
+
+    } // endDTD()
+
+    //
+    // Parser and XMLReader methods
+    //
+
+    /**
+     * Parses the input source specified by the given system identifier.
+     * <p>
+     * This method is equivalent to the following:
+     * <pre>
+     *     parse(new InputSource(systemId));
+     * </pre>
+     *
+     * @param systemId The system identifier (URI).
+     *
+     * @exception org.xml.sax.SAXException Throws exception on SAX error.
+     * @exception java.io.IOException Throws exception on i/o error.
+     */
+    public X X(X X) throws X, X
+    {
+
+        // parse document
+        X X = new X(0, X, 0);
+        try
+        {
+            X(X);
+        }
+
+        // wrap XNI exceptions as SAX exceptions
+        catch (X X)
+        {
+            X X = X.X();
+            if (X == 0)
+            {
+                // must be a parser exception; mine it for locator info and throw
+                // a SAXParseException
+                X X = new X()
+                {
+                    public X X()
+                    {
+                        return X;
+                    }
+                    // since XMLParseExceptions know nothing about encoding,
+                    // we cannot return anything meaningful in this context.
+                    // We *could* consult the LocatorProxy, but the
+                    // application can do this itself if it wishes to possibly
+                    // be mislead.
+                    public X X()
+                    {
+                        return 0;
+                    }
+                };
+                X.X(X.X());
+                X.X(X.X());
+                X.X(X.X());
+                X.X(X.X());
+                throw new X(X.X(), X);
+            }
+            if (X instanceof X)
+            {
+                // why did we create an XMLParseException?
+                throw (X)X;
+            }
+            if (X instanceof X)
+            {
+                throw (X)X;
+            }
+            throw new X(X);
+        }
+        catch (X X)
+        {
+            X X = X.X();
+            if (X == 0)
+            {
+                throw new X(X.X());
+            }
+            if (X instanceof X)
+            {
+                throw (X)X;
+            }
+            if (X instanceof X)
+            {
+                throw (X)X;
+            }
+            throw new X(X);
+        }
+
+    } // parse(String)
+
+    /**
+     * parse
+     *
+     * @param inputSource
+     *
+     * @exception org.xml.sax.SAXException
+     * @exception java.io.IOException
+     */
+    public X X(X X)
+    throws X, X
+    {
+
+        // parse document
+        try
+        {
+            X X =
+                new X(X.X(),
+                                   X.X(),
+                                   0);
+            X.X(X.X());
+            X.X(X.X());
+            X.X(X.X());
+            X(X);
+        }
+
+        // wrap XNI exceptions as SAX exceptions
+        catch (X X)
+        {
+            X X = X.X();
+            if (X == 0)
+            {
+                // must be a parser exception; mine it for locator info and throw
+                // a SAXParseException
+                X X = new X()
+                {
+                    public X X()
+                    {
+                        return X;
+                    }
+                    // since XMLParseExceptions know nothing about encoding,
+                    // we cannot return anything meaningful in this context.
+                    // We *could* consult the LocatorProxy, but the
+                    // application can do this itself if it wishes to possibly
+                    // be mislead.
+                    public X X()
+                    {
+                        return 0;
+                    }
+                };
+                X.X(X.X());
+                X.X(X.X());
+                X.X(X.X());
+                X.X(X.X());
+                throw new X(X.X(), X);
+            }
+            if (X instanceof X)
+            {
+                // why did we create an XMLParseException?
+                throw (X)X;
+            }
+            if (X instanceof X)
+            {
+                throw (X)X;
+            }
+            throw new X(X);
+        }
+        catch (X X)
+        {
+            X X = X.X();
+            if (X == 0)
+            {
+                throw new X(X.X());
+            }
+            if (X instanceof X)
+            {
+                throw (X)X;
+            }
+            if (X instanceof X)
+            {
+                throw (X)X;
+            }
+            throw new X(X);
+        }
+
+    } // parse(InputSource)
+
+    /**
+     * Sets the resolver used to resolve external entities. The EntityResolver
+     * interface supports resolution of public and system identifiers.
+     *
+     * @param resolver The new entity resolver. Passing a null value will
+     *                 uninstall the currently installed resolver.
+     */
+    public X X(X X)
+    {
+
+        try
+        {
+            X X = (X) X.X(X);
+            if (X && X instanceof X)
+            {
+                if (X instanceof X)
+                {
+                    X X = (X) X;
+                    X.X((X) X);
+                }
+                else
+                {
+                    X.X(X,
+                                               new X((X) X));
+                }
+            }
+            else
+            {
+                if (X instanceof X)
+                {
+                    X X = (X) X;
+                    X.X(X);
+                }
+                else
+                {
+                    X.X(X,
+                                               new X(X));
+                }
+            }
+        }
+        catch (X X)
+        {
+            // do nothing
+        }
+
+    } // setEntityResolver(EntityResolver)
+
+    /**
+     * Return the current entity resolver.
+     *
+     * @return The current entity resolver, or null if none
+     *         has been registered.
+     * @see #setEntityResolver
+     */
+    public X X()
+    {
+
+        X X = 0;
+        try
+        {
+            X X =
+                (X)X.X(X);
+            if (X != 0)
+            {
+                if (X instanceof X)
+                {
+                    X =
+                        ((X) X).X();
+                }
+                else if (X instanceof X)
+                {
+                    X =
+                        ((X) X).X();
+                }
+            }
+        }
+        catch (X X)
+        {
+            // do nothing
+        }
+        return X;
+
+    } // getEntityResolver():EntityResolver
+
+    /**
+     * Allow an application to register an error event handler.
+     *
+     * <p>If the application does not register an error handler, all
+     * error events reported by the SAX parser will be silently
+     * ignored; however, normal processing may not continue.  It is
+     * highly recommended that all SAX applications implement an
+     * error handler to avoid unexpected bugs.</p>
+     *
+     * <p>Applications may register a new or different handler in the
+     * middle of a parse, and the SAX parser must begin using the new
+     * handler immediately.</p>
+     *
+     * @param errorHandler The error handler.
+     * @see #getErrorHandler
+     */
+    public X X(X X)
+    {
+
+        try
+        {
+            X X = (X) X.X(X);
+            if (X instanceof X)
+            {
+                X X = (X) X;
+                X.X(X);
+            }
+            else
+            {
+                X.X(X,
+                                           new X(X));
+            }
+        }
+        catch (X X)
+        {
+            // do nothing
+        }
+
+    } // setErrorHandler(ErrorHandler)
+
+    /**
+     * Return the current error handler.
+     *
+     * @return The current error handler, or null if none
+     *         has been registered.
+     * @see #setErrorHandler
+     */
+    public X X()
+    {
+
+        X X = 0;
+        try
+        {
+            X X =
+                (X)X.X(X);
+            if (X != 0 &&
+                    X instanceof X)
+            {
+                X = ((X)X).X();
+            }
+        }
+        catch (X X)
+        {
+            // do nothing
+        }
+        return X;
+
+    } // getErrorHandler():ErrorHandler
+
+    /**
+     * Set the locale to use for messages.
+     *
+     * @param locale The locale object to use for localization of messages.
+     *
+     * @exception SAXException An exception thrown if the parser does not
+     *                         support the specified locale.
+     *
+     * @see org.xml.sax.Parser
+     */
+    public X X(X X) throws X
+    {
+        //REVISIT:this methods is not part of SAX2 interfaces, we should throw exception
+        //if any application uses SAX2 and sets locale also. -nb
+        X.X(X);
+
+    } // setLocale(Locale)
+
+    /**
+     * Allow an application to register a DTD event handler.
+     * <p>
+     * If the application does not register a DTD handler, all DTD
+     * events reported by the SAX parser will be silently ignored.
+     * <p>
+     * Applications may register a new or different handler in the
+     * middle of a parse, and the SAX parser must begin using the new
+     * handler immediately.
+     *
+     * @param dtdHandler The DTD handler.
+     *
+
+     * @see #getDTDHandler
+     */
+    public X X(X X)
+    {
+        X = X;
+    } // setDTDHandler(DTDHandler)
+
+    //
+    // Parser methods
+    //
+
+    /**
+     * Allow an application to register a document event handler.
+     * <p>
+     * If the application does not register a document handler, all
+     * document events reported by the SAX parser will be silently
+     * ignored (this is the default behaviour implemented by
+     * HandlerBase).
+     * <p>
+     * Applications may register a new or different handler in the
+     * middle of a parse, and the SAX parser must begin using the new
+     * handler immediately.
+     *
+     * @param documentHandler The document handler.
+     */
+    public X X(X X)
+    {
+        X = X;
+    } // setDocumentHandler(DocumentHandler)
+
+    //
+    // XMLReader methods
+    //
+
+    /**
+     * Allow an application to register a content event handler.
+     * <p>
+     * If the application does not register a content handler, all
+     * content events reported by the SAX parser will be silently
+     * ignored.
+     * <p>
+     * Applications may register a new or different handler in the
+     * middle of a parse, and the SAX parser must begin using the new
+     * handler immediately.
+     *
+     * @param contentHandler The content handler.
+     *
+     * @see #getContentHandler
+     */
+    public X X(X X)
+    {
+        X = X;
+    } // setContentHandler(ContentHandler)
+
+    /**
+     * Return the current content handler.
+     *
+     * @return The current content handler, or null if none
+     *         has been registered.
+     *
+     * @see #setContentHandler
+     */
+    public X X()
+    {
+        return X;
+    } // getContentHandler():ContentHandler
+
+    /**
+     * Return the current DTD handler.
+     *
+     * @return The current DTD handler, or null if none
+     *         has been registered.
+     * @see #setDTDHandler
+     */
+    public X X()
+    {
+        return X;
+    } // getDTDHandler():DTDHandler
+
+    /**
+     * Set the state of any feature in a SAX2 parser.  The parser
+     * might not recognize the feature, and if it does recognize
+     * it, it might not be able to fulfill the request.
+     *
+     * @param featureId The unique identifier (URI) of the feature.
+     * @param state The requested state of the feature (true or false).
+     *
+     * @exception SAXNotRecognizedException If the
+     *            requested feature is not known.
+     * @exception SAXNotSupportedException If the
+     *            requested feature is known, but the requested
+     *            state is not supported.
+     */
+    public X X(X X, X X)
+    throws X, X
+    {
+
+        try
+        {
+            //
+            // SAX2 Features
+            //
+
+            if (X.X(X.X))
+            {
+                final X X = X.X() - X.X.X();
+
+                // http://xml.org/sax/features/namespaces
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    X.X(X, X);
+                    X = X;
+                    return;
+                }
+
+                // http://xml.org/sax/features/namespace-prefixes
+                //   controls the reporting of raw prefixed names and Namespace
+                //   declarations (xmlns* attributes): when this feature is false
+                //   (the default), raw prefixed names may optionally be reported,
+                //   and xmlns* attributes must not be reported.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    X.X(X, X);
+                    X = X;
+                    return;
+                }
+
+                // http://xml.org/sax/features/string-interning
+                //   controls the use of java.lang.String#intern() for strings
+                //   passed to SAX handlers.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    if (!X)
+                    {
+                        throw new X(
+                            X.X(X.X(),
+                                                              0, new X [] {X}));
+                    }
+                    return;
+                }
+
+                // http://xml.org/sax/features/lexical-handler/parameter-entities
+                //   controls whether the beginning and end of parameter entities
+                //   will be reported to the LexicalHandler.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    X = X;
+                    return;
+                }
+
+                // http://xml.org/sax/features/resolve-dtd-uris
+                //   controls whether system identifiers will be absolutized relative to
+                //   their base URIs before reporting.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    X = X;
+                    return;
+                }
+
+                // http://xml.org/sax/features/unicode-normalization-checking
+                //   controls whether Unicode normalization checking is performed
+                //   as per Appendix B of the XML 1.1 specification
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    // REVISIT: Allow this feature to be set once Unicode normalization
+                    // checking is supported -- mrglavas.
+                    if (X)
+                    {
+                        throw new X(
+                            X.X(X.X(),
+                                                              0, new X [] {X}));
+                    }
+                    return;
+                }
+
+                // http://xml.org/sax/features/xmlns-uris
+                //   controls whether the parser reports that namespace declaration
+                //   attributes as being in the namespace: http://www.w3.org/2000/xmlns/
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    X = X;
+                    return;
+                }
+
+                // http://xml.org/sax/features/use-entity-resolver2
+                //   controls whether the methods of an object implementing
+                //   org.xml.sax.ext.EntityResolver2 will be used by the parser.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    if (X != X)
+                    {
+                        X = X;
+                        // Refresh EntityResolver wrapper.
+                        X(X());
+                    }
+                    return;
+                }
+
+                //
+                // Read only features.
+                //
+
+                // http://xml.org/sax/features/is-standalone
+                //   reports whether the document specified a standalone document declaration.
+                // http://xml.org/sax/features/use-attributes2
+                //   reports whether Attributes objects passed to startElement also implement
+                //   the org.xml.sax.ext.Attributes2 interface.
+                // http://xml.org/sax/features/use-locator2
+                //   reports whether Locator objects passed to setDocumentLocator also implement
+                //   the org.xml.sax.ext.Locator2 interface.
+                // http://xml.org/sax/features/xml-1.1
+                //   reports whether the parser supports both XML 1.1 and XML 1.0.
+                if ((X == X.X.X() &&
+                        X.X(X.X)) ||
+                        (X == X.X.X() &&
+                         X.X(X.X)) ||
+                        (X == X.X.X() &&
+                         X.X(X.X)) ||
+                        (X == X.X.X() &&
+                         X.X(X.X)))
+                {
+                    throw new X(
+                        X.X(X.X(),
+                                                          0, new X [] {X}));
+                }
+
+
+                //
+                // Drop through and perform default processing
+                //
+            }
+
+            //
+            // Xerces Features
+            //
+
+            /*
+            else if (featureId.startsWith(XERCES_FEATURES_PREFIX)) {
+                String feature = featureId.substring(XERCES_FEATURES_PREFIX.length());
+                //
+                // Drop through and perform default processing
+                //
+            }
+            */
+
+            //
+            // Default handling
+            //
+
+            X.X(X, X);
+        }
+        catch (X X)
+        {
+            X X = X.X();
+            if (X.X() == X.X)
+            {
+                throw new X(
+                    X.X(X.X(),
+                                                      0, new X [] {X}));
+            }
+            else
+            {
+                throw new X(
+                    X.X(X.X(),
+                                                      0, new X [] {X}));
+            }
+        }
+
+    } // setFeature(String,boolean)
+
+    /**
+     * Query the state of a feature.
+     *
+     * Query the current state of any feature in a SAX2 parser.  The
+     * parser might not recognize the feature.
+     *
+     * @param featureId The unique identifier (URI) of the feature
+     *                  being set.
+     * @return The current state of the feature.
+     * @exception org.xml.sax.SAXNotRecognizedException If the
+     *            requested feature is not known.
+     * @exception SAXNotSupportedException If the
+     *            requested feature is known but not supported.
+     */
+    public X X(X X)
+    throws X, X
+    {
+
+        try
+        {
+            //
+            // SAX2 Features
+            //
+
+            if (X.X(X.X))
+            {
+                final X X = X.X() - X.X.X();
+
+                // http://xml.org/sax/features/namespace-prefixes
+                //   controls the reporting of raw prefixed names and Namespace
+                //   declarations (xmlns* attributes): when this feature is false
+                //   (the default), raw prefixed names may optionally be reported,
+                //   and xmlns* attributes must not be reported.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    X X = X.X(X);
+                    return X;
+                }
+                // http://xml.org/sax/features/string-interning
+                //   controls the use of java.lang.String#intern() for strings
+                //   passed to SAX handlers.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    return 0;
+                }
+
+                // http://xml.org/sax/features/is-standalone
+                //   reports whether the document specified a standalone document declaration.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    return X;
+                }
+
+                // http://xml.org/sax/features/xml-1.1
+                //   reports whether the parser supports both XML 1.1 and XML 1.0.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    return (X instanceof X);
+                }
+
+                // http://xml.org/sax/features/lexical-handler/parameter-entities
+                //   controls whether the beginning and end of parameter entities
+                //   will be reported to the LexicalHandler.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    return X;
+                }
+
+                // http://xml.org/sax/features/resolve-dtd-uris
+                //   controls whether system identifiers will be absolutized relative to
+                //   their base URIs before reporting.
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    return X;
+                }
+
+                // http://xml.org/sax/features/xmlns-uris
+                //   controls whether the parser reports that namespace declaration
+                //   attributes as being in the namespace: http://www.w3.org/2000/xmlns/
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    return X;
+                }
+
+                // http://xml.org/sax/features/unicode-normalization-checking
+                //   controls whether Unicode normalization checking is performed
+                //   as per Appendix B of the XML 1.1 specification
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    // REVISIT: Allow this feature to be set once Unicode normalization
+                    // checking is supported -- mrglavas.
+                    return 0;
+                }
+
+                // http://xml.org/sax/features/use-entity-resolver2
+                //   controls whether the methods of an object implementing
+                //   org.xml.sax.ext.EntityResolver2 will be used by the parser.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    return X;
+                }
+
+                // http://xml.org/sax/features/use-attributes2
+                //   reports whether Attributes objects passed to startElement also implement
+                //   the org.xml.sax.ext.Attributes2 interface.
+                // http://xml.org/sax/features/use-locator2
+                //   reports whether Locator objects passed to setDocumentLocator also implement
+                //   the org.xml.sax.ext.Locator2 interface.
+                //
+                if ((X == X.X.X() &&
+                        X.X(X.X)) ||
+                        (X == X.X.X() &&
+                         X.X(X.X)))
+                {
+                    return 0;
+                }
+
+
+                //
+                // Drop through and perform default processing
+                //
+            }
+
+            //
+            // Xerces Features
+            //
+
+            /*
+            else if (featureId.startsWith(XERCES_FEATURES_PREFIX)) {
+                //
+                // Drop through and perform default processing
+                //
+            }
+            */
+
+            return X.X(X);
+        }
+        catch (X X)
+        {
+            X X = X.X();
+            if (X.X() == X.X)
+            {
+                throw new X(
+                    X.X(X.X(),
+                                                      0, new X [] {X}));
+            }
+            else
+            {
+                throw new X(
+                    X.X(X.X(),
+                                                      0, new X [] {X}));
+            }
+        }
+
+    } // getFeature(String):boolean
+
+    /**
+     * Set the value of any property in a SAX2 parser.  The parser
+     * might not recognize the property, and if it does recognize
+     * it, it might not support the requested value.
+     *
+     * @param propertyId The unique identifier (URI) of the property
+     *                   being set.
+     * @param value The value to which the property is being set.
+     *
+     * @exception SAXNotRecognizedException If the
+     *            requested property is not known.
+     * @exception SAXNotSupportedException If the
+     *            requested property is known, but the requested
+     *            value is not supported.
+     */
+    public X X(X X, X X)
+    throws X, X
+    {
+
+        try
+        {
+            //
+            // SAX2 core properties
+            //
+
+            if (X.X(X.X))
+            {
+                final X X = X.X() - X.X.X();
+
+                //
+                // http://xml.org/sax/properties/lexical-handler
+                // Value type: org.xml.sax.ext.LexicalHandler
+                // Access: read/write, pre-parse only
+                //   Set the lexical event handler.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    try
+                    {
+                        X((X)X);
+                    }
+                    catch (X X)
+                    {
+                        throw new X(
+                            X.X(X.X(),
+                                                              0, new X [] {X, 0}));
+                    }
+                    return;
+                }
+                //
+                // http://xml.org/sax/properties/declaration-handler
+                // Value type: org.xml.sax.ext.DeclHandler
+                // Access: read/write, pre-parse only
+                //   Set the DTD declaration event handler.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    try
+                    {
+                        X((X)X);
+                    }
+                    catch (X X)
+                    {
+                        throw new X(
+                            X.X(X.X(),
+                                                              0, new X [] {X, 0}));
+                    }
+                    return;
+                }
+                //
+                // http://xml.org/sax/properties/dom-node
+                // Value type: DOM Node
+                // Access: read-only
+                //   Get the DOM node currently being visited, if the SAX parser is
+                //   iterating over a DOM tree.  If the parser recognises and
+                //   supports this property but is not currently visiting a DOM
+                //   node, it should return null (this is a good way to check for
+                //   availability before the parse begins).
+                // http://xml.org/sax/properties/document-xml-version
+                // Value type: java.lang.String
+                // Access: read-only
+                //   The literal string describing the actual XML version of the document.
+                //
+                if ((X == X.X.X() &&
+                        X.X(X.X)) ||
+                        (X == X.X.X() &&
+                         X.X(X.X)))
+                {
+                    throw new X(
+                        X.X(X.X(),
+                                                          0, new X [] {X}));
+                }
+                //
+                // Drop through and perform default processing
+                //
+            }
+
+            //
+            // Xerces Properties
+            //
+
+            /*
+            else if (propertyId.startsWith(XERCES_PROPERTIES_PREFIX)) {
+                //
+                // Drop through and perform default processing
+                //
+            }
+            */
+
+            //
+            // Perform default processing
+            //
+
+            X.X(X, X);
+        }
+        catch (X X)
+        {
+            X X = X.X();
+            if (X.X() == X.X)
+            {
+                throw new X(
+                    X.X(X.X(),
+                                                      0, new X [] {X}));
+            }
+            else
+            {
+                throw new X(
+                    X.X(X.X(),
+                                                      0, new X [] {X}));
+            }
+        }
+
+    } // setProperty(String,Object)
+
+    /**
+     * Query the value of a property.
+     *
+     * Return the current value of a property in a SAX2 parser.
+     * The parser might not recognize the property.
+     *
+     * @param propertyId The unique identifier (URI) of the property
+     *                   being set.
+     * @return The current value of the property.
+     * @exception org.xml.sax.SAXNotRecognizedException If the
+     *            requested property is not known.
+     * @exception SAXNotSupportedException If the
+     *            requested property is known but not supported.
+     */
+    public X X(X X)
+    throws X, X
+    {
+
+        try
+        {
+            //
+            // SAX2 core properties
+            //
+
+            if (X.X(X.X))
+            {
+                final X X = X.X() - X.X.X();
+
+                //
+                // http://xml.org/sax/properties/document-xml-version
+                // Value type: java.lang.String
+                // Access: read-only
+                //   The literal string describing the actual XML version of the document.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    return X;
+                }
+
+                //
+                // http://xml.org/sax/properties/lexical-handler
+                // Value type: org.xml.sax.ext.LexicalHandler
+                // Access: read/write, pre-parse only
+                //   Set the lexical event handler.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    return X();
+                }
+                //
+                // http://xml.org/sax/properties/declaration-handler
+                // Value type: org.xml.sax.ext.DeclHandler
+                // Access: read/write, pre-parse only
+                //   Set the DTD declaration event handler.
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    return X();
+                }
+
+                //
+                // http://xml.org/sax/properties/dom-node
+                // Value type: DOM Node
+                // Access: read-only
+                //   Get the DOM node currently being visited, if the SAX parser is
+                //   iterating over a DOM tree.  If the parser recognises and
+                //   supports this property but is not currently visiting a DOM
+                //   node, it should return null (this is a good way to check for
+                //   availability before the parse begins).
+                //
+                if (X == X.X.X() &&
+                        X.X(X.X))
+                {
+                    // we are not iterating a DOM tree
+                    throw new X(
+                        X.X(X.X(),
+                                                          0, 0));
+                }
+
+                //
+                // Drop through and perform default processing
+                //
+            }
+
+            //
+            // Xerces properties
+            //
+
+            /*
+            else if (propertyId.startsWith(XERCES_PROPERTIES_PREFIX)) {
+                //
+                // Drop through and perform default processing
+                //
+            }
+            */
+
+            //
+            // Perform default processing
+            //
+
+            return X.X(X);
+        }
+        catch (X X)
+        {
+            X X = X.X();
+            if (X.X() == X.X)
+            {
+                throw new X(
+                    X.X(X.X(),
+                                                      0, new X [] {X}));
+            }
+            else
+            {
+                throw new X(
+                    X.X(X.X(),
+                                                      0, new X [] {X}));
+            }
+        }
+
+    } // getProperty(String):Object
+
+    //
+    // Protected methods
+    //
+
+    // SAX2 core properties
+
+    /**
+     * Set the DTD declaration event handler.
+     * <p>
+     * This method is the equivalent to the property:
+     * <pre>
+     * http://xml.org/sax/properties/declaration-handler
+     * </pre>
+     *
+     * @param handler The new handler.
+     *
+     * @see #getDeclHandler
+     * @see #setProperty
+     */
+    protected X X(X X)
+    throws X, X
+    {
+
+        if (X)
+        {
+            throw new X(
+                X.X(X.X(),
+                                                  0,
+                                                  new X [] {0}));
+        }
+        X = X;
+
+    } // setDeclHandler(DeclHandler)
+
+    /**
+     * Returns the DTD declaration event handler.
+     *
+     * @see #setDeclHandler
+     */
+    protected X X()
+    throws X, X
+    {
+        return X;
+    } // getDeclHandler():DeclHandler
+
+    /**
+     * Set the lexical event handler.
+     * <p>
+     * This method is the equivalent to the property:
+     * <pre>
+     * http://xml.org/sax/properties/lexical-handler
+     * </pre>
+     *
+     * @param handler lexical event handler
+     *
+     * @see #getLexicalHandler
+     * @see #setProperty
+     */
+    protected X X(X X)
+    throws X, X
+    {
+
+        if (X)
+        {
+            throw new X(
+                X.X(X.X(),
+                                                  0,
+                                                  new X [] {0}));
+        }
+        X = X;
+
+    } // setLexicalHandler(LexicalHandler)
+
+    /**
+     * Returns the lexical handler.
+     *
+     * @see #setLexicalHandler
+     */
+    protected X X()
+    throws X, X
+    {
+        return X;
+    } // getLexicalHandler():LexicalHandler
+
+    /**
+     * Send startPrefixMapping events
+     */
+    protected final X X() throws X
+    {
+        X X = X.X();
+        if (X > 0)
+        {
+            X X = 0;
+            X X = 0;
+            for (X X = 0; X < X; X++)
+            {
+                X = X.X(X);
+                X = X.X(X);
+                X.X(X,
+                                                   (X == 0) ? 0 : X);
+            }
+        }
+    }
+
+    /**
+     * Send endPrefixMapping events
+     */
+    protected final X X() throws X
+    {
+        X X = X.X();
+        if (X > 0)
+        {
+            for (X X = 0; X < X; X++)
+            {
+                X.X(X.X(X));
+            }
+        }
+    }
+
+    //
+    // XMLDocumentParser methods
+    //
+
+    /**
+     * Reset all components before parsing.
+     *
+     * @throws XNIException Thrown if an error occurs during initialization.
+     */
+    public X X() throws X
+    {
+        X.X();
+
+        // reset state
+        X = 0;
+        X = 0;
+        X = 0;
+
+        // features
+        X = X.X(X);
+        X = X.X(X);
+        X = 0;
+        X = 0;
+
+    } // reset()
+
+    //
+    // Classes
+    //
+
+    protected class X
+        implements X
+    {
+
+        //
+        // Data
+        //
+
+        /** XML locator. */
+        protected X X;
+
+        //
+        // Constructors
+        //
+
+        /** Constructs an XML locator proxy. */
+        public X(X X)
+        {
+            X = X;
+        }
+
+        //
+        // Locator methods
+        //
+
+        /** Public identifier. */
+        public X X()
+        {
+            return X.X();
+        }
+
+        /** System identifier. */
+        public X X()
+        {
+            return X.X();
+        }
+        /** Line number. */
+        public X X()
+        {
+            return X.X();
+        }
+
+        /** Column number. */
+        public X X()
+        {
+            return X.X();
+        }
+
+        // Locator2 methods
+        public X X()
+        {
+            return X.X();
+        }
+
+        public X X()
+        {
+            return X.X();
+        }
+
+    } // class LocatorProxy
+
+    protected static final class X
+        implements X, X
+    {
+
+        //
+        // Data
+        //
+
+        /** XML attributes. */
+        protected X X;
+
+        //
+        // Public methods
+        //
+
+        /** Sets the XML attributes. */
+        public X X(X X)
+        {
+            X = X;
+        } // setAttributes(XMLAttributes)
+
+        public X X()
+        {
+            return X.X();
+        }
+
+        public X X(X X)
+        {
+            return X.X(X);
+        }
+
+        public X X(X X)
+        {
+            return X.X(X);
+        }
+
+        public X X(X X)
+        {
+            // REVISIT: this hides the fact that internally we use
+            //          null instead of empty string
+            //          SAX requires URI to be a string or an empty string
+            X X= X.X(X);
+            return X != 0 ? X : 0;
+        }
+
+        public X X(X X)
+        {
+            return X.X(X);
+        }
+
+        public X X(X X)
+        {
+            return X.X(X);
+        }
+
+        public X X(X X)
+        {
+            return X.X(X);
+        }
+
+        public X X(X X, X X)
+        {
+            return X.X(0) ? X.X(0, X) :
+                   X.X(X, X);
+        }
+
+        public X X(X X)
+        {
+            return X.X(X);
+        }
+
+        public X X(X X)
+        {
+            return X.X(X);
+        }
+
+        public X X(X X, X X)
+        {
+            return X.X(0) ? X.X(0, X) :
+                   X.X(X, X);
+        }
+
+        public X X(X X)
+        {
+            return X.X(X);
+        }
+
+        public X X(X X, X X)
+        {
+            return X.X(0) ? X.X(0, X) :
+                   X.X(X, X);
+        }
+
+        // Attributes2 methods
+        // REVISIT: Localize exception messages. -- mrglavas
+        public X X(X X)
+        {
+            if (X < 0 || X >= X.X())
+            {
+                throw new X(X);
+            }
+            return X.X.X(
+                       X.X(X).X(
+                           X.X));
+        }
+
+        public X X(X X)
+        {
+            X X = X(X);
+            if (X == -0)
+            {
+                throw new X(X);
+            }
+            return X.X.X(
+                       X.X(X).X(
+                           X.X));
+        }
+
+        public X X(X X, X X)
+        {
+            X X = X(X, X);
+            if (X == -0)
+            {
+                throw new X(X);
+            }
+            return X.X.X(
+                       X.X(X).X(
+                           X.X));
+        }
+
+        public X X(X X)
+        {
+            if (X < 0 || X >= X.X())
+            {
+                throw new X(X);
+            }
+            return X.X(X);
+        }
+
+        public X X(X X)
+        {
+            X X = X(X);
+            if (X == -0)
+            {
+                throw new X(X);
+            }
+            return X.X(X);
+        }
+
+        public X X(X X, X X)
+        {
+            X X = X(X, X);
+            if (X == -0)
+            {
+                throw new X(X);
+            }
+            return X.X(X);
+        }
+
+    } // class AttributesProxy
+
+
+    // PSVIProvider methods
+
+    public X X()
+    {
+        return (X != 0)?(X)X.X(X.X):0;
+    }
+
+
+    public X X(X X)
+    {
+
+        return (X)X.X.X(X).X(X.X);
+    }
+
+
+    public X X(X X,
+            X X)
+    {
+        return (X)X.X.X(X, X).X(X.X);
+    }
+
+} // class AbstractSAXParser

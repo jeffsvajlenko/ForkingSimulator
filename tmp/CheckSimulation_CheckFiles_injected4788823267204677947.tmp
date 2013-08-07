@@ -1,0 +1,74 @@
+package X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.*;
+
+import X.X.X;
+
+public abstract class X extends X implements X, X {
+    protected X X;
+    protected X X;
+    protected X X;
+    private X X = new X ();
+
+    protected X () {
+    }
+
+    public X X (X X) {
+        if (X.X () == X.X) throw new X ();
+
+        X.X = X;
+    }
+
+    public X X () {
+        return X;
+    }
+
+    public X X () {
+        return X;
+    }
+
+    public X X () {
+        X.X = X;
+    }
+
+    public X X () {
+        return X;
+    }
+
+    public X X () {
+        X.X = X;
+    }
+
+    public X X (X X) {
+        X.X (X);
+    }
+
+    public X X (X X) {
+        X.X (X);
+    }
+
+    public X X () {
+        X.X ();
+    }
+
+    public X [] X () {
+        X [] X = new X [X.X ()];
+        X.X ();
+        return X;
+    }
+
+    public abstract X X ();
+
+    public X X () {
+        try {
+            return X.X ();
+        } catch (X X) {
+            X.X.X ();
+            return 0;
+        }
+    }
+
+}
+

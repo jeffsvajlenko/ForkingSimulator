@@ -1,0 +1,1159 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+package X.X.X.X;
+
+import X.X.*;
+import X.X.X.X;
+import X.X.*;
+import X.X.*;
+import X.X.X;
+import X.X.X.X.X;
+
+/**
+ * ImagePainter fills in the specified region using an Image. The Image
+ * is split into 9 segments: north, north east, east, south east, south,
+ * south west, west, north west and the center. The corners are defined
+ * by way of an insets, and the remaining regions are either tiled or
+ * scaled to fit.
+ *
+ * @version %I%, %G%
+ * @author Scott Violet
+ */
+class X extends X
+{
+    private static final X X = new X(); // SynthCacheKey
+
+    private X X;
+    private X X;
+    private X X;
+    private X X;
+    private X X;
+    private X X;
+    private X X;
+    private X X;
+
+    private static X X()
+    {
+        // A SynthPainter is created per <imagePainter>.  We want the
+        // cache to be shared by all, and we don't use a static because we
+        // don't want it to persist between look and feels.  For that reason
+        // we use a AppContext specific Paint9Painter.  It's backed via
+        // a WeakRef so that it can go away if the look and feel changes.
+        synchronized(X)
+        {
+            X<X> X =
+                (X<X>)X.X().
+                X(X);
+            X X;
+            if (X == 0 || (X = X.X()) == 0)
+            {
+                X = new X(0);
+                X = new X(X);
+                X.X().X(X, X);
+            }
+            return X;
+        }
+    }
+
+    X(X X, X X,
+                 X X, X X, X X,
+                 X X)
+    {
+        if (X != 0)
+        {
+            X.X = (X)X.X();
+        }
+        if (X == 0)
+        {
+            X = X;
+        }
+        else
+        {
+            X.X = (X)X.X();
+        }
+        X.X = X;
+        X.X = X;
+        X.X = X();
+        X.X = X;
+        X.X = X;
+    }
+
+    public X X()
+    {
+        return X;
+    }
+
+    public X X()
+    {
+        return X;
+    }
+
+    public X X()
+    {
+        return X;
+    }
+
+    public X X(X X)
+    {
+        if (X == 0)
+        {
+            return (X)X.X.X();
+        }
+        X.X = X.X.X;
+        X.X = X.X.X;
+        X.X = X.X.X;
+        X.X = X.X.X;
+        return X;
+    }
+
+    public X X()
+    {
+        if (X == 0)
+        {
+            X = new X(X, 0).X();
+        }
+        return X;
+    }
+
+    private X X(X X, X X, X X, X X, X X,
+                       X X)
+    {
+        X X = X();
+        if (X.X(X))
+        {
+            X.X X;
+            if (X())
+            {
+                X = X.X.X;
+            }
+            else if (!X())
+            {
+                X = X.X.X;
+            }
+            else
+            {
+                X = X.X.X;
+            }
+            X X = X.X;
+            if (!X() && !X())
+            {
+                X |= X.X;
+            }
+            X.X(X.X(), X, X, X, X, X,
+                             X, X, X, X,
+                             X);
+        }
+    }
+
+
+    // SynthPainter
+    public X X(X X,
+                                           X X, X X, X X,
+                                           X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                           X X, X X, X X,
+                                           X X, X X,
+                                           X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // BUTTON
+    public X X(X X,
+                                      X X, X X, X X,
+                                      X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                  X X, X X, X X,
+                                  X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // CHECK_BOX_MENU_ITEM
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                            X X, X X, X X,
+                                            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // CHECK_BOX
+    public X X(X X,
+                                        X X, X X, X X,
+                                        X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                    X X, X X, X X,
+                                    X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // COLOR_CHOOSER
+    public X X(X X,
+                                            X X, X X, X X,
+                                            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                        X X, X X, X X,
+                                        X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // COMBO_BOX
+    public X X(X X,
+                                        X X, X X, X X,
+                                        X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                    X X, X X, X X,
+                                    X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // DESKTOP_ICON
+    public X X(X X,
+                                           X X, X X, X X,
+                                           X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // DESKTOP_PANE
+    public X X(X X,
+                                           X X, X X, X X,
+                                           X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // EDITOR_PANE
+    public X X(X X,
+                                          X X, X X, X X,
+                                          X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                      X X, X X, X X,
+                                      X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // FILE_CHOOSER
+    public X X(X X,
+                                           X X, X X, X X,
+                                           X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // FORMATTED_TEXT_FIELD
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // INTERNAL_FRAME_TITLE_PANE
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // INTERNAL_FRAME
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                         X X, X X, X X,
+                                         X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // LABEL
+    public X X(X X,
+                                     X X, X X, X X,
+                                     X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                 X X, X X, X X,
+                                 X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // LIST
+    public X X(X X,
+                                    X X, X X, X X,
+                                    X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                X X, X X, X X,
+                                X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // MENU_BAR
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                   X X, X X, X X,
+                                   X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // MENU_ITEM
+    public X X(X X,
+                                        X X, X X, X X,
+                                        X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                    X X, X X, X X,
+                                    X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // MENU
+    public X X(X X,
+                                    X X, X X, X X,
+                                    X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                X X, X X, X X,
+                                X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // OPTION_PANE
+    public X X(X X,
+                                          X X, X X, X X,
+                                          X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                      X X, X X, X X,
+                                      X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // PANEL
+    public X X(X X,
+                                     X X, X X, X X,
+                                     X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                 X X, X X, X X,
+                                 X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // PANEL
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                         X X, X X, X X,
+                                         X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // POPUP_MENU
+    public X X(X X,
+                                         X X, X X, X X,
+                                         X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                     X X, X X, X X,
+                                     X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // PROGRESS_BAR
+    public X X(X X,
+                                           X X, X X, X X,
+                                           X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                           X X, X X, X X,
+                                           X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                           X X, X X, X X,
+                                           X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // RADIO_BUTTON_MENU_ITEM
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // RADIO_BUTTON
+    public X X(X X,
+                                           X X, X X, X X,
+                                           X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // ROOT_PANE
+    public X X(X X,
+                                        X X, X X, X X,
+                                        X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                    X X, X X, X X,
+                                    X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // SCROLL_BAR
+    public X X(X X,
+                                         X X, X X, X X,
+                                         X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                         X X, X X, X X,
+                                         X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                     X X, X X, X X,
+                                     X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                     X X, X X, X X,
+                                     X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // SCROLL_BAR_THUMB
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                          X X, X X, X X,
+                                          X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // SCROLL_BAR_TRACK
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                          X X, X X, X X,
+                                          X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                          X X, X X, X X,
+                                          X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // SCROLL_PANE
+    public X X(X X,
+                                          X X, X X, X X,
+                                          X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                      X X, X X, X X,
+                                      X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // SEPARATOR
+    public X X(X X,
+                                         X X, X X, X X,
+                                         X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                         X X, X X, X X,
+                                         X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                     X X, X X, X X,
+                                     X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                     X X, X X, X X,
+                                     X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                         X X, X X, X X,
+                                         X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // SLIDER
+    public X X(X X,
+                                      X X, X X, X X,
+                                      X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                      X X, X X, X X,
+                                      X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                  X X, X X, X X,
+                                  X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                  X X, X X, X X,
+                                  X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // SLIDER_THUMB
+    public X X(X X,
+                                           X X, X X, X X,
+                                           X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // SLIDER_TRACK
+    public X X(X X,
+                                           X X, X X, X X,
+                                           X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                           X X, X X, X X,
+                                           X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // SPINNER
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                   X X, X X, X X,
+                                   X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // SPLIT_PANE_DIVIDER
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                          X X, X X, X X,
+                                          X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // SPLIT_PANE
+    public X X(X X,
+                                         X X, X X, X X,
+                                         X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                     X X, X X, X X,
+                                     X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TABBED_PANE
+    public X X(X X,
+                                          X X, X X, X X,
+                                          X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                      X X, X X, X X,
+                                      X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TABBED_PANE_TAB_AREA
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TABBED_PANE_TAB
+    public X X(X X, X X,
+            X X, X X, X X, X X,
+            X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X, X X,
+            X X, X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X, X X,
+                                         X X, X X, X X, X X,
+                                         X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X, X X,
+                                         X X, X X, X X, X X,
+                                         X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TABBED_PANE_CONTENT
+    public X X(X X,
+            X X, X X, X X, X X,
+            X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X, X X,
+            X X, X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TABLE_HEADER
+    public X X(X X,
+                                           X X, X X, X X,
+                                           X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TABLE
+    public X X(X X,
+                                     X X, X X, X X,
+                                     X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                 X X, X X, X X,
+                                 X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TEXT_AREA
+    public X X(X X,
+                                        X X, X X, X X,
+                                        X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                    X X, X X, X X,
+                                    X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TEXT_PANE
+    public X X(X X,
+                                        X X, X X, X X,
+                                        X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                    X X, X X, X X,
+                                    X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TEXT_FIELD
+    public X X(X X,
+                                         X X, X X, X X,
+                                         X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                     X X, X X, X X,
+                                     X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TOGGLE_BUTTON
+    public X X(X X,
+                                            X X, X X, X X,
+                                            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                        X X, X X, X X,
+                                        X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TOOL_BAR
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                   X X, X X, X X,
+                                   X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                   X X, X X, X X,
+                                   X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TOOL_BAR_CONTENT
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                          X X, X X, X X,
+                                          X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                          X X, X X, X X,
+                                          X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TOOL_DRAG_WINDOW
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+            X X, X X, X X,
+            X X, X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TOOL_TIP
+    public X X(X X,
+                                       X X, X X, X X,
+                                       X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                   X X, X X, X X,
+                                   X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TREE
+    public X X(X X,
+                                    X X, X X, X X,
+                                    X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                X X, X X, X X,
+                                X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // TREE_CELL
+    public X X(X X,
+                                        X X, X X, X X,
+                                        X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                    X X, X X, X X,
+                                    X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                   X X, X X, X X,
+                                   X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    // VIEWPORT
+    public X X(X X,
+                                        X X, X X, X X,
+                                        X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+
+    public X X(X X,
+                                    X X, X X, X X,
+                                    X X, X X)
+    {
+        X(X, X, X, X, X, X);
+    }
+}

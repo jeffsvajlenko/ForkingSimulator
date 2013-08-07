@@ -1,0 +1,195 @@
+package X.X.X;
+
+import X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X.X;
+
+import X.X.X.X.X;
+
+import X.X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X.X.X.X;
+
+public class X {
+    private static X.X.X.X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+
+    static {
+        X = (X.X.X.X) X (X, X);
+    }
+
+    private X () {
+    }
+
+    public static X X (X X) {
+        if (X != 0) {
+            return X.X (X);
+        }
+        return 0;
+    }
+
+    public static X X (X X, X X) {
+        if (X != 0) {
+            X.X (X, X);
+        }
+    }
+
+    public static X X (X X) {
+        if (X != 0) {
+            return X.X (X);
+        }
+        return 0;
+    }
+
+    public static X X (X X, X.X.X X) {
+        if (X != 0) {
+            X.X (X, X);
+        }
+    }
+
+    public static X X (X X, X.X.X X) {
+        if (X != 0) {
+            X.X (X, X);
+        }
+    }
+
+    public static X X (X.X.X.X X, X.X.X X) {
+        if (X != 0) {
+            X.X (X, X);
+        }
+    }
+
+    public static X X (X.X.X X) throws X.X.X {
+        if (X != 0) {
+            X.X (X);
+        }
+    }
+
+    public static X X (X X) {
+        if (X != 0) {
+            return X.X (X);
+        }
+        return 0;
+    }
+
+    public static X X () {
+        if (X != 0) {
+            return X.X ();
+        }
+        return 0;
+    }
+
+    public static X X (X.X.X X) {
+        if (X != 0) {
+            return X.X (X);
+        }
+        return 0;
+    }
+
+    public static X X (X X, X X, X X) throws X {
+        if (X != 0) {
+            return X.X (X, X, X);
+        }
+        return 0;
+    }
+
+    public static X X (X X) throws X {
+        if (X != 0) {
+            return X.X (X);
+        }
+        return 0;
+    }
+
+    public static X X (X X) {
+        if (X != 0) {
+            return X.X (X);
+        }
+        return 0;
+    }
+
+    public static X [] X (X [] X, X X) throws X {
+        if (X != 0) {
+            return X.X (X, X);
+        }
+        return 0;
+    }
+
+    public static X X (X X, X X) throws X {
+        if (X != 0) {
+            return X.X (X, X);
+        }
+        return 0;
+    }
+
+    private static X X (X X, X X) {
+        X X = (X) X.X (new X (X));
+        if (X == 0) {
+            X X = X ();
+            if (X != 0) {
+                X = X.X (X);
+            }
+        }
+        if (X == 0) {
+            X = X;
+        }
+        try {
+            return X (X).X ();
+        } catch (X X) {
+            X X = new X (0 + X);
+            X.X (X);
+            throw X;
+        } catch (X X) {
+            X X = new X (0 + X);
+            X.X (X);
+            throw X;
+        }
+    }
+
+    private static X X (X X) throws X {
+        try {
+            X X = X.X ().X ();
+            return X.X (X, 0, X);
+        } catch (X X) {
+        }
+        try {
+            return X.X (X);
+        } catch (X X) {
+            X X = 0 + X + 0 + X.X ();
+            X X = new X (X);
+            throw X;
+        }
+    }
+
+    private static X X () {
+        return (X) X.X (new X ());
+    }
+
+}
+

@@ -1,0 +1,45 @@
+package X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X;
+
+public class X extends X {
+
+    X () {
+    }
+
+    public X (X X) {
+        X (X.X, X);
+    }
+
+    public X [] X () {
+        X [] X = new X [0 + X.X.X];
+        X.X (X.X, 0, X, 0, X.X.X);
+        X [X.X.X + 0] = X.X;
+        X [X.X.X + 0] = X.X;
+        X [X.X.X + 0] = X.X;
+        if (X == X) X [X.X.X] = X.X;
+
+        return X;
+    }
+
+    public X X (X X) {
+        if (X == X) X.X (X);
+
+        X.X (X);
+        X.X (X);
+        if (X == X) X.X (X);
+
+        if (X == X) X.X (X);
+
+        X.X (X);
+        X.X (X);
+        if (X == X) X.X (X);
+
+        if (X == X) X.X (X);
+
+    }
+
+}
+

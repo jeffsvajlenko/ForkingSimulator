@@ -1,0 +1,21 @@
+package X.X.X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+public class X extends X implements X {
+    public static final X X = new X ();
+    public static final X X = new X (X);
+    public static final X X = new X (X, X.X);
+
+    protected X () {
+    }
+
+    @X
+    public X X (X X) {
+        return X.X ();
+    }
+
+}
+

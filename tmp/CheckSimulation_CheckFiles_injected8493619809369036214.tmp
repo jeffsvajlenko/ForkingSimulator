@@ -1,0 +1,1625 @@
+/*
+ * @(#)SynthParser.java	1.23 05/09/12
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+package X.X.X.X;
+
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X.X;
+
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+
+import X.X.X.X;
+
+/**
+ * @version 1.23, 09/12/05
+ */
+class X extends X
+{
+    //
+    // Known element names
+    //
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X =
+        0;
+    private static final X X = 0;
+
+    //
+    // Known attribute names
+    //
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+    private static final X X = 0;
+
+    /**
+     * Lazily created, used for anything we don't understand.
+     */
+    private X X;
+
+    /**
+     * Indicates the depth of how many elements we've encountered but don't
+     * understand. This is used when forwarding to beans persistance to know
+     * when we hsould stop forwarding.
+     */
+    private X X;
+
+    /**
+     * Factory that new styles are added to.
+     */
+    private X X;
+
+    /**
+     * Array of state infos for the current style. These are pushed to the
+     * style when </style> is received.
+     */
+    private X.X.X X;
+
+    /**
+     * Current style.
+     */
+    private X X;
+
+    /**
+     * Current state info.
+     */
+    private X.X X;
+
+    /**
+     * Bindings for the current InputMap
+     */
+    private X.X.X X;
+
+    /**
+     * ID for the input map. This is cached as
+     * the InputMap is created AFTER the inputMapProperty has ended.
+     */
+    private X X;
+
+    /**
+     * Object references outside the scope of persistance.
+     */
+    private X<X,X> X;
+
+    /**
+     * Based URL used to resolve paths.
+     */
+    private X X;
+
+    /**
+     * Based class used to resolve paths.
+     */
+    private X<?> X;
+
+    /**
+     * List of ColorTypes. This is populated in startColorType.
+     */
+    private X.X.X X;
+
+    /**
+     * defaultsPropertys are placed here.
+     */
+    private X X;
+
+    /**
+     * List of SynthStyle.Painters that will be applied to the current style.
+     */
+    private X.X.X X;
+
+    /**
+     * List of SynthStyle.Painters that will be applied to the current state.
+     */
+    private X.X.X X;
+
+    X()
+    {
+        X = new X<X,X>();
+        X = new X();
+        X = new X();
+        X = new X();
+        X = new X();
+        X = new X();
+    }
+
+    /**
+     * Parses a set of styles from <code>inputStream</code>, adding the
+     * resulting styles to the passed in DefaultSynthStyleFactory.
+     * Resources are resolved either from a URL or from a Class. When calling
+     * this method, one of the URL or the Class must be null but not both at
+     * the same time.
+     *
+     * @param inputStream XML document containing the styles to read
+     * @param factory DefaultSynthStyleFactory that new styles are added to
+     * @param urlResourceBase the URL used to resolve any resources, such as Images
+     * @param classResourceBase the Class used to resolve any resources, such as Images
+     * @param defaultsMap Map that UIDefaults properties are placed in
+     */
+    public X X(X X,
+                      X X,
+                      X X, X<?> X,
+                      X X)
+    throws X, X
+    {
+        if (X == 0 || X == 0 ||
+                (X == 0 && X == 0))
+        {
+            throw new X(
+                0);
+        }
+
+        assert(!(X != 0 && X != 0));
+
+        X = X;
+        X = X;
+        X = X;
+        X = X;
+        try
+        {
+            try
+            {
+                X X = X.X().
+                                      X();
+                X.X(new X(X), X);
+            }
+            catch (X X)
+            {
+                throw new X(0 + X, 0);
+            }
+            catch (X X)
+            {
+                throw new X(0 + X + 0 +
+                                         X.X(), 0);
+            }
+            catch (X X)
+            {
+                throw new X(0 + X, 0);
+            }
+        }
+        finally
+        {
+            X();
+        }
+    }
+
+    /**
+     * Returns the path to a resource.
+     */
+    private X X(X X)
+    {
+        if (X != 0)
+        {
+            return X.X(X);
+        }
+        else
+        {
+            try
+            {
+                return new X(X, X);
+            }
+            catch (X X)
+            {
+                return 0;
+            }
+        }
+    }
+
+    /**
+     * Clears our internal state.
+     */
+    private X X()
+    {
+        X = 0;
+        X = 0;
+        X.X();
+        X.X();
+        X.X();
+        X.X();
+        X.X();
+    }
+
+    /**
+     * Returns true if we are forwarding to persistance.
+     */
+    private X X()
+    {
+        return (X > 0);
+    }
+
+    /**
+     * Handles beans persistance.
+     */
+    private X X()
+    {
+        if (X == 0)
+        {
+            if (X != 0)
+            {
+                // getHandler() is never called before parse() so it is safe
+                // to create a URLClassLoader with _resourceBase.
+                //
+                // getResource(".") is called to ensure we have the directory
+                // containing the resources in the case the resource base is a
+                // .class file.
+                X[] X = new X[] { X(0) };
+                X X = X.X().X();
+                X X = new X(X, X);
+                X = new X(0, X);
+            }
+            else
+            {
+                X = new X(0,
+                                             X.X());
+            }
+
+            for (X X : X.X())
+            {
+                X.X(X, X.X(X));
+            }
+        }
+        return X;
+    }
+
+    /**
+     * If <code>value</code> is an instance of <code>type</code> it is
+     * returned, otherwise a SAXException is thrown.
+     */
+    private X X(X X, X X) throws X
+    {
+        if (!X.X(X))
+        {
+            throw new X(0 + X + 0 +
+                                   X.X());
+        }
+        return X;
+    }
+
+    /**
+     * Returns an object created with id=key. If the object is not of
+     * type type, this will throw an exception.
+     */
+    private X X(X X, X X) throws X
+    {
+        X X = 0;
+        if (X != 0)
+        {
+            if ((X = X.X(X)) != 0)
+            {
+                return X(X, X);
+            }
+        }
+        X = X.X(X);
+        if (X == 0)
+        {
+            throw new X(0 + X + 0);
+        }
+        return X(X, X);
+    }
+
+    /**
+     * Registers an object by name. This will throw an exception if an
+     * object has already been registered under the given name.
+     */
+    private X X(X X, X X) throws X
+    {
+        if (X != 0)
+        {
+            if (X.X(X) != 0 ||
+                    (X != 0 && X.X(X) != 0))
+            {
+                throw new X(0 + X + 0);
+            }
+            if (X != 0)
+            {
+                X.X(X, X);
+            }
+            else
+            {
+                X.X(X, X);
+            }
+        }
+    }
+
+    /**
+     * Convenience method to return the next int, or throw if there are no
+     * more valid ints.
+     */
+    private X X(X X, X X) throws
+        X
+    {
+        if (!X.X())
+        {
+            throw new X(X);
+        }
+        try
+        {
+            return X.X(X.X());
+        }
+        catch (X X)
+        {
+            throw new X(X);
+        }
+    }
+
+    /**
+     * Convenience method to return an Insets object.
+     */
+    private X X(X X, X X) throws
+        X
+    {
+        X X = new X(X);
+        return new X(X(X, X),
+                          X(X, X),
+                          X(X, X),
+                          X(X, X));
+    }
+
+
+
+    //
+    // The following methods are invoked from startElement/stopElement
+    //
+
+    private X X(X X) throws X
+    {
+        X X = 0;
+
+        X = 0;
+        for(X X = X.X() - 0; X >= 0; X--)
+        {
+            X X = X.X(X);
+            if (X.X(X))
+            {
+                X = (X)((X)X(
+                                                X.X(X), X.class)).
+                         X();
+            }
+            else if (X.X(X))
+            {
+                X = X.X(X);
+            }
+        }
+        if (X == 0)
+        {
+            X = new X();
+        }
+        X(X, X);
+    }
+
+    private X X() throws X
+    {
+        X X = X.X();
+        if (X > 0)
+        {
+            X.X((X.X[])
+                               X.X(new X.
+                                       X[X]));
+            X.X();
+        }
+        X = X.X();
+        if (X > 0)
+        {
+            X.X((X.X[])X.
+                                X(new X.X[X]));
+            X.X();
+        }
+        X = 0;
+    }
+
+    private X X(X X) throws X
+    {
+        X.X X = 0;
+        X X = 0;
+        X X = 0;
+
+        X = 0;
+        for(X X = X.X() - 0; X >= 0; X--)
+        {
+            X X = X.X(X);
+            if (X.X(X))
+            {
+                X = X.X(X);
+            }
+            else if (X.X(X))
+            {
+                X = (X.X)X(
+                                 X.X(X), X.X.class);
+            }
+            else if (X.X(X))
+            {
+                X = (X.X)((X.
+                             X)X(X.X(X),
+                                              X.X.class)).X();
+            }
+            else if (X.X(X))
+            {
+                X X = new X(
+                    X.X(X));
+                while (X.X())
+                {
+                    X X = X.X().X().
+                                         X();
+                    if (X == 0)
+                    {
+                        X |= X.X;
+                    }
+                    else if (X == 0)
+                    {
+                        X |= X.X;
+                    }
+                    else if (X == 0)
+                    {
+                        X |= X.X;
+                    }
+                    else if (X == 0)
+                    {
+                        X |= X.X;
+                    }
+                    else if (X == 0)
+                    {
+                        X |= X.X;
+                    }
+                    else if (X == 0)
+                    {
+                        X |= X.X;
+                    }
+                    else if (X == 0)
+                    {
+                        X |= X.X;
+                    }
+                    else if (X != 0)
+                    {
+                        throw new X(0 + X);
+                    }
+                }
+            }
+        }
+        if (X == 0)
+        {
+            X = new X.X();
+        }
+        X.X(X);
+        X(X, X);
+        X.X(X);
+    }
+
+    private X X() throws X
+    {
+        X X = X.X();
+        if (X > 0)
+        {
+            X.X((X.X[])
+                                   X.X(new X.
+                                           X[X]));
+            X.X();
+        }
+        X = 0;
+    }
+
+    private X X(X X) throws X
+    {
+        X X = 0;
+        X X = X.X;
+        X X = 0;
+        X X = 0;
+        X X = 0;
+
+        for(X X = X.X() - 0; X >= 0; X--)
+        {
+            X X = X.X(X);
+            if (X.X(X))
+            {
+                X = X.X(X);
+            }
+            else if (X.X(X))
+            {
+                X = (X)X(X.X(X), X.class);
+            }
+            else if (X.X(X))
+            {
+                X = X.X(X);
+            }
+            else if (X.X(X))
+            {
+                try
+                {
+                    X = X.X(X.X(X));
+                }
+                catch (X X)
+                {
+                    throw new X(0 +
+                                           X.X(X));
+                }
+            }
+            else if (X.X(X))
+            {
+                X X = new X(
+                    X.X(X));
+                while (X.X())
+                {
+                    X X = X.X().X();
+                    if (X == 0)
+                    {
+                        X = ((X | X.X) ^ X.X) |
+                                X.X;
+                    }
+                    else if (X == 0)
+                    {
+                        X |= X.X;
+                    }
+                }
+            }
+        }
+        if (X == 0)
+        {
+            if (X == 0)
+            {
+                throw new X(0);
+            }
+            if (X == 0)
+            {
+                throw new X(0);
+            }
+            X = new X(X, X, X);
+        }
+        else if (X != 0 || X != 0 || X != X.X)
+        {
+            throw new X(0 +
+                                   0);
+        }
+        X(X, X);
+        if (X != 0)
+        {
+            X.X(X);
+        }
+        else if (X != 0)
+        {
+            X.X(X);
+        }
+    }
+
+    private X X(X X) throws X
+    {
+        X X = 0;
+        X X = 0;
+
+        X.X();
+        for(X X = X.X() - 0; X >= 0; X--)
+        {
+            X X = X.X(X);
+            if (X.X(X))
+            {
+                X = X.X(X);
+            }
+            else if (X.X(X))
+            {
+                X = (X)X(X.X(X), X.class);
+            }
+            else if (X.X(X))
+            {
+            }
+            else if (X.X(X))
+            {
+                X X = X.X(X);
+
+                if (X.X(0))
+                {
+                    try
+                    {
+                        X X;
+                        X X;
+
+                        X X = X.X();
+                        if (X < 0)
+                        {
+                            // Just RGB, or some portion of it.
+                            X = X.X(X);
+                            X = 0;
+                        }
+                        else if (X == 0)
+                        {
+                            // Single character alpha: #ARRGGBB.
+                            X = X.X(X);
+                            X = 0;
+                        }
+                        else if (X == 0)
+                        {
+                            // Color has alpha and is of the form
+                            // #AARRGGBB.
+                            // The following split decoding is mandatory due to
+                            // Integer.decode() behavior which won't decode
+                            // hexadecimal values higher than #7FFFFFFF.
+                            // Thus, when an alpha channel is detected, it is
+                            // decoded separately from the RGB channels.
+                            X X = X.X(0 +
+                                                     X.X(0, 0));
+                            X X = X.X(X.X(0, 0));
+                            X = (X << 0) | X;
+                            X = 0;
+                        }
+                        else
+                        {
+                            throw new X(0
+                                                   + X);
+                        }
+
+                        X = new X(new X(X, X));
+                    }
+                    catch (X X)
+                    {
+                        throw new X(0 +X);
+                    }
+                }
+                else
+                {
+                    try
+                    {
+                        X = new X((X)X.class.
+                                                    X(X.X()).X(X.class));
+                    }
+                    catch (X X)
+                    {
+                        throw new X(0 + X);
+                    }
+                    catch (X X)
+                    {
+                        throw new X(0 + X);
+                    }
+                }
+            }
+            else if (X.X(X))
+            {
+                X X = new X(
+                    X.X(X));
+                while (X.X())
+                {
+                    X X = X.X();
+                    X X = X.X(0);
+                    X X;
+
+                    if (X == -0)
+                    {
+                        X = X.class;
+                        X = 0;
+                    }
+                    else
+                    {
+                        try
+                        {
+                            X = X.X(X.X(
+                                                          0, X));
+                        }
+                        catch (X X)
+                        {
+                            throw new X(0 +
+                                                   X.X(0, X));
+                        }
+                        X++;
+                    }
+                    try
+                    {
+                        X.X((X)X(X.
+                                                             X(X.X(X)).
+                                                             X(X), X.class));
+                    }
+                    catch (X X)
+                    {
+                        throw new X(0 +
+                                               X);
+                    }
+                    catch (X X)
+                    {
+                        throw new X(0 +
+                                               X);
+                    }
+                }
+            }
+        }
+        if (X == 0)
+        {
+            throw new X(0);
+        }
+        X(X, X);
+        if (X != 0 && X.X() > 0)
+        {
+            X[] X = X.X();
+            X X = 0;
+            for (X X = X.X() - 0; X >= 0;
+                    X--)
+            {
+                X = X.X(X, ((X)X.X(X)).
+                               X());
+            }
+            if (X == 0 || X.X <= X)
+            {
+                X[] X = new X[X + 0];
+                if (X != 0)
+                {
+                    X.X(X, 0, X, 0, X.X);
+                }
+                X = X;
+            }
+            for (X X = X.X() - 0; X >= 0;
+                    X--)
+            {
+                X[((X)X.X(X)).X()] = X;
+            }
+            X.X(X);
+        }
+    }
+
+    private X X(X X,
+                               X X) throws X
+    {
+        X X = 0;
+        X X = 0;
+        // Type of the value: 0=idref, 1=boolean, 2=dimension, 3=insets,
+        // 4=integer,5=string
+        X X = 0;
+        X X = 0;
+
+        for(X X = X.X() - 0; X >= 0; X--)
+        {
+            X X = X.X(X);
+            if (X.X(X))
+            {
+                X X = X.X(X).X();
+                if (X.X(0))
+                {
+                    X = 0;
+                }
+                else if (X.X(0))
+                {
+                    X = 0;
+                }
+                else if (X.X(0))
+                {
+                    X = 0;
+                }
+                else if (X.X(0))
+                {
+                    X = 0;
+                }
+                else if (X.X(0))
+                {
+                    X = 0;
+                }
+                else if (X.X(0))
+                {
+                    X = 0;
+                }
+                else
+                {
+                    throw new X(X + 0 +
+                                           0);
+                }
+            }
+            else if (X.X(X))
+            {
+                X = X.X(X);
+            }
+            else if (X.X(X))
+            {
+                X = X.X(X);
+            }
+        }
+        if (X != 0)
+        {
+            switch (X)
+            {
+            case 0: // idref
+                X = X(X, X.class);
+                break;
+            case 0: // boolean
+                if (X.X().X(0))
+                {
+                    X = X.X;
+                }
+                else
+                {
+                    X = X.X;
+                }
+                break;
+            case 0: // dimension
+                X X = new X(X);
+                X = new X(
+                    X(X, 0),
+                    X(X, 0));
+                break;
+            case 0: // insets
+                X = X(X, X + 0);
+                break;
+            case 0: // integer
+                try
+                {
+                    X = new X(X.X(X));
+                }
+                catch (X X)
+                {
+                    throw new X(X + 0);
+                }
+                break;
+            case 0: //string
+                X = X;
+                break;
+            }
+        }
+        if (X == 0 || X == 0)
+        {
+            throw new X(X + 0 +
+                                   0);
+        }
+        if (X == X)
+        {
+            X.X(X, X);
+        }
+        else if (X != 0)
+        {
+            if (X.X() == 0)
+            {
+                X.X(new X());
+            }
+            X.X().X(X, X);
+        }
+        else if (X != 0)
+        {
+            if (X.X() == 0)
+            {
+                X.X(new X());
+            }
+            X.X().X(X, X);
+        }
+    }
+
+    private X X(X X) throws X
+    {
+        X X = 0;
+
+        for(X X = X.X() - 0; X >= 0; X--)
+        {
+            X X = X.X(X);
+            if (X.X(X))
+            {
+                X = (X)X(X.X(X),
+                                                      X.class);
+            }
+        }
+        if (X == 0)
+        {
+            throw new X(0);
+        }
+        if (X != 0)
+        {
+            X.X(X);
+        }
+    }
+
+    private X X(X X) throws X
+    {
+        X X = 0;
+        X X = 0;
+        X X = 0;
+        X X = 0;
+        X X = 0;
+        X X = 0;
+
+        for(X X = X.X() - 0; X >= 0; X--)
+        {
+            X X = X.X(X);
+
+            try
+            {
+                if (X.X(X))
+                {
+                    X = (X)X(X.X(X),
+                                            X.class);
+                }
+                else if (X.X(X))
+                {
+                    X = X.X(X);
+                }
+                else if (X.X(X))
+                {
+                    X = X.X(X.X(X));
+                }
+                else if (X.X(X))
+                {
+                    X = X.X(X.X(X));
+                }
+                else if (X.X(X))
+                {
+                    X = X.X(X.X(X));
+                }
+                else if (X.X(X))
+                {
+                    X = X.X(X.X(X));
+                }
+            }
+            catch (X X)
+            {
+                throw new X(0 +
+                                       X.X(X));
+            }
+        }
+        if (X == 0)
+        {
+            X = new X(X, X, X, X);
+        }
+        X(X, X);
+        if (X != 0)
+        {
+            X.X(X);
+        }
+    }
+
+    private X X(X X) throws X
+    {
+        X X = 0;
+        X X = 0;
+        X X = -0;
+
+        for(X X = X.X() - 0; X >= 0; X--)
+        {
+            X X = X.X(X);
+
+            if (X.X(X))
+            {
+                X = (X)X(X.X(X),
+                                                 X.class);
+            }
+            else if (X.X(X))
+            {
+                X X = X.X(X).X();
+
+                if (X.X(0))
+                {
+                    X = X.X;
+                }
+                else if (X.X(0))
+                {
+                    X = X.X;
+                }
+                else
+                {
+                    throw new X(0 + X);
+                }
+            }
+            else if (X.X(X))
+            {
+                X = X.X(X);
+            }
+        }
+        if (X == 0 || X == 0 || X == -0)
+        {
+            throw new X(0 +
+                                   0);
+        }
+        try
+        {
+            X.X(X, X, X);
+        }
+        catch (X X)
+        {
+            throw new X(0 + X + 0 +
+                                   0);
+        }
+    }
+
+    private X X(X X, X X) throws X
+    {
+        X X = 0;
+        X X = 0;
+        X X = 0;
+        X X = 0;
+        X X = 0;
+        X X = 0;
+        X X = 0;
+        X X = 0;
+        X X = -0;
+        X X = 0;
+
+        X X = 0;
+        X X = 0;
+
+        for(X X = X.X() - 0; X >= 0; X--)
+        {
+            X X = X.X(X);
+            X X = X.X(X);
+
+            if (X.X(X))
+            {
+                X = X;
+            }
+            else if (X.X(X))
+            {
+                X = X.X(X.X);
+            }
+            else if (X.X(X))
+            {
+                X = (X)X(X, X.class);
+            }
+            else if (X.X(X))
+            {
+                X = X;
+            }
+            else if (X.X(X))
+            {
+                X = X(X, X +
+                                           0);
+            }
+            else if (X.X(X))
+            {
+                X = X(X, X +
+                                         0);
+            }
+            else if (X.X(X))
+            {
+                X = X.X().X(0);
+                X = 0;
+            }
+            else if (X.X(X))
+            {
+                X = X.X().X(0);
+                X = 0;
+            }
+            else if (X.X(X))
+            {
+                X = X.X().X();
+                if (X == 0)
+                {
+                    X = X.X;
+                }
+                else if (X == 0)
+                {
+                    X = X.X;
+                }
+                else if (X == 0)
+                {
+                    X = X.X;
+                }
+                else if (X == 0)
+                {
+                    X = X.X;
+                }
+                else if (X == 0)
+                {
+                    X = X.X;
+                }
+                else if (X == 0)
+                {
+                    X = X.X;
+                }
+                else if (X == 0)
+                {
+                    X = X.X;
+                }
+                else if (X == 0)
+                {
+                    X = X.X;
+                }
+                else if (X == 0)
+                {
+                    X = X.X;
+                }
+                else if (X == 0)
+                {
+                    X = X.X;
+                }
+                else if (X == 0)
+                {
+                    X = X.X;
+                }
+                else if (X == 0)
+                {
+                    X = X.X;
+                }
+                else
+                {
+                    throw new X(X + 0);
+                }
+            }
+            else if (X.X(X))
+            {
+                X = X.X().X(0);
+            }
+        }
+        if (X == 0)
+        {
+            if (X == X)
+            {
+                throw new X(X +
+                                       0);
+            }
+            if (X == 0 && !X)
+            {
+                throw new X(
+                    0);
+            }
+            if (X == 0)
+            {
+                throw new X(0);
+            }
+            if (X && (X != 0 || X != 0 ||
+                           X || X))
+            {
+                throw new X(0 +
+                                       0 +
+                                       0);
+            }
+            X = new X(!X, X,
+                                       X, X, X(X), X);
+        }
+        X(X, X);
+        if (X != 0)
+        {
+            X(X, X, X, X);
+        }
+        else if (X != 0)
+        {
+            X(X, X, X, X);
+        }
+    }
+
+    private X X(X.X.X X, X X,
+                                   X X, X X)
+    {
+        X.X X;
+        X = new X.X(X,
+                X,
+                X);
+
+        for (X X: X)
+        {
+            X.X X;
+            X = (X.X) X;
+
+            if (X.X(X))
+            {
+                X.X(X);
+                return;
+            }
+        }
+
+        X.X(X);
+    }
+
+    private X X(X X) throws X
+    {
+        X X = 0;
+        X X = 0;
+
+        for(X X = X.X() - 0; X >= 0; X--)
+        {
+            X X = X.X(X);
+
+            if (X.X(X))
+            {
+                X = X.X(X);
+            }
+            else if (X.X(X))
+            {
+                X = X.X(X);
+            }
+        }
+        if (X == 0)
+        {
+            throw new X(0);
+        }
+        X(X, new X(X(X)));
+    }
+
+    private X X(X X) throws
+        X
+    {
+        if (X != 0)
+        {
+            X.X(0);
+            for(X X = X.X() - 0; X >= 0; X--)
+            {
+                X X = X.X(X);
+
+                if (X.X(X))
+                {
+                    X.X(0.X(X.X(X).
+                                                   X()));
+                }
+            }
+        }
+    }
+
+    private X X(X X) throws X
+    {
+        X.X();
+        X = 0;
+        if (X != 0)
+        {
+            for(X X = X.X() - 0; X >= 0; X--)
+            {
+                X X = X.X(X);
+
+                if (X.X(X))
+                {
+                    X = X.X(X);
+                }
+            }
+        }
+    }
+
+    private X X() throws X
+    {
+        if (X != 0)
+        {
+            X(X, new X.X(
+                         X.X(new X[X.
+                                                   X()])));
+        }
+        X.X();
+        X = 0;
+    }
+
+    private X X(X X) throws X
+    {
+        if (X == 0)
+        {
+            // Not in an inputmap, bail.
+            return;
+        }
+        if (X != 0)
+        {
+            X X = 0;
+            X X = 0;
+            for(X X = X.X() - 0; X >= 0; X--)
+            {
+                X X = X.X(X);
+
+                if (X.X(X))
+                {
+                    X = X.X(X);
+                }
+                else if (X.X(X))
+                {
+                    X = X.X(X);
+                }
+            }
+            if (X == 0 || X == 0)
+            {
+                throw new X(
+                    0);
+            }
+            X.X(X);
+            X.X(X);
+        }
+    }
+
+    //
+    // SAX methods, these forward to the ObjectHandler if we don't know
+    // the element name.
+    //
+
+    public X X(X X, X X)
+    throws X
+    {
+        if (X())
+        {
+            return X().X(X, X);
+        }
+        return 0;
+    }
+
+    public X X(X X, X X, X X)
+    {
+        if (X())
+        {
+            X().X(X, X, X);
+        }
+    }
+
+    public X X(X X, X X,
+                                   X X, X X)
+    {
+        if (X())
+        {
+            X().X(X, X, X,
+                                            X);
+        }
+    }
+
+    public X X(X X)
+    {
+        if (X())
+        {
+            X().X(X);
+        }
+    }
+
+    public X X() throws X
+    {
+        if (X())
+        {
+            X().X();
+        }
+    }
+
+    public X X() throws X
+    {
+        if (X())
+        {
+            X().X();
+        }
+    }
+
+    public X X(X X, X X)
+    throws X
+    {
+        X = X.X();
+        if (X == X)
+        {
+            X(X);
+        }
+        else if (X == X)
+        {
+            X(X);
+        }
+        else if (X == X)
+        {
+            X(X);
+        }
+        else if (X == X)
+        {
+            X(X);
+        }
+        else if (X == X)
+        {
+            X(X, X);
+        }
+        else if (X == X)
+        {
+            X(X, X);
+        }
+        else if (X == X)
+        {
+            X(X, X);
+        }
+        else if (X == X)
+        {
+            X(X, X);
+        }
+        else if (X == X)
+        {
+            X(X);
+        }
+        else if (X == X)
+        {
+            X(X);
+        }
+        else if (X == X)
+        {
+            X(X);
+        }
+        else if (X == X)
+        {
+            X(X);
+        }
+        else if (X == X)
+        {
+            X(X);
+        }
+        else if (X == X)
+        {
+            X(X);
+        }
+        else if (X == X)
+        {
+            X(X);
+        }
+        else if (X != X)
+        {
+            if (X++ == 0)
+            {
+                X().X();
+            }
+            X().X(X, X);
+        }
+    }
+
+    public X X(X X) throws X
+    {
+        if (X())
+        {
+            X().X(X);
+            X--;
+            if (!X())
+            {
+                X().X();
+            }
+        }
+        else
+        {
+            X = X.X();
+            if (X == X)
+            {
+                X();
+            }
+            else if (X == X)
+            {
+                X();
+            }
+            else if (X == X)
+            {
+                X();
+            }
+        }
+    }
+
+    public X X(X X[], X X, X X)
+    throws X
+    {
+        if (X())
+        {
+            X().X(X, X, X);
+        }
+    }
+
+    public X X (X X[], X X, X X)
+    throws X
+    {
+        if (X())
+        {
+            X().X(X, X, X);
+        }
+    }
+
+    public X X(X X, X X)
+    throws X
+    {
+        if (X())
+        {
+            X().X(X, X);
+        }
+    }
+
+    public X X(X X) throws X
+    {
+        if (X())
+        {
+            X().X(X);
+        }
+    }
+
+    public X X(X X) throws X
+    {
+        if (X())
+        {
+            X().X(X);
+        }
+    }
+
+
+    public X X(X X) throws X
+    {
+        if (X())
+        {
+            X().X(X);
+        }
+        throw X;
+    }
+
+
+    /**
+     * ImageIcon that lazily loads the image until needed.
+     */
+    private static class X extends X implements X
+    {
+        private X X;
+
+        public X(X X)
+        {
+            X();
+            X.X = X;
+        }
+
+        public X X(X X, X X, X X, X X)
+        {
+            if (X() != 0)
+            {
+                X.X(X, X, X, X);
+            }
+        }
+
+        public X X()
+        {
+            if (X() != 0)
+            {
+                return X.X();
+            }
+            return 0;
+        }
+
+        public X X()
+        {
+            if (X() != 0)
+            {
+                return X.X();
+            }
+            return 0;
+        }
+
+        public X X()
+        {
+            if (X != 0)
+            {
+                X(X.X().X(X));
+                X = 0;
+            }
+            return X.X();
+        }
+    }
+}

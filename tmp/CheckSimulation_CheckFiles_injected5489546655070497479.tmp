@@ -1,0 +1,37 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+
+package X.X.X.X;
+
+/**
+ * TypeMismatch is thrown by dynamic any accessor methods when
+ * type of the actual contents do not match what is trying to be
+ * accessed.
+ */
+public final class X
+    extends X.X.X.X
+{
+
+    /**
+     * Constructs a <code>TypeMismatch</code> object.
+     */
+    public X()
+    {
+        X();
+    }
+
+    /**
+     * Constructs a <code>TypeMismatch</code> object.
+     * @param reason  a <code>String</code> giving more information
+     * regarding the exception.
+     */
+    public X(X X)
+    {
+        X(X);
+    }
+}

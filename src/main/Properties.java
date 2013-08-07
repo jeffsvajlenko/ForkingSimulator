@@ -305,7 +305,7 @@ public class Properties {
 							s.close();
 							throw new IllegalArgumentException("Property 'functionFragmentMaxSize' is invalid.");
 						}
-						if(this.functionFragmentMaxSize <= 0) {
+						if(this.functionFragmentMaxSize < 0) {
 							s.close();
 							throw new IllegalArgumentException("Property 'functionFragmentMaxSize' is invalid.");
 						}
@@ -319,7 +319,7 @@ public class Properties {
 							s.close();
 							throw new IllegalArgumentException("Property 'maxFileEdit' is invalid.");
 						}
-						if(this.maxFileEdit <= 0) {
+						if(this.maxFileEdit < 0) {
 							s.close();
 							throw new IllegalArgumentException("Property 'maxFileEdit' is invalid.");
 						}
@@ -333,7 +333,7 @@ public class Properties {
 							s.close();
 							throw new IllegalArgumentException("Property 'maxFunctionEdit' is invalid.");
 						}
-						if(this.maxFunctionEdit <= 0) {
+						if(this.maxFunctionEdit < 0) {
 							s.close();
 							throw new IllegalArgumentException("Property 'maxFunctionEdit' is invalid.");
 						}

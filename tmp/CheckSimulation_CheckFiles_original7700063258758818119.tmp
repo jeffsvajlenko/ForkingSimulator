@@ -1,0 +1,46 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X.X;
+
+/**
+ * Signals that user authentication failed.
+ *
+ * <p> This exception is thrown by LoginModules if authentication failed.
+ * For example, a <code>LoginModule</code> throws this exception if
+ * the user entered an incorrect password.
+ *
+ * @version %I%, %G%
+ */
+public class X extends X
+{
+
+    private static final X X = 0;
+
+    /**
+     * Constructs a FailedLoginException with no detail message. A detail
+     * message is a String that describes this particular exception.
+     */
+    public X()
+    {
+        X();
+    }
+
+    /**
+     * Constructs a FailedLoginException with the specified detail
+     * message.  A detail message is a String that describes this particular
+     * exception.
+     *
+     * <p>
+     *
+     * @param msg the detail message.
+     */
+    public X(X X)
+    {
+        X(X);
+    }
+}

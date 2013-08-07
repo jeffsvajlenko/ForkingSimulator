@@ -1,0 +1,16 @@
+<source file="/home/jeff/git/ForkingSimulator/tmp/ForkSim_7352240973985204601/DrawingChangeEvent.java" startline="30" endline="34">
+public DrawingChangeEvent (Drawing source, Rectangle r) {
+    super (source);
+    fRectangle = r;
+}
+</source>
+<source file="/home/jeff/git/ForkingSimulator/tmp/ForkSim_7352240973985204601/DrawingChangeEvent.java" startline="39" endline="42">
+public Drawing getDrawing () {
+    return (Drawing) getSource ();
+}
+</source>
+<source file="/home/jeff/git/ForkingSimulator/tmp/ForkSim_7352240973985204601/DrawingChangeEvent.java" startline="47" endline="50">
+public Rectangle getInvalidatedRectangle () {
+    return fRectangle;
+}
+</source>

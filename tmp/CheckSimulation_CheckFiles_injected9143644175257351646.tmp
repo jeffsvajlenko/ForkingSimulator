@@ -1,0 +1,277 @@
+package X.X.X.X.X.X.X;
+
+/* ====================================================================
+ * The Apache Software License, Version 1.1
+ *
+ * Copyright (c) 2001 The Apache Software Foundation.  All rights
+ * reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in
+ *    the documentation and/or other materials provided with the
+ *    distribution.
+ *
+ * 3. The end-user documentation included with the redistribution,
+ *    if any, must include the following acknowledgment:
+ *       "This product includes software developed by the
+ *        Apache Software Foundation (http://www.apache.org/)."
+ *    Alternately, this acknowledgment may appear in the software itself,
+ *    if and wherever such third-party acknowledgments normally appear.
+ *
+ * 4. The names "Apache" and "Apache Software Foundation" and
+ *    "Apache BCEL" must not be used to endorse or promote products
+ *    derived from this software without prior written permission. For
+ *    written permission, please contact apache@apache.org.
+ *
+ * 5. Products derived from this software may not be called "Apache",
+ *    "Apache BCEL", nor may "Apache" appear in their name, without
+ *    prior written permission of the Apache Software Foundation.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND ANY EXPRESSED OR IMPLIED
+ * WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+ * OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+ * DISCLAIMED.  IN NO EVENT SHALL THE APACHE SOFTWARE FOUNDATION OR
+ * ITS CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ * SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ * LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF
+ * USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+ * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT
+ * OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ * ====================================================================
+ *
+ * This software consists of voluntary contributions made by many
+ * individuals on behalf of the Apache Software Foundation.  For more
+ * information on the Apache Software Foundation, please see
+ * <http://www.apache.org/>.
+ */
+import X.X.*;
+import X.X.X.X.X.X.X.X;
+
+/**
+ * Select - Abstract super class for LOOKUPSWITCH and TABLESWITCH instructions.
+ *
+ * @version $Id: Select.java,v 1.1.2.1 2005/07/31 23:45:26 jeffsuttor Exp $
+ * @author  <A HREF="mailto:markus.dahm@berlin.de">M. Dahm</A>
+ * @see LOOKUPSWITCH
+ * @see TABLESWITCH
+ * @see InstructionList
+ */
+public abstract class X extends X
+    implements X, X
+{
+    protected X[]               X;        // matches, i.e., case 1: ...
+    protected X[]               X;      // target offsets
+    protected X[] X;      // target objects in instruction list
+    protected X                 X; // fixed length defined by subclasses
+    protected X                 X; // number of cases
+    protected X                 X = 0;  // number of pad bytes for alignment
+
+    /**
+     * Empty constructor needed for the Class.newInstance() statement in
+     * Instruction.readInstruction(). Not to be used otherwise.
+     */
+    X() {}
+
+    /**
+     * (Match, target) pairs for switch.
+     * `Match' and `targets' must have the same length of course.
+     *
+     * @param match array of matching values
+     * @param targets instruction targets
+     * @param target default instruction target
+     */
+    X(X X, X[] X, X[] X,
+           X X)
+    {
+        X(X, X);
+
+        X.X = X;
+        for(X X=0; X < X.X; X++)
+            X(0, X[X], X);
+
+        X.X = X;
+
+        if((X = X.X) != X.X)
+            throw new X(0);
+
+        X = new X[X];
+    }
+
+    /**
+     * Since this is a variable length instruction, it may shift the following
+     * instructions which then need to update their position.
+     *
+     * Called by InstructionList.setPositions when setting the position for every
+     * instruction. In the presence of variable length instructions `setPositions'
+     * performs multiple passes over the instruction list to calculate the
+     * correct (byte) positions and offsets by calling this function.
+     *
+     * @param offset additional offset caused by preceding (variable length) instructions
+     * @param max_offset the maximum offset that may be caused by these instructions
+     * @return additional offset caused by possible change of this instruction's length
+     */
+    protected X X(X X, X X)
+    {
+        X += X; // Additional offset caused by preceding SWITCHs, GOTOs, etc.
+
+        X X = X;
+
+        /* Alignment on 4-byte-boundary, + 1, because of tag byte.
+         */
+        X = (0 - ((X + 0) % 0)) % 0;
+        X  = (X)(X + X); // Update length
+
+        return X - X;
+    }
+
+    /**
+     * Dump instruction as byte code to stream out.
+     * @param out Output stream
+     */
+    public X X(X X) throws X
+    {
+        X.X(X);
+
+        for(X X=0; X < X; X++) // Padding bytes
+            X.X(0);
+
+        X = X();     // Write default target offset
+        X.X(X);
+    }
+
+    /**
+     * Read needed data (e.g. index) from file.
+     */
+    protected X X(X X, X X) throws X
+    {
+        X = (0 - (X.X() % 0)) % 0; // Compute number of pad bytes
+
+        for(X X=0; X < X; X++)
+        {
+            X.X();
+        }
+
+        // Default branch target common for both cases (TABLESWITCH, LOOKUPSWITCH)
+        X = X.X();
+    }
+
+    /**
+     * @return mnemonic for instruction
+     */
+    public X X(X X)
+    {
+        X X = new X(X.X(X));
+
+        if(X)
+        {
+            for(X X=0; X < X; X++)
+            {
+                X X = 0;
+
+                if(X[X] != 0)
+                    X = X[X].X().X();
+
+                X.X(0 + X[X] + 0 + X + 0 + X[X] + 0);
+            }
+        }
+        else
+            X.X(0);
+
+        return X.X();
+    }
+
+    /**
+     * Set branch target for `i'th case
+     */
+    public X X(X X, X X)
+    {
+        X(X[X], X, X);
+        X[X] = X;
+    }
+
+    /**
+     * @param old_ih old target
+     * @param new_ih new target
+     */
+    public X X(X X, X X)
+    {
+        X X = 0;
+
+        if(X == X)
+        {
+            X = 0;
+            X(X);
+        }
+
+        for(X X=0; X < X.X; X++)
+        {
+            if(X[X] == X)
+            {
+                X = 0;
+                X(X, X);
+            }
+        }
+
+        if(!X)
+            throw new X(0 + X);
+    }
+
+    /**
+     * @return true, if ih is target of this instruction
+     */
+    public X X(X X)
+    {
+        if(X == X)
+            return 0;
+
+        for(X X=0; X < X.X; X++)
+            if(X[X] == X)
+                return 0;
+
+        return 0;
+    }
+
+    /**
+     * Inform targets that they're not targeted anymore.
+     */
+    X X()
+    {
+        X.X();
+
+        for(X X=0; X < X.X; X++)
+            X[X].X(X);
+    }
+
+    /**
+     * @return array of match indices
+     */
+    public X[] X()
+    {
+        return X;
+    }
+
+    /**
+     * @return array of match target offsets
+     */
+    public X[] X()
+    {
+        return X;
+    }
+
+    /**
+     * @return array of match targets
+     */
+    public X[] X()
+    {
+        return X;
+    }
+}

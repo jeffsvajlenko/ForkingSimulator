@@ -1,0 +1,141 @@
+package X.X.X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X.X;
+
+import X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X.X;
+
+import X.X.X.X.*;
+
+import X.X.X.*;
+
+import X.X.X.X.X;
+
+public abstract class X {
+    private X X;
+    private X X;
+
+    protected X () {
+    }
+
+    public static X X (X X) {
+        if (X == 0) {
+            throw new X (0);
+        }
+        X X;
+        try {
+            X = X.X (0, 0, X);
+        } catch (X X) {
+            throw new X (X);
+        }
+        X X = (X) X.X;
+        X.X = X;
+        X.X = X.X;
+        return X;
+    }
+
+    public static X X (X X, X X) {
+        if (X == 0) {
+            throw new X (0);
+        } else if (X == 0) {
+            throw new X (0);
+        }
+
+        X X;
+        try {
+            X = X.X (0, 0, X, X);
+        } catch (X X) {
+            throw new X (X);
+        }
+        X X = (X) X.X;
+        X.X = X;
+        X.X = X.X;
+        return X;
+    }
+
+    public static X X (X X, X X) throws X {
+        if (X == 0) {
+            throw new X (0);
+        } else if (X == 0) {
+            throw new X (0);
+        } else if (X.X () == 0) {
+            throw new X ();
+        }
+
+        X X;
+        try {
+            X = X.X (0, 0, X, X);
+        } catch (X X) {
+            throw new X (X);
+        }
+        X X = (X) X.X;
+        X.X = X;
+        X.X = X.X;
+        return X;
+    }
+
+    public static X X () {
+        return X (0);
+    }
+
+    public final X X () {
+        return X;
+    }
+
+    public final X X () {
+        return X;
+    }
+
+    public abstract X X (X X);
+
+    public abstract X X (X X, X X);
+
+    public abstract X X (X X);
+
+    public abstract X X (X X) throws X;
+
+    public abstract X X (X [] X);
+
+    public abstract X X (X [] X, X [] X, X X);
+
+    public abstract X X (X [] X, X X);
+
+    public abstract X X (X X);
+
+    public abstract X X (X X, X X, X X);
+
+    public abstract X X (X X);
+
+    public abstract X X (X X, X X);
+
+    public abstract X X (X X);
+
+    public abstract X X ();
+
+    public abstract X X (X X) throws X;
+
+}
+

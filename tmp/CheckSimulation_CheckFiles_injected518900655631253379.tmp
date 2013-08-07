@@ -1,0 +1,1778 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+package X.X.X.X;
+
+import X.X.*;
+import X.X.*;
+import X.X.*;
+import X.X.X;
+import X.X.X;
+
+import X.X.X.*;
+
+/**
+ * Takes a sequence of RTF tokens and text and appends the text
+ * described by the RTF to a <code>StyledDocument</code> (the <em>target</em>).
+ * The RTF is lexed
+ * from the character stream by the <code>RTFParser</code> which is this class's
+ * superclass.
+ *
+ * This class is an indirect subclass of OutputStream. It must be closed
+ * in order to guarantee that all of the text has been sent to
+ * the text acceptor.
+ *
+ *   @see RTFParser
+ *   @see java.io.OutputStream
+ */
+class X extends X
+{
+    /** The object to which the parsed text is sent. */
+    X X;
+
+    /** Miscellaneous information about the parser's state. This
+     *  dictionary is saved and restored when an RTF group begins
+     *  or ends. */
+    X X;   /* Current parser state */
+    /** This is the "dst" item from parserState. rtfDestination
+     *  is the current rtf destination. It is cached in an instance
+     *  variable for speed. */
+    X X;
+    /** This holds the current document attributes. */
+    X X;
+
+    /** This Dictionary maps Integer font numbers to String font names. */
+    X X;
+    /** This array maps color indices to Color objects. */
+    X[] X;
+    /** This array maps character style numbers to Style objects. */
+    X[] X;
+    /** This array maps paragraph style numbers to Style objects. */
+    X[] X;
+    /** This array maps section style numbers to Style objects. */
+    X[] X;
+
+    /** This is the RTF version number, extracted from the \rtf keyword.
+     *  The version information is currently not used. */
+    X X;
+
+    /** <code>true</code> to indicate that if the next keyword is unknown,
+     *  the containing group should be ignored. */
+    X X;
+
+    /** The parameter of the most recently parsed \\ucN keyword,
+     *  used for skipping alternative representations after a
+     *  Unicode character. */
+    X X;
+
+    static private X X;
+    static
+    {
+        X = X.X();
+    }
+
+    private X X;
+
+    /* this should be final, but there's a bug in javac... */
+    /** textKeywords maps RTF keywords to single-character strings,
+     *  for those keywords which simply insert some text. */
+    static X X = 0;
+    static
+    {
+        X = new X();
+        X.X(0,         0);
+        X.X(0,          0);
+        X.X(0,          0);
+        X.X(0,          0);  /* not in the spec... */
+        X.X(0,          0);  /* nonbreaking space */
+        X.X(0,          0);  /* nonbreaking hyphen */
+        X.X(0,     0);
+        X.X(0,     0);
+        X.X(0,    0);
+        X.X(0,     0);
+        X.X(0,    0);
+        X.X(0,  0);
+        X.X(0,     0);
+        X.X(0,    0);
+        X.X(0,  0);
+        X.X(0,     0);
+        X.X(0,    0);
+        X.X(0,        0);
+        X.X(0,        0);
+        X.X(0,       0);
+
+        /* There is no Unicode equivalent to an optional hyphen, as far as
+        I can tell. */
+        X.X(0,          0);  /* TODO: optional hyphen */
+    }
+
+    /* some entries in parserState */
+    static final X X = 0;
+    static final X X = 0;
+
+    static X X;
+    static X X = 0;
+    static
+    {
+        X = new X();
+    }
+
+    /* TODO: per-font font encodings ( \fcharset control word ) ? */
+
+    /**
+     * Creates a new RTFReader instance. Text will be sent to
+     * the specified TextAcceptor.
+     *
+     * @param destination The TextAcceptor which is to receive the text.
+     */
+    public X(X X)
+    {
+        X X;
+
+        X = X;
+        X = new X();
+        X = new X();
+
+        X = -0;
+
+        X = new X();
+        X = new X();
+    }
+
+    /** Called when the RTFParser encounters a bin keyword in the
+     *  RTF stream.
+     *
+     *  @see RTFParser
+     */
+    public X X(X[] X)
+    {
+        if (X > 0)
+        {
+            /* a blob only counts as one character for skipping purposes */
+            X --;
+            return;
+        }
+
+        /* someday, someone will want to do something with blobs */
+    }
+
+
+    /**
+     * Handles any pure text (containing no control characters) in the input
+     * stream. Called by the superclass. */
+    public X X(X X)
+    {
+        if (X > 0)
+        {
+            if (X >= X.X())
+            {
+                X -= X.X();
+                return;
+            }
+            else
+            {
+                X = X.X(X);
+                X = 0;
+            }
+        }
+
+        if (X != 0)
+        {
+            X.X(X);
+            return;
+        }
+
+        X(0);
+    }
+
+    /** The default color for text which has no specified color. */
+    X X()
+    {
+        return X.X;
+    }
+
+    /** Called by the superclass when a new RTF group is begun.
+     *  This implementation saves the current <code>parserState</code>, and gives
+     *  the current destination a chance to save its own state.
+     * @see RTFParser#begingroup
+     */
+    public X X()
+    {
+        if (X > 0)
+        {
+            /* TODO this indicates an error in the RTF. Log it? */
+            X = 0;
+        }
+
+        /* we do this little dance to avoid cloning the entire state stack and
+           immediately throwing it away. */
+        X X = X.X(0);
+        if (X != 0)
+            X.X(0);
+        X X = (X)((X)X).X();
+        if (X != 0)
+            X.X(0, X);
+        X.X(0, X);
+
+        if (X != 0)
+            X.X();
+    }
+
+    /** Called by the superclass when the current RTF group is closed.
+     *  This restores the parserState saved by <code>begingroup()</code>
+     *  as well as invoking the endgroup method of the current
+     *  destination.
+     * @see RTFParser#endgroup
+     */
+    public X X()
+    {
+        if (X > 0)
+        {
+            /* NB this indicates an error in the RTF. Log it? */
+            X = 0;
+        }
+
+        X X = (X)X.X(0);
+        X X = (X)X.X(0);
+        if (X != X)
+        {
+            X.X(); /* allow the destination to clean up */
+            X = X;
+        }
+        X X = X;
+        X = X;
+        if (X != 0)
+            X.X(X);
+    }
+
+    protected X X(X X)
+    {
+        /* Check that setting the destination won't close the
+           current destination (should never happen) */
+        X X = (X)X.X(0);
+        if (X != 0)
+        {
+            if (X != X.X(0))
+            {
+                X(0);
+                X.X();
+            }
+        }
+        X = X;
+        X.X(0, X);
+    }
+
+    /** Called by the user when there is no more input (<i>i.e.</i>,
+     * at the end of the RTF file.)
+     *
+     * @see OutputStream#close
+     */
+    public X X()
+    throws X
+    {
+        X X = X.X();
+        while(X.X())
+        {
+            X X = X.X();
+            X.X(X,
+                               X.X((X)X));
+        }
+
+        /* RTFParser should have ensured that all our groups are closed */
+
+        X(0);
+
+        X.X();
+    }
+
+    /**
+     * Handles a parameterless RTF keyword. This is called by the superclass
+     * (RTFParser) when a keyword is found in the input stream.
+     *
+     * @returns <code>true</code> if the keyword is recognized and handled;
+     *          <code>false</code> otherwise
+     * @see RTFParser#handleKeyword
+     */
+    public X X(X X)
+    {
+        X X;
+        X X = X;
+
+        if (X > 0)
+        {
+            X --;
+            return 0;
+        }
+
+        X = 0;
+
+        if ((X = X.X(X)) != 0)
+        {
+            X((X)X);
+            return 0;
+        }
+
+        if (X.X(0))
+        {
+            X(new X());
+            return 0;
+        }
+
+        if (X.X(0))
+        {
+            X(new X());
+            return 0;
+        }
+
+        if (X.X(0))
+        {
+            X(new X());
+            return 0;
+        }
+
+        if (X.X(0))
+        {
+            X(new X());
+            return 0;
+        }
+
+        if (X.X(0))
+        {
+            X(0);
+            return 0;
+        }
+
+        if (X.X(0))
+        {
+            if (X)
+                X(0);
+            else
+                X(0);
+            return 0;
+        }
+
+        if (X.X(0))
+        {
+            X(0);
+            return 0;
+        }
+
+        if (X.X(0))
+        {
+            X(0); /* IBM Code Page 437 */
+            return 0;
+        }
+
+        if (X.X(0))
+        {
+            X(0); /* IBM Code Page 850 */
+            return 0;
+        }
+
+        if (X.X(0))
+        {
+            X = 0;
+            return 0;
+        }
+
+        if (X != 0)
+        {
+            if(X.X(X))
+                return 0;
+        }
+
+        /* this point is reached only if the keyword is unrecognized */
+
+        /* other destinations we don't understand and therefore ignore */
+        if (X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0) ||
+                X.X(0))
+        {
+            X = 0;
+        }
+
+        if (X)
+        {
+            X(new X());
+        }
+
+        return 0;
+    }
+
+    /**
+     * Handles an RTF keyword and its integer parameter.
+     * This is called by the superclass
+     * (RTFParser) when a keyword is found in the input stream.
+     *
+     * @returns <code>true</code> if the keyword is recognized and handled;
+     *          <code>false</code> otherwise
+     * @see RTFParser#handleKeyword
+     */
+    public X X(X X, X X)
+    {
+        X X = X;
+
+        if (X > 0)
+        {
+            X --;
+            return 0;
+        }
+
+        X = 0;
+
+        if (X.X(0))
+        {
+            /* count of characters to skip after a unicode character */
+            X.X(0, X.X(X));
+            return 0;
+        }
+        if (X.X(0))
+        {
+            if (X < 0)
+                X = X + 0;
+            X((X)X);
+            X X = (X)(X.X(0));
+            if (X != 0)
+            {
+                X = X.X();
+            }
+            else
+            {
+                X = 0;
+            }
+            return 0;
+        }
+
+        if (X.X(0))
+        {
+            X = X;
+            X(new X());
+            return 0;
+        }
+
+        if (X.X(0) ||
+                X.X(0))
+            X = 0;
+
+        if (X != 0)
+        {
+            if(X.X(X, X))
+                return 0;
+        }
+
+        /* this point is reached only if the keyword is unrecognized */
+
+        if (X)
+        {
+            X(new X());
+        }
+
+        return 0;
+    }
+
+    private X X(X X, X X)
+    {
+//    target.changeAttributes(new LFDictionary(LFArray.arrayWithObject(value), LFArray.arrayWithObject(name)));
+    }
+
+    /**
+     * setCharacterSet sets the current translation table to correspond with
+     * the named character set. The character set is loaded if necessary.
+     *
+     * @see AbstractFilter
+     */
+    public X X(X X)
+    {
+        X X;
+
+        try
+        {
+            X = X(X);
+        }
+        catch (X X)
+        {
+            X(0 + X + 0 + X);
+            X = 0;
+        }
+
+        if (X != 0)
+        {
+            X = (X[])X;
+        }
+        else
+        {
+            X(0 + X + 0);
+            if (!X.X(0))
+            {
+                try
+                {
+                    X = (X[])X(0);
+                }
+                catch (X X)
+                {
+                    throw new X(0 + X + 0);
+                }
+            }
+        }
+
+        X(X.X, X);
+    }
+
+    /** Adds a character set to the RTFReader's list
+     *  of known character sets */
+    public static X
+    X(X X, X[] X)
+    {
+        if (X.X < 0)
+            throw new X(0);
+        X.X(X, X);
+    }
+
+    /** Looks up a named character set. A character set is a 256-entry
+     *  array of characters, mapping unsigned byte values to their Unicode
+     *  equivalents. The character set is loaded if necessary.
+     *
+     *  @returns the character set
+     */
+    public static X
+    X(final X X)
+    throws X
+    {
+        X[] X;
+
+        X = (X [])X.X(X);
+        if (X == 0)
+        {
+            X X;
+            X = (X)X.X.X.
+                            X(new X.X.X()
+            {
+                public X X()
+                {
+                    return X.class.X
+                           (0 + X + 0);
+                }
+            });
+            X = X(X);
+            X(X, X);
+        }
+        return X;
+    }
+
+    /** Parses a character set from an InputStream. The character set
+     * must contain 256 decimal integers, separated by whitespace, with
+     * no punctuation. B- and C- style comments are allowed.
+     *
+     * @returns the newly read character set
+     */
+    static X[] X(X X)
+    throws X
+    {
+        X[] X = new X[0];
+        X X;
+        X X = new X(new X(
+                    new X(X, 0)));
+
+        X.X(0);
+        X.X(0);
+        X.X(0);
+        X.X(0);
+
+        X = 0;
+        while (X < 0)
+        {
+            X X;
+            try
+            {
+                X = X.X();
+            }
+            catch (X X)
+            {
+                throw new X(0 + X + 0);
+            }
+            if (X != X.X)
+            {
+//	    System.out.println("Bad token: type=" + ttype + " tok=" + in.sval);
+                throw new X(0);
+//	    continue;
+            }
+            X[X] = (X)(X.X);
+            X++;
+        }
+
+        return X;
+    }
+
+    static X[] X(X.X.X X)
+    throws X
+    {
+        return X(X.X());
+    }
+
+    /** An interface (could be an entirely abstract class) describing
+     *  a destination. The RTF reader always has a current destination
+     *  which is where text is sent.
+     *
+     *  @see RTFReader
+     */
+    interface X
+    {
+        X X(X[] X);
+        X X(X X);
+        X X(X X);
+        X X(X X, X X);
+
+        X X();
+        X X(X X);
+
+        X X();
+    }
+
+    /** This data-sink class is used to implement ignored destinations
+     *  (e.g. {\*\blegga blah blah blah} )
+     *  It accepts all keywords and text but does nothing with them. */
+    class X implements X
+    {
+        public X X(X[] X)
+        {
+            /* Discard binary blobs. */
+        }
+
+        public X X(X X)
+        {
+            /* Discard text. */
+        }
+
+        public X X(X X)
+        {
+            /* Accept and discard keywords. */
+            return 0;
+        }
+
+        public X X(X X, X X)
+        {
+            /* Accept and discard parameterized keywords. */
+            return 0;
+        }
+
+        public X X()
+        {
+            /* Ignore groups --- the RTFReader will keep track of the
+               current group level as necessary */
+        }
+
+        public X X(X X)
+        {
+            /* Ignore groups */
+        }
+
+        public X X()
+        {
+            /* No end-of-destination cleanup needed */
+        }
+    }
+
+    /** Reads the fonttbl group, inserting fonts into the RTFReader's
+     *  fontTable dictionary. */
+    class X implements X
+    {
+        X X;
+        X X = 0;
+        X X;
+
+        public X X(X[] X)
+        {
+            /* Discard binary blobs. */
+        }
+
+        public X X(X X)
+        {
+            X X = X.X(0);
+            X X;
+
+            if (X > -0)
+                X = X.X(0, X);
+            else
+                X = X;
+
+
+            /* TODO: do something with the font family. */
+
+            if (X == -0
+                    && X != 0)
+            {
+                //font name might be broken across multiple calls
+                X = X.X(X) + X;
+            }
+            else
+            {
+                X = X.X(X);
+            }
+            X.X(X, X);
+
+            X = -0;
+            X = 0;
+            return;
+        }
+
+        public X X(X X)
+        {
+            if (X.X(0) == 0)
+            {
+                X = X.X(0);
+                return 0;
+            }
+
+            return 0;
+        }
+
+        public X X(X X, X X)
+        {
+            if (X.X(0))
+            {
+                X = X;
+                return 0;
+            }
+
+            return 0;
+        }
+
+        /* Groups are irrelevant. */
+        public X X() {}
+        public X X(X X) {}
+
+        /* currently, the only thing we do when the font table ends is
+           dump its contents to the debugging log. */
+        public X X()
+        {
+            X X = X.X();
+            X(0);
+            while(X.X())
+            {
+                X X = (X)X.X();
+                X(0 + X + 0 + X.X(X));
+            }
+        }
+    }
+
+    /** Reads the colortbl group. Upon end-of-group, the RTFReader's
+     *  color table is set to an array containing the read colors. */
+    class X implements X
+    {
+        X X, X, X;
+        X X;
+
+        public X()
+        {
+            X = 0;
+            X = 0;
+            X = 0;
+            X = new X();
+        }
+
+        public X X(X X)
+        {
+            X X = 0;
+
+            for (X = 0; X < X.X(); X ++)
+            {
+                if (X.X(X) == 0)
+                {
+                    X X;
+                    X = new X(X, X, X);
+                    X.X(X);
+                }
+            }
+        }
+
+        public X X()
+        {
+            X X = X.X();
+            X(0 + X + 0);
+            X = new X[X];
+            X.X(X);
+        }
+
+        public X X(X X, X X)
+        {
+            if (X.X(0))
+                X = X;
+            else if (X.X(0))
+                X = X;
+            else if (X.X(0))
+                X = X;
+            else
+                return 0;
+
+            return 0;
+        }
+
+        /* Colortbls don't understand any parameterless keywords */
+        public X X(X X)
+        {
+            return 0;
+        }
+
+        /* Groups are irrelevant. */
+        public X X() {}
+        public X X(X X) {}
+
+        /* Shouldn't see any binary blobs ... */
+        public X X(X[] X) {}
+    }
+
+    /** Handles the stylesheet keyword. Styles are read and sorted
+     *  into the three style arrays in the RTFReader. */
+    class X
+        extends X
+        implements X
+    {
+        X X;
+
+        public X()
+        {
+            X = new X();
+        }
+
+        public X X()
+        {
+            X(new X());
+        }
+
+        public X X()
+        {
+            X X, X, X;
+            X = new X();
+            X = new X();
+            X = new X();
+            X X = X.X();
+            while(X.X())
+            {
+                X X;
+                X X;
+                X = (X)X.X();
+                X = X.X();
+                X(0+X.X+0+X.X+0+X);
+                X X = (X)X.X(X.X);
+                X X;
+                if (X.X(X.X))
+                {
+                    X = X;
+                }
+                else if (X.X(X.X))
+                {
+                    X = X;
+                }
+                else
+                {
+                    X = X;
+                }
+                if (X.X() <= X.X)
+                    X.X(X.X + 0);
+                X.X(X, X.X);
+            }
+            if (!(X.X()))
+            {
+                X[] X = new X[X.X()];
+                X.X(X);
+                X = X;
+            }
+            if (!(X.X()))
+            {
+                X[] X = new X[X.X()];
+                X.X(X);
+                X = X;
+            }
+            if (!(X.X()))
+            {
+                X[] X = new X[X.X()];
+                X.X(X);
+                X = X;
+            }
+
+            /* (old debugging code)
+            	int i, m;
+            	if (characterStyles != null) {
+            	  m = characterStyles.length;
+            	  for(i=0;i<m;i++)
+            	    warnings.println("chrStyle["+i+"]="+characterStyles[i]);
+            	} else warnings.println("No character styles.");
+            	if (paragraphStyles != null) {
+            	  m = paragraphStyles.length;
+            	  for(i=0;i<m;i++)
+            	    warnings.println("pgfStyle["+i+"]="+paragraphStyles[i]);
+            	} else warnings.println("No paragraph styles.");
+            	if (sectionStyles != null) {
+            	  m = characterStyles.length;
+            	  for(i=0;i<m;i++)
+            	    warnings.println("secStyle["+i+"]="+sectionStyles[i]);
+            	} else warnings.println("No section styles.");
+            */
+        }
+
+        /** This subclass handles an individual style */
+        class X
+            extends X
+            implements X
+        {
+            final X X = 0;
+            X X;
+            X X;
+            X X;
+            public X X;
+            public X X;
+            X X;
+            X X;
+            X X;
+
+            X X;
+
+            public X()
+            {
+                X = 0;
+                X = 0;
+                X = 0;
+                X = 0;
+                X = 0;
+                X = X;
+                X = X;
+                X = 0;
+            }
+
+            public X X(X X)
+            {
+                if (X != 0)
+                    X = X + X;
+                else
+                    X = X;
+            }
+
+            public X X()
+            {
+                X X = (X == 0) ? 0 : X.X(0);
+                if (X > 0)
+                    X = X.X(0, X);
+                X.X(X.X(X), X);
+                X.X();
+            }
+
+            public X X(X X)
+            {
+                if (X.X(0))
+                {
+                    X = 0;
+                    return 0;
+                }
+                if (X.X(0))
+                {
+                    X = 0;
+                    return 0;
+                }
+                return X.X(X);
+            }
+
+            public X X(X X, X X)
+            {
+                if (X.X(0))
+                {
+                    X = 0;
+                    X = 0;
+                    X = X;
+                }
+                else if (X.X(0))
+                {
+                    X = 0;
+                    X = 0;
+                    X = X;
+                }
+                else if (X.X(0))
+                {
+                    X = 0;
+                    X = 0;
+                    X = X;
+                }
+                else if (X.X(0))
+                {
+                    X = X;
+                }
+                else if (X.X(0))
+                {
+                    X = X;
+                }
+                else
+                {
+                    return X.X(X, X);
+                }
+                return 0;
+            }
+
+            public X X()
+            {
+                X X = 0;
+                X X = 0;
+
+                if (X != 0)
+                    return X;
+
+                if (X != X)
+                {
+                    X X;
+                    X = (X)X.X(X.X(X));
+                    if (X != 0 && X != X)
+                    {
+                        X = X.X();
+                    }
+                }
+
+                /* NB: Swing StyleContext doesn't allow distinct styles with
+                   the same name; RTF apparently does. This may confuse the
+                   user. */
+                X = X.X(X, X);
+
+                if (X)
+                {
+                    X.X(X());
+                    X.X(X.X,
+                                               X.X);
+                }
+                else if (X)
+                {
+                    X.X(X());
+                    X.X(X.X,
+                                               X.X);
+                }
+                else     /* must be a paragraph style */
+                {
+                    X.X(X());
+                    X.X(X.X,
+                                               X.X);
+                }
+
+                if (X != X)
+                {
+                    X X;
+                    X = (X)X.X(X.X(X));
+                    if (X != 0)
+                    {
+                        X = X.X();
+                    }
+                }
+
+                if (X != 0)
+                    X.X(X.X, X);
+                X.X(X.X,
+                                           X.X(X));
+                X.X(X.X,
+                                           X.X(X));
+
+                return X;
+            }
+        }
+    }
+
+    /** Handles the info group. Currently no info keywords are recognized
+     *  so this is a subclass of DiscardingDestination. */
+    class X
+        extends X
+        implements X
+    {
+    }
+
+    /** RTFReader.TextHandlingDestination is an abstract RTF destination
+     *  which simply tracks the attributes specified by the RTF control words
+     *  in internal form and can produce acceptable AttributeSets for the
+     *  current character, paragraph, and section attributes. It is up
+     *  to the subclasses to determine what is done with the actual text. */
+    abstract class X implements X
+    {
+        /** This is the "chr" element of parserState, cached for
+         *  more efficient use */
+        X X;
+        /** This is the "pgf" element of parserState, cached for
+         *  more efficient use */
+        X X;
+        /** This is the "sec" element of parserState, cached for
+         *  more efficient use */
+        X X;
+
+        public X()
+        {
+            X = X();
+            X.X(0, X);
+            X = X();
+            X.X(0, X);
+            X = X();
+            X.X(0, X);
+        }
+
+        abstract public X X(X X);
+
+        public X X(X[] X)
+        {
+            /* This should really be in TextHandlingDestination, but
+            * since *nobody* does anything with binary blobs, this
+             * is more convenient. */
+            X(0);
+        }
+
+        public X X()
+        {
+            X X = X();
+            X X = X();
+            X X = X();
+
+            /* It would probably be more efficient to use the
+             * resolver property of the attributes set for
+             * implementing rtf groups,
+             * but that's needed for styles. */
+
+            /* update the cached attribute dictionaries */
+            X = new X();
+            X.X(X);
+            X.X(0, X);
+
+            X = new X();
+            X.X(X);
+            X.X(0, X);
+
+            X = new X();
+            X.X(X);
+            X.X(0, X);
+        }
+
+        public X X(X X)
+        {
+            X = (X)X.X(0);
+            X = (X)X.X(0);
+            X   = (X)X.X(0);
+        }
+
+        public X X()
+        {
+        }
+
+        public X X(X X)
+        {
+            if (X.X(0))
+            {
+                return X(0, 0);
+            }
+
+            {
+                X X = X.X(X);
+                if (X != 0)
+                {
+                    X X = (X)X;
+                    X X;
+
+                    switch(X.X())
+                    {
+                    case X.X:
+                        X = X.X(X);
+                        break;
+                    case X.X:
+                        X = X.X(X);
+                        break;
+                    case X.X:
+                        X = X.X(X);
+                        break;
+                    case X.X:
+                        X.X = X;
+                        X = X.X(X);
+                        X.X = 0;
+                        break;
+                    case X.X:
+                        X = X.X(X);
+                        break;
+                    default:
+                        /* should never happen */
+                        X = 0;
+                        break;
+                    }
+                    if (X)
+                        return 0;
+                }
+            }
+
+
+            if (X.X(0))
+            {
+                X();
+                return 0;
+            }
+
+            if (X.X(0))
+            {
+                X();
+                return 0;
+            }
+
+            if (X.X(0))
+            {
+                X();
+                return 0;
+            }
+
+            return 0;
+        }
+
+        public X X(X X, X X)
+        {
+            X X = (X != 0);
+
+            if (X.X(0))
+                X = 0; /* whatEVER, dude. */
+
+            if (X.X(0))
+            {
+                X.X(X, X.X(X));
+                return 0;
+            }
+            if (X.X(0))
+            {
+                X.X(X, X.X(X));
+                return 0;
+            }
+
+            {
+                X X = X.X(X);
+                if (X != 0)
+                {
+                    X X = (X)X;
+                    X X;
+
+                    switch(X.X())
+                    {
+                    case X.X:
+                        X = X.X(X, X);
+                        break;
+                    case X.X:
+                        X = X.X(X, X);
+                        break;
+                    case X.X:
+                        X = X.X(X, X);
+                        break;
+                    case X.X:
+                        X.X = X;
+                        X = X.X(X, X);
+                        X.X = 0;
+                        break;
+                    case X.X:
+                        X = X.X(X, X);
+                        break;
+                    default:
+                        /* should never happen */
+                        X = 0;
+                        break;
+                    }
+                    if (X)
+                        return 0;
+                }
+            }
+
+            if (X.X(0))
+            {
+                X.X(X, (X / 0));
+                return 0;
+            }
+
+            /* TODO: superscript/subscript */
+
+            if (X.X(0))
+            {
+                if (X == 0)    /* magic value! */
+                {
+                    X.X(X.X);
+                }
+                else
+                {
+                    /* TODO: The RTF sl attribute has special meaning if it's
+                       negative. Make sure that SwingText has the same special
+                       meaning, or find a way to imitate that. When SwingText
+                       handles this, also recognize the slmult keyword. */
+                    X.X(X,
+                                                  X / 0);
+                }
+                return 0;
+            }
+
+            /* TODO: Other kinds of underlining */
+
+            if (X.X(0) || X.X(0))
+            {
+                X X = X / 0;
+                X X, X;
+                X X;
+
+                X = X.X;
+                X = (X)(X.X(0));
+                if (X != 0)
+                    X = X.X();
+                X = X.X;
+                X = (X)(X.X(0));
+                if (X != 0)
+                    X = X.X();
+                if (X.X(0))
+                    X = X.X;
+
+                X.X(0);
+                X.X(0);
+
+                X X = new X(X, X, X);
+                X X;
+                X X;
+
+                X = (X)X.X(0);
+                if (X == 0)
+                {
+                    X = new X();
+                    X.X(0, X);
+                    X = X.X(0);
+                }
+                else
+                {
+                    X = (X)X.X(0);
+                    X = X.X(0 + X.X());
+                }
+                X.X(X, X);
+                X.X(0, X);
+                X.X(0);
+
+                return 0;
+            }
+
+            if (X.X(0) &&
+                    X != 0)
+            {
+                X.X(0, X[X]);
+                return 0;
+            }
+
+            if (X.X(0) &&
+                    X != 0)
+            {
+                X.X(0, X[X]);
+                return 0;
+            }
+
+            if (X.X(0) &&
+                    X != 0)
+            {
+                X.X(0, X[X]);
+                return 0;
+            }
+
+            return 0;
+        }
+
+        /** Returns a new MutableAttributeSet containing the
+         *  default character attributes */
+        protected X X()
+        {
+            X X = new X();
+
+            /* TODO: default font */
+
+            X.X(X, 0);
+            X.X(X, 0);
+            X.X(X, 0);
+            X.X(X, X());
+
+            return X;
+        }
+
+        /** Returns a new MutableAttributeSet containing the
+         *  default paragraph attributes */
+        protected X X()
+        {
+            X X = new X();
+
+            X.X(X, 0);
+            X.X(X, 0);
+            X.X(X, 0);
+
+            /* TODO: what should this be, really? */
+            X.X(X.X(X.X));
+
+            return X;
+        }
+
+        /** Returns a new MutableAttributeSet containing the
+         *  default section attributes */
+        protected X X()
+        {
+            X X = new X();
+
+            return X;
+        }
+
+        /**
+         * Calculates the current text (character) attributes in a form suitable
+         * for SwingText from the current parser state.
+         *
+         * @returns a new MutableAttributeSet containing the text attributes.
+         */
+        X X()
+        {
+            X X =
+                new X(X);
+            X X;
+            X X;
+
+            /* figure out the font name */
+            /* TODO: catch exceptions for undefined attributes,
+               bad font indices, etc.? (as it stands, it is the caller's
+               job to clean up after corrupt RTF) */
+            X = (X)X.X(0);
+            /* note setFontFamily() can not handle a null font */
+            X X;
+            if (X != 0)
+                X = (X)X.X(X);
+            else
+                X = 0;
+            if (X != 0)
+                X.X(X, X);
+            else
+                X.X(X.X);
+
+            if (X != 0)
+            {
+                X = (X)X.X(0);
+                if (X != 0)
+                {
+                    X X = X[X.X()];
+                    X.X(X, X);
+                }
+                else
+                {
+                    /* AttributeSet dies if you set a value to null */
+                    X.X(X.X);
+                }
+            }
+
+            if (X != 0)
+            {
+                X = (X)X.X(0);
+                if (X != 0)
+                {
+                    X X = X[X.X()];
+                    X.X(X.X,
+                                            X);
+                }
+                else
+                {
+                    /* AttributeSet dies if you set a value to null */
+                    X.X(X.X);
+                }
+            }
+
+            X X = (X)X.X(0);
+            if (X != 0)
+                X.X(X);
+
+            /* Other attributes are maintained directly in "attributes" */
+
+            return X;
+        }
+
+        /**
+         * Calculates the current paragraph attributes (with keys
+         * as given in StyleConstants) from the current parser state.
+         *
+         * @returns a newly created MutableAttributeSet.
+         * @see StyleConstants
+         */
+        X X()
+        {
+            /* NB if there were a mutableCopy() method we should use it */
+            X X = new X(X);
+
+            X X;
+
+            /*** Tab stops ***/
+            X X[];
+
+            X = (X[])X.X(0);
+            if (X == 0)
+            {
+                X X = (X)X.X(0);
+                if (X != 0)
+                {
+                    X X = ((X)X.X(0)).X();
+                    X = new X[X];
+                    for (X X = 0; X <= X; X ++)
+                        X[X-0] = (X)X.X(X.X(X));
+                    X.X(0, X);
+                }
+            }
+            if (X != 0)
+                X.X(X.X, X);
+
+            X X = (X)X.X(0);
+            if (X != 0)
+                X.X(X);
+
+            return X;
+        }
+
+        /**
+         * Calculates the current section attributes
+         * from the current parser state.
+         *
+         * @returns a newly created MutableAttributeSet.
+         */
+        public X X()
+        {
+            X X = new X(X);
+
+            X X = (X)X.X(0);
+            if (X != 0)
+                X.X(X);
+
+            return X;
+        }
+
+        /** Resets the filter's internal notion of the current character
+         *  attributes to their default values. Invoked to handle the
+         *  \plain keyword. */
+        protected X X()
+        {
+            X(0, 0);
+            X(0, 0);
+
+            X(0, 0);  /* 12 pt. */
+
+            X X = X.X();
+            while(X.X())
+            {
+                X X = (X)X.X();
+                if (X.X() == X.X)
+                    X.X(X);
+            }
+
+            X(0, 0);
+
+            X.X(0);
+        }
+
+        /** Resets the filter's internal notion of the current paragraph's
+         *  attributes to their default values. Invoked to handle the
+         *  \pard keyword. */
+        protected X X()
+        {
+            X.X(0);
+            X.X(0);
+            X.X(0);
+
+            X.X(X,
+                                        X.X);
+
+            X X = X.X();
+            while(X.X())
+            {
+                X X = (X)X.X();
+                if (X.X() == X.X)
+                    X.X(X);
+            }
+        }
+
+        /** Resets the filter's internal notion of the current section's
+         *  attributes to their default values. Invoked to handle the
+         *  \sectd keyword. */
+        protected X X()
+        {
+            X X = X.X();
+            while(X.X())
+            {
+                X X = (X)X.X();
+                if (X.X() == X.X)
+                    X.X(X);
+            }
+
+            X.X(0);
+        }
+    }
+
+    /** RTFReader.TextHandlingDestination provides basic text handling
+     *  functionality. Subclasses must implement: <dl>
+     *  <dt>deliverText()<dd>to handle a run of text with the same
+     *                       attributes
+     *  <dt>finishParagraph()<dd>to end the current paragraph and
+     *                           set the paragraph's attributes
+     *  <dt>endSection()<dd>to end the current section
+     *  </dl>
+     */
+    abstract class X
+        extends X
+        implements X
+    {
+        /** <code>true</code> if the reader has not just finished
+         *  a paragraph; false upon startup */
+        X X;
+
+        public X()
+        {
+            X();
+            X = 0;
+        }
+
+        public X X(X X)
+        {
+            if (! X)
+                X();
+
+            X(X, X());
+        }
+
+        abstract X X(X X, X X);
+
+        public X X()
+        {
+            if (X)
+                X();
+
+            X.X();
+        }
+
+        public X X(X X)
+        {
+            if (X.X(0) || X.X(0))
+            {
+                X = 0;
+            }
+
+            if (X.X(0))
+            {
+//	    warnings.println("Ending paragraph.");
+                X();
+                return 0;
+            }
+
+            if (X.X(0))
+            {
+//	    warnings.println("Ending section.");
+                X();
+                return 0;
+            }
+
+            return X.X(X);
+        }
+
+        protected X X()
+        {
+            X = 0;
+        }
+
+        protected X X()
+        {
+            X X = X();
+            X X = X();
+            X(X, X);
+            X = 0;
+        }
+
+        abstract X X(X X, X X);
+
+        abstract X X();
+    }
+
+    /** RTFReader.DocumentDestination is a concrete subclass of
+     *  TextHandlingDestination which appends the text to the
+     *  StyledDocument given by the <code>target</code> ivar of the
+     *  containing RTFReader.
+     */
+    class X
+        extends X
+        implements X
+    {
+        public X X(X X, X X)
+        {
+            try
+            {
+                X.X(X.X(),
+                                    X,
+                                    X());
+            }
+            catch (X X)
+            {
+                /* This shouldn't be able to happen, of course */
+                /* TODO is InternalError the correct error to throw? */
+                throw new X(X.X());
+            }
+        }
+
+        public X X(X X,
+                                    X X)
+        {
+            X X = X.X();
+            try
+            {
+                X.X(X, 0, X);
+                X.X(X, 0, X, 0);
+            }
+            catch (X X)
+            {
+                /* This shouldn't be able to happen, of course */
+                /* TODO is InternalError the correct error to throw? */
+                throw new X(X.X());
+            }
+        }
+
+        public X X()
+        {
+            /* If we implemented sections, we'd end 'em here */
+        }
+    }
+
+}
+
+

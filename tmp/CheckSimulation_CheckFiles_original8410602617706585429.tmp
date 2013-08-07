@@ -1,0 +1,14 @@
+package X.X.X.X;
+
+import X.X.X;
+
+public interface X {
+
+    X X (X X);
+
+    X X (X X, X X);
+
+    X X ();
+
+}
+

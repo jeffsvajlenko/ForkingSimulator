@@ -17,7 +17,7 @@ import java.util.Random;
 import models.FileVariant;
 import models.Fork;
 import models.Fragment;
-import models.FragmentVariant;
+import models.FunctionVariant;
 import models.LeafDirectoryVariant;
 import models.Operator;
 
@@ -180,6 +180,9 @@ public class ForkingSimulator {
 			return;
 		}
 		PrintWriter log = new PrintWriter(logs);
+		
+	//Make copy of properties in output
+		Files.copy(propertiesfile, outputdir.resolve("properties"));
 		
 	//Set up repository
 		try {
@@ -375,9 +378,9 @@ log.println("BEGIN: FileVariants");
 				
 			//File Injection Header and Refereced Data
 				if(doUniform) {
-					log.println(numf + " U " + t_variants.size() + " " + file.toAbsolutePath().normalize().toString());
+					log.println(numf + " U " + t_variants.size() + " " + outputdir.relativize(file.toAbsolutePath().normalize()).toString());
 				} else {
-					log.println(numf + " V " + t_variants.size() + " " + file.toAbsolutePath().normalize().toString());
+					log.println(numf + " V " + t_variants.size() + " " + outputdir.relativize(file.toAbsolutePath().normalize()).toString());
 				}
 				//Save Original Copy
 				try {
@@ -400,7 +403,7 @@ log.println("BEGIN: FileVariants");
 					} else {
 						log.print(" O");
 					}
-					log.println(" " + t_variants.get(i).getInjectedFile());
+					log.println(" " + outputdir.relativize(t_variants.get(i).getInjectedFile()));
 					
 					//Save copy of possibly mutated
 					try {
@@ -530,9 +533,9 @@ log.println("BEGIN: LeafDirectoryVariants");
 				
 			//Dir Injection Header and Referenced Data
 				if(doUniform) {
-					log.println(numd + " U " + t_forks.size() + " " + leafDirectory.toAbsolutePath().normalize().toString());
+					log.println(numd + " U " + t_forks.size() + " " + outputdir.relativize(leafDirectory.toAbsolutePath().normalize()).toString());
 				} else {
-					log.println(numd + " V " + t_forks.size() + " " + leafDirectory.toAbsolutePath().normalize().toString());
+					log.println(numd + " V " + t_forks.size() + " " + outputdir.relativize(leafDirectory.toAbsolutePath().normalize()).toString());
 				}
 				
 				//Track original folder
@@ -552,7 +555,7 @@ log.println("BEGIN: LeafDirectoryVariants");
 					} else {
 						log.print(" O ");
 					}
-					log.println(t_variants.get(i).getFileVariants().size() + " " + t_variants.get(i).getInjectedDirectory());
+					log.println(t_variants.get(i).getFileVariants().size() + " " + outputdir.relativize(t_variants.get(i).getInjectedDirectory()));
 					
 					for(FileVariant fv : t_variants.get(i).getFileVariants()) {
 						log.print("\t\t\t");
@@ -566,7 +569,7 @@ log.println("BEGIN: LeafDirectoryVariants");
 						} else {
 							log.print(" O");
 						}
-						log.println(" " + fv.getOriginalFile() + ";" + fv.getInjectedFile());
+						log.println(" " + outputdir.relativize(fv.getOriginalFile()) + ";" + outputdir.relativize(fv.getInjectedFile()));
 					}
 					
 					//make copy
@@ -624,7 +627,7 @@ log.println("BEGIN: FunctionFragmentVariants");
 		//Inject the function fragment into the forks
 			//track the forks effected/variants created
 			List<Integer> t_forks = new LinkedList<Integer>();
-			List<FragmentVariant> t_variants = new LinkedList<FragmentVariant>();
+			List<FunctionVariant> t_variants = new LinkedList<FunctionVariant>();
 			
 			//perform injections
 			
@@ -653,7 +656,7 @@ functionfragmentinjectloop:
 			for(int forkn : injects) {
 				try {
 					Fork fork = forks.get(forkn);
-					FragmentVariant ffv = null;
+					FunctionVariant ffv = null;
 					Fragment thisInjectAfter = null;
 					if(isInjectionUniform) {
 						thisInjectAfter = new Fragment(fork.getLocation().toAbsolutePath().normalize().resolve(injectafter.getSrcFile()), injectafter.getStartLine(), injectafter.getEndLine());
@@ -694,15 +697,15 @@ functionfragmentinjectloop:
 			if(t_variants.size() > 0) {
 				numff++;
 				if(isInjectionUniform) {
-					log.println(numff + " U " +  t_forks.size() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine() + " " + functionfragment.getSrcFile());
+					log.println(numff + " U " +  t_forks.size() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine() + " " + outputdir.relativize(functionfragment.getSrcFile()));
 				} else {
-					log.println(numff + " V " +  t_forks.size() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine() + " " + functionfragment.getSrcFile());
+					log.println(numff + " V " +  t_forks.size() + " " + functionfragment.getStartLine() + " " + functionfragment.getEndLine() + " " + outputdir.relativize(functionfragment.getSrcFile()));
 				}
 				for(int i = 0; i < t_forks.size(); i++) {
 					if(t_variants.get(i).getOperator() == null) {
-						log.println("\t" + t_forks.get(i) + " O " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine() + " " + t_variants.get(i).getInjectedFragment().getSrcFile());
+						log.println("\t" + t_forks.get(i) + " O " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine() + " " + outputdir.relativize(t_variants.get(i).getInjectedFragment().getSrcFile()));
 					} else {
-						log.println("\t" + t_forks.get(i) + " M " + t_variants.get(i).getOperator().getId() + " " + t_variants.get(i).getTimes() + " " +t_variants.get(i).getOperator().getTargetCloneType() + " " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine()  + " " + t_variants.get(i).getInjectedFragment().getSrcFile());
+						log.println("\t" + t_forks.get(i) + " M " + t_variants.get(i).getOperator().getId() + " " + t_variants.get(i).getTimes() + " " +t_variants.get(i).getOperator().getTargetCloneType() + " " + t_variants.get(i).getInjectedFragment().getStartLine() + " " + t_variants.get(i).getInjectedFragment().getEndLine()  + " " + outputdir.relativize(t_variants.get(i).getInjectedFragment().getSrcFile()));
 					}
 				}
 				try {

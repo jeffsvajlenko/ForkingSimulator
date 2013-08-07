@@ -1,0 +1,538 @@
+package X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X;
+
+public class X implements X, X.X.X {
+    protected X X;
+    protected X X;
+
+    public X (X X) {
+        X.X = X;
+        X.X = X;
+    }
+
+    public X (X X) {
+        X (X, X.X ());
+    }
+
+    public X (X X) {
+        X (0);
+    }
+
+    public X X (X X, X X, X X, X [] X, X X) {
+        X X;
+        X X = 0;
+        X X = X.X (X, X);
+        for (X X = 0;
+        X < X.X; X ++) X += X [X].X ();
+
+        if (X == X.X) X = X.X (X);
+        else X = X.X (X, X);
+
+        switch (X) {
+            case X.X :
+                return new X ();
+            case X.X :
+                return new X ();
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X (X + 0);
+            default :
+                throw new X ();
+        }
+    }
+
+    public X X () {
+        X X = new X ();
+        X X = X.X (0, 0, 0);
+        X X = X.X (0, 0, 0);
+        X.X ();
+        X.X (new X (X, X));
+        X.X (new X (X));
+        return X;
+    }
+
+    public X X (X X) {
+        X X;
+        if (X instanceof X) X = new X ((X) X);
+        else if (X instanceof X) X = new X (X, (X) X);
+        else if (X instanceof X) X = new X (X, (X) X);
+        else if (X instanceof X) X = new X (X);
+        else throw new X (0 + X.X ());
+
+        return X.X ();
+    }
+
+    private static class X {
+        X [] X;
+        X X;
+        X [] X;
+        X X;
+        X X;
+        X X;
+
+        X (X X, X X, X [] X, X X) {
+            X = X;
+            X = X;
+            X = X;
+            X = X;
+            X = X;
+        }
+
+    }
+
+    private X X (X X) {
+        return X (X.X, X.X, X.X, X.X, X);
+    }
+
+    private static X [] X = {new X (0, 0, X.X, new X [] {X.X}, X.X), new X (0, 0, X.X, new X [] {X.X}, X.X), 0, 0, new X (0, 0, X.X, new X [] {X.X}, X.X), new X (0, 0, X.X, new X [] {X.X}, X.X), new X (0, 0, X.X, new X [] {X.X}, X.X), new X (0, 0, X.X, new X [] {X.X}, X.X), new X (0, 0, X.X, new X [] {X.X}, X.X), new X (0, 0, X.X, new X [] {X.X}, X.X), new X (0, 0, X.X, new X [] {X.X}, X.X), new X (0, 0, X.X, new X [] {X.X}, X.X)};
+
+    private static final X X (X X) {
+        return ((X instanceof X) && ((X) X).X ().X (0));
+    }
+
+    public X X (X X) {
+        X X = X.X ();
+        if (X (X)) return X ();
+
+        switch (X) {
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+                return X (X [X], X.X);
+            case X.X :
+            case X.X :
+                return X (X [0], X.X);
+            default :
+                throw new X (0 + X);
+        }
+    }
+
+    public X X (X X, X X, X X) {
+        X X;
+        X X = X.X ();
+        X = X.X (X, X, X);
+        switch (X) {
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X (X);
+            default :
+                throw new X (0 + X);
+        }
+    }
+
+    public static X X () {
+        return new X ();
+    }
+
+    public static X X () {
+        switch (X.X ()) {
+            case X.X :
+            case X.X :
+                return X;
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            default :
+                throw new X (0 + X);
+        }
+    }
+
+    private static final X X (X X) {
+        switch (X) {
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X.X (0) ? (X) X : (X) X;
+            default :
+                throw new X (0 + X);
+        }
+    }
+
+    private static final X X (X X) {
+        switch (X) {
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X.X (0) ? (X) X : (X) X;
+            default :
+                throw new X ();
+        }
+    }
+
+    private static final X X (X X) {
+        switch (X) {
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            default :
+                throw new X (0 + X);
+        }
+    }
+
+    private static final X X (X X) {
+        switch (X) {
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            case 0 :
+                return X;
+            default :
+                throw new X (0 + X);
+        }
+    }
+
+    public static X X (X X) {
+        X X = X.X () [0];
+        switch (X.X ()) {
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+                return X (X, X);
+            case X.X :
+                return X (X, X);
+            case X.X :
+                return X (X);
+            case X.X :
+                return X (X);
+            default :
+                throw new X (0 + X);
+        }
+    }
+
+    public static X X (X X) {
+        return (X == 0) ? (X) X : (X) X;
+    }
+
+    public static X X (X X) {
+        return (X == 0) ? (X) X : (X) X;
+    }
+
+    public static X X () {
+        return (X == 0) ? (X) X : (X) X;
+    }
+
+    public static X X (X X) {
+        return (X == 0) ? (X) X : (X) X;
+    }
+
+    public static X X (X X) {
+        switch (X.X ()) {
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+                return new X ();
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X ();
+            case X.X :
+                return new X ();
+            case X.X :
+            case X.X :
+                return new X (X);
+            default :
+                throw new X ();
+        }
+    }
+
+    public static X X (X X, X X) {
+        switch (X.X ()) {
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X ();
+            case X.X :
+                return new X (X);
+            case X.X :
+            case X.X :
+                return new X (X);
+            default :
+                throw new X (0 + X);
+        }
+    }
+
+    public static X X () {
+        switch (X.X ()) {
+            case X.X :
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+            case X.X :
+                return X;
+            default :
+                throw new X (0 + X);
+        }
+    }
+
+    public static X X (X X) {
+        switch (X.X ()) {
+            case X.X :
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+            case X.X :
+                return X;
+            default :
+                throw new X (0 + X);
+        }
+    }
+
+    public X X (X X) {
+        if ((X instanceof X) && (X instanceof X)) {
+            X X = X.X ();
+            X X = X.X ();
+            if (X == X.X && (X == X.X || X == X.X || X == X.X)) X = X.X;
+
+            X [] X = {0, 0, 0, 0, 0, 0, 0};
+            X X = 0 + X [X - X.X] + 0 + X [X - X.X];
+            X X = 0;
+            try {
+                X = (X) X.X.X.X (X).X ();
+            } catch (X X) {
+                throw new X (0 + X);
+            }
+            return X;
+        } else if ((X instanceof X) && (X instanceof X)) {
+            if (X instanceof X) return new X ();
+            else return new X (X.X ());
+
+        } else throw new X ();
+
+    }
+
+    public X X (X X) {
+        return new X (X.X (X, X));
+    }
+
+    public X X (X X) {
+        return new X (X.X (X, X.X ()));
+    }
+
+    public X X (X X, X X) {
+        return new X (X.X (X, X.X ()));
+    }
+
+    public X X (X X, X X, X X) {
+        return new X (X.X (X));
+    }
+
+    public X X (X X) {
+        if (X instanceof X) return new X (X.X ((X) X));
+        else return new X ();
+
+    }
+
+    public X X () {
+        if (X instanceof X) return new X ();
+        else return new X (X.X ((X) X));
+
+    }
+
+    public X X (X X) {
+        return new X (X.X (X));
+    }
+
+    public X X (X X) {
+        return X ();
+    }
+
+    public X X (X X) {
+        if (X == 0) {
+            if (X instanceof X) return new X ();
+            else if (X instanceof X) return new X (X.X ());
+            else return new X (((X) X).X ());
+
+        } else {
+            X X;
+            if (X instanceof X) X = (X) X;
+            else X = new X (X);
+
+            return new X (X.X (X));
+        }
+    }
+
+    public static X X (X X) {
+        switch (X.X ()) {
+            case X.X :
+            case X.X :
+                return X;
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            case X.X :
+                return X;
+            default :
+                throw new X (0 + X);
+        }
+    }
+
+    public static X X (X X, X X) {
+        switch (X) {
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X ();
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X ();
+            case X.X :
+                return new X ();
+            case X.X :
+                return new X ();
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X ();
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X ();
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X ();
+            case X.X :
+                return new X ();
+            case X.X :
+                return new X (X);
+            case X.X :
+                return new X (X);
+            default :
+                throw new X ();
+        }
+    }
+
+    public X X (X X) {
+        X = X;
+    }
+
+    public X X () {
+        return X;
+    }
+
+    public X X (X X) {
+        X = X;
+    }
+
+    public X X () {
+        return X;
+    }
+
+}
+

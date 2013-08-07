@@ -1,0 +1,19 @@
+package X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+public abstract class X extends X {
+    protected X X;
+
+    protected X (X X) {
+        X (new X ());
+        if (X == X) X.X (X.X + X.X, X);
+
+    }
+
+}
+

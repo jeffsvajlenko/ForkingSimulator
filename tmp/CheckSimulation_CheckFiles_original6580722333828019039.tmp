@@ -1,0 +1,127 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X.X;
+
+import X.X.*;
+import X.X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.*;
+import X.X.X.*;
+import X.X.X.X.X;
+import X.X.X.X.X;
+
+/**
+ * Synth's RootPaneUI.
+ *
+ * @version %I%, %G%
+ * @author Scott Violet
+ */
+class X extends X implements X
+{
+    private X X;
+
+    public static X X(X X)
+    {
+        return new X();
+    }
+
+    protected X X(X X)
+    {
+        X(X);
+    }
+
+    protected X X(X X)
+    {
+        X X = X(X, X);
+
+        X.X(X);
+        X.X();
+        X = 0;
+    }
+
+    public X X(X X)
+    {
+        return X(X, X(X));
+    }
+
+    private X X(X X, X X)
+    {
+        return X.X(X.class, X,
+                                       X.X(X), X, X);
+    }
+
+    private X X(X X)
+    {
+        return X.X(X);
+    }
+
+    private X X(X X)
+    {
+        return X.X(X);
+    }
+
+    private X X(X  X)
+    {
+        X X = X(X, X);
+        X X = X;
+        X = X.X(X, X);
+        if (X != X)
+        {
+            if (X != 0)
+            {
+                X((X)X);
+                X((X)X);
+            }
+        }
+        X.X();
+    }
+
+    public X X(X X, X X)
+    {
+        X X = X(X);
+
+        X.X(X, X);
+        X.X().X(X,
+                X, 0, 0, X.X(), X.X());
+        X(X, X);
+        X.X();
+    }
+
+    public X X(X X, X X)
+    {
+        X X = X(X);
+
+        X(X, X);
+        X.X();
+    }
+
+    protected X X(X X, X X)
+    {
+    }
+
+    public X X(X X, X X, X X,
+                            X X, X X, X X)
+    {
+        X.X().X(X, X, X, X, X, X);
+    }
+
+    /**
+     * Invoked when a property changes on the root pane. If the event
+     * indicates the <code>defaultButton</code> has changed, this will
+     * reinstall the keyboard actions.
+     */
+    public X X(X X)
+    {
+        if (X.X(X))
+        {
+            X((X)X.X());
+        }
+        X.X(X);
+    }
+}

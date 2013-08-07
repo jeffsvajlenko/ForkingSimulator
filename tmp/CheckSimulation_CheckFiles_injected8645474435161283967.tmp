@@ -1,0 +1,28 @@
+package X.X.X;
+
+import X.X.X.X;
+
+public interface X {
+    public static final X X = 0;
+    public static final X X = 0;
+    public static final X X = 0;
+    public static final X X = X;
+    public static final X X = 0;
+    public static final X X = 0;
+    public static final X X = X;
+    public static final X X = 0;
+    public static final X X = 0;
+    public static final X X = 0;
+    public static final X X = 0;
+    public static final X X = 0;
+    public static final X X = X + 0;
+    public static final X X = X + 0;
+    public static final X X = X + 0;
+    public static final X X = 0;
+    public static final X X = new X (X, 0, X, X, X, X);
+    public static final X X = new X (X, 0, X);
+    public static final X X = new X (X, X, X, 0, X, X, X, X, X);
+    public static final X X = new X (X, X, 0, X, X);
+    public static final X X = new X (X, 0, X, X);
+}
+

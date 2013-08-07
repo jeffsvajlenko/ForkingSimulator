@@ -1,0 +1,115 @@
+package X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X.X;
+
+public class X extends X {
+    protected static final X X = X.X + X.X;
+    protected static final X X = X.X + X.X;
+    protected static final X X = X.X + X.X;
+    protected static final X X = X.X + X.X;
+    protected static final X X = X.X + X.X;
+    protected static final X X = X.X + X.X;
+    protected static final X X = X.X + X.X;
+    protected static final X X = X.X + X.X;
+    protected static final X X = X.X + X.X;
+    protected static final X X = X.X + X.X;
+    protected static final X X = X.X + X.X;
+    protected X X;
+
+    public X () {
+        X (0, 0);
+    }
+
+    public X () {
+        X (X, 0);
+    }
+
+    public X (X X, X X) {
+        X (X, X);
+    }
+
+    public X (X X, X X, X X) {
+        X (X, X, X);
+        final X [] X = {X, X, X, X, X, X, X, X,};
+        X ();
+        X (X, 0);
+        X (X);
+        X (0);
+        X (X);
+        X ();
+        X (X, 0);
+        final X [] X = {X, X,};
+        X ();
+    }
+
+    protected X X () {
+        X.X ();
+        if (X ()) {
+            if (X == 0) {
+                X = new X ();
+                X.X (X);
+                X (X);
+                if (X.X () == 0) {
+                    X X = new X ();
+                    X.X (X.X);
+                }
+            }
+            X = X;
+            X.X ();
+            X.X (X);
+            X.X (X);
+        }
+    }
+
+    protected X X (X X) throws X {
+        if (X.X (X.X)) {
+            final X X = X.X () - X.X.X ();
+            if (X == X.X.X () && X.X (X.X)) {
+                return;
+            }
+            if (X == X.X.X () && X.X ()) {
+                return;
+            }
+            if (X == X.X.X () && X.X ()) {
+                return;
+            }
+            if (X == X.X.X () && X.X ()) {
+                return;
+            }
+        }
+        X.X (X);
+    }
+
+    protected X X (X X) throws X {
+        if (X.X (X.X)) {
+            final X X = X.X () - X.X.X ();
+            if (X == X.X.X () && X.X ()) {
+                return;
+            }
+            if (X == X.X.X () && X.X ()) {
+                return;
+            }
+        }
+        if (X.X (X.X)) {
+            final X X = X.X () - X.X.X ();
+            if (X == X.X.X () && X.X (X.X)) {
+                return;
+            }
+        }
+        X.X ();
+    }
+
+}
+

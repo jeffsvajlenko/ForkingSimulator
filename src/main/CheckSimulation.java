@@ -462,7 +462,7 @@ public class CheckSimulation {
 					return;
 				}
 				numinject = lin.nextInt();
-				originalfile = Paths.get(lin.next());
+				originalfile = outputdir.resolve(Paths.get(lin.next()));
 				lin.close();
 			} catch (Exception e) {
 				System.out.println("FileVariant " + numExpected + " has invalid header.  Line: " + line);
@@ -565,7 +565,7 @@ public class CheckSimulation {
 						return;
 					}
 					
-					injectedfile = Paths.get(lin.next());
+					injectedfile = outputdir.resolve(Paths.get(lin.next()));
 					
 					lin.close();
 				} catch (Exception e) {
@@ -646,7 +646,7 @@ public class CheckSimulation {
 						return;
 					}
 					
-					if(!(times == 1 || times <= (int)((double)FileUtil.countLines(originalfile) * (double) maxfileedits / (double) 100))) {
+					if(!(times == 1 || times <= (int)((double)FileUtil.countPrettyLines(originalfile, language) * (double) maxfileedits / (double) 100))) {
 						System.out.println("FileVariant " + numExpected + " Injection " + (i+1) + " was mutated more than maximum times." + " Line: " + line);
 						return;
 					}
@@ -854,7 +854,7 @@ public class CheckSimulation {
 					return;
 				}
 				numinject = lin.nextInt();
-				originaldir = Paths.get(lin.next());
+				originaldir = outputdir.resolve(Paths.get(lin.next()));
 				lin.close();
 			} catch (Exception e) {
 				System.out.println("DirectoryVariant " + numExpected + " has invalid header.  Line: " + line);
@@ -944,7 +944,7 @@ public class CheckSimulation {
 						return;
 					}
 					dir_numfiles = lin.nextInt();
-					injecteddir = Paths.get(lin.nextLine().trim()).toAbsolutePath().normalize();
+					injecteddir = outputdir.resolve(Paths.get(lin.nextLine().trim())).toAbsolutePath().normalize();
 					lin.close();
 				} catch (Exception e) {
 					System.out.println("DirectoryVariant " + numExpected + " Injection " + (i+1) + " has invalid header.  Line: " + line);
@@ -973,8 +973,7 @@ public class CheckSimulation {
 			//Check Injection
 				//injected into correct fork
 				if(!injecteddir.toAbsolutePath().normalize().startsWith(forkpath.toAbsolutePath().normalize())) {
-					System.out.println("DirectoryVariant " + numExpected + " Injection " + (i+1) + " directory was not injected into the correct fork.  Line: " + line);
-					
+					System.out.println("DirectoryVariant " + numExpected + " Injection " + (i+1) + " directory was not injected into the correct fork.  Line: " + line);;
 					return;
 				}
 				//injected directory exists
@@ -1003,6 +1002,7 @@ public class CheckSimulation {
 				//Check Number of Files
 				if(dir_numfiles != injecteddir.toFile().listFiles().length) {
 					System.out.println("DirectoryVariant " + numExpected + " Injection " + (i+1) + " file number indicator is wrong.  Line: " + line);
+					System.out.println(injecteddir.toFile().listFiles().length);
 					return;
 				}
 				
@@ -1090,8 +1090,8 @@ public class CheckSimulation {
 						}
 						
 						lin.useDelimiter(";");
-						dvifh_originalFile = Paths.get(lin.next().trim());
-						dvifh_injectedFile = Paths.get(lin.next().trim());
+						dvifh_originalFile = outputdir.resolve(Paths.get(lin.next().trim()));
+						dvifh_injectedFile = outputdir.resolve(Paths.get(lin.next().trim()));
 					} catch (Exception e) {
 						System.out.println("DirectoryVariant " + numExpected + " Injection " + (i+1) + "File " + (j+1) + " has invalid header.  Line: " + line);
 						e.printStackTrace();
@@ -1176,7 +1176,7 @@ public class CheckSimulation {
 							System.out.println("DirectoryVariant " + numExpected + " Injection " + (i+1) + "File " + (j+1) + " times is invalid, < 0.  Line: " + line);
 							return;
 						}
-						if(!(dvifh_times == 1 || dvifh_times <= (int)((double)FileUtil.countLines(dvifh_originalFile) * (double) maxfileedits / (double) 100))) {
+						if(!(dvifh_times == 1 || dvifh_times <= (int)((double)FileUtil.countPrettyLines(dvifh_originalFile, language) * (double) maxfileedits / (double) 100))) {
 							System.out.println("FileVariant " + numExpected + " Injection " + (i+1) + " was mutated more than maximum times." + " Line: " + line);
 							return;
 						}
@@ -1432,7 +1432,7 @@ public class CheckSimulation {
 			int numinject = lin.nextInt();
 			int startline = lin.nextInt();
 			int endline = lin.nextInt();
-			Path srcfile = Paths.get(lin.nextLine().trim());
+			Path srcfile = outputdir.resolve(Paths.get(lin.nextLine().trim()));
 						
 			Fragment originalfragment = new Fragment(srcfile, startline, endline);
 			lin.close();
@@ -1516,7 +1516,7 @@ public class CheckSimulation {
 					
 					int istartline = lin.nextInt();
 					int iendline = lin.nextInt();
-					Path isrcfile = Paths.get(lin.nextLine().trim());
+					Path isrcfile = outputdir.resolve(Paths.get(lin.nextLine().trim()));
 					injectedfragment = new Fragment(isrcfile, istartline, iendline);;
 					lin.close();
 				} catch (Exception e) {

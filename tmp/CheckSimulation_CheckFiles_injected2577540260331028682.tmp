@@ -1,0 +1,120 @@
+package X.X.X.X;
+
+import X.X.*;
+
+import X.X.X.X;
+
+import X.X.X;
+
+import X.X.*;
+
+import X.X.X.*;
+
+import X.X.X.X.*;
+
+import X.X.X;
+
+class X extends X {
+    public static final X X = 0;
+    public static final X X = 0;
+    private X < X > X;
+    private X X;
+    private X X;
+    private X X;
+
+    X () {
+        X = new X (0);
+        X = new X < X > ();
+        X = new X ();
+    }
+
+    public synchronized X X (X X, X X, X X) throws X {
+        if (X == 0) {
+            X = 0;
+        }
+        if (X == X) {
+            X.X (X.X (X, X, X));
+        } else if (X == X) {
+            X.X (X.X (X.X (), X, X));
+        }
+
+    }
+
+    public synchronized X X (X X, X X) {
+        X X = X;
+        X.X ();
+        X (X, X, X, X, X);
+        if (X.X () == 0) {
+            return X ();
+        }
+        X.X ();
+        X X = X (X);
+        if (X == 0) {
+            X = X (X, X);
+            if (X != 0) {
+                X (X, X, X, X);
+            }
+        }
+        return X;
+    }
+
+    private X X () {
+        if (X == 0) {
+            X = new X ();
+            ((X) X).X (new X (X.X, X.X, X, 0));
+        }
+        return X;
+    }
+
+    private X X (X.X.X X, X X, X X) {
+        X X = X.X ();
+        X X = X.X (X);
+        if (X == 0) {
+            X = 0;
+        }
+        for (X X = X.X () - 0;
+        X >= 0; X --) {
+            X X = X.X (X);
+            X X;
+            if (X.X () == X) {
+                X = X;
+            } else {
+                X = X;
+            }
+            if (X.X (X) && X.X (X.X (), X) == - 0) {
+                X.X (X.X ());
+            }
+        }
+    }
+
+    private X X (X.X.X X, X X) {
+        X X = new X (X, X);
+        X.X (X, X, X);
+    }
+
+    private X X (X.X.X X) {
+        if (X.X () == 0) {
+            return 0;
+        }
+        return (X) X.X (X, X);
+    }
+
+    private X X (X.X.X X) {
+        X X = X.X ();
+        if (X == 0) {
+            return 0;
+        } else if (X == 0) {
+            return (X) ((X) X.X (0), X).X ();
+        }
+
+        X X = (X) X.X (X - 0);
+        X = (X) X.X ();
+        for (X X = X - 0;
+        X >= 0; X --) {
+            X = ((X) X.X (X)).X (X);
+        }
+        return X;
+    }
+
+}
+

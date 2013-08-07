@@ -1,0 +1,80 @@
+/*
+ * Copyright (c) 1997, 2008, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ *
+ */
+/*
+ * $Id: MimeHeader.java,v 1.3 2005/04/05 20:49:48 mk125090 Exp $
+ * $Revision: 1.3 $
+ * $Date: 2005/04/05 20:49:48 $
+ */
+
+
+package X.X.X;
+
+
+/**
+ * An object that stores a MIME header name and its value. One or more
+ * <code>MimeHeader</code> objects may be contained in a <code>MimeHeaders</code>
+ * object.
+ *
+ * @see MimeHeaders
+ */
+public class X
+{
+
+    private X X;
+    private X X;
+
+    /**
+     * Constructs a <code>MimeHeader</code> object initialized with the given
+     * name and value.
+     *
+     * @param name a <code>String</code> giving the name of the header
+     * @param value a <code>String</code> giving the value of the header
+     */
+    public X(X X, X X)
+    {
+        X.X = X;
+        X.X = X;
+    }
+
+    /**
+     * Returns the name of this <code>MimeHeader</code> object.
+     *
+     * @return the name of the header as a <code>String</code>
+     */
+    public X X()
+    {
+        return X;
+    }
+
+    /**
+     * Returns the value of this <code>MimeHeader</code> object.
+     *
+     * @return 	the value of the header as a <code>String</code>
+     */
+    public X X()
+    {
+        return X;
+    }
+}

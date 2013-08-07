@@ -1,0 +1,82 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X.X.X.X;
+
+import X.X.X.X;
+import X.X.X ;
+import X.X.X ;
+import X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+
+public class X
+{
+    private X X ;
+    private X X ;
+
+    private X X( X X )
+    {
+        X.X( X, X ) ;
+    }
+
+    public X( X X )
+    {
+        X = new X() ;
+        X.X = X ;
+    }
+
+    /** Register the ServiceContext class so that it will be recognized
+     * by the read method.
+     * Class cls must have the following properties:
+     * <ul>
+     * <li>It must derive from com.sun.corba.se.spi.servicecontext.ServiceContext.</li>
+     * <li>It must have a public static final int SERVICE_CONTEXT_ID
+     * member.</li>
+     * <li>It must implement a constructor that takes a
+     * org.omg.CORBA_2_3.portable.InputStream argument.</li>
+     * </ul>
+     */
+    public X X( X X )
+    {
+        if (X.X)
+            X( 0 + X ) ;
+
+        X X = new X( X ) ;
+
+        if (X(X.X()) == 0)
+            X.X( X ) ;
+        else
+            throw new X( 0 ) ;
+    }
+
+    public X X( X X )
+    {
+        if (X.X)
+            X( 0 + X ) ;
+
+        X X = X.X() ;
+        while (X.X())
+        {
+            X X =
+                (X)(X.X()) ;
+            if (X.X() == X)
+            {
+                if (X.X)
+                    X( 0 + X ) ;
+
+                return X ;
+            }
+        }
+
+        if (X.X)
+            X( 0 ) ;
+
+        return 0 ;
+    }
+}

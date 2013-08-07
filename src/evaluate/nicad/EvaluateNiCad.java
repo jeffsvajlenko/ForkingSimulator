@@ -53,7 +53,7 @@ public class EvaluateNiCad {
 		
 	//GenerationLog
 		try {
-			generationLog = Paths.get(args[0]);
+			generationLog = Paths.get(args[0]).toAbsolutePath().normalize();
 		} catch (InvalidPathException e) {
 			System.out.println("GenerationLog path invalid.");
 			return;
@@ -68,7 +68,7 @@ public class EvaluateNiCad {
 		}
 		
 		try {
-			niCadFunctionCloneReport = Paths.get(args[1]);
+			niCadFunctionCloneReport = Paths.get(args[1]).toAbsolutePath().normalize();
 		} catch (InvalidPathException e) {
 			System.out.println("niCadFunctionCloneReport path invalid.");
 			return;
@@ -83,7 +83,7 @@ public class EvaluateNiCad {
 		}
 		
 		try {
-			niCadFileCloneReport = Paths.get(args[2]);
+			niCadFileCloneReport = Paths.get(args[2]).toAbsolutePath().normalize();
 		} catch (InvalidPathException e) {
 			System.out.println("niCadFileCloneReport path invalid.");
 			return;
@@ -98,7 +98,7 @@ public class EvaluateNiCad {
 		}
 		
 		try {
-			outputDirectory = Paths.get(args[3]);
+			outputDirectory = Paths.get(args[3]).toAbsolutePath().normalize();
 		} catch (InvalidPathException e) {
 			System.out.println("outputDirectory path invalid.");
 			return;
@@ -113,7 +113,7 @@ public class EvaluateNiCad {
 		}
 		
 		try {
-			evaluationDirectory = Paths.get(args[4]);
+			evaluationDirectory = Paths.get(args[4]).toAbsolutePath().normalize();
 		} catch (InvalidPathException e) {
 			System.out.println("evaluationDirectory path invalid.");
 			return;
@@ -134,6 +134,10 @@ public class EvaluateNiCad {
 		LinkedList<LinkedList<LinkedHashSet<CloneClass<Fragment>>>> functionClones_injectedDirectories_byVariantByFile = new LinkedList<LinkedList<LinkedHashSet<CloneClass<Fragment>>>>();
 		LinkedHashSet<CloneClass<Fragment>> functionClones_injectedFunctions = new LinkedHashSet<CloneClass<Fragment>>();
 		LinkedList<LinkedHashSet<CloneClass<Fragment>>> functionClones_original = new LinkedList<LinkedHashSet<CloneClass<Fragment>>>();
+		
+		LinkedList<CloneClass<Fragment>> functionClones_injectedFunctions_pairs = new LinkedList<CloneClass<Fragment>>();
+		LinkedList<CloneClass<Fragment>> functionClones_original_pairs = new LinkedList<CloneClass<Fragment>>();
+		
 		
 	//Compared to base data
 		LinkedHashSet<Path> modifiedOriginalFiles = new LinkedHashSet<Path>(); //Files in base system which were modified in one or more forks
@@ -184,6 +188,7 @@ System.out.println(">> Parsing properties...");
 		in.nextLine(); // directory rename rate
 		in.nextLine(); // max file edit
 		in.nextLine(); // mutation attempts
+		in.nextLine();
 		
 		in.nextLine(); // END Properties.
 		
@@ -520,6 +525,8 @@ System.out.println(">> Parsing function variants...");
 			functionClones_injectedFunctions.add(new CloneClass<Fragment>(fvh_fragments));
 		}
 
+		
+		
 System.out.println(">> Parsing original system...");
 // Original Files (Base System)
 		InventoriedSystem originalSystemInventory = new InventoriedSystem(systemDirectory, language);
@@ -574,10 +581,15 @@ System.out.println(">> Parsing original system...");
 				for(Fragment o_fragment : EvaluateNiCad.getFunctionFragmentsInFile(outputDirectory.resolve(o_fileInFork), language)) {
 					Fragment o_nfragment = new Fragment(outputDirectory.relativize(o_fragment.getSrcFile()), o_fragment.getStartLine(), o_fragment.getEndLine());
 					//System.out.println("\t\t\t" + o_nfragment.getSrcFile() + " " + o_nfragment.getStartLine() + " " + o_nfragment.getEndLine());
-					if(!o_nfragment.equals(injected)) {
-						o_originalFragments.add(o_nfragment);
+					
+					if(injected != null) {
+						if(o_nfragment.getStartLine() >= injected.getStartLine() && o_nfragment.getStartLine() <= injected.getEndLine()) {
+							//System.out.println("\t\t\t\tRejected, is/in injected.");
+						} else {
+							o_originalFragments.add(o_nfragment);
+						}
 					} else {
-						//System.out.println("\t\t\t\t discarded injected");
+						o_originalFragments.add(o_nfragment);
 					}
 				}
 				o_originalFragmentsPerFork.add(o_originalFragments);
@@ -593,9 +605,42 @@ System.out.println(">> Parsing original system...");
 				o_cloneClassesFromFile.add(new CloneClass<Fragment>(o_function_cclass_fragments));
 			}
 			
-			//add built list of clone classes for this file to the list
-			functionClones_original.add(o_cloneClassesFromFile);
+			//add built list of clone classes for this file to the list, but only if not empty
+			if(o_cloneClassesFromFile.size() > 0) {
+				//System.out.println("\tadded");
+				functionClones_original.add(o_cloneClassesFromFile);
+			} else {
+				//System.out.println("\tnot added");
+			}
 		}
+		
+System.out.println(">> Converting to clone pairs");
+	
+	for(CloneClass<Fragment> cclass : functionClones_injectedFunctions) {
+		LinkedList<Fragment> fragments = new LinkedList<Fragment>(cclass.getFragments());
+		for(int i = 0; i < fragments.size(); i++) {
+			for(int j = i+1; j < fragments.size(); j++) {
+				LinkedHashSet<Fragment> set = new LinkedHashSet<Fragment>();
+				set.add(fragments.get(i));
+				set.add(fragments.get(j));
+				functionClones_injectedFunctions_pairs.add(new CloneClass<Fragment>(set));
+			}
+		}
+	}
+	
+	for(LinkedHashSet<CloneClass<Fragment>> lhs : functionClones_original) {
+		for(CloneClass<Fragment> cclass : lhs) {
+			LinkedList<Fragment> fragments = new LinkedList<Fragment>(cclass.getFragments());
+			for(int i = 0; i < fragments.size(); i++) {
+				for(int j = i+1; j < fragments.size(); j++) {
+					LinkedHashSet<Fragment> set = new LinkedHashSet<Fragment>();
+					set.add(fragments.get(i));
+					set.add(fragments.get(j));
+					functionClones_original_pairs.add(new CloneClass<Fragment>(set));
+				}
+			}
+		}
+	}
 		
 System.out.println(">> Parsing NiCad results...");
 //Get NiCad Results
@@ -607,6 +652,7 @@ System.out.println(">> Parsing NiCad results...");
 			}
 			nicad_fileResults.add(new CloneClass<Path>(paths));
 		}
+		System.out.println("\t" + nicad_fileResults.size() + " file clone classes found.");
 		
 	//Get Path Results (clone pairs, trim internal clones)
 		for(CloneClass<Path> cclass : nicad_fileResults) {
@@ -625,6 +671,7 @@ System.out.println(">> Parsing NiCad results...");
 				}
 			}
 		}
+		System.out.println("\t" + nicad_fileResults_pairs_trimmedInternalClones.size() + " file clone pairs found.");
 		
 	//Get Function Results
 		for(CloneClass<Fragment> cclass : ParseNiCad.parseNiCadFragments(niCadFunctionCloneReport)) {
@@ -634,6 +681,7 @@ System.out.println(">> Parsing NiCad results...");
 			}
 			nicad_functionResults.add(new CloneClass<Fragment>(fragments));
 		}
+		System.out.println("\t" + nicad_functionResults.size() + " function clone classes found.");
 	
 	//Get Function Results (clone pairs, trim internal clones)
 		for(CloneClass<Fragment> cclass : nicad_functionResults) {
@@ -652,8 +700,11 @@ System.out.println(">> Parsing NiCad results...");
 				}
 			}
 		}
+		System.out.println("\t" + nicad_functionResults_pairs_trimmedInternalClones.size() + " file clone pairs found.");
 		
-System.out.println(">> Evaluating NiCad for Files");
+		if(0 == 0) return;
+		
+System.out.println(">>>> Evaluating NiCad for Files <<<<");
 //Evaluate NiCad
 //Evaluate File Clones
 	//Injected File Clones
@@ -1426,7 +1477,7 @@ System.out.println(">> Evaluating NiCad Function Clones");
 	
 	//Injected File Clones
 	{
-		System.out.println("DirectoryVariant Function Clone Classes Recall Performance:");
+		System.out.println(">>DirectoryVariant Function Clone Classes Recall Performance:");
 		
 		int ffedv_numVariant = 0;
 		int ffedv_numFile = 0;
@@ -1574,7 +1625,7 @@ System.out.println(">> Evaluating NiCad Function Clones");
 
 	//Injected function clones
 	{
-		System.out.println("FunctionVariant Function Clone Class Recall Performance");
+		System.out.println(">>FunctionVariant Function Clone Class Recall Performance");
 		int ffefv_numVariant = 0;
 		int ffefv_numCloneClasses = 0;
 		int ffefv_numCloneClassesSubsumed = 0;
@@ -1626,7 +1677,7 @@ System.out.println(">> Evaluating NiCad Function Clones");
 							//Update statistics
 							ffefv_numCloneClassesSubsumed++;
 							ffefv_numCloneClassesPartial+=1.0;
-							ffefv_subsumeFound = false;
+							ffefv_subsumeFound = true;
 							
 							//Report
 							System.out.println("Subsume Match Found.  Extra matches:");
@@ -1691,6 +1742,7 @@ System.out.println(">> Evaluating NiCad Function Clones");
 		injectedFunctionFunctionRecallExact = (double) ffefv_numCloneClassesMatched / (double) ffefv_numCloneClasses;
 		injectedFunctionFunctionRecallPartial = ffefv_numCloneClassesPartial / (double) ffefv_numCloneClasses;
 		
+		System.out.println("FunctionVariant Function Clone Class Recall Performance Summary");
 		System.out.println("\t# Clone Classes: " + ffefv_numCloneClasses);
 		System.out.println("\t# Exact Match Found: " + ffefv_numCloneClassesMatched);
 		System.out.println("\t# Subsume Match Found: " + ffefv_numCloneClassesSubsumed);
@@ -1701,9 +1753,30 @@ System.out.println(">> Evaluating NiCad Function Clones");
 		System.out.println("\tRecall (Partial): " + injectedFunctionFunctionRecallPartial);
 	}
 	
+	//Inject function clones (pairs)
+	{
+		int ffefvp_numClonePairs = 0;
+		int ffefvp_numClonePairsDetected = 0;
+		
+		System.out.println("FunctionVariant Function Clone Detection (pair):");
+		for(CloneClass<Fragment> cpair : functionClones_injectedFunctions_pairs) {
+			if(cpair.size() != 2) {
+				System.out.println("ClonePairError: Evaluate pair injected function clones!");
+				return;
+			}
+			ffefvp_numClonePairs++;
+			if(nicad_functionResults_pairs_trimmedInternalClones.contains(cpair)) {
+				ffefvp_numClonePairsDetected++;
+			}
+		}
+		System.out.println("FunctionVariant Function Clone Pair Recall Performance Summary");
+		System.out.println("\tClone Pairs: " + ffefvp_numClonePairs);
+		System.out.println("\t#Found: " + ffefvp_numClonePairsDetected);
+	}
+	
 	//Original File Function Clones
 	{
-		System.out.println("Original File Function Clone Classes Recall Performance:");
+		System.out.println(">>Original File Function Clone Classes Recall Performance:");
 		
 		int ffeof_numOriginalFile = 0;
 		int ffeof_numFragment = 0;
@@ -1770,7 +1843,7 @@ System.out.println(">> Evaluating NiCad Function Clones");
 								System.out.println("Subsume Match Found.  Extra matches:");
 								for(Fragment ffeof_fragment: ffeof_nicad_cclass) {
 									if(!ffeof_cclass.contains(ffeof_fragment)) {
-										System.out.println("\t\t" + ffeof_fragment.getSrcFile() + " " + ffeof_fragment.getStartLine() + " " + ffeof_fragment.getEndLine());
+										System.out.println("\t\t\t" + ffeof_fragment.getSrcFile() + " " + ffeof_fragment.getStartLine() + " " + ffeof_fragment.getEndLine());
 									}
 								}
 								
@@ -1839,6 +1912,27 @@ System.out.println(">> Evaluating NiCad Function Clones");
 		System.out.println("\tRecall (Subsumed): " + originalFileFunctionRecallSubsumed);
 		System.out.println("\tRecall (Exact): " + originalFileFunctionRecallExact);
 		System.out.println("\tRecall (Partial): " + originalFileFunctionRecallPartial);
+	}
+	
+	//Inject function clones (pairs)
+	{
+		int ffeofp_numClonePairs = 0;
+		int ffeofp_numClonePairsDetected = 0;
+		
+		System.out.println("Original File Function Clone Detection (pair):");
+		for(CloneClass<Fragment> cpair : functionClones_original_pairs) {
+			if(cpair.size() != 2) {
+				System.out.println("ClonePairError: Evaluate pair original file function clones!");
+				return;
+			}
+			ffeofp_numClonePairs++;
+			if(nicad_functionResults_pairs_trimmedInternalClones.contains(cpair)) {
+				ffeofp_numClonePairsDetected++;
+			}
+		}
+		System.out.println("Original File Function Clone Pair Recall Performance Summary");
+		System.out.println("\tClone Pairs: " + ffeofp_numClonePairs);
+		System.out.println("\t#Found: " + ffeofp_numClonePairsDetected);
 	}
 	
 //Precision
@@ -2108,7 +2202,7 @@ System.out.println(">> Evaluating NiCad Function Clones");
 				test_counter_2++;
 				System.out.println("\tFragment " + test_counter_2 + ")");
 				for(Fragment test_fragment : test_cclass) {
-					System.out.println("\t\tt" + test_fragment.getSrcFile() + " " + test_fragment.getStartLine() + " " + test_fragment.getEndLine());
+					System.out.println("\t\t" + test_fragment.getSrcFile() + " " + test_fragment.getStartLine() + " " + test_fragment.getEndLine());
 				}
 			}
 		}

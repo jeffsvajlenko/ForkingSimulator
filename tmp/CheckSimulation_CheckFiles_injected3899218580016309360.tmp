@@ -1,0 +1,242 @@
+package X.X.X.X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X.X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X.X;
+
+public class X extends X {
+    private final X [] X;
+    private final X [] X;
+    private final X X;
+    final X X;
+    public static final X X = new X (0);
+    public static final X X = new X (0) {
+
+        public X X (X X) {
+            X X = (X) X;
+            X.X.X ();
+        }
+
+    }
+
+    ;
+    public static final X X = new X (0);
+    public static final X X = new X (0);
+    public static final X X = new X (0) {
+
+        public X X (X X) {
+            X X = (X) X;
+            X X = X.X [0];
+            if (X != 0) X.X ();
+
+        }
+
+        public X X (X X) {
+            X X = (X) X;
+            X.X.X ();
+        }
+
+    }
+
+    ;
+    public static final X X = new X (0);
+    static final X X = new X (0);
+    static final X X = new X (0);
+    static final X X = new X (0);
+    static final X X = new X (0);
+    static final X X = new X (0);
+    static final X X = new X (0);
+    static final X X = new X (0);
+    private static X X = new X (0) {
+
+        public X X (X X, X X) {
+            X X = (X) X;
+            X.X [0] ++;
+        }
+
+    }
+
+    ;
+    private static X X = new X (0) {
+
+        public X X (X X, X X) {
+            X X = (X) X;
+            if (X.X [0] > 0) X.X [0] --;
+            else throw X.X.X ().X ();
+
+        }
+
+    }
+
+    ;
+    private static X X = new X (0) {
+
+        public X X (X X, X X) {
+            throw new X (0);
+        }
+
+    }
+
+    ;
+    private static X X = new X (0) {
+
+        public X X (X X, X X) {
+            throw new X (new X ());
+        }
+
+    }
+
+    ;
+    private static X X = new X (0) {
+
+        public X.X X (X X, X X) {
+            X X = (X) X;
+            try {
+                X.X.X ();
+            } catch (X X) {
+            }
+            return X.X.X;
+        }
+
+    }
+
+    ;
+    private static class X extends X {
+        private X X;
+
+        public X (X X) {
+            X (0 + X);
+            X.X = X;
+        }
+
+        public X.X X (X X, X X) {
+            X X = (X) X;
+            return X.X.X (X.X [0] > X);
+        }
+
+    };
+
+    private static X X = new X (0);
+    private static X X = new X.X (X);
+    private static X X = new X (0);
+    private static X X = new X.X (X);
+    private static X X;
+
+    static {
+        X = X.X ();
+        X.X (X, X, X, X);
+        X.X (X, X, 0, X);
+        X.X (X);
+        X.X (X, X, X, 0, X);
+        X.X (X, X, 0, X);
+        if (X == X) X.X (X, X, X, 0, X);
+
+        X.X (X, X, 0, X);
+        X.X (X, X, X, X);
+        X.X (X, X, X, X);
+        X.X (X, X, X, X);
+        X.X (X, X, X, X);
+        if (X == X) X.X (X, X, X, 0, X);
+
+        X.X (X, X, X, 0, X);
+        X.X (X, X, X, X);
+        if (X == X) X.X (X, X, X, 0, X);
+
+        X.X (X, X, 0, X);
+        X.X (X, X, X, X, X);
+        if (X == X) X.X (X, X, X, X, X);
+
+        X.X (X, X, X, X);
+        if (X == X) X.X (X, X, 0, X);
+
+        X.X (X, X, 0, X);
+        X.X (X, X, X, X);
+        if (X == X) X.X (X, X, X, 0, X);
+
+        X.X (X, X, X);
+        X.X ();
+    }
+
+    public X (X X) {
+        X (X, X, ((X) X.X ()).X);
+        X.X = X;
+        X = new X [0];
+        X [0] = 0;
+        X = new X [0];
+        X [0] = 0;
+        X = new X (X.X, ((X) X.X ()).X);
+    }
+
+    public X X (X X) {
+        X.X [0] = X;
+        X (X);
+    }
+
+    public X X () {
+        if (X == X) X (X);
+
+    }
+
+    public X X () {
+        X (X);
+    }
+
+    public X X () {
+        X (X);
+    }
+
+    public X X () throws X {
+        try {
+            if (X == X) X (X);
+
+        } catch (X X) {
+            X X = X.X ();
+            if (X instanceof X) throw (X) X;
+            else throw X;
+
+        }
+    }
+
+    public X X () {
+        X (X);
+    }
+
+    public X X () {
+        if (X == X) X (X);
+
+    }
+
+}
+

@@ -1,0 +1,88 @@
+package X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+import X.X.X.X.X;
+
+import X.X.X.X;
+
+public final class X implements X {
+    public static final X X = 0;
+    public static final X X = 0;
+    public static final X X = 0;
+    private static final X X = - 0;
+    private static final X X = new X (0);
+    private static final X X = new X ();
+    private static final X X = new X ();
+    private final X X;
+    private final X X;
+
+    public X () {
+        if (X ()) {
+            X = new X ();
+            X = X.X ();
+        } else {
+            X = X;
+            X = X.X ();
+        }
+    }
+
+    public X (X X) {
+        X = new X ((X) 0);
+        X.X = X;
+    }
+
+    private X (X X, X X) {
+        X.X = X;
+        X.X = X;
+    }
+
+    public X X (X X) throws X {
+        X.X (X);
+        X.X (X);
+    }
+
+    public static X X (X X) throws X {
+        X X = X.X ();
+        X X = X.X (X);
+        return new X (X, X);
+    }
+
+    public X X () {
+        return (X) X;
+    }
+
+    public X X (X X) {
+        if (X instanceof X) {
+            X X = (X) X;
+            return X == X.X && X.X (X.X);
+        } else {
+            return 0;
+        }
+    }
+
+    public X X () {
+        return 0 + (X.X (X) ? 0 : X + 0) + X + 0;
+    }
+
+    private static X X () {
+        X X = X.X (new X (0));
+        return X == 0 ? 0 : X.X (X);
+    }
+
+}
+

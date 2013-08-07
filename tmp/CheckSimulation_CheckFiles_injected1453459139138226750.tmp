@@ -1,0 +1,33 @@
+package X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X.X;
+
+import X.X.X;
+
+interface X {
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+
+    public X X ();
+
+    public X X ();
+
+    public X X ();
+
+    public X X ();
+
+    public X X (X X, X X);
+
+    public X X ();
+
+    public X X (X X, X X, X X) throws X;
+
+    public X X (X X, X X, X X) throws X;
+
+}
+

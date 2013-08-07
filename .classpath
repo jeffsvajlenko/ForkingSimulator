@@ -4,7 +4,7 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="dependencies/Apache-Commons/IO/commons-io-2.4.jar">
 		<attributes>
-			<attribute name="javadoc_location" value="jar:file:/Users/jeffreysvajlenko/Development/EclipseWorkspace/NiCadVariantAnalysisEvaluation/lib/commons-lang3-3.1-javadoc.jar!/"/>
+			<attribute name="javadoc_location" value="jar:file:/home/jeff/git/ForkingSimulator/dependencies/Apache-Commons/IO/commons-io-2.4-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="dependencies/Apache-Commons/lang/commons-lang3-3.1.jar">

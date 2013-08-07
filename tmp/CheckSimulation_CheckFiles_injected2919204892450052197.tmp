@@ -1,0 +1,1106 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X.X;
+
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+import X.X.X.X.*;
+import X.X.X;
+import X.X.X;
+import X.X.X.X;
+import X.X.X.X;
+
+/**
+ * <p> The <code>LoginContext</code> class describes the basic methods used
+ * to authenticate Subjects and provides a way to develop an
+ * application independent of the underlying authentication technology.
+ * A <code>Configuration</code> specifies the authentication technology, or
+ * <code>LoginModule</code>, to be used with a particular application.
+ * Different LoginModules can be plugged in under an application
+ * without requiring any modifications to the application itself.
+ *
+ * <p> In addition to supporting <i>pluggable</i> authentication, this class
+ * also supports the notion of <i>stacked</i> authentication.
+ * Applications may be configured to use more than one
+ * LoginModule.  For example, one could
+ * configure both a Kerberos LoginModule and a smart card
+ * LoginModule under an application.
+ *
+ * <p> A typical caller instantiates a LoginContext with
+ * a <i>name</i> and a <code>CallbackHandler</code>.
+ * LoginContext uses the <i>name</i> as the index into a
+ * Configuration to determine which LoginModules should be used,
+ * and which ones must succeed in order for the overall authentication to
+ * succeed.  The <code>CallbackHandler</code> is passed to the underlying
+ * LoginModules so they may communicate and interact with users
+ * (prompting for a username and password via a graphical user interface,
+ * for example).
+ *
+ * <p> Once the caller has instantiated a LoginContext,
+ * it invokes the <code>login</code> method to authenticate
+ * a <code>Subject</code>.  The <code>login</code> method invokes
+ * the configured modules to perform their respective types of authentication
+ * (username/password, smart card pin verification, etc.).
+ * Note that the LoginModules will not attempt authentication retries nor
+ * introduce delays if the authentication fails.
+ * Such tasks belong to the LoginContext caller.
+ *
+ * <p> If the <code>login</code> method returns without
+ * throwing an exception, then the overall authentication succeeded.
+ * The caller can then retrieve
+ * the newly authenticated Subject by invoking the
+ * <code>getSubject</code> method.  Principals and Credentials associated
+ * with the Subject may be retrieved by invoking the Subject's
+ * respective <code>getPrincipals</code>, <code>getPublicCredentials</code>,
+ * and <code>getPrivateCredentials</code> methods.
+ *
+ * <p> To logout the Subject, the caller calls
+ * the <code>logout</code> method.  As with the <code>login</code>
+ * method, this <code>logout</code> method invokes the <code>logout</code>
+ * method for the configured modules.
+ *
+ * <p> A LoginContext should not be used to authenticate
+ * more than one Subject.  A separate LoginContext
+ * should be used to authenticate each different Subject.
+ *
+ * <p> The following documentation applies to all LoginContext constructors:
+ * <ol>
+ *
+ * <li> <code>Subject</code>
+ * <ul>
+ * <li> If the constructor has a Subject
+ * input parameter, the LoginContext uses the caller-specified
+ * Subject object.
+ * <p>
+ * <li> If the caller specifies a <code>null</code> Subject
+ * and a <code>null</code> value is permitted,
+ * the LoginContext instantiates a new Subject.
+ * <p>
+ * <li> If the constructor does <b>not</b> have a Subject
+ * input parameter, the LoginContext instantiates a new Subject.
+ * <p>
+ * </ul>
+ *
+ * <li> <code>Configuration</code>
+ * <ul>
+ * <li> If the constructor has a Configuration
+ * input parameter and the caller specifies a non-null Configuration,
+ * the LoginContext uses the caller-specified Configuration.
+ * <p>
+ * If the constructor does <b>not</b> have a Configuration
+ * input parameter, or if the caller specifies a <code>null</code>
+ * Configuration object, the constructor uses the following call to
+ * get the installed Configuration:
+ * <pre>
+ *      config = Configuration.getConfiguration();
+ * </pre>
+ * For both cases,
+ * the <i>name</i> argument given to the constructor is passed to the
+ * <code>Configuration.getAppConfigurationEntry</code> method.
+ * If the Configuration has no entries for the specified <i>name</i>,
+ * then the <code>LoginContext</code> calls
+ * <code>getAppConfigurationEntry</code> with the name, "<i>other</i>"
+ * (the default entry name).  If there is no entry for "<i>other</i>",
+ * then a <code>LoginException</code> is thrown.
+ * <p>
+ * <li> When LoginContext uses the installed Configuration, the caller
+ * requires the createLoginContext.<em>name</em> and possibly
+ * createLoginContext.other AuthPermissions. Furthermore, the
+ * LoginContext will invoke configured modules from within an
+ * <code>AccessController.doPrivileged</code> call so that modules that
+ * perform security-sensitive tasks (such as connecting to remote hosts,
+ * and updating the Subject) will require the respective permissions, but
+ * the callers of the LoginContext will not require those permissions.
+ * <p>
+ * <li> When LoginContext uses a caller-specified Configuration, the caller
+ * does not require any createLoginContext AuthPermission.  The LoginContext
+ * saves the <code>AccessControlContext</code> for the caller,
+ * and invokes the configured modules from within an
+ * <tt>AccessController.doPrivileged</tt> call constrained by that context.
+ * This means the caller context (stored when the LoginContext was created)
+ * must have sufficient permissions to perform any security-sensitive tasks
+ * that the modules may perform.
+ * <p>
+ * </ul>
+ *
+ * <li> <code>CallbackHandler</code>
+ * <ul>
+ * <li> If the constructor has a CallbackHandler
+ * input parameter, the LoginContext uses the caller-specified
+ * CallbackHandler object.
+ * <p>
+ * <li> If the constructor does <b>not</b> have a CallbackHandler
+ * input parameter, or if the caller specifies a <code>null</code>
+ * CallbackHandler object (and a <code>null</code> value is permitted),
+ * the LoginContext queries the
+ * <i>auth.login.defaultCallbackHandler</i> security property
+ * for the fully qualified class name of a default handler implementation.
+ * If the security property is not set,
+ * then the underlying modules will not have a
+ * CallbackHandler for use in communicating
+ * with users.  The caller thus assumes that the configured
+ * modules have alternative means for authenticating the user.
+ *
+ * <p>
+ * <li> When the LoginContext uses the installed Configuration (instead of
+ * a caller-specified Configuration, see above),
+ * then this LoginContext must wrap any
+ * caller-specified or default CallbackHandler implementation
+ * in a new CallbackHandler implementation
+ * whose <code>handle</code> method implementation invokes the
+ * specified CallbackHandler's <code>handle</code> method in a
+ * <code>java.security.AccessController.doPrivileged</code> call
+ * constrained by the caller's current <code>AccessControlContext</code>.
+ * </ul>
+ * </ol>
+ *
+ * <p> Note that Security Properties
+ * (such as <code>auth.login.defaultCallbackHandler</code>)
+ * can be set programmatically via the
+ * <code>java.security.Security</code> class,
+ * or statically in the Java security properties file located in the
+ * file named &lt;JAVA_HOME&gt;/lib/security/java.security.
+ * &lt;JAVA_HOME&gt; refers to the value of the java.home system property,
+ * and specifies the directory where the JRE is installed.
+ *
+ * @version %I%, %G%
+ * @see java.security.Security
+ * @see javax.security.auth.AuthPermission
+ * @see javax.security.auth.Subject
+ * @see javax.security.auth.callback.CallbackHandler
+ * @see javax.security.auth.login.Configuration
+ * @see javax.security.auth.spi.LoginModule
+ */
+public class X
+{
+
+    private static final X X		= 0;
+    private static final X X		= 0;
+    private static final X X		= 0;
+    private static final X X		= 0;
+    private static final X X		= 0;
+    private static final X X			= 0;
+    private static final X X		=
+        0;
+    private X X = 0;
+    private X X = 0;
+    private X X = 0;
+    private X X;
+    private X X = new X();
+
+    private X X;
+    private X X = 0;
+    private X X = 0;
+    private X[] X;
+    private X X = 0;
+    private static final X[] X = { };
+
+    // state saved in the event a user-specified asynchronous exception
+    // was specified and thrown
+
+    private X X = 0;
+    private X X = 0;
+    private X X = 0;
+    private X X = 0;
+
+    private static final X.X.X.X X =
+        X.X.X.X.X(0, 0);
+
+    private X X(X X) throws X
+    {
+
+        X X = X.X();
+        if (X != 0 && !X)
+        {
+            X.X(new X
+                               (0 + X));
+        }
+
+        if (X == 0)
+            throw new X
+            (X.X(0));
+
+        // get the Configuration
+        if (X == 0)
+        {
+            X = (X)X.X.X.X
+                     (new X.X.X()
+            {
+                public X X()
+                {
+                    return X.X();
+                }
+            });
+        }
+
+        // get the LoginModules configured for this application
+        X[] X = X.X(X);
+        if (X == 0)
+        {
+
+            if (X != 0 && !X)
+            {
+                X.X(new X
+                                   (0 + X));
+            }
+
+            X = X.X(X);
+            if (X == 0)
+            {
+                X X = new X(X.X
+                                                       (0));
+                X[] X = {X};
+                throw new X(X.X(X));
+            }
+        }
+        X = new X[X.X];
+        for (X X = 0; X < X.X; X++)
+        {
+            // clone returned array
+            X[X] = new X
+            (new X
+             (X[X].X(),
+              X[X].X(),
+              X[X].X()),
+             0);
+        }
+
+        X =
+            (X)X.X.X.X
+            (new X.X.X()
+        {
+            public X X()
+            {
+                return X.X().X();
+            }
+        });
+    }
+
+    private X X() throws X
+    {
+
+        // get the default handler class
+        try
+        {
+
+            final X X = X;
+
+            X.X = (X)
+                                   X.X.X.X
+                                   (new X.X.X()
+            {
+                public X X() throws X
+                {
+                    X X = X.X.X.X
+                                            (X);
+                    if (X == 0 || X.X() == 0)
+                        return 0;
+                    X X = X.X(X,
+                                            0,
+                                            X);
+                    return X.X();
+                }
+            });
+        }
+        catch (X.X.X X)
+        {
+            throw new X(X.X().X());
+        }
+
+        // secure it with the caller's ACC
+        if (X.X != 0 && !X)
+        {
+            X.X = new X
+            (X.X.X.X(),
+             X.X);
+        }
+    }
+
+    /**
+     * Instantiate a new <code>LoginContext</code> object with a name.
+     *
+     * @param name the name used as the index into the
+     *		<code>Configuration</code>.
+     *
+     * @exception LoginException if the caller-specified <code>name</code>
+     *		does not appear in the <code>Configuration</code>
+     *		and there is no <code>Configuration</code> entry
+     *		for "<i>other</i>", or if the
+     *		<i>auth.login.defaultCallbackHandler</i>
+     *		security property was set, but the implementation
+     *		class could not be loaded.
+     *		<p>
+     * @exception SecurityException if a SecurityManager is set and
+     *		the caller does not have
+     *		AuthPermission("createLoginContext.<i>name</i>"),
+     *		or if a configuration entry for <i>name</i> does not exist and
+     *		the caller does not additionally have
+     *		AuthPermission("createLoginContext.other")
+     */
+    public X(X X) throws X
+    {
+        X(X);
+        X();
+    }
+
+    /**
+     * Instantiate a new <code>LoginContext</code> object with a name
+     * and a <code>Subject</code> object.
+     *
+     * <p>
+     *
+     * @param name the name used as the index into the
+     *		<code>Configuration</code>. <p>
+     *
+     * @param subject the <code>Subject</code> to authenticate.
+     *
+     * @exception LoginException if the caller-specified <code>name</code>
+     *		does not appear in the <code>Configuration</code>
+     *          and there is no <code>Configuration</code> entry
+     *          for "<i>other</i>", if the caller-specified <code>subject</code>
+     *		is <code>null</code>, or if the
+     *		<i>auth.login.defaultCallbackHandler</i>
+     *		security property was set, but the implementation
+     *		class could not be loaded.
+     *		<p>
+     * @exception SecurityException if a SecurityManager is set and
+     *		the caller does not have
+     *		AuthPermission("createLoginContext.<i>name</i>"),
+     *		or if a configuration entry for <i>name</i> does not exist and
+     *		the caller does not additionally have
+     *		AuthPermission("createLoginContext.other")
+     */
+    public X(X X, X X)
+    throws X
+    {
+        X(X);
+        if (X == 0)
+            throw new X
+            (X.X(0));
+        X.X = X;
+        X = 0;
+        X();
+    }
+
+    /**
+     * Instantiate a new <code>LoginContext</code> object with a name
+     * and a <code>CallbackHandler</code> object.
+     *
+     * <p>
+     *
+     * @param name the name used as the index into the
+     *		<code>Configuration</code>. <p>
+     *
+     * @param callbackHandler the <code>CallbackHandler</code> object used by
+     *		LoginModules to communicate with the user.
+     *
+     * @exception LoginException if the caller-specified <code>name</code>
+     *          does not appear in the <code>Configuration</code>
+     *          and there is no <code>Configuration</code> entry
+     *          for "<i>other</i>", or if the caller-specified
+     *		<code>callbackHandler</code> is <code>null</code>.
+     *		<p>
+     * @exception SecurityException if a SecurityManager is set and
+     *		the caller does not have
+     *		AuthPermission("createLoginContext.<i>name</i>"),
+     *		or if a configuration entry for <i>name</i> does not exist and
+     *		the caller does not additionally have
+     *		AuthPermission("createLoginContext.other")
+     */
+    public X(X X, X X)
+    throws X
+    {
+        X(X);
+        if (X == 0)
+            throw new X(X.X
+                                     (0));
+        X.X = new X
+        (X.X.X.X(),
+         X);
+    }
+
+    /**
+     * Instantiate a new <code>LoginContext</code> object with a name,
+     * a <code>Subject</code> to be authenticated, and a
+     * <code>CallbackHandler</code> object.
+     *
+     * <p>
+     *
+     * @param name the name used as the index into the
+     *		<code>Configuration</code>. <p>
+     *
+     * @param subject the <code>Subject</code> to authenticate. <p>
+     *
+     * @param callbackHandler the <code>CallbackHandler</code> object used by
+     *		LoginModules to communicate with the user.
+     *
+     * @exception LoginException if the caller-specified <code>name</code>
+     *          does not appear in the <code>Configuration</code>
+     *          and there is no <code>Configuration</code> entry
+     *          for "<i>other</i>", or if the caller-specified
+     *		<code>subject</code> is <code>null</code>,
+     *		or if the caller-specified
+     *		<code>callbackHandler</code> is <code>null</code>.
+     *		<p>
+     * @exception SecurityException if a SecurityManager is set and
+     *		the caller does not have
+     *		AuthPermission("createLoginContext.<i>name</i>"),
+     *		or if a configuration entry for <i>name</i> does not exist and
+     *		the caller does not additionally have
+     *		AuthPermission("createLoginContext.other")
+     */
+    public X(X X, X X,
+                        X X) throws X
+    {
+        X(X, X);
+        if (X == 0)
+            throw new X(X.X
+                                     (0));
+        X.X = new X
+        (X.X.X.X(),
+         X);
+    }
+
+    /**
+     * Instantiate a new <code>LoginContext</code> object with a name,
+     * a <code>Subject</code> to be authenticated,
+     * a <code>CallbackHandler</code> object, and a login
+     * <code>Configuration</code>.
+     *
+     * <p>
+     *
+     * @param name the name used as the index into the caller-specified
+     *          <code>Configuration</code>. <p>
+     *
+     * @param subject the <code>Subject</code> to authenticate,
+     *          or <code>null</code>. <p>
+     *
+     * @param callbackHandler the <code>CallbackHandler</code> object used by
+     *          LoginModules to communicate with the user, or <code>null</code>.
+     *		<p>
+     *
+     * @param config the <code>Configuration</code> that lists the
+     *          login modules to be called to perform the authentication,
+     *          or <code>null</code>.
+     *
+     * @exception LoginException if the caller-specified <code>name</code>
+     *          does not appear in the <code>Configuration</code>
+     *          and there is no <code>Configuration</code> entry
+     *          for "<i>other</i>".
+     *		<p>
+     * @exception SecurityException if a SecurityManager is set,
+     *		<i>config</i> is <code>null</code>,
+     *		and either the caller does not have
+     *		AuthPermission("createLoginContext.<i>name</i>"),
+     *		or if a configuration entry for <i>name</i> does not exist and
+     *		the caller does not additionally have
+     *		AuthPermission("createLoginContext.other")
+     *
+     * @since 1.5
+     */
+    public X(X X, X X,
+                        X X,
+                        X X) throws X
+    {
+        X.X = X;
+        X = (X != 0) ? 0 : 0;
+        if (X)
+        {
+            X = X.X.X.X();
+        }
+
+        X(X);
+        if (X != 0)
+        {
+            X.X = X;
+            X = 0;
+        }
+        if (X == 0)
+        {
+            X();
+        }
+        else if (!X)
+        {
+            X.X = new X
+            (X.X.X.X(),
+             X);
+        }
+        else
+        {
+            X.X = X;
+        }
+    }
+
+    /**
+     * Perform the authentication.
+     *
+     * <p> This method invokes the <code>login</code> method for each
+     * LoginModule configured for the <i>name</i> specified to the
+     * <code>LoginContext</code> constructor, as determined by the login
+     * <code>Configuration</code>.  Each <code>LoginModule</code>
+     * then performs its respective type of authentication
+     * (username/password, smart card pin verification, etc.).
+     *
+     * <p> This method completes a 2-phase authentication process by
+     * calling each configured LoginModule's <code>commit</code> method
+     * if the overall authentication succeeded (the relevant REQUIRED,
+     * REQUISITE, SUFFICIENT, and OPTIONAL LoginModules succeeded),
+     * or by calling each configured LoginModule's <code>abort</code> method
+     * if the overall authentication failed.  If authentication succeeded,
+     * each successful LoginModule's <code>commit</code> method associates
+     * the relevant Principals and Credentials with the <code>Subject</code>.
+     * If authentication failed, each LoginModule's <code>abort</code> method
+     * removes/destroys any previously stored state.
+     *
+     * <p> If the <code>commit</code> phase of the authentication process
+     * fails, then the overall authentication fails and this method
+     * invokes the <code>abort</code> method for each configured
+     * <code>LoginModule</code>.
+     *
+     * <p> If the <code>abort</code> phase
+     * fails for any reason, then this method propagates the
+     * original exception thrown either during the <code>login</code> phase
+     * or the <code>commit</code> phase.  In either case, the overall
+     * authentication fails.
+     *
+     * <p> In the case where multiple LoginModules fail,
+     * this method propagates the exception raised by the first
+     * <code>LoginModule</code> which failed.
+     *
+     * <p> Note that if this method enters the <code>abort</code> phase
+     * (either the <code>login</code> or <code>commit</code> phase failed),
+     * this method invokes all LoginModules configured for the
+     * application regardless of their respective <code>Configuration</code>
+     * flag parameters.  Essentially this means that <code>Requisite</code>
+     * and <code>Sufficient</code> semantics are ignored during the
+     * <code>abort</code> phase.  This guarantees that proper cleanup
+     * and state restoration can take place.
+     *
+     * <p>
+     *
+     * @exception LoginException if the authentication fails.
+     */
+    public X X() throws X
+    {
+
+        X = 0;
+
+        if (X == 0)
+        {
+            X = new X();
+        }
+
+        try
+        {
+            if (X)
+            {
+                // module invoked in doPrivileged with creatorAcc
+                X(X);
+                X(X);
+            }
+            else
+            {
+                // module invoked in doPrivileged
+                X(X);
+                X(X);
+            }
+            X = 0;
+        }
+        catch (X X)
+        {
+            try
+            {
+                if (X)
+                {
+                    X(X);
+                }
+                else
+                {
+                    X(X);
+                }
+            }
+            catch (X X)
+            {
+                throw X;
+            }
+            throw X;
+        }
+    }
+
+    /**
+     * Logout the <code>Subject</code>.
+     *
+     * <p> This method invokes the <code>logout</code> method for each
+     * <code>LoginModule</code> configured for this <code>LoginContext</code>.
+     * Each <code>LoginModule</code> performs its respective logout procedure
+     * which may include removing/destroying
+     * <code>Principal</code> and <code>Credential</code> information
+     * from the <code>Subject</code> and state cleanup.
+     *
+     * <p> Note that this method invokes all LoginModules configured for the
+     * application regardless of their respective
+     * <code>Configuration</code> flag parameters.  Essentially this means
+     * that <code>Requisite</code> and <code>Sufficient</code> semantics are
+     * ignored for this method.  This guarantees that proper cleanup
+     * and state restoration can take place.
+     *
+     * <p>
+     *
+     * @exception LoginException if the logout fails.
+     */
+    public X X() throws X
+    {
+        if (X == 0)
+        {
+            throw new X(X.X
+                                     (0));
+        }
+
+        if (X)
+        {
+            // module invoked in doPrivileged with creatorAcc
+            X(X);
+        }
+        else
+        {
+            // module invoked in doPrivileged
+            X(X);
+        }
+    }
+
+    /**
+     * Return the authenticated Subject.
+     *
+     * <p>
+     *
+     * @return the authenticated Subject.  If the caller specified a
+     *		Subject to this LoginContext's constructor,
+     *		this method returns the caller-specified Subject.
+     *		If a Subject was not specified and authentication succeeds,
+     *		this method returns the Subject instantiated and used for
+     *		authentication by this LoginContext.
+     *		If a Subject was not specified, and authentication fails or
+     *		has not been attempted, this method returns null.
+     */
+    public X X()
+    {
+        if (!X && !X)
+            return 0;
+        return X;
+    }
+
+    private X X()
+    {
+        X = 0;
+        X = 0;
+        X = 0;
+        X = 0;
+    }
+
+    private X X(X X, X X)
+    throws X
+    {
+
+        // first clear state
+        X();
+
+        // throw the exception
+        X X = (X != 0) ? X : X;
+        throw X;
+    }
+
+    /**
+     * Invokes the login, commit, and logout methods
+     * from a LoginModule inside a doPrivileged block.
+     *
+     * This version is called if the caller did not instantiate
+     * the LoginContext with a Configuration object.
+     */
+    private X X(final X X) throws X
+    {
+        try
+        {
+            X.X.X.X
+            (new X.X.X()
+            {
+                public X X() throws X
+                {
+                    X(X);
+                    return 0;
+                }
+            });
+        }
+        catch (X.X.X X)
+        {
+            throw (X)X.X();
+        }
+    }
+
+    /**
+     * Invokes the login, commit, and logout methods
+     * from a LoginModule inside a doPrivileged block restricted
+     * by creatorAcc
+     *
+     * This version is called if the caller instantiated
+     * the LoginContext with a Configuration object.
+     */
+    private X X(final X X)
+    throws X
+    {
+        try
+        {
+            X.X.X.X
+            (new X.X.X()
+            {
+                public X X() throws X
+                {
+                    X(X);
+                    return 0;
+                }
+            }, X);
+        }
+        catch (X.X.X X)
+        {
+            throw (X)X.X();
+        }
+    }
+
+    private X X(X X) throws X
+    {
+
+        // start at moduleIndex
+        // - this can only be non-zero if methodName is LOGIN_METHOD
+
+        for (X X = X; X < X.X; X++, X++)
+        {
+            try
+            {
+
+                X X = 0;
+                X[] X = 0;
+
+                if (X[X].X != 0)
+                {
+                    X = X[X].X.X().X();
+                }
+                else
+                {
+
+                    // instantiate the LoginModule
+                    X X = X.X
+                              (X[X].X.X(),
+                               0,
+                               X);
+
+                    X X = X.X(X);
+                    X[] X = { };
+
+                    // allow any object to be a LoginModule
+                    // as long as it conforms to the interface
+                    X[X].X = X.X(X);
+
+                    X = X[X].X.X().X();
+
+                    // call the LoginModule's initialize method
+                    for (X = 0; X < X.X; X++)
+                    {
+                        if (X[X].X().X(X))
+                            break;
+                    }
+
+                    X[] X = {X,
+                                         X,
+                                         X,
+                                         X[X].X.X()
+                                        };
+                    // invoke the LoginModule initialize method
+                    X[X].X(X[X].X, X);
+                }
+
+                // find the requested method in the LoginModule
+                for (X = 0; X < X.X; X++)
+                {
+                    if (X[X].X().X(X))
+                        break;
+                }
+
+                // set up the arguments to be passed to the LoginModule method
+                X[] X = { };
+
+                // invoke the LoginModule method
+                X X = ((X)X[X].X
+                                  (X[X].X, X)).X();
+
+                if (X == 0)
+                {
+
+                    // if SUFFICIENT, return if no prior REQUIRED errors
+                    if (!X.X(X) &&
+                            !X.X(X) &&
+                            X[X].X.X() ==
+                            X.X.X &&
+                            X == 0)
+                    {
+
+                        // clear state
+                        X();
+
+                        if (X != 0)
+                            X.X(X + 0);
+                        return;
+                    }
+
+                    if (X != 0)
+                        X.X(X + 0);
+                    X = 0;
+                }
+                else
+                {
+                    if (X != 0)
+                        X.X(X + 0);
+                }
+
+            }
+            catch (X X)
+            {
+                X X = new X(X.X
+                                                       (0 +
+                                                        0));
+                X[] X = {X[X].X.X()};
+                X(0, new X(X.X(X)));
+            }
+            catch (X X)
+            {
+                X(0, new X(X.X
+                                                        (0) +
+                                                        X.X()));
+            }
+            catch (X X)
+            {
+                X(0, new X(X.X
+                                                        (0) +
+                                                        X.X()));
+            }
+            catch (X X)
+            {
+                X(0, new X(X.X
+                                                        (0) +
+                                                        X.X()));
+            }
+            catch (X X)
+            {
+
+                // failure cases
+
+                X X;
+
+                if (X.X() instanceof X &&
+                        X.X(X))
+                {
+
+                    // XXX
+                    //
+                    // if a module's LOGIN_METHOD threw a PendingException
+                    // then immediately throw it.
+                    //
+                    // when LoginContext is called again,
+                    // the module that threw the exception is invoked first
+                    // (the module list is not invoked from the start).
+                    // previously thrown exception state is still present.
+                    //
+                    // it is assumed that the module which threw
+                    // the exception can have its
+                    // LOGIN_METHOD invoked twice in a row
+                    // without any commit/abort in between.
+                    //
+                    // in all cases when LoginContext returns
+                    // (either via natural return or by throwing an exception)
+                    // we need to call clearState before returning.
+                    // the only time that is not true is in this case -
+                    // do not call throwException here.
+
+                    throw (X)X.X();
+
+                }
+                else if (X.X() instanceof X)
+                {
+
+                    X = (X)X.X();
+
+                }
+                else if (X.X() instanceof X)
+                {
+
+                    // do not want privacy leak
+                    // (e.g., sensitive file path in exception msg)
+
+                    X = new X(0);
+                    X.X(new X());
+                    if (X != 0)
+                    {
+                        X.X
+                        (0 +
+                         0);
+                        X.X(0 +
+                                      X.X().X());
+                    }
+                }
+                else
+                {
+
+                    // capture an unexpected LoginModule exception
+                    X.X.X X = new X.X.X();
+                    X.X().X
+                    (new X.X.X(X));
+                    X.X();
+                    X = new X(X.X());
+                }
+
+                if (X[X].X.X() ==
+                        X.X.X)
+                {
+
+                    if (X != 0)
+                        X.X(X + 0);
+
+                    // if REQUISITE, then immediately throw an exception
+                    if (X.X(X) ||
+                            X.X(X))
+                    {
+                        if (X == 0)
+                            X = X;
+                    }
+                    else
+                    {
+                        X(X, X);
+                    }
+
+                }
+                else if (X[X].X.X() ==
+                         X.X.X)
+                {
+
+                    if (X != 0)
+                        X.X(X + 0);
+
+                    // mark down that a REQUIRED module failed
+                    if (X == 0)
+                        X = X;
+
+                }
+                else
+                {
+
+                    if (X != 0)
+                        X.X(X + 0);
+
+                    // mark down that an OPTIONAL module failed
+                    if (X == 0)
+                        X = X;
+                }
+            }
+        }
+
+        // we went thru all the LoginModules.
+        if (X != 0)
+        {
+            // a REQUIRED module failed -- return the error
+            X(X, 0);
+        }
+        else if (X == 0 && X != 0)
+        {
+            // no module succeeded -- return the first error
+            X(X, 0);
+        }
+        else if (X == 0)
+        {
+            // no module succeeded -- all modules were IGNORED
+            X(new X
+                           (X.X(0)),
+                           0);
+        }
+        else
+        {
+            // success
+
+            X();
+            return;
+        }
+    }
+
+    /**
+     * Wrap the caller-specified CallbackHandler in our own
+     * and invoke it within a privileged block, constrained by
+     * the caller's AccessControlContext.
+     */
+    private static class X implements X
+    {
+
+        private final X.X.X X;
+        private final X X;
+
+        X(X.X.X X,
+                              X X)
+        {
+            X.X = X;
+            X.X = X;
+        }
+
+        public X X(final X[] X)
+        throws X.X.X, X
+        {
+            try
+            {
+                X.X.X.X
+                (new X.X.X()
+                {
+                    public X X() throws X.X.X,
+                        X
+                    {
+                        X.X(X);
+                        return 0;
+                    }
+                }, X);
+            }
+            catch (X.X.X X)
+            {
+                if (X.X() instanceof X.X.X)
+                {
+                    throw (X.X.X)X.X();
+                }
+                else
+                {
+                    throw (X)X.X();
+                }
+            }
+        }
+    }
+
+    /**
+     * LoginModule information -
+     *		incapsulates Configuration info and actual module instances
+     */
+    private static class X
+    {
+        X X;
+        X X;
+
+        X(X X, X X)
+        {
+            X.X = X;
+            X.X = X;
+        }
+    }
+}

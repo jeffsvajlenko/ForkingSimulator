@@ -1,0 +1,22 @@
+package X.X.X;
+
+import X.X.X;
+
+import X.X.X;
+
+public interface X {
+
+    X X ();
+
+    X < ? extends X > X ();
+
+    X X ();
+
+    X < ? extends X > X ();
+
+    X < X > X ();
+
+    X X ();
+
+}
+

@@ -1,0 +1,98 @@
+package X.X.X;
+
+final class X {
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = 0;
+    static final X X = (X | X);
+    static final X X = (X | X | X);
+    static final X X = (X | X | X | X);
+    static final X X = (X | X | X | X);
+    static final X X = (X);
+    private static final X [] X = new X [] {X, X, X, X, X, X, X, X, X, X + X + X, X + X, X + X, X + X, X + X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X + X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X, X + X + 0, X + X + 0, X + X + 0, X + X + 0, X + X + 0, X + X + 0, X + X + 0, X + X + 0, X + X + 0, X + X + 0, X, X, X, X, X, X, X, X + X + 0, X + X + 0, X + X + 0, X + X + 0, X + X + 0, X + X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X, X, X, X, X | X, X, X + X + 0, X + X + 0, X + X + 0, X + X + 0, X + X + 0, X + X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X + 0, X, X, X, X, X,};
+
+    static X X (X X) {
+        return ((X & 0) == 0 ? X [X] : 0);
+    }
+
+    static X X (X X, X X) {
+        return (X (X) & X) != 0;
+    }
+
+    static X X (X X) {
+        return ((X & 0) == 0);
+    }
+
+    static X X (X X) {
+        return X (X, X);
+    }
+
+    static X X (X X) {
+        return ((X - 0) | (0 - X)) >= 0;
+    }
+
+    static X X (X X) {
+        return X (X, X);
+    }
+
+    static X X (X X) {
+        return X (X, X);
+    }
+
+    static X X (X X) {
+        return ((X - 0) | (0 - X)) >= 0;
+    }
+
+    static X X (X X) {
+        return X (X, X);
+    }
+
+    static X X (X X) {
+        return X (X, X);
+    }
+
+    static X X (X X) {
+        return X (X, X);
+    }
+
+    static X X (X X) {
+        return ((X - 0) | (0 - X)) >= 0;
+    }
+
+    static X X (X X) {
+        return X (X, X);
+    }
+
+    static X X (X X) {
+        return ((X - 0) | (0 - X)) >= 0;
+    }
+
+    static X X (X X) {
+        return ((X - 0) | (0 - X)) >= 0;
+    }
+
+    static X X (X X) {
+        return X (X, X);
+    }
+
+    static X X (X X) {
+        return (X [X & 0] & 0);
+    }
+
+    static X X (X X) {
+        return X (X) ? (X + 0) : X;
+    }
+
+    static X X (X X) {
+        return X (X) ? (X - 0) : X;
+    }
+
+}
+

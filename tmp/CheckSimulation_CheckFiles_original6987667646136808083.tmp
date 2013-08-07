@@ -1,0 +1,55 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X.X.X.X;
+
+import X.X.X.X;
+import X.X.X.X.X ;
+import X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X.X;
+import X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+import X.X.X.X.X.X.X ;
+
+public class X extends X
+{
+    public X( X X )
+    {
+        X.X = X ;
+    }
+
+    public X(X X, X X)
+    {
+        X(X, X) ;
+        X = new X( X ) ;
+    }
+
+    // Required SERVICE_CONTEXT_ID and getId definitions
+    public static final X X = 0 ;
+    public X X()
+    {
+        return X ;
+    }
+
+    public X X( X X ) throws X
+    {
+        X.X( X ) ;
+    }
+
+    public X X()
+    {
+        return X ;
+    }
+
+    private X X = 0 ;
+
+    public X X()
+    {
+        return 0 + X + 0 ;
+    }
+}

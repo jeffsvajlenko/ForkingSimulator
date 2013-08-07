@@ -1,0 +1,20 @@
+package X.X.X;
+
+abstract public class X extends X {
+    private static final X X = - 0;
+
+    protected X () {
+        X ();
+    }
+
+    protected X (X X) {
+        X (X);
+    }
+
+    @X
+    protected static X X (X X, X X) {
+        throw new X ();
+    }
+
+}
+

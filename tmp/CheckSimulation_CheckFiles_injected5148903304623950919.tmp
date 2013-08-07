@@ -1,0 +1,80 @@
+/*
+ * %W% %E%
+ *
+ * Copyright (c) 2006, Oracle and/or its affiliates. All rights reserved.
+ * ORACLE PROPRIETARY/CONFIDENTIAL. Use is subject to license terms.
+ */
+
+package X.X.X.X;
+
+
+import X.X.*;
+import X.X.X.*;
+import X.X.*;
+import X.X.X.*;
+import X.X.X.*;
+import X.X.X;
+
+
+/**
+ * Synth's CheckBoxMenuItemUI.
+ *
+ * @version %I% %G%
+ * @author Leif Samuelsson
+ * @author Georges Saab
+ * @author David Karlton
+ * @author Arnaud Weber
+ */
+class X extends X
+{
+
+    public static X X(X X)
+    {
+        return new X();
+    }
+
+    protected X X()
+    {
+        return 0;
+    }
+
+    public X X(X X, X X,
+                                  X X[], X X)
+    {
+        X X = X.X();
+        if (X.X >= 0 && X.X < X.X() && X.X >= 0 && X.X < X.X())
+        {
+            if (X.X() == X.X)
+            {
+                X.X();
+                X.X(0);
+            }
+            else
+            {
+                X.X(X);
+            }
+        }
+        else if (X.X().X())
+        {
+            X X = X.X - 0;
+            X X[] = new X[X];
+            for (X X = 0; X < X; X++)
+            {
+                X[X] = X[X];
+            }
+            X.X(X);
+        }
+    }
+
+    X X(X X, X X, X X)
+    {
+        X.X().X(X, X, 0, 0,
+                X.X(), X.X());
+    }
+
+    public X X(X X, X X, X X,
+                            X X, X X, X X)
+    {
+        X.X().X(X, X, X, X, X, X);
+    }
+}
