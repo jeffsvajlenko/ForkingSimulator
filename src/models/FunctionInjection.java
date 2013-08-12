@@ -12,8 +12,27 @@ public class FunctionInjection {
 	private Path log;
 	private List<FunctionInjectionInstance> instances;
 	
-	public FunctionInjection(int num, boolean isUniform, Fragment original,
-			Path log, List<FunctionInjectionInstance> instances) {
+	public FunctionInjection getNormalize(Path path) {
+		Fragment original = new Fragment(path.relativize(this.original.getSrcFile()), this.original.getStartLine(), this.original.getEndLine());
+		Path log = path.relativize(this.log);
+		List<FunctionInjectionInstance> newInstances = new LinkedList<FunctionInjectionInstance>();
+		for(FunctionInjectionInstance fii : instances) {
+			newInstances.add(fii.getNormalized(path));
+		}
+		return new FunctionInjection(num, isUniform, original, log, newInstances);
+	}
+	
+	public String toString() {
+		String s = "";
+		char isUniform = this.isUniform ? 'U' : 'V';
+		s = num + " " + isUniform + " " + instances.size() + " " + original.getStartLine() + " " + original.getEndLine() + " " + original.getSrcFile();
+		for(FunctionInjectionInstance fii : instances) {
+			s = s + "\n\t" + fii.toString();
+		}
+		return s;
+	}
+	
+	public FunctionInjection(int num, boolean isUniform, Fragment original, Path log, List<FunctionInjectionInstance> instances) {
 		super();
 		this.num = num;
 		this.isUniform = isUniform;
@@ -86,12 +105,4 @@ public class FunctionInjection {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "FunctionInjection [num=" + num + ", isUniform=" + isUniform
-				+ ", original=" + original + ", log=" + log + ", instances="
-				+ instances + "]";
-	}
-	
 }

@@ -1,5 +1,8 @@
 package main;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -489,7 +492,7 @@ public class Properties {
 	/**
 	 * @return The maximum number of forked systems the variants should be duplicated in.
 	 */
-	public int getMaxinjectnum() {
+	public int getMaxinjectNum() {
 		return maxInjectNum;
 	}
 
@@ -517,14 +520,14 @@ public class Properties {
 	/**
 	 * @return The chance that a directory variant is mutated before injection into a fork.
 	 */
-	public int getDirectoryMutationRate() {
+	public int getDirMutationRate() {
 		return dirMutationRate;
 	}
 	
 	/**
 	 * @return How many times to attempt a fragment mutation.
 	 */
-	public int getNumMutationAttempts() {
+	public int getMutationAttempts() {
 		return mutationAttempts;
 	}
 	
@@ -552,11 +555,11 @@ public class Properties {
 	/**
 	 * @return The maximum number of times to apply an operator on a file.
 	 */
-	public int getMaxFileEdits() {
+	public int getMaxFileEdit() {
 		return this.maxFileEdit;
 	}
 	
-	public int getMaxFunctionEdits() {
+	public int getMaxFunctionEdit() {
 		return this.maxFunctionEdit;
 	}
 	
@@ -573,7 +576,73 @@ public class Properties {
 	public int getDirRenameRate() {
 		return this.dirRenameRate;
 	}
-	
+
+	public void setMaxInjectNum(int maxInjectNum) {
+		this.maxInjectNum = maxInjectNum;
+	}
+
+	public void setMutationAttempts(int mutationAttempts) {
+		this.mutationAttempts = mutationAttempts;
+	}
+
+	public void setMaxFunctionEdit(int maxFunctionEdit) {
+		this.maxFunctionEdit = maxFunctionEdit;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public void setNumFiles(int numFiles) {
+		this.numFiles = numFiles;
+	}
+
+	public void setNumDirectories(int numDirectories) {
+		this.numDirectories = numDirectories;
+	}
+
+	public void setNumFragments(int numFragments) {
+		this.numFragments = numFragments;
+	}
+
+	public void setNumForks(int numForks) {
+		this.numForks = numForks;
+	}
+
+	public void setFragmentMutationRate(int fragmentMutationRate) {
+		this.fragmentMutationRate = fragmentMutationRate;
+	}
+
+	public void setFileMutationRate(int fileMutationRate) {
+		this.fileMutationRate = fileMutationRate;
+	}
+
+	public void setDirMutationRate(int dirMutationRate) {
+		this.dirMutationRate = dirMutationRate;
+	}
+
+	public void setInjectionRepetitionRate(int injectionRepetitionRate) {
+		this.injectionRepetitionRate = injectionRepetitionRate;
+	}
+
+	public void setFunctionFragmentMinSize(int functionFragmentMinSize) {
+		this.functionFragmentMinSize = functionFragmentMinSize;
+	}
+
+	public void setFunctionFragmentMaxSize(int functionFragmentMaxSize) {
+		this.functionFragmentMaxSize = functionFragmentMaxSize;
+	}
+
+	public void setFileRenameRate(int fileRenameRate) {
+		this.fileRenameRate = fileRenameRate;
+	}
+
+	public void setDirRenameRate(int dirRenameRate) {
+		this.dirRenameRate = dirRenameRate;
+	}
+
+
+
 	private Operator functionMutationOperators[];
 	private Operator fileMutationOperators[];
 	private Operator directoryMutationOperators[];
@@ -606,6 +675,39 @@ public class Properties {
 		this.directoryCurrentOperator = nextRollingNumber(this.directoryCurrentOperator, directoryMutationOperators.length - 1);
 	}
 	
+	public Path write(Path file) throws IOException {
+		Objects.requireNonNull(file);
+		if(Files.exists(file)) {
+			throw new IllegalArgumentException("File must not exist.");
+		}
+		file = Files.createFile(file);
+		
+		PrintWriter pw = new PrintWriter(new FileWriter(file.toFile()));
+		pw.println("system=" + this.getSystem());
+		pw.println("repository=" + this.getRepository());
+		pw.println("language=" + this.getLanguage());
+		pw.println("numForks=" + this.getNumForks());
+		pw.println("numFiles=" + this.getNumFiles());
+		pw.println("numDirectories=" + this.getNumDirectories());
+		pw.println("numFragments=" + this.getNumFragments());
+		pw.println("functionFragmentMinSize=" + this.getFunctionFragmentMinSize());
+		pw.println("functionFragmentMaxSize=" + this.getFunctionFragmentMaxSize());
+		pw.println("maxInjectNum=" + this.getMaxinjectNum());
+		pw.println("injectionRepitionRate=" + this.getInjectionReptitionRate());
+		pw.println("fragmentMutationRate=" + this.getFragmentMutationRate());
+		pw.println("fileMutationRate=" + this.getFileMutationRate());
+		pw.println("dirMutationRate=" + this.getDirMutationRate());
+		pw.println("fileRenameRate=" + this.getFileRenameRate());
+		pw.println("dirRenameRate=" + this.getDirRenameRate());
+		pw.println("maxFileEdit=" + this.getMaxFileEdit());
+		pw.println("maxFunctionEdit=" + this.getMaxFunctionEdit());
+		pw.println("mutationAttempts=" + this.getMutationAttempts());
+		pw.flush();
+		pw.close();
+		
+		return file;
+	}
+	
 	/**
 	 * Increments an integer from 0 to maximum (inclusive), with roll around.
 	 * @param current The current value.
@@ -623,4 +725,7 @@ public class Properties {
 		}
 		return next;
 	}
+	
+	
+	
 }

@@ -4,10 +4,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Scanner;
+
+import org.apache.commons.io.FileUtils;
 
 import models.Fragment;
 import util.StreamGobbler;
@@ -19,7 +24,7 @@ import util.StreamGobbler;
  */
 public class SelectFunctionFragments {
 	
-	public static List<Fragment> getFunctionFragments(File srcloc, String language) {
+	public static List<Fragment> getFunctionFragmentsRecursive(File srcloc, String language) {
 	
 		//Delete leftover extraction data
 		new File(srcloc + "/_functions.xml").delete();
@@ -109,11 +114,34 @@ public class SelectFunctionFragments {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
-		}
-		
-		
+		}	
 		
 		// Return
 		return functions;
+	}
+
+	public static List<Fragment> getFunctionFragmentsInFile(Path file, String language) throws IOException {
+		if(!Files.exists(file)) {
+			throw new IllegalArgumentException("File must exist.");
+		}
+		if(!Files.isRegularFile(file)) {
+			throw new IllegalArgumentException("File must be a regular file.");
+		}
+		List<Fragment> retval;
+		List<Fragment> retval_fixed;
+		file = file.toAbsolutePath().normalize();
+		
+		Path dir = Files.createTempDirectory(SystemUtil.getTemporaryDirectory(), "ForkSim_");
+		Files.copy(file, dir.resolve(file.getFileName()));
+		
+		retval = getFunctionFragmentsRecursive(dir.toFile(), language);
+		
+		retval_fixed = new LinkedList<Fragment>();
+		for(Fragment f : retval) {
+			retval_fixed.add(new Fragment(file, f.getStartLine(), f.getEndLine()));
+		}
+		
+		FileUtils.deleteDirectory(dir.toFile());
+		return retval_fixed;
 	}
 }

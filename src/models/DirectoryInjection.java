@@ -13,6 +13,27 @@ public class DirectoryInjection {
 	private Path log;
 	private List<DirectoryInjectionInstance> instances;
 	
+	public DirectoryInjection getNormalized(Path path) {
+		Path original = path.relativize(this.original);
+		Path log = path.relativize(this.log);
+		List<DirectoryInjectionInstance> newInstances = new LinkedList<DirectoryInjectionInstance>();
+		for(DirectoryInjectionInstance dii : instances) {
+			newInstances.add(dii.getNormalized(path));
+		}
+		return new DirectoryInjection(num, isUniform, original, log, newInstances);
+	}
+	
+	@Override
+	public String toString() {
+		String s = "";
+		char isUniform = this.isUniform ? 'U' : 'V';
+		s = s + num + " " + isUniform + " " + instances.size() + " " + original.toString();
+		for(DirectoryInjectionInstance dii : instances) {
+			s = s + "\n\t" + dii.toString().replaceAll("\t", "\t\t");
+		}
+		return s;
+	}
+	
 	public DirectoryInjection(int num, boolean isUniform, Path original,
 			Path log, List<DirectoryInjectionInstance> instances) {
 		super();
@@ -87,12 +108,4 @@ public class DirectoryInjection {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "DirectoryInjection [num=" + num + ", isUniform=" + isUniform
-				+ ", original=" + original + ", log=" + log + ", instances="
-				+ instances + "]";
-	}
-		
 }

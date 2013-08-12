@@ -335,7 +335,7 @@ public class Fork {
 		int times = 0;
 		if(mutate) {
 			//pick times to edit
-			int maxedits = (int)((double) FileUtil.countPrettyLines(file, properties.getLanguage())* (double) properties.getMaxFileEdits() / 100.0);
+			int maxedits = (int)((double) FileUtil.countPrettyLines(file, properties.getLanguage())* (double) properties.getMaxFileEdit() / 100.0);
 			if(maxedits == 0) maxedits = 1;
 			times = random.nextInt(maxedits) + 1;
 			
@@ -346,7 +346,7 @@ public class Fork {
 			//try mutation
 			while(operator != null) {
 				try {
-					toInject = this.mutate_file_helper(file, operator, times, properties.getNumMutationAttempts());
+					toInject = this.mutate_file_helper(file, operator, times, properties.getMutationAttempts());
 					break;
 				} catch (MutationFailedException e) {
 					operator = oc.getRandom();
@@ -537,7 +537,7 @@ public class Fork {
 			if(fileMutate) {
 				
 				//pick times to edit
-				int maxedits = (int)((double) FileUtil.countPrettyLines(file.toPath(), properties.getLanguage())* (double) properties.getMaxFileEdits() / 100.0);
+				int maxedits = (int)((double) FileUtil.countPrettyLines(file.toPath(), properties.getLanguage())* (double) properties.getMaxFileEdit() / 100.0);
 				if(maxedits == 0) maxedits = 1;
 				times = random.nextInt(maxedits) + 1;
 				
@@ -548,7 +548,7 @@ public class Fork {
 				//try mutation
 				while(operator != null) {
 					try {
-						ifile = this.mutate_file_helper(ofile, operator, times, properties.getNumMutationAttempts());
+						ifile = this.mutate_file_helper(ofile, operator, times, properties.getMutationAttempts());
 						break;
 					} catch (MutationFailedException e) {
 						operator = oc.getRandom();
@@ -720,7 +720,7 @@ public class Fork {
 		Path extracted = Files.createTempFile(SystemUtil.getTemporaryDirectory(), "extracted", "");
 		FragmentUtil.extractFragment(function, extracted);
 		
-		int maxedits = (int)((double) (FileUtil.countPrettyLines(extracted, properties.getLanguage())) * (double) properties.getMaxFunctionEdits() / 100.0);
+		int maxedits = (int)((double) (FileUtil.countPrettyLines(extracted, properties.getLanguage())) * (double) properties.getMaxFunctionEdit() / 100.0);
 		if(maxedits == 0) maxedits = 1;
 		times = random.nextInt(maxedits) + 1;
 		
@@ -735,7 +735,7 @@ public class Fork {
 			//try mutation
 			while(operator != null) {
 				try {
-					mutated = mutate_function_helper(function, operator, times, properties.getNumMutationAttempts());
+					mutated = mutate_function_helper(function, operator, times, properties.getMutationAttempts());
 					toInject = new Fragment(mutated, 1, FileUtil.countLines(mutated));
 					break;
 				} catch (MutationFailedException e) {

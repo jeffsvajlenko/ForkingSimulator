@@ -12,6 +12,27 @@ public class FileInjectionInstance {
 	private Path injected;
 	private Path log;
 	
+	public FileInjectionInstance getNormalized(Path path) {
+		Path injected = path.relativize(this.injected);
+		Path log = path.relativize(this.log);
+		return new FileInjectionInstance(forknum, isRenamed, isMutated, operator, times, type, injected, log);
+	}
+	
+	@Override
+	public String toString() {
+		String s = "";
+		char isRenamed = this.isRenamed ? 'R' : 'O';
+		char isMutated = this.isMutated ? 'M' : 'O';
+		s = forknum + " " + isRenamed;
+		if(this.isMutated) {
+			s = s + " " + isMutated + " " + operator + " " + times + " " + type;
+		} else {
+			s = s + " " + isMutated;
+		}
+		s = s + " " + injected.toString();
+		return s;
+	}
+	
 	public FileInjectionInstance(int forknum, boolean isRenamed,
 			boolean isMutated, String operator, int times, int type,
 			Path injected, Path log) {
@@ -111,15 +132,4 @@ public class FileInjectionInstance {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "FileInjectionInstance [forknum=" + forknum + ", isRenamed="
-				+ isRenamed + ", isMutated=" + isMutated + ", operator="
-				+ operator + ", times=" + times + ", type=" + type
-				+ ", injected=" + injected + ", log=" + log + "]";
-	}
-	
-	
-	
 }

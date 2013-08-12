@@ -135,6 +135,7 @@ public class SystemUtil {
 		
 		//Execute TXL
 		String command = "txl " + " -w 100000 -o " + outputFile.toAbsolutePath().normalize().toString() + " " + inputFile.toAbsolutePath().normalize().toString() + " " + txlScriptName.toAbsolutePath().normalize().toString();
+		//System.out.println(command);
 		Process process = null;
 		int retval;
 		try {

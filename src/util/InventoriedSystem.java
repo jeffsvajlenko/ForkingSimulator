@@ -80,7 +80,7 @@ public class InventoriedSystem {
 		selectLeafDirectories = new ArrayList<Path>(leafDirectories);
 		
 		//Function Fragments
-		this.functionFragments = SelectFunctionFragments.getFunctionFragments(this.location.toFile(), this.language);
+		this.functionFragments = SelectFunctionFragments.getFunctionFragmentsRecursive(this.location.toFile(), this.language);
 		this.selectFunctionFragments = new ArrayList<Fragment>(this.functionFragments);
 		this.selectFunctionFragmentsFile = new LinkedList<Fragment>(this.functionFragments);
 		

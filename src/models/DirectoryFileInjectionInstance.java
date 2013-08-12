@@ -12,9 +12,28 @@ public class DirectoryFileInjectionInstance {
 	private Path injected;
 	private Path log;
 	
-	public DirectoryFileInjectionInstance(boolean isRenamed, boolean isMutated,
-			String operator, int times, int type, Path original, Path injected,
-			Path log) {
+	public String toString() {
+		String s = "";
+		char isRenamed = this.isRenamed ? 'R' : 'O';
+		char isMutated = this.isMutated ? 'M' : 'O';
+		s = s + isRenamed;
+		if(this.isMutated) {
+			s = s + " " + isMutated + " " + operator + " " + times + " " + type;
+		} else {
+			s = s + " " + isMutated;
+		}
+		s = s + " " + injected.toString();
+		return s;
+	}
+	
+	public DirectoryFileInjectionInstance getNormalized(Path path) {
+		Path original = path.relativize(this.original);
+		Path log = path.relativize(this.log);
+		Path injected = path.relativize(this.injected);
+		return new DirectoryFileInjectionInstance(isRenamed, isMutated, operator, times, type, original, injected, log);
+	}
+	
+	public DirectoryFileInjectionInstance(boolean isRenamed, boolean isMutated, String operator, int times, int type, Path original, Path injected, Path log) {
 		super();
 		this.isRenamed = isRenamed;
 		this.isMutated = isMutated;
@@ -115,13 +134,4 @@ public class DirectoryFileInjectionInstance {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "DirectoryFileInjectionInstance [isRenamed=" + isRenamed
-				+ ", isMutated=" + isMutated + ", operator=" + operator
-				+ ", times=" + times + ", type=" + type + ", original="
-				+ original + ", injected=" + injected + ", log=" + log + "]";
-	}	
-	
 }

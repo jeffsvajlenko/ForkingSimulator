@@ -47,34 +47,39 @@ public class CreateUnMutatedDataset {
 		Path filsLog = Files.createDirectories(output.resolve("files"));
 		Path dirsLog = Files.createDirectories(output.resolve("dirs"));
 		Path funcsLog = Files.createDirectories(output.resolve("function_fragments"));
-		Path propertiesFile = Files.copy(dataset.getExperimentPath().resolve("properties"), output.resolve("properties"));
 		
 		PrintWriter log = new PrintWriter(output.resolve("log").toFile());
 		
+		properties.setDirMutationRate(0);
+		properties.setFileMutationRate(0);
+		properties.setFragmentMutationRate(0);
+		properties.setDirRenameRate(0);
+		properties.setFileRenameRate(0);
+		properties.write(output.resolve("properties"));
 		
 		// Output Properties
-		log.println("BEGIN: Properties");
-		log.println("\t" + "output_directory=" + output.toAbsolutePath().normalize().toString());
-		log.println("\t" + "system_directory=" + output.resolve("originalSystem").toString());
-		log.println("\t" + "repository_directory=" + output.resolve("sourceRepository").toString());
-		log.println("\t" + "language=" + properties.getLanguage());
-		log.println("\t" + "numforks=" + properties.getNumForks());
-		log.println("\t" + "numfiles=" + properties.getNumFiles());
-		log.println("\t" + "numdirs=" + properties.getNumDirectories());
-		log.println("\t" + "numfragments=" + properties.getNumFragments());
-		log.println("\t" + "functionfragmentminsize=" + properties.getFunctionFragmentMinSize());
-		log.println("\t" + "functionfragmentmaxsize=" + properties.getFunctionFragmentMaxSize());
-		log.println("\t" + "maxinjectnum=" + properties.getMaxinjectnum());
-		log.println("\t" + "injectionrepititionrate=" + properties.getInjectionReptitionRate());
-		log.println("\t" + "fragmentmutationrate=" + properties.getFragmentMutationRate());
-		log.println("\t" + "filemutationrate=" + properties.getFileMutationRate());
-		log.println("\t" + "dirmutationrate=" + properties.getDirectoryMutationRate());
-		log.println("\t" + "filerenamerate=" + properties.getFileRenameRate());
-		log.println("\t" + "dirrenamerate=" + properties.getDirRenameRate());
-		log.println("\t" + "maxfileedits=" + properties.getMaxFileEdits());
-		log.println("\t" + "maxfunctionedits=" + properties.getMaxFunctionEdits());
-		log.println("\t" + "mutationattempts=" + properties.getNumMutationAttempts());
-		log.println("END: Properties");
+//		log.println("BEGIN: Properties");
+//		log.println("\t" + "output_directory=" + output.toAbsolutePath().normalize().toString());
+//		log.println("\t" + "system_directory=" + output.resolve("originalSystem").toString());
+//		log.println("\t" + "repository_directory=" + output.resolve("sourceRepository").toString());
+//		log.println("\t" + "language=" + properties.getLanguage());
+//		log.println("\t" + "numforks=" + properties.getNumForks());
+//		log.println("\t" + "numfiles=" + properties.getNumFiles());
+//		log.println("\t" + "numdirs=" + properties.getNumDirectories());
+//		log.println("\t" + "numfragments=" + properties.getNumFragments());
+//		log.println("\t" + "functionfragmentminsize=" + properties.getFunctionFragmentMinSize());
+//		log.println("\t" + "functionfragmentmaxsize=" + properties.getFunctionFragmentMaxSize());
+//		log.println("\t" + "maxinjectnum=" + properties.getMaxinjectNum());
+//		log.println("\t" + "injectionrepititionrate=" + properties.getInjectionReptitionRate());
+//		log.println("\t" + "fragmentmutationrate=" + properties.getFragmentMutationRate());
+//		log.println("\t" + "filemutationrate=" + properties.getFileMutationRate());
+//		log.println("\t" + "dirmutationrate=" + properties.getDirMutationRate());
+//		log.println("\t" + "filerenamerate=" + properties.getFileRenameRate());
+//		log.println("\t" + "dirrenamerate=" + properties.getDirRenameRate());
+//		log.println("\t" + "maxfileedits=" + properties.getMaxFileEdit());
+//		log.println("\t" + "maxfunctionedits=" + properties.getMaxFunctionEdit());
+//		log.println("\t" + "mutationattempts=" + properties.getMutationAttempts());
+//		log.println("END: Properties");
 		
 		
 		//Replicate File Injections

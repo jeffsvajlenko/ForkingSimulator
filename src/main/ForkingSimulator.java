@@ -238,28 +238,28 @@ public class ForkingSimulator {
 		}
 		
 	// Output Properties
-		log.println("BEGIN: Properties");
-		log.println("\t" + "output_directory=" + outputdir.toAbsolutePath().normalize().toString());
-		log.println("\t" + "system_directory=" + properties.getSystem().toAbsolutePath().normalize());
-		log.println("\t" + "repository_directory=" + properties.getRepository().toAbsolutePath().normalize());
-		log.println("\t" + "language=" + properties.getLanguage());
-		log.println("\t" + "numforks=" + properties.getNumForks());
-		log.println("\t" + "numfiles=" + properties.getNumFiles());
-		log.println("\t" + "numdirs=" + properties.getNumDirectories());
-		log.println("\t" + "numfragments=" + properties.getNumFragments());
-		log.println("\t" + "functionfragmentminsize=" + properties.getFunctionFragmentMinSize());
-		log.println("\t" + "functionfragmentmaxsize=" + properties.getFunctionFragmentMaxSize());
-		log.println("\t" + "maxinjectnum=" + properties.getMaxinjectnum());
-		log.println("\t" + "injectionrepititionrate=" + properties.getInjectionReptitionRate());
-		log.println("\t" + "fragmentmutationrate=" + properties.getFragmentMutationRate());
-		log.println("\t" + "filemutationrate=" + properties.getFileMutationRate());
-		log.println("\t" + "dirmutationrate=" + properties.getDirectoryMutationRate());
-		log.println("\t" + "filerenamerate=" + properties.getFileRenameRate());
-		log.println("\t" + "dirrenamerate=" + properties.getDirRenameRate());
-		log.println("\t" + "maxfileedits=" + properties.getMaxFileEdits());
-		log.println("\t" + "maxfunctionedits=" + properties.getMaxFunctionEdits());
-		log.println("\t" + "mutationattempts=" + properties.getNumMutationAttempts());
-		log.println("END: Properties");
+//		log.println("BEGIN: Properties");
+//		log.println("\t" + "output_directory=" + outputdir.toAbsolutePath().normalize().toString());
+//		log.println("\t" + "system_directory=" + properties.getSystem().toAbsolutePath().normalize());
+//		log.println("\t" + "repository_directory=" + properties.getRepository().toAbsolutePath().normalize());
+//		log.println("\t" + "language=" + properties.getLanguage());
+//		log.println("\t" + "numforks=" + properties.getNumForks());
+//		log.println("\t" + "numfiles=" + properties.getNumFiles());
+//		log.println("\t" + "numdirs=" + properties.getNumDirectories());
+//		log.println("\t" + "numfragments=" + properties.getNumFragments());
+//		log.println("\t" + "functionfragmentminsize=" + properties.getFunctionFragmentMinSize());
+//		log.println("\t" + "functionfragmentmaxsize=" + properties.getFunctionFragmentMaxSize());
+//		log.println("\t" + "maxinjectnum=" + properties.getMaxinjectNum());
+//		log.println("\t" + "injectionrepititionrate=" + properties.getInjectionReptitionRate());
+//		log.println("\t" + "fragmentmutationrate=" + properties.getFragmentMutationRate());
+//		log.println("\t" + "filemutationrate=" + properties.getFileMutationRate());
+//		log.println("\t" + "dirmutationrate=" + properties.getDirMutationRate());
+//		log.println("\t" + "filerenamerate=" + properties.getFileRenameRate());
+//		log.println("\t" + "dirrenamerate=" + properties.getDirRenameRate());
+//		log.println("\t" + "maxfileedits=" + properties.getMaxFileEdit());
+//		log.println("\t" + "maxfunctionedits=" + properties.getMaxFunctionEdit());
+//		log.println("\t" + "mutationattempts=" + properties.getMutationAttempts());
+//		log.println("END: Properties");
 		
 	//Create the forks
 		List<Fork> forks = new ArrayList<Fork>(properties.getNumForks());
@@ -303,7 +303,7 @@ log.println("BEGIN: FileVariants");
 			}
 			
 		//Randomly select number of forks to inject into
-			int numinjections = random.nextInt(properties.getMaxinjectnum()) + 1;
+			int numinjections = random.nextInt(properties.getMaxinjectNum()) + 1;
 			
 		//Chose the forks to inject into
 			List<Integer> injects = pickRandomNumbers(numinjections,properties.getNumForks()); //pick random numbers of the fork numbers
@@ -450,7 +450,7 @@ log.println("BEGIN: LeafDirectoryVariants");
 			}
 			
 		//Randomly select number of forks to inject into
-			int numinjections = random.nextInt(properties.getMaxinjectnum()) + 1;
+			int numinjections = random.nextInt(properties.getMaxinjectNum()) + 1;
 			//System.out.println("DEBUG:\t" + numinjections + " forks chosen.");
 			
 		//Chose the forks to inject into (the numbers in the forks list)
@@ -618,7 +618,7 @@ log.println("BEGIN: FunctionFragmentVariants");
 			}
 		
 		//Randomly select number of forks to inject into;
-			int numinjections = random.nextInt(properties.getMaxinjectnum()) + 1;
+			int numinjections = random.nextInt(properties.getMaxinjectNum()) + 1;
 			
 		//Chose the forks to inject into (the numbers in the forks list)
 			List<Integer> injects = pickRandomNumbers(numinjections,properties.getNumForks());

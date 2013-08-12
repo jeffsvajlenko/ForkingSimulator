@@ -13,14 +13,12 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import models.CloneClass;
 import models.Fragment;
 import util.InventoriedSystem;
 import util.SelectFunctionFragments;
-import util.SystemUtil;
 
 public class EvaluateNiCad {
 	/**
@@ -279,7 +277,7 @@ System.out.println(">> Parsing file variants...");
 			for(Path fvi_file : fvi_cloneclass) {
 				fvi_file = outputDirectory.resolve(fvi_file);
 				LinkedList<Fragment> fvi_fragments = new LinkedList<Fragment>();
-				for(Fragment fvi_fragment : EvaluateNiCad.getFunctionFragmentsInFile(fvi_file, language)) {
+				for(Fragment fvi_fragment : SelectFunctionFragments.getFunctionFragmentsInFile(fvi_file, language)) {
 					fvi_fragments.add(new Fragment(outputDirectory.relativize(fvi_fragment.getSrcFile()), fvi_fragment.getStartLine(), fvi_fragment.getEndLine()));
 				}
 				fvi_filefunctions.add(fvi_fragments);
@@ -419,7 +417,7 @@ System.out.println(">> Parsing directory variants...");
 				for(Path dv_file : dv_tmpset) {
 					dv_file = outputDirectory.resolve(dv_file);
 					LinkedList<Fragment> dv_fragments = new LinkedList<Fragment>();
-					for(Fragment dv_fragment : EvaluateNiCad.getFunctionFragmentsInFile(dv_file, language)) {
+					for(Fragment dv_fragment : SelectFunctionFragments.getFunctionFragmentsInFile(dv_file, language)) {
 						dv_fragments.add(new Fragment(outputDirectory.relativize(dv_fragment.getSrcFile()), dv_fragment.getStartLine(), dv_fragment.getEndLine()));
 					}
 					dv_filefunctions.add(dv_fragments);
@@ -578,7 +576,7 @@ System.out.println(">> Parsing original system...");
 				}
 				//Collect original fragments from fork's version of original file (skip if it was an injected one)
 				LinkedList<Fragment> o_originalFragments = new LinkedList<Fragment>();
-				for(Fragment o_fragment : EvaluateNiCad.getFunctionFragmentsInFile(outputDirectory.resolve(o_fileInFork), language)) {
+				for(Fragment o_fragment : SelectFunctionFragments.getFunctionFragmentsInFile(outputDirectory.resolve(o_fileInFork), language)) {
 					Fragment o_nfragment = new Fragment(outputDirectory.relativize(o_fragment.getSrcFile()), o_fragment.getStartLine(), o_fragment.getEndLine());
 					//System.out.println("\t\t\t" + o_nfragment.getSrcFile() + " " + o_nfragment.getStartLine() + " " + o_nfragment.getEndLine());
 					
@@ -2253,29 +2251,5 @@ System.out.println(">> Evaluating NiCad Function Clones");
 				System.out.println("\t" + test_fragment.getSrcFile() + " " + test_fragment.getStartLine() + " " + test_fragment.getEndLine());
 			}
 		}
-	}
-	
-	public static List<Fragment> getFunctionFragmentsInFile(Path file, String language) throws IOException {
-		//System.out.print  ("Analyzing: ");
-		//System.out.println(file);
-		
-		List<Fragment> retval;
-		List<Fragment> retval_fixed;
-		file = file.toAbsolutePath().normalize();
-		
-		Path dir = Files.createTempDirectory(SystemUtil.getTemporaryDirectory(), "ForkSim_");
-		Files.copy(file, dir.resolve(file.getFileName()));
-		
-		retval = SelectFunctionFragments.getFunctionFragments(dir.toFile(), language);
-		
-		retval_fixed = new LinkedList<Fragment>();
-		for(Fragment f : retval) {
-			retval_fixed.add(new Fragment(file, f.getStartLine(), f.getEndLine()));
-			//System.out.println("\t" + file + " " + f.getStartLine() + " " + f.getEndLine());
-		}
-		
-		FileUtils.deleteDirectory(dir.toFile());
-		
-		return retval_fixed;
 	}
 }

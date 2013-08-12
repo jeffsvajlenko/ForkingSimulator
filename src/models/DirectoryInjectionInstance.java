@@ -13,6 +13,26 @@ public class DirectoryInjectionInstance {
 	private Path log;
 	private List<DirectoryFileInjectionInstance> instances;
 	
+	public DirectoryInjectionInstance getNormalized(Path path) {
+		Path injected = path.relativize(this.injected);
+		Path log = path.relativize(this.log);
+		List<DirectoryFileInjectionInstance> newInstances = new LinkedList<DirectoryFileInjectionInstance>();
+		for(DirectoryFileInjectionInstance dfii : instances) {
+			newInstances.add(dfii.getNormalized(path));
+		}
+		return new DirectoryInjectionInstance(forknum, isRenamed, injected, log, newInstances);
+	}
+	
+	public String toString() {
+		String s = "";
+		char isRenamed = this.isRenamed ? 'R' : 'O';
+		s = s + forknum + " " + isRenamed + " " + instances.size() + " " + injected.toString();
+		for(DirectoryFileInjectionInstance dfii : instances) {
+			s = s + "\n\t" + dfii.toString();
+		}
+		return s;
+	}
+	
 	public DirectoryInjectionInstance(int forknum, boolean isRenamed, Path injected, Path log, List<DirectoryFileInjectionInstance> instances) {
 		super();
 		this.forknum = forknum;
@@ -86,12 +106,4 @@ public class DirectoryInjectionInstance {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "DirectoryInjectionInstance [forknum=" + forknum
-				+ ", isRenamed=" + isRenamed + ", injected=" + injected
-				+ ", log=" + log + ", instances=" + instances + "]";
-	}
-	
 }

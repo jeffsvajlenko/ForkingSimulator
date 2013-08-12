@@ -261,8 +261,8 @@ public class CheckSimulation {
 		}
 		int maxinjects = Integer.parseInt(line.replaceFirst("\tmaxinjectnum=", ""));
 			//Check
-		if(maxinjects != properties.getMaxinjectnum()) {
-			System.out.println("NumForks does not match.  Properties: " + properties.getMaxinjectnum() + ", Output: " + maxinjects);
+		if(maxinjects != properties.getMaxinjectNum()) {
+			System.out.println("NumForks does not match.  Properties: " + properties.getMaxinjectNum() + ", Output: " + maxinjects);
 			System.exit(-1);
 		}
 		
@@ -317,8 +317,8 @@ public class CheckSimulation {
 		}
 		int dirmutationrate = Integer.parseInt(line.replace("\tdirmutationrate=", ""));
 			//Check
-		if(dirmutationrate != properties.getDirectoryMutationRate()) {
-			System.out.println("Directory mutation rate does not match.  Properties: " + properties.getDirectoryMutationRate() + ", Output: " + dirmutationrate);
+		if(dirmutationrate != properties.getDirMutationRate()) {
+			System.out.println("Directory mutation rate does not match.  Properties: " + properties.getDirMutationRate() + ", Output: " + dirmutationrate);
 			System.exit(-1);
 		}
 		
@@ -359,8 +359,8 @@ public class CheckSimulation {
 		}
 		int maxfileedits = Integer.parseInt(line.replace("\tmaxfileedits=", ""));
 			//Check
-		if(maxfileedits != properties.getMaxFileEdits()) {
-			System.out.println("Max file edits does not match.  Properties: " + properties.getMaxFileEdits() + ", Output: " + maxfileedits);
+		if(maxfileedits != properties.getMaxFileEdit()) {
+			System.out.println("Max file edits does not match.  Properties: " + properties.getMaxFileEdit() + ", Output: " + maxfileedits);
 			System.exit(-1);
 		}
 		
@@ -373,8 +373,8 @@ public class CheckSimulation {
 		}
 		int maxfunctionedits = Integer.parseInt(line.replace("\tmaxfunctionedits=", ""));
 			//Check
-		if(maxfunctionedits != properties.getMaxFunctionEdits()) {
-			System.out.println("Max function edits does not match.  Properties: " + properties.getMaxFileEdits() + ", Output: " + maxfileedits);
+		if(maxfunctionedits != properties.getMaxFunctionEdit()) {
+			System.out.println("Max function edits does not match.  Properties: " + properties.getMaxFileEdit() + ", Output: " + maxfileedits);
 			System.exit(-1);
 		}
 				
@@ -387,8 +387,8 @@ public class CheckSimulation {
 		}
 		int mutationattempts = Integer.parseInt(line.replace("\tmutationattempts=", ""));
 			//Check
-		if(mutationattempts != properties.getNumMutationAttempts()) {
-			System.out.println("Mutation attempts does not match.  Properties: " + properties.getNumMutationAttempts() + ", Output: " + mutationattempts);
+		if(mutationattempts != properties.getMutationAttempts()) {
+			System.out.println("Mutation attempts does not match.  Properties: " + properties.getMutationAttempts() + ", Output: " + mutationattempts);
 			System.exit(-1);
 		}
 

@@ -12,6 +12,27 @@ public class FileInjection {
 	private Path log;
 	private List<FileInjectionInstance> instances;
 	
+	public FileInjection getNormalized(Path path) {
+		Path original = path.relativize(this.original);
+		Path log = path.relativize(this.log);
+		List<FileInjectionInstance> newInstances = new LinkedList<FileInjectionInstance>();
+		for(FileInjectionInstance fii : instances) {
+			newInstances.add(fii.getNormalized(path));
+		}
+		return new FileInjection(num, uniform, original, log, newInstances);
+	}
+	
+	@Override
+	public String toString() {
+		String s;
+		char uflag = uniform ? 'U' : 'V';
+		s = num + " " + uflag + " " + instances.size() + " " + original.toString();
+		for(FileInjectionInstance fii : instances) {
+			s = s + "\n\t" + fii.toString();
+		}
+		return s;
+	}
+	
 	public FileInjection(int num, boolean isUniform, Path original, Path log, List<FileInjectionInstance> instances) {
 		this.num = num;
 		this.uniform = isUniform;
@@ -85,13 +106,4 @@ public class FileInjection {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "FileInjection [num=" + num + ", uniform=" + uniform
-				+ ", log=" + original + ", original="
-				+ log + ", instances=" + instances + "]";
-	}
-	
-	
 }

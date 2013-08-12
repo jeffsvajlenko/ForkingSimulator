@@ -11,8 +11,26 @@ public class FunctionInjectionInstance {
 	private Fragment injected;
 	private Path log;
 	
-	public FunctionInjectionInstance(int forknum, boolean isMutated,
-			String operator, int times, int type, Fragment injected, Path log) {
+	public FunctionInjectionInstance getNormalized(Path path) {
+		Fragment injected = new Fragment(path.relativize(this.injected.getSrcFile()), this.injected.getStartLine(), this.injected.getEndLine());
+		Path log = path.relativize(this.log);
+		return new FunctionInjectionInstance(forknum, isMutated, operator, times, type, injected, log);
+	}
+	
+	public String toString() {
+		String s = "";
+		char isMutated = this.isMutated ? 'M' : 'O';
+		s = s + forknum;
+		if(this.isMutated) {
+			s = s + " " + isMutated + " " + operator + " " + times + " " + type;
+		} else {
+			s = s + " " + isMutated;
+		}
+		s = s + " " + injected.getStartLine() + " " + injected.getEndLine() + " " + injected.getSrcFile();
+		return s;
+	}
+	
+	public FunctionInjectionInstance(int forknum, boolean isMutated, String operator, int times, int type, Fragment injected, Path log) {
 		super();
 		this.forknum = forknum;
 		this.isMutated = isMutated;
@@ -101,13 +119,4 @@ public class FunctionInjectionInstance {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "FunctionInjectionInstance [forknum=" + forknum + ", isMutated="
-				+ isMutated + ", operator=" + operator + ", times=" + times
-				+ ", type=" + type + ", injected=" + injected + ", log=" + log
-				+ "]";
-	}
-	
 }
