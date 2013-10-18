@@ -6,4 +6,4 @@
 #$4 infile
 #$5 outfile
 ulimit -s hard
-"$1" -s 400 -o "$5" "$4" "$3"/"$2"/mCF_R.txl
+"$1" -s 400 -w 32767 -o "$5" "$4" "$3"/"$2"/mCF_R.txl
