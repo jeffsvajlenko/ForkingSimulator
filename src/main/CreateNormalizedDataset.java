@@ -23,10 +23,9 @@ import util.SystemUtil;
 
 public class CreateNormalizedDataset {
 	public static void main(String args[]) throws IOException {
-		if(Files.exists(Paths.get("/home/jeff/git/ForkingSimulator/NormalizedOutput/")))
-			FileUtils.deleteDirectory(Paths.get("/home/jeff/git/ForkingSimulator/NormalizedOutput/").toFile());
-		CreateNormalizedDataset.create(new ForkSimDataset(Paths.get("/home/jeff/git/ForkingSimulator/output"), Paths.get("/home/jeff/git/ForkingSimulator/output/log"), Paths.get("/home/jeff/git/ForkingSimulator/output/properties")),
-				Paths.get("/home/jeff/git/ForkingSimulator/NormalizedOutput/"), true, false, false, false, false);
+		FileUtils.deleteDirectory(new File(args[3]));
+		CreateNormalizedDataset.create(new ForkSimDataset(Paths.get(args[0]).toAbsolutePath().normalize(), Paths.get(args[1]).toAbsolutePath().normalize(), Paths.get(args[2]).toAbsolutePath().normalize()),
+				Paths.get(args[3]).toAbsolutePath().normalize(), true, true, true, true, false);
 	}
 	
 	public static void create(ForkSimDataset dataset, Path output, boolean prettyprint, boolean normalizeIdentifiers, boolean normalizeLiterals, boolean normalizePrimitives, boolean normalizeComments) throws IOException {
@@ -46,9 +45,12 @@ public class CreateNormalizedDataset {
 		for(int i = 0; i < properties.getNumForks(); i++) {
 			FileUtils.copyDirectory(dataset.getExperimentPath().resolve("" + i).toFile(), output.resolve(i + "").toFile());
 		}
-		Path filesLog = Files.createDirectories(output.resolve("files"));
-		Path dirsLog = Files.createDirectories(output.resolve("dirs"));
-		Path funcsLog = Files.createDirectories(output.resolve("function_fragments"));
+		FileUtils.copyDirectoryToDirectory(dataset.getExperimentPath().resolve("files").toFile(), output.toFile());
+		FileUtils.copyDirectoryToDirectory(dataset.getExperimentPath().resolve("dirs").toFile(), output.toFile());
+		FileUtils.copyDirectoryToDirectory(dataset.getExperimentPath().resolve("function_fragments").toFile(), output.toFile());
+		//Path filesLog = Files.createDirectories(output.resolve("files"));
+		//Path dirsLog = Files.createDirectories(output.resolve("dirs"));
+		//Path funcsLog = Files.createDirectories(output.resolve("function_fragments"));
 		Path propertiesFile = Files.copy(dataset.getExperimentPath().resolve("properties"), output.resolve("properties"));
 		//Path log = Files.copy(dataset.getExperimentPath().resolve("log"), output.resolve("log"));
 		
@@ -93,7 +95,7 @@ public class CreateNormalizedDataset {
 		
 		//Function (Corrected)
 		for(int i = 0; i < dataset.numFunctionInjections(); i++) {
-			out.println(CreateNormalizedDataset.updateFunctionInjection(dataset.getFunctionInjection(i), dataset.getExperimentPath(), output, properties.getLanguage()).getNormalize(output));
+			out.println(CreateNormalizedDataset.updateFunctionInjection(dataset.getFunctionInjection(i), dataset.getExperimentPath(), output, properties.getLanguage()).getNormalize(output.toAbsolutePath().normalize()));
 		}
 		
 		out.flush();
@@ -112,21 +114,27 @@ public class CreateNormalizedDataset {
 				num++;
 			}
 			List<Fragment> newfragments = SelectFunctionFragments.getFunctionFragmentsInFile(output.resolve(original.relativize(fii.getInjected().getSrcFile())), language);
+			System.out.println(functionInjection);
+			System.out.println(fii);
+			System.out.println(newfragments);
 			Fragment newfragment = newfragments.get(num);
 			newInstances.add(new FunctionInjectionInstance(fii.getForknum(), fii.isMutated(), fii.getOperator(), fii.getTimes(), fii.getType(), newfragment, fii.getLog()));
 		}
-		return new FunctionInjection(functionInjection.getNum(), functionInjection.isUniform(), functionInjection.getOriginal(), functionInjection.getLog(), newInstances);
+		Fragment neworiginal = new Fragment(output.resolve(original.relativize(functionInjection.getOriginal().getSrcFile())), functionInjection.getOriginal().getStartLine(), functionInjection.getOriginal().getEndLine());
+		return new FunctionInjection(functionInjection.getNum(), functionInjection.isUniform(), neworiginal, functionInjection.getLog(), newInstances);
 	}
 
 	public static void executeTxlOnAll(Path output, int numforks, Path script) {
-		//System.out.println("Running Script: " + script);
+		System.out.println("Running Script: " + script);
 		List<File> files = new LinkedList<File>();
 		for(int i = 0; i < numforks; i++) {
 			files.addAll(FileUtils.listFiles(output.resolve(i + "").toFile(), TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE));
 		}
 		for(File file : files) {
-			//System.out.print("\t" + file);
-			SystemUtil.runTxl(script, file.toPath(), file.toPath());
+			System.out.println("\t" + file);
+			if(SystemUtil.runTxl(script, file.toPath(), file.toPath()) != 0) {
+				System.out.println("\tFailed!!");
+			}
 			//System.out.println("\t" + retval);
 		}
 	}

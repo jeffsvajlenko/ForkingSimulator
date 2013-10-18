@@ -24,25 +24,35 @@ import util.SystemUtil;
 
 public class CheckSimulation {
 	
+	//TODO update for relative paths
+	
 	public static void main(String args[]) throws IOException {
 		check(args);
 	}
 	
 	public static void check(String args[]) throws IOException {
 		// Check Inputs
-		if (args.length != 2) {
-			System.out.println("Input Parameters: properties output");
+		if (args.length != 1) {
+			System.out.println("Input Parameters: outputDirectory");
 			return;
 		}
 
-		Path propertiesf = Paths.get(args[0]);
-		Path output = Paths.get(args[1]);
+		Path outputdir = Paths.get(args[0]);
+		if(!Files.exists(outputdir)) {
+			System.out.println("Directory does not exist.");
+		}
+		if(!Files.isDirectory(outputdir)) {
+			System.out.println("Path specified does not denote a directory.");
+		}
+		
+		Path propertiesf = outputdir.resolve("properties");
+		Path output = outputdir.resolve("log");
 		if (!Files.isReadable(propertiesf) || !Files.isRegularFile(propertiesf)) {
-			System.out.println("Properties file is invalid.");
+			System.out.println("Properties is not readable or not a regular file..");
 			return;
 		}
 		if (!Files.isReadable(output) || !Files.isRegularFile(output)) {
-			System.out.println("Output file is invalid.");
+			System.out.println("Log file is not readable or not a regular file.");
 			return;
 		}
 		
@@ -109,295 +119,15 @@ public class CheckSimulation {
 		System.out.println("Checking properties.");
 		
 		Properties properties = new Properties(propertiesf, method_mutation_operators, file_mutation_operators, dir_mutation_operators);
-		
-	//Header
-		line = in.nextLine();
-		if(!line.equals("BEGIN: Properties")) {
-			System.out.println("Expected 'Begin: Properties' but saw: " + line);
-			System.exit(-1);
-		}
-		
-	//Properties
-		//Output Directory
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\toutput_directory=")) {
-			System.out.println("Expected '\toutput_directory=' but saw: " + line);
-			System.exit(-1);
-		}
-		Path outputdir = Paths.get(line.replaceFirst("\toutput_directory=", ""));
 
-		//System Directory
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tsystem_directory=")) {
-			System.out.println("Expected '\tsystem_directory=' but saw: " + line);
-			System.exit(-1);
-		}
-		Path systemdir = Paths.get(line.replaceFirst("\tsystem_directory=", ""));
-			//Check
-		if(!systemdir.toAbsolutePath().normalize().equals(outputdir.resolve("originalSystem").toAbsolutePath().normalize())) {
-			System.out.println("System directory is not correct: " + systemdir + " but should be " + outputdir.resolve("originalSystem").toAbsolutePath().normalize());
-			System.exit(-1);
-		}
-				
-		//Repository Directory
-		line = in.nextLine();
-		if(!line.startsWith("\trepository_directory=")) {
-			System.out.println("Expected '\trepository_directory=' but saw: " + line);
-			System.exit(-1);
-		}
-		Path repositorydir = Paths.get(line.replaceFirst("\trepository_directory=", ""));
-			//Check
-		if(!repositorydir.toAbsolutePath().normalize().equals(outputdir.resolve("sourceRepository").toAbsolutePath().normalize())) {
-			System.out.println("Repository directory is not correct: " + repositorydir + " but should be " + outputdir.resolve("sourceRepository").toAbsolutePath().normalize());
-			System.exit(-1);
-		}
-		
-		//Language
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tlanguage=")) {
-			System.out.println("Expected '\tlanguage=' but saw: " + line);
-			System.exit(-1);
-		}
-		String language = line.replaceFirst("\tlanguage=", "");
-			//Check
-		if(!language.equals(properties.getLanguage())) {
-			System.out.println("Language does not match. Properties: " + properties.getLanguage() + ", Output: " + language);
-			System.exit(-1);
-		}
-		
-		//NumForks
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tnumforks=")) {
-			System.out.println("Expected '\tnumforks=' but saw: " + line);
-			System.exit(-1);
-		}
-		int numforks = Integer.parseInt(line.replaceFirst("\tnumforks=", ""));
-			//Check
-		if(numforks != properties.getNumForks()) {
-			System.out.println("NumForks does not match.  Properties: " + properties.getNumForks() + ", Output: " + numforks);
-			System.exit(-1);
-		}
-		
-		//Num Files
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tnumfiles=")) {
-			System.out.println("Expected '\tnumfiles=' but saw: " + line);
-			System.exit(-1);
-		}
-		int numfiles = Integer.parseInt(line.replaceFirst("\tnumfiles=", ""));
-			//Check
-		if(numfiles != properties.getNumFiles()) {
-			System.out.println("NumFiles does not match.  Properties: " + properties.getNumFiles() + ", Output: " + numfiles);
-			System.exit(-1);
-		}
-		
-		//Num Dirs
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tnumdirs=")) {
-			System.out.println("Expected '\tnumdirs=' but saw: " + line);
-			System.exit(-1);
-		}
-		int numdirs = Integer.parseInt(line.replaceFirst("\tnumdirs=", ""));
-			//Check
-		if(numdirs != properties.getNumDirectories()) {
-			System.out.println("NumDirs does not match.  Properties: " + properties.getNumDirectories() + ", Output: " + numdirs);
-			System.exit(-1);
-		}
-		
-		//Num Fragments
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tnumfragments=")) {
-			System.out.println("Expected '\tnumfragments=' but saw: " + line);
-			System.exit(-1);
-		}
-		int numfragments = Integer.parseInt(line.replace("\tnumfragments=", ""));
-			//Check
-		if(numfragments != properties.getNumFragments()) {
-			System.out.println("NumFragments does not match.  Properties: " + properties.getNumFragments() + ", Output: " + numfragments);
-			System.exit(-1);
-		}
-		
-		//Function Fragment Min Size
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tfunctionfragmentminsize=")) {
-			System.out.println("Expected '\tfunctionfragmentminsize=' but saw: " + line);
-			System.exit(-1);
-		}
-		int functionFragmentMinSize = Integer.parseInt(line.replaceFirst("\tfunctionfragmentminsize=", ""));
-			//Check
-		if(functionFragmentMinSize != properties.getFunctionFragmentMinSize()) {
-			System.out.println("Function fragment min size does not match.  Properties: " + properties.getFunctionFragmentMinSize() + ", Output: " + functionFragmentMinSize);
-			System.exit(-1);
-		}
-				
-		//Function Fragment Max Size
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tfunctionfragmentmaxsize=")) {
-			System.out.println("Expected '\tfunctionfragmentmaxsize=' but saw: " + line);
-			System.exit(-1);
-		}
-		int functionFragmentMaxSize = Integer.parseInt(line.replaceFirst("\tfunctionfragmentmaxsize=", ""));
-			//Check
-		if(functionFragmentMaxSize != properties.getFunctionFragmentMaxSize()) {
-			System.out.println("Function fragment max size does not match.  Properties: " + properties.getFunctionFragmentMaxSize() + ", Output: " + functionFragmentMaxSize);
-			System.exit(-1);
-		}
-		
-		//Max Injects
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tmaxinjectnum=")) {
-			System.out.println("Expected '\tmaxinjectnum=' but saw: " + line);
-			System.exit(-1);
-		}
-		int maxinjects = Integer.parseInt(line.replaceFirst("\tmaxinjectnum=", ""));
-			//Check
-		if(maxinjects != properties.getMaxinjectNum()) {
-			System.out.println("NumForks does not match.  Properties: " + properties.getMaxinjectNum() + ", Output: " + maxinjects);
-			System.exit(-1);
-		}
-		
-		//Injection Repetition Rate
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tinjectionrepititionrate=")) {
-			System.out.println("Expected '\tinjectionrepititionrate=' but saw: " + line);
-			System.exit(-1);
-		}
-		int injectionrepititionrate = Integer.parseInt(line.replace("\tinjectionrepititionrate=", ""));
-			//Check
-		if(injectionrepititionrate != properties.getInjectionReptitionRate()) {
-			System.out.println("Injection reptition rate does not match.  Properties: " + properties.getInjectionReptitionRate() + ", Output: " + injectionrepititionrate);
-			System.exit(-1);
-		}
-		
-		//Fragment Mutation Rate
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tfragmentmutationrate=")) {
-			System.out.println("Expected '\tfragmentmutationrate=' but saw: " + line);
-			System.exit(-1);
-		}
-		int fragmentmutationrate = Integer.parseInt(line.replace("\tfragmentmutationrate=", ""));
-			//Check
-		if(fragmentmutationrate != properties.getFragmentMutationRate()) {
-			System.out.println("Fragment mutation rate does not match.  Properties: " + properties.getFragmentMutationRate() + ", Output: " + fragmentmutationrate);
-			System.exit(-1);
-		}
-		
-		//File Mutation Rate
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tfilemutationrate=")) {
-			System.out.println("Expected '\tfilemutationrate=' but saw: " + line);
-			System.exit(-1);
-		}
-		int filemutationrate = Integer.parseInt(line.replace("\tfilemutationrate=", ""));
-			//Check
-		if(filemutationrate != properties.getFileMutationRate()) {
-			System.out.println("File mutation rate does not match.  Properties: " + properties.getFileMutationRate() + ", Output: " + filemutationrate);
-			System.exit(-1);
-		}
-		
-		//Directory Mutation Rate
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tdirmutationrate=")) {
-			System.out.println("Expected '\tdirmutationrate=' but saw: " + line);
-			System.exit(-1);
-		}
-		int dirmutationrate = Integer.parseInt(line.replace("\tdirmutationrate=", ""));
-			//Check
-		if(dirmutationrate != properties.getDirMutationRate()) {
-			System.out.println("Directory mutation rate does not match.  Properties: " + properties.getDirMutationRate() + ", Output: " + dirmutationrate);
-			System.exit(-1);
-		}
-		
-		//File Rename Rate
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tfilerenamerate=")) {
-			System.out.println("Expected '\tfilerenamerate=' but saw: " + line);
-			System.exit(-1);
-		}
-		int filerenamerate = Integer.parseInt(line.replace("\tfilerenamerate=", ""));
-			//Check
-		if(filerenamerate != properties.getFileRenameRate()) {
-			System.out.println("File rename rate does not match.  Properties: " + properties.getFileRenameRate() + ", Output: " + filerenamerate);
-			System.exit(-1);
-		}
-		
-		//Directory Rename Rate
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tdirrenamerate=")) {
-			System.out.println("Expected '\tdirrenamerate=' but saw: " + line);
-			System.exit(-1);
-		}
-		int dirrenamerate = Integer.parseInt(line.replace("\tdirrenamerate=", ""));
-			//Check
-		if(dirrenamerate != properties.getDirRenameRate()) {
-			System.out.println("Directory rename rate does not match.  Properties: " + properties.getDirRenameRate() + ", Output: " + dirrenamerate);
-			System.exit(-1);
-		}
-		
-		//Max File Edit
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tmaxfileedits=")) {
-			System.out.println("Expected '\tmaxfileedits=' but saw: " + line);
-			System.exit(-1);
-		}
-		int maxfileedits = Integer.parseInt(line.replace("\tmaxfileedits=", ""));
-			//Check
-		if(maxfileedits != properties.getMaxFileEdit()) {
-			System.out.println("Max file edits does not match.  Properties: " + properties.getMaxFileEdit() + ", Output: " + maxfileedits);
-			System.exit(-1);
-		}
-		
-		//Max File Edit
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tmaxfunctionedits=")) {
-			System.out.println("Expected '\tmaxfunctionedits=' but saw: " + line);
-			System.exit(-1);
-		}
-		int maxfunctionedits = Integer.parseInt(line.replace("\tmaxfunctionedits=", ""));
-			//Check
-		if(maxfunctionedits != properties.getMaxFunctionEdit()) {
-			System.out.println("Max function edits does not match.  Properties: " + properties.getMaxFileEdit() + ", Output: " + maxfileedits);
-			System.exit(-1);
-		}
-				
-		//Mutation Attempts
-			//Read
-		line = in.nextLine();
-		if(!line.startsWith("\tmutationattempts=")) {
-			System.out.println("Expected '\tmutationattempts=' but saw: " + line);
-			System.exit(-1);
-		}
-		int mutationattempts = Integer.parseInt(line.replace("\tmutationattempts=", ""));
-			//Check
-		if(mutationattempts != properties.getMutationAttempts()) {
-			System.out.println("Mutation attempts does not match.  Properties: " + properties.getMutationAttempts() + ", Output: " + mutationattempts);
-			System.exit(-1);
-		}
-
-		//Footer
-		line = in.nextLine();
-		if(!line.equals("END: Properties")) {
-			System.out.println("Expected 'End: Properties' but saw: " + line);
-			System.exit(-1);
-		}
+		int numforks = properties.getNumForks();
+		Path repositorydir = outputdir.resolve("sourceRepository");
+		int maxfileedits = properties.getMaxFileEdit();
+		String language = properties.getLanguage();
+		int numfiles = properties.getNumFiles();
+		int numdirs = properties.getNumDirectories();
+		int numfragments = properties.getNumFragments();
+		Path systemdir = properties.getSystem();
 		
 // --- TRACKING DATA ------------------------------------------------------------------------------
 		List<List<Path>> file_tracker = new LinkedList<List<Path>>(); //Maintain a list of all files in each fork

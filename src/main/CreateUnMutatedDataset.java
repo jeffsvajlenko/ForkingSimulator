@@ -24,7 +24,7 @@ public class CreateUnMutatedDataset {
 	
 	public static void main(String args[]) throws IOException {
 		FileUtils.deleteDirectory(Paths.get(args[3]).toFile());
-		CreateUnMutatedDataset.create(new ForkSimDataset(Paths.get(args[0]), Paths.get(args[1]), Paths.get(args[2])), Paths.get(args[3]));
+		CreateUnMutatedDataset.create(new ForkSimDataset(Paths.get(args[0]).toAbsolutePath(), Paths.get(args[1]).toAbsolutePath(), Paths.get(args[2]).toAbsolutePath()), Paths.get(args[3]).toAbsolutePath());
 	}
 	
 	public static void create(ForkSimDataset dataset, Path output) throws IOException {
@@ -154,9 +154,9 @@ public class CreateUnMutatedDataset {
 		log.println("END: FunctionFragmentVariants");
 		log.flush();
 		log.close();
-		System.out.println("Checking...");
-		String argsc[] = {output.resolve("properties").toString(), output.resolve("log").toString()};
-		CheckSimulation.check(argsc);
+		//System.out.println("Checking...");
+		//String argsc[] = {output.resolve("properties").toString(), output.resolve("log").toString()};
+		//CheckSimulation.check(argsc);
 		
 		
 	}

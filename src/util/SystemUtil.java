@@ -134,7 +134,7 @@ public class SystemUtil {
 		}
 		
 		//Execute TXL
-		String command = "txl " + " -w 100000 -o " + outputFile.toAbsolutePath().normalize().toString() + " " + inputFile.toAbsolutePath().normalize().toString() + " " + txlScriptName.toAbsolutePath().normalize().toString();
+		String command = "txl " + "  -o " + outputFile.toAbsolutePath().normalize().toString() + " " + inputFile.toAbsolutePath().normalize().toString() + " " + txlScriptName.toAbsolutePath().normalize().toString();
 		//System.out.println(command);
 		Process process = null;
 		int retval;
@@ -144,16 +144,19 @@ public class SystemUtil {
 			new StreamGobbler(process.getErrorStream()).start();
 			retval = process.waitFor();
 		} catch (IOException e) {
+			System.out.println("IO EXCEPTION!");
 			retval = -1;
+			e.printStackTrace();
 		} catch (InterruptedException e) {
+			System.out.println("INTERRUPTED EXCEPTION!");
 			retval = -1;
 		} finally {
 			if(process != null) {
-				try {process.getErrorStream().close();} catch (IOException e) {}
-				try {process.getInputStream().close();} catch (IOException e) {}
-				try {process.getOutputStream().close();} catch (IOException e) {}
-				process.destroy();
-				process = null;
+				//try {process.getErrorStream().close();} catch (IOException e) {}
+				//try {process.getInputStream().close();} catch (IOException e) {}
+				//try {process.getOutputStream().close();} catch (IOException e) {}
+				//process.destroy();
+				//process = null;
 			}
 		}
 		

@@ -693,7 +693,7 @@ public class Properties {
 		pw.println("functionFragmentMinSize=" + this.getFunctionFragmentMinSize());
 		pw.println("functionFragmentMaxSize=" + this.getFunctionFragmentMaxSize());
 		pw.println("maxInjectNum=" + this.getMaxinjectNum());
-		pw.println("injectionRepitionRate=" + this.getInjectionReptitionRate());
+		pw.println("injectionRepetitionRate=" + this.getInjectionReptitionRate());
 		pw.println("fragmentMutationRate=" + this.getFragmentMutationRate());
 		pw.println("fileMutationRate=" + this.getFileMutationRate());
 		pw.println("dirMutationRate=" + this.getDirMutationRate());

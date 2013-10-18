@@ -95,7 +95,7 @@ public class SelectFunctionFragments {
 
 		
 		// Cleanup
-		new File(srcloc.getAbsolutePath() + "/_functions.xml").delete(); // no longer need this file, so trash it
+		//new File(srcloc.getAbsolutePath() + "/_functions.xml").delete(); // no longer need this file, so trash it
 		
 		//Cleanup ifdef
 		String command =  SystemUtil.getScriptsLocation().toString() + "/RemoveIfDefed " + srcloc.getAbsolutePath() + "/";
@@ -140,8 +140,8 @@ public class SelectFunctionFragments {
 		for(Fragment f : retval) {
 			retval_fixed.add(new Fragment(file, f.getStartLine(), f.getEndLine()));
 		}
-		
-		FileUtils.deleteDirectory(dir.toFile());
+		System.out.println(dir);
+		//FileUtils.deleteDirectory(dir.toFile());
 		return retval_fixed;
 	}
 }
