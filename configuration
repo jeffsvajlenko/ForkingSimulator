@@ -1,0 +1,44 @@
+##  	Basic Settings  ##
+
+system=/Users/jeff/git/ForkingSimulator/resources/systems_norm/java/JHotDraw54b1/
+repository=/Users/jeff/git/ForkingSimulator/resources/repository_norm/java/
+
+language=java
+numForks=5
+
+
+
+##  	Code Artifact Settings  ##
+numFiles=10
+numDirectories=10
+numFragments=20
+
+
+
+##	Function Fragment Selection Settings ##
+functionFragmentMinSize=20
+functionFragmentMaxSize=100
+
+
+
+##	Injection Settings  ##
+maxInjectNum=5
+injectionRepetitionRate=50
+
+
+
+##	Mutation Settings  ##
+fragmentMutationRate=50
+fileMutationRate=50
+dirMutationRate=50
+
+fileRenameRate=50
+dirRenameRate=50
+
+maxFileEdit=10
+maxFunctionEdit=10
+
+
+
+##	Misc Settings ##
+mutationAttempts=10
