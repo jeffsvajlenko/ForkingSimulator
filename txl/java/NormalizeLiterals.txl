@@ -79,7 +79,7 @@ function main
     replace [program]
         P [program]
     by
-        P [renameLiteral]
+        P [renameBoolean] [renameString] [renameNumeric] [renameCharacter]
 end function
 
 % Choose some random id and rename it
@@ -90,6 +90,13 @@ rule rename
         'X
 end rule
 
+rule renameCharacter
+	replace $ [character_literal]
+		_ [character_literal]
+	by
+		''c'
+end rule
+
 rule renamePrimitives
 	replace $ [primitive_type]
 		k [primitive_type]
@@ -97,9 +104,23 @@ rule renamePrimitives
 		'X
 end rule
 
-rule renameLiteral
-	replace $ [literal]
-		_ [literal]
+rule renameBoolean
+	replace $ [boolean_literal]
+		_ [boolean_literal]
+	by
+		'true
+end rule
+
+rule renameString
+	replace $ [string_literal]
+		_ [string_literal]
+	by
+		"string"
+end rule
+
+rule renameNumeric
+	replace $ [numeric_literal]
+		_ [numeric_literal]
 	by
 		0
 end rule
