@@ -2,3 +2,5 @@
 find src/ -name "*.java" > sources.txt
 javac -cp src/:dependencies/Apache-Commons/IO/commons-io-2.4.jar:dependencies/Apache-Commons/lang/commons-lang3-3.1.jar @sources.txt
 rm sources.txt
+cd dependencies/NiCad/
+make
