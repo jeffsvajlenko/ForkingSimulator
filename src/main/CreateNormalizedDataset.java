@@ -48,11 +48,6 @@ public class CreateNormalizedDataset {
 		FileUtils.copyDirectoryToDirectory(dataset.getExperimentPath().resolve("files").toFile(), output.toFile());
 		FileUtils.copyDirectoryToDirectory(dataset.getExperimentPath().resolve("dirs").toFile(), output.toFile());
 		FileUtils.copyDirectoryToDirectory(dataset.getExperimentPath().resolve("function_fragments").toFile(), output.toFile());
-		//Path filesLog = Files.createDirectories(output.resolve("files"));
-		//Path dirsLog = Files.createDirectories(output.resolve("dirs"));
-		//Path funcsLog = Files.createDirectories(output.resolve("function_fragments"));
-		Path propertiesFile = Files.copy(dataset.getExperimentPath().resolve("properties"), output.resolve("properties"));
-		//Path log = Files.copy(dataset.getExperimentPath().resolve("log"), output.resolve("log"));
 		
 		//Execute Pretty Print
 		if(prettyprint) {
@@ -108,15 +103,17 @@ public class CreateNormalizedDataset {
 			int num = 0;
 			List<Fragment> fragments = SelectFunctionFragments.getFunctionFragmentsInFile(fii.getInjected().getSrcFile(), language);
 			for(Fragment target : fragments) {
-				if(target.getStartLine() == fii.getInjected().getStartLine() && target.getEndLine() == fii.getInjected().getEndLine()) {
+				//fuzzy match first line because formatting modification may have added or removed a line before the start of the function!
+				if((target.getStartLine() == fii.getInjected().getStartLine() || target.getStartLine() == fii.getInjected().getStartLine() + 1 || target.getStartLine() == fii.getInjected().getStartLine() - 1) && target.getEndLine() == fii.getInjected().getEndLine()) {
 					break;
 				}
 				num++;
 			}
 			List<Fragment> newfragments = SelectFunctionFragments.getFunctionFragmentsInFile(output.resolve(original.relativize(fii.getInjected().getSrcFile())), language);
-			System.out.println(functionInjection);
-			System.out.println(fii);
-			System.out.println(newfragments);
+			//System.out.println("--------------------------------------------------------------------------------");
+			//System.out.println(functionInjection);
+			//System.out.println(fii);
+			//System.out.println(newfragments);
 			Fragment newfragment = newfragments.get(num);
 			newInstances.add(new FunctionInjectionInstance(fii.getForknum(), fii.isMutated(), fii.getOperator(), fii.getTimes(), fii.getType(), newfragment, fii.getLog()));
 		}
@@ -125,17 +122,13 @@ public class CreateNormalizedDataset {
 	}
 
 	public static void executeTxlOnAll(Path output, int numforks, Path script) {
-		System.out.println("Running Script: " + script);
 		List<File> files = new LinkedList<File>();
 		for(int i = 0; i < numforks; i++) {
 			files.addAll(FileUtils.listFiles(output.resolve(i + "").toFile(), TrueFileFilter.INSTANCE, TrueFileFilter.INSTANCE));
 		}
 		for(File file : files) {
-			System.out.println("\t" + file);
 			if(SystemUtil.runTxl(script, file.toPath(), file.toPath()) != 0) {
-				System.out.println("\tFailed!!");
 			}
-			//System.out.println("\t" + retval);
 		}
 	}
 }
